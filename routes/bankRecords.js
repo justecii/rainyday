@@ -1,9 +1,31 @@
 var express = require('express');
 var mongoose = require('mongoose');
-// var Category = require('../models/BankData')
+var BankRecord = require('../models/BankRecord')
 var router = express.Router();
 
-
+router.post('/', function(req, res, next) {
+          /*let data = req.body.data[0]
+          console.log("keys1: ", Object.keys(data));*/
+          /*let newData = req.body.data*/
+  for (let obj of req.body.data) {
+    obj['TransDate'] = obj['Trans Date'];
+    obj['Amount'] = obj['\t\t\tAmount'];
+    obj['PostDate'] = obj['Post Date'];
+    delete obj['Trans Date'];
+    delete obj['\t\t\tAmount'];
+    delete obj['Post Date'];
+  }
+  let item = req.body.data;
+  console.log(item);
+  /*console.log("keys2: ", Object.keys(data));*/
+  let trans = []
+  for (var i = 0; i < 100; i++) {
+    console.log(item[i]);
+    trans.push(item[i]);
+    BankRecord.create(item[i]);
+  }
+  let find = Bank.find({});
+})
 
 /* GET display all the bank records */
 router.get('/', function(req, res, next) {

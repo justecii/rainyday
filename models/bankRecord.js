@@ -1,15 +1,20 @@
 var mongoose = require('mongoose');
 
-var bankRecordSchema = new mongoose.Schema({
-    amount: {type: Number, required: true},
-    description: {type: String, required: true},
-    postingDate: {type: Date, required: true},
-    userId: {type: String, required: true},
-    isSaved: {type: Boolean},
-    categoryId: {type: String}
+var BankRecordSchema = new mongoose.Schema({
+  Description: String,
+  Type: String,
+  Amount: Number,
+  PostDate: String,
+  TransDate: String,
+  Balance: Number,
+  Details: String,
+  CheckNumber: String,
+  Calc: String,
+  Category: String,
+  userId: String
 });
 
 
-var BankRecord = mongoose.model('BankRecord', bankRecordSchema);
+var BankRecord = mongoose.model('BankRecord', BankRecordSchema);
 
 module.exports = BankRecord;
