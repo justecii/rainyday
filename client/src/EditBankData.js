@@ -10,6 +10,7 @@ class EditBankData extends Component {
       records: []
     }
     this.deleteTransaction = this.deleteTransaction.bind(this);
+    this.categoryChange = this.categoryChange.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
@@ -31,6 +32,28 @@ class EditBankData extends Component {
     })
   }
 
+  categoryChange(e) {
+    e.preventDefault();
+    let i = e.target.getAttribute('data-key');
+    let Category = e.target.getAttribute('data-value');
+    let currentState = this.state.records;
+    let individState = this.state.records[i];
+    let categState = this.state.records[i].Category = Category;
+    individState.Category = categState
+    let trans = this.state.records[i]._id;
+    let a = this;
+    axios.put('/bankRecords/change', {
+      data: trans,
+      Category: Category
+    }).then(function (response) {
+      a.setState({
+        records: currentState,
+      })
+    }).catch(function (error) {
+      console.log("error: ", error);
+    })
+  }
+
   componentDidMount() {
 
     fetch('/bankRecords')
@@ -46,10 +69,10 @@ class EditBankData extends Component {
           <table className="highlight centered responsive-table" key={index}>
             <tbody>
               <tr>
-                <td>{records.TransDate}</td>
+                <td>{records.TransDate} {records.Category}</td>
                 <td>{records.Description}</td>
                 <td>{records.Amount}</td>
-                <td> <a className='dropdown-button btn ' href='#' data-activates='dropdown1'>Catigorize!</a></td>
+                <td> <a className='dropdown-button btn ' href='#' data-activates='dropdown1' data-value="Entertainment" data-key={index} onClick={this.categoryChange}>Catigorize!</a></td>
                 <ul id='dropdown1' className='dropdown-content'>
                   <li><a href="#!">Entertainment</a></li>
                   <li><a href="#!">Transportation</a></li>

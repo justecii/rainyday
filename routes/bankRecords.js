@@ -27,6 +27,21 @@ router.post('/', function(req, res, next) {
   }
 })
 
+router.put('/change', function(req, res, next){
+    console.log("/change in put route");
+    console.log("req: ", req.body.data);
+    console.log("category: ", req.body.Category)
+    let id = req.body.data;
+    let Category = req.body.Category;
+    BankRecord.update(
+      {_id: id},
+      {Category: Category},
+       function(err, item){
+        if(err) res.json(err);
+        else res.end();
+    });
+});
+
 /* GET display all the bank records */
 router.get('/', function(req, res, next) {
   console.log('in the /bankData route get');
