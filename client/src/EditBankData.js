@@ -15,22 +15,17 @@ class EditBankData extends Component {
 
   deleteTransaction(e) {
     e.preventDefault();
-    console.log(this.state.records);
     let i = e.target.getAttribute('data-key');
-    let deleteRecord = this.state.records[i];
     let currentState = this.state.records;
     let trans = this.state.records[i]._id;
     let a = this;
     axios.put('/bankRecords', {
       data: trans
     }).then(function (response) {
-      console.log("response: ", response)
       currentState.splice(i, 1);
       a.setState({
         records: currentState
       })
-    }).then(function(response) {
-      console.log("response2: ", response);
     }).catch(function (error) {
       console.log("error: ", error);
     })
@@ -43,16 +38,12 @@ class EditBankData extends Component {
       .then(response => this.setState({records: response}))
     }
 
+
   render() {
 
-
-
     return (
-
-
         this.state.records.map((records, index) => (
           <table className="highlight centered responsive-table" key={index}>
-
             <tbody>
               <tr>
                 <td>{records.TransDate}</td>

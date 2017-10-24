@@ -4,10 +4,8 @@ var BankRecord = require('../models/BankRecord')
 var router = express.Router();
 var flash = require('connect-flash');
 
+//COMPLETE: grab data form database and display in client: src/EditBankData.js
 router.post('/', function(req, res, next) {
-          /*let data = req.body.data[0]
-          console.log("keys1: ", Object.keys(data));*/
-          /*let newData = req.body.data*/
   for (let obj of req.body.data) {
     obj['TransDate'] = obj['Trans Date'];
     obj['Amount'] = obj['\t\t\tAmount'];
@@ -19,7 +17,6 @@ router.post('/', function(req, res, next) {
   }
   let item = req.body.data;
   console.log(item);
-  /*console.log("keys2: ", Object.keys(data));*/
   let trans = []
   for (var i = 0; i < 100; i++) {
     console.log(item[i]);
@@ -48,7 +45,7 @@ router.get('/:recordId', function(req, res, next) {
     });
 });
 
-//user can delete specific transaction from database
+//COMPLETE: user can delete specific transaction from database
 router.put('/', function(req, res, next){
     console.log("req: ", req.body.data);
     let id = req.body.data
