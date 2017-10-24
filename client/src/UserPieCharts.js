@@ -83,7 +83,7 @@ class UserPieCharts extends Component {
     for(var m = 0; m<dataArr.length;m++){//assigning radius, radius from state and color based on index
       dataArr[m].radius = this.state.radius;
       dataArr[m].radius0 = this.state.radius0;
-      dataArr[m].color = 5*(dataArr[m].angle0/(2*Math.PI));
+      dataArr[m].color = m+1;
     }
     this.setState({
       myData:dataArr
@@ -105,8 +105,8 @@ class UserPieCharts extends Component {
             radiusType={'literal'}
             center={{x: -2, y: 2}}
             data={this.state.myData}
-            colorDomain={[0, 1, 5]} 
-            colorRange={['#f2f2f2', '#pink', 'blue']} 
+            colorDomain={[0, this.state.myData.length/2, this.state.myData.length]} 
+            colorRange={['#fff', 'pink', 'blue']} 
             colorType={'linear'}/>
         </XYPlot>
       </div>
