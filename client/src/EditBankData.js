@@ -37,6 +37,7 @@ class EditBankData extends Component {
     let i = e.target.getAttribute('data-key');
     let Category = e.target.getAttribute('data-value');
     let currentState = this.state.records;
+    console.log("currentState: ", this.state.records);
     let individState = this.state.records[i];
     let categState = this.state.records[i].Category = Category;
     individState.Category = categState
@@ -69,7 +70,7 @@ class EditBankData extends Component {
           <table className="highlight centered responsive-table" key={index}>
             <tbody>
               <tr>
-                <td>{records.TransDate} {records.Category}</td>
+                <td>{records.TransDate} {records.PostedDate} {records.Category}</td>
                 <td>{records.Description}</td>
                 <td>{records.Amount}</td>
                 <td> <a className='dropdown-button btn ' href='#' data-activates='dropdown1' data-value="Entertainment" data-key={index} onClick={this.categoryChange}>Catigorize!</a></td>

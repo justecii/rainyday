@@ -7,18 +7,19 @@ var flash = require('connect-flash');
 
 //COMPLETE: grab data form database and display in client: src/EditBankData.js
 router.post('/', function(req, res, next) {
-
   for (let obj of req.body.data) {
     obj['TransDate'] = obj['Trans Date'];
-    obj['Amount'] = obj['\t\t\tAmount'];
-    obj['PostDate'] = obj['Post Date' || 'Posting Date'];
+    // obj['Amount'] = obj['\t\t\tAmount'];
+    obj['PostDate'] = obj['Post Date'];
+    obj['PostedDate'] = obj['Posting Date'];
     obj['CheckNumber'] = obj['Check or Slip #'];
     delete obj['Trans Date'];
-    delete obj['\t\t\tAmount'];
+    // delete obj['\t\t\tAmount'];
     delete obj['Post Date'];
+    delete obj['Posting Date'];
   }
   let item = req.body.data;
-  console.log(item);
+  console.log("item in router.post: ", item);
   let trans = []
   for (var i = 0; i < 100; i++) {
     console.log(item[i]);
@@ -47,6 +48,7 @@ router.get('/', function(req, res, next) {
   console.log('in the /bankData route get');
   BankRecord.find({}, function(err, records){
       if(err) return res.send(err);
+      console.log("records in router.get: ", records);
       res.send(records);
   });
 });
