@@ -67,23 +67,30 @@ class EditBankData extends Component {
 
     return (
         this.state.records.map((records, index) => (
-          <table className="highlight centered responsive-table" key={index}>
-            <tbody>
-              <tr>
-                <td>{records.TransDate} {records.PostedDate} {records.Category}</td>
-                <td>{records.Description}</td>
-                <td>{records.Amount}</td>
-                <td> <a className='dropdown-button btn ' href='#' data-activates='dropdown1' data-value="Entertainment" data-key={index} onClick={this.categoryChange}>Catigorize!</a></td>
-                <ul id='dropdown1' className='dropdown-content'>
-                  <li><a href="#!">Entertainment</a></li>
-                  <li><a href="#!">Transportation</a></li>
-                  <li><a href="#!"> Dinning out</a></li>
-                  <li><a href="#!">Clothing</a></li>
-                </ul>
-                <a class="waves-effect waves-light btn-large red" data-key={index} onClick={this.deleteTransaction}>Delete</a>
-              </tr>
-            </tbody>
-          </table>  ))
+
+          <section className="row z-depth-1" key={index}>
+            
+             
+                <div className='col s3'>{records.TransDate} {records.PostedDate} {records.Category}</div>
+                <div className='col s3'>{records.Description}</div>
+                <div className='col s3'>{records.Amount}</div>
+                <div className='col s2'> 
+                  <select class="browser-default">
+                  <label>Catigorize!</label>
+                  <option value="" disabled selected data-value="Entertainment" data-key={index} onClick={this.categoryChange}>Choose your Category</option>
+                  <option value="1">Entertainment</option>
+                  <option value="2">Transportation</option>
+                  <option value="3"> Dinning out</option>
+                  <option value="3">Clothing</option>
+                </select>
+                </div>
+               
+  
+
+                <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteTransaction}>Delete</div>
+              
+          </section>  ))
+
     );
   }
 }
