@@ -20,6 +20,16 @@ class BankRecords extends Component {
       <div className="BankRecordsWrapper">
         <p>BankRecords Page</p>
         <InputBankRecords />
+        <table className="highlight centered responsive-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Category</th>
+            </tr>
+          </thead>
+        </table>
         <EditBankData />
       </div>
     );
