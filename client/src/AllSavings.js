@@ -6,10 +6,15 @@ class AllSavings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      childProp:""
+      savings: []
     }
   }
-
+  
+  componentDidMount(){
+    fetch("/bankRecords/savedList")
+    .then((response) => response.json())
+    .then((response) => this.setState({savings: response}))
+  }
 
 
   render() {

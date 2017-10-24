@@ -26,7 +26,7 @@ class Home extends Component {
         </header> */}
          {/*  parallax */}
         <div className="parallax-container">
-                            <div className="parallax"><img src="https://static.pexels.com/photos/243971/pexels-photo-243971.jpeg" height="1000"/></div>
+                            <div className="parallax responsive-img"><img src="https://static.pexels.com/photos/243971/pexels-photo-243971.jpeg" height="1000"/></div>
                         </div>
                         {/* end of  Parallax */}
       
@@ -43,7 +43,7 @@ class Home extends Component {
                                 <p>When trying to save money, you can’t save much on bills,  but you can save on excess purchasing. </p>
                                 <p>Here you can cut back on avoidable purchases and tack how much you’ve saved. That way when you make better financial decisions you can see and track your reward you put out for yourself.</p>
                                 <p>
-                                    <a className="btn btn-primary btn-lg" href=""><i className="large material-icons">beach_access  </i> Get Started  </a>
+                                    <a className="btn btn-primary btn-lg #b0bec5 blue-grey lighten-3" href=""><i className="large material-icons">beach_access  </i> Get Started  </a>
                                 </p>
                                 </div>
                                 <div className="col 4 ">
@@ -75,12 +75,11 @@ class Home extends Component {
                                     <div className="col s4 ">
                                         <div className="card card-panel hoverable">
                                             <div className="card-image">
-                                            <img src="https://static.pexels.com/photos/38867/pexels-photo-38867.jpeg" height='420' alt=""/>
-                                            <span className="card-title">Card Title</span>
+                                            <img src="https://static.pexels.com/photos/38867/pexels-photo-38867.jpeg" height='320' alt=""/>
+                                            <span className="card-title">Import and critique</span>
                                             </div>
                                             <div className="card-content">
-                                            <p>I am a very simple card. I am good at containing small bits of information.
-                                            I am convenient because I require little markup to use effectively.</p>
+                                            <p>Here you can import your bank statement and organize your spending habits.</p>
                                             </div>
                                             <div className="card-action">
                                             <a href="">This is a link</a>
@@ -90,12 +89,11 @@ class Home extends Component {
                                     <div className="col s4 ">
                                         <div className="card card-panel hoverable">
                                             <div className="card-image">
-                                            <img src="https://static.pexels.com/photos/4417/black-and-white-people-bar-men.jpg" height='420' alt=""/>
-                                            <span className="card-title">Card Title</span>
+                                            <img src="https://static.pexels.com/photos/4417/black-and-white-people-bar-men.jpg" height='320' alt=""/>
+                                            <span className="card-title">Set goals and track them</span>
                                             </div>
                                             <div className="card-content">
-                                            <p>I am a very simple card. I am good at containing small bits of information.
-                                            I am convenient because I require little markup to use effectively.</p>
+                                            <p>Here you can start tracking your purposeful  good spending decisions.</p>
                                             </div>
                                             <div className="card-action">
                                             <a href="">This is a link</a>
@@ -106,12 +104,11 @@ class Home extends Component {
                                         <div className="card card-panel hoverable">
                                             <div className="card-image  ">
                         
-                                            <img  src="https://static.pexels.com/photos/38867/pexels-photo-38867.jpeg" height='420' alt=""/>
-                                            <span className="card-title">Card Title</span>
+                                            <img  src="https://static.pexels.com/photos/38867/pexels-photo-38867.jpeg" height='320' alt=""/>
+                                            <span className="card-title">Visualize your progress</span>
                                             </div>
                                             <div className="card-content">
-                                            <p>I am a very simple card. I am good at containing small bits of information.
-                                            I am convenient because I require little markup to use effectively.</p>
+                                            <p>Here you can see and compare how much you purposely saved with how much you usually spend.</p>
                                             </div>
                                             <div className="card-action">
                                             <a href="">This is a link</a>
@@ -122,7 +119,11 @@ class Home extends Component {
                             </div>
 
                         </div>
-
+                        {/*  parallax */}
+                        <div className="parallax-container">
+                            <div className="parallax"><img src="https://static.pexels.com/photos/166639/pexels-photo-166639.jpeg" height="700"/></div>
+                        </div>
+                        {/* end of  Parallax */}
                 </section>
                 <footer>
                     <div className="footer-copyright white-text center #00838f cyan darken-3">
