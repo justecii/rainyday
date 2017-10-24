@@ -15,10 +15,10 @@ var flash = require('connect-flash');
 // Mongoose stuff
 var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/mern-local-auth');
-mongoose.connect('mongodb://localhost/rainyDay'); //change this line to change db name
+mongoose.connect('mongodb://localhost/rainyDay');
 
 var Category = require('./models/category');
-var BankRecord = require('./models/bankRecord');
+// var BankRecord = require('./models/bankRecord');
 var User = require('./models/user');
 var index = require('./routes/index');
 var users = require('./routes/users');

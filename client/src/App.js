@@ -12,6 +12,7 @@ import Login from './Login';
 import Home from './Home.js';
 import Savings from './Savings.js';
 import BankRecords from './BankRecords.js';
+import EditBankData from './EditBankData';
 import UserData from './UserData.js';
 
 
@@ -33,21 +34,22 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <div className="RouterLinks TheseWillBeCards">  
+          <div className="RouterLinks TheseWillBeCards">
             <Link to="/homeReactRoute">Home</Link>
             <Link to="/savingsReactRoute">Savings</Link>
             <Link to="/bankRecordsReactRoute">Bank Records</Link>
             <Link to="/userDataReactRoute">User Data</Link>
           </div>
           <div>
-            <Route 
-            exact path="/homeReactRoute" 
+            <Route
+            exact path="/homeReactRoute"
             render={() => <Home childProp={this.state.childProp} />}/>
             <Route exact path="/savingsReactRoute" component={Savings} />
             <Route exact path="/bankRecordsReactRoute" component={BankRecords} />
+            <Route exact path="/bankRecordsReactRoute" component={EditBankData} />
             <Route exact path="/userDataReactRoute" component={UserData} />
           </div>
-        
+
           <div className="App">
             <div className="SignupBox">
               <Signup lift={this.liftTokenToState} />
@@ -56,17 +58,10 @@ class App extends Component {
               <Login lift={this.liftTokenToState} />
             </div>
           </div>
-        </div>  
-      </Router>  
+        </div>
+      </Router>
     );
   }
 }
 
 export default App;
-
-
-
-  
-
-
-
