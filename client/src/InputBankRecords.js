@@ -45,6 +45,7 @@ class InputBankRecords extends Component {
             </div>
           </div>
         </form>
+        
       </div>
     );
   }

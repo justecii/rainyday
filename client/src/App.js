@@ -48,9 +48,9 @@ class App extends Component {
         <Router>
           <div>
             <nav className="RouterLinks nav-wrapper #00838f cyan darken-3">
-              <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access</i></a>
-              <Link to="/homeReactRoute" className="btn btn-large #00838f cyan darken-3 ">Home</Link>
-              <Link to="/savingsReactRoute" className="btn btn-large #00838f cyan darken-3 ">Savings</Link>
+              <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access </i></a>
+              <Link to="/homeReactRoute" className="btn btn-large #99d3df cyan darken-3 ">Home</Link>
+              <Link to="/savingsReactRoute" className="btn btn-large #88bbd6 cyan darken-3 ">Savings</Link>
               <Link to="/bankRecordsReactRoute" className="btn btn-large #00838f cyan darken-3 ">Bank Records</Link>
               <Link to="/userDataReactRoute" className="btn btn-large #00838f cyan darken-3 ">User Data</Link>
             </nav>

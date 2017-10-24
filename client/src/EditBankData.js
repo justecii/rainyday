@@ -43,20 +43,20 @@ class EditBankData extends Component {
 
     return (
         this.state.records.map((records, index) => (
-          <table className="highlight centered responsive-table" key={index}>
+          <table className="highlight centered responsive-table row" key={index}>
             <tbody>
               <tr>
-                <td>{records.TransDate}</td>
-                <td>{records.Description}</td>
-                <td>{records.Amount}</td>
-                <td> <a className='dropdown-button btn ' href='#' data-activates='dropdown1'>Catigorize!</a></td>
+                <td className='col s3'>{records.TransDate}</td>
+                <td className='col s3'>{records.Description}</td>
+                <td className='col s3'>{records.Amount}</td>
+                <td className='col s2'> <a className='dropdown-button btn '  data-activates='dropdown1'>Catigorize!</a></td>
                 <ul id='dropdown1' className='dropdown-content'>
-                  <li><a href="#!">Entertainment</a></li>
-                  <li><a href="#!">Transportation</a></li>
+                  <li ><a>Entertainment</a></li>
+                  <li><a >Transportation</a></li>
                   <li><a href="#!"> Dinning out</a></li>
-                  <li><a href="#!">Clothing</a></li>
+                  <li><a href="#!">Clothing</a></li>   
                 </ul>
-                <a class="waves-effect waves-light btn-large red" data-key={index} onClick={this.deleteTransaction}>Delete</a>
+                <td className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteTransaction}>Delete</td>
               </tr>
             </tbody>
           </table>  ))
