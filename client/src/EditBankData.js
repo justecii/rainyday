@@ -35,14 +35,17 @@ class EditBankData extends Component {
   categoryChange(e) {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
-    let Category = e.target.getAttribute('data-value');
+    let Category = e.target.value;
     let currentState = this.state.records;
+    console.log("data-value: ", Category);
     console.log("currentState: ", this.state.records);
     let individState = this.state.records[i];
     let categState = this.state.records[i].Category = Category;
     individState.Category = categState
+    console.log("individState: ", individState);
     let trans = this.state.records[i]._id;
     let a = this;
+    console.log("state: ", this.state.records);
     axios.put('/bankRecords/change', {
       data: trans,
       Category: Category
@@ -69,26 +72,26 @@ class EditBankData extends Component {
         this.state.records.map((records, index) => (
 
           <section className="row z-depth-1" key={index}>
-            
-             
+
+
                 <div className='col s3'>{records.TransDate} {records.PostedDate} {records.Category}</div>
                 <div className='col s3'>{records.Description}</div>
                 <div className='col s3'>{records.Amount}</div>
-                <div className='col s2'> 
-                  <select class="browser-default">
+                <div className='col s2'>
+                  <select class="browser-default" data-key={index} onChange={this.categoryChange}>
                   <label>Catigorize!</label>
-                  <option value="" disabled selected data-value="Entertainment" data-key={index} onClick={this.categoryChange}>Choose your Category</option>
-                  <option value="1">Entertainment</option>
-                  <option value="2">Transportation</option>
-                  <option value="3"> Dinning out</option>
-                  <option value="3">Clothing</option>
+                  <option value="" disabled selected>{records.Category}</option>
+                  <option value="Entertainment" data-key={index}>Entertainment</option>
+                  <option value="Transportation" data-key={index}>Transportation</option>
+                  <option value="Dining Out" data-key={index}> Dining out</option>
+                  <option value="Clothing" data-key={index}>Clothing</option>
                 </select>
                 </div>
-               
-  
+
+
 
                 <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteTransaction}>Delete</div>
-              
+
           </section>  ))
 
     );
