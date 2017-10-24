@@ -30,37 +30,54 @@ class App extends Component {
     this.setState({token: token})
   }
 
-  render() {
-    return (
-      <Router>
-        <div>
-          <div className="RouterLinks TheseWillBeCards">
-            <Link to="/homeReactRoute">Home</Link>
-            <Link to="/savingsReactRoute">Savings</Link>
-            <Link to="/bankRecordsReactRoute">Bank Records</Link>
-            <Link to="/userDataReactRoute">User Data</Link>
-          </div>
-          <div>
-            <Route
-            exact path="/homeReactRoute"
-            render={() => <Home childProp={this.state.childProp} />}/>
-            <Route exact path="/savingsReactRoute" component={Savings} />
-            <Route exact path="/bankRecordsReactRoute" component={BankRecords} />
-            <Route exact path="/bankRecordsReactRoute" component={EditBankData} />
-            <Route exact path="/userDataReactRoute" component={UserData} />
-          </div>
+  isEmpty(obj) {
+    for(var prop in obj) {
+      if(obj.hasOwnProperty(prop)){
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
 
-          <div className="App">
-            <div className="SignupBox">
-              <Signup lift={this.liftTokenToState} />
+  render() {
+    console.log("APP.JS STATE", this.state)
+    //if the token exists display the router
+    if(!this.isEmpty(this.state.token)){
+      return (
+        <Router>
+          <div>
+            <nav className="RouterLinks nav-wrapper #00838f cyan darken-3">
+              <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access</i></a>
+              <Link to="/homeReactRoute" className="btn btn-large #00838f cyan darken-3 ">Home</Link>
+              <Link to="/savingsReactRoute" className="btn btn-large #00838f cyan darken-3 ">Savings</Link>
+              <Link to="/bankRecordsReactRoute" className="btn btn-large #00838f cyan darken-3 ">Bank Records</Link>
+              <Link to="/userDataReactRoute" className="btn btn-large #00838f cyan darken-3 ">User Data</Link>
+            </nav>
+            <div>
+              <Route
+              exact path="/homeReactRoute"
+              render={() => <Home childProp={this.state.childProp} />}/>
+              <Route exact path="/savingsReactRoute" component={Savings} />
+              <Route exact path="/bankRecordsReactRoute" component={BankRecords} />
+              <Route exact path="/bankRecordsReactRoute" component={EditBankData} />
+              <Route exact path="/userDataReactRoute" component={UserData} />
             </div>
-            <div className="LoginBox">
-              <Login lift={this.liftTokenToState} />
-            </div>
+          </div>
+        </Router> 
+      );
+    } else{ //if it doesn't exist go to the login page
+      return(
+        <div className="App">
+          <div className="SignupBox">
+            <Signup lift={this.liftTokenToState} />
+          </div>
+          <div className="LoginBox">
+            <Login lift={this.liftTokenToState} />
           </div>
         </div>
-      </Router>
-    );
+      )
+    }
   }
 }
 
