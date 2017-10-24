@@ -38,7 +38,7 @@ router.post('/', function(req, res, next){
         name: req.body.name,
         // userId: req.user.id
         userId: 10
-    }, function(err, job){
+    }, function(err, categoryr){
         if(err) return res.send(err);
         res.send(category);
     })

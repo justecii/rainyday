@@ -3,9 +3,26 @@ var mongoose = require('mongoose');
 var BankRecord = require('../models/BankRecord')
 var router = express.Router();
 
+router.post('/savedList', function(req, res){
+    console.log('inthe post saved list')
+    BankRecord.create({
+        // Description: req.body.Description,
+        // Category: req.body.Category,
+        // Amount: req.body.Amount,
+        // userId: 10
+        Description: lala,
+        Category: kuku,
+        Amount: 10,
+        userId: 10
+    }, function(err, record){
+        if(err) return res.send(err);
+        res.send(record);
+    })
+});
+
 router.post('/', function(req, res, next) {
-          /*let data = req.body.data[0]
-          console.log("keys1: ", Object.keys(data));*/
+          let data = req.body.data[0]
+          /*console.log("keys1: ", Object.keys(data));*/
           /*let newData = req.body.data*/
   for (let obj of req.body.data) {
     obj['TransDate'] = obj['Trans Date'];
@@ -25,7 +42,6 @@ router.post('/', function(req, res, next) {
     trans.push(item[i]);
     BankRecord.create(item[i]);
   }
-  let find = Bank.find({});
 })
 
 /* GET display all the bank records */
@@ -71,13 +87,15 @@ router.put('/:recordId/:toSave', function(req, res, next){
 });
 
 
-//////////////////////////NOT SURE WE NEED THIS ROUTE///////////////
-router.get('/:toSave', function(req, res, next){
+// //////////////////////////NOT SURE WE NEED THIS ROUTE///////////////
+router.get('/savedList', function(req, res, next){
+    console.log("router.get('/savedList,...) in routes on server");
     BankRecord.find({ isSaved: true }, function(err, records){
         if(err) return res.send(err);
         res.send(records);
     });
 });
+
 
 //using node export syntex
 module.exports = router;
