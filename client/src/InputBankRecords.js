@@ -37,10 +37,13 @@ class InputBankRecords extends Component {
   render() {
     return (
       <div>
-        <h1>Upload A File</h1>
-        <form  onSubmit={this.uploadFile} action="/jobs" method="POST">
-          <input type="file" name="uploadCSV" onChange={this.uploadFile}/>
-          <input type="submit" />
+        <form action="#">
+          <div className="file-field input-field ">
+            <div className="btn #00838f cyan darken-3">
+              <span>File</span>
+              <input type="file" name="uploadCSV" onChange={this.uploadFile}/>
+            </div>
+          </div>
         </form>
       </div>
     );
