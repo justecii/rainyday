@@ -27,6 +27,10 @@ router.post('/', function(req, res, next) {
   }
 })
 
+router.post('/savedList', function(req, res, next) {
+    console.log("/savedList post route in bankRecords route");
+})
+
 /* GET display all the bank records */
 router.get('/', function(req, res, next) {
   console.log('in the /bankData route get');

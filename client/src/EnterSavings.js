@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
 import './App.css';
 
 //form for entering
@@ -9,29 +10,67 @@ class EnterSavings extends Component {
     this.state = {
       // isSaved = true, should it be included here...
       savings: [],
-      value: "transportation"
+      Description: "",
+      Category: "",
+      Amount: ""
     };
     //thisis the binding line necessary to keep this bound correctly
-    this.componentDidMount = this.componentDidMount.bind(this);
+    // this.componentDidMount = this.componentDidMount.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  
   handleChange(event) {
-    this.setState({value: event.target.value});
+
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    if (name === "Description") {
+      this.setState({
+        Description: value
+      });
+    } else if (name === "Category") {
+      this.setState({
+        Category: value
+      });
+    } else {
+      this.setState({
+        Amount: value
+      });
+    }
   }
 
-  handleSubmit(event) {
-    console.log('this is event from handle submit', event.target);
-    alert('A new input was submitted: ' + this.state.value);
-    event.preventDefault();
+  handleSubmit(e) {
+    console.log("Description: ", this.state.Description);
+    console.log("Category: ", this.state.Category);
+    console.log("Amount: ", this.state.Amount);
+    e.preventDefault();
+    //create variable (let Description = this.state.Descrption, etc)
+    //add all three variables to object {} -- let Object = {insert object of three variables}
+    //data: Ojbect of the three variables
+
+    //re-set state based on updated form information...
+    let tempArr = this.state.savings;
+    //add the new object (Object) to tempArr -- Google: ".shift() for objects"
+    //setState to tempArr (which is already done below)
+    let a = this;
+    axios.post('/bankRecords/savedList', {
+      data: a//insert object of the three variables
+    }).then(function (response) {
+      a.setState({
+        savings: tempArr
+      })
+    }).catch(function (error) {
+      console.log("error: ", error);
+    })
+
   }
 
-  componentDidMount(){
-    fetch("/bankRecords/savedList")
-    .then((response) => response.json())
-    .then((response) => this.setState({savings: response}))
-  }
+  // componentDidMount(){
+  //   fetch("/bankRecords/savedList")
+  //   .then((response) => response.json())
+  //   .then((response) => this.setState({savings: response}))
+  // }
   
   render() {
 
@@ -39,32 +78,35 @@ class EnterSavings extends Component {
       <div className="EnterSavingsWrapper">
         <h1>Choose your savings</h1>
         <form onSubmit={(e) => this.handleSubmit(e)}>
-        <label>
-          What is the thing you are saving on: <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/>
-        </label> 
-        <label>
-          Category:
-        </label>  
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="bills">Bills</option>
-            <option value="groceries">Groceries</option>
-            <option value="transportation">Transportation</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="clothes">Clothes</option>
-            <option value="dining Out">Dining Out</option>
-            <option value="vices">Vices</option>
-            <option value="debt">Debt</option>
-            <option value="housing">Housing</option>
-            <option value="savings">Savings</option>
-            <option value="health">Health</option>
-            <option value="miscellaneous">Miscellaneous</option>
-          </select>
-        
-        <br />
-        <label>
-          Amount: <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
-        </label> 
-        <input type="submit" value="Submit" />
+          <label htmlFor="Description">
+            What is the thing you are saving on: 
+          </label> 
+          <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/>
+          <div>
+            <label htmlFor="Category">
+              Category:
+            </label>   
+              <select name="Category" value={this.state.value} onChange={this.handleChange}>
+                <option value="bills">Bills</option>
+                <option value="groceries">Groceries</option>
+                <option value="transportation">Transportation</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="clothes">Clothes</option>
+                <option value="dining Out">Dining Out</option>
+                <option value="vices">Vices</option>
+                <option value="debt">Debt</option>
+                <option value="housing">Housing</option>
+                <option value="savings">Savings</option>
+                <option value="health">Health</option>
+                <option value="miscellaneous">Miscellaneous</option>
+              </select>
+          </div>  
+          <br />
+          <label htmlFor="Amount">
+            Amount: 
+          </label> 
+          <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );

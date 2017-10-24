@@ -9,7 +9,12 @@ class AllSavings extends Component {
       childProp:""
     }
   }
-
+  
+  componentDidMount(){
+    fetch("/bankRecords/savedList")
+    .then((response) => response.json())
+    .then((response) => this.setState({savings: response}))
+  }
 
 
   render() {
