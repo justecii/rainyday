@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var BankRecord = require('../models/BankRecord')
 var router = express.Router();
+var flash = require('connect-flash');
 
 router.post('/', function(req, res, next) {
           /*let data = req.body.data[0]
@@ -47,6 +48,16 @@ router.get('/:recordId', function(req, res, next) {
     });
 });
 
+//user can delete specific transaction from database
+router.put('/', function(req, res, next){
+    console.log("req: ", req.body.data);
+    let id = req.body.data
+    BankRecord.findByIdAndRemove({_id: id},
+       function(err, item){
+        if(err) res.json(err);
+        else res.end();
+    });
+});
 
 //user can assign specific record to his specific category, needs button/href/stimulation on front end
 router.put('/:recordId/category/:categoryId', function(req, res, next){
