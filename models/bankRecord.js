@@ -5,6 +5,7 @@ var BankRecordSchema = new mongoose.Schema({
   Type: String,
   Amount: Number,
   PostDate: String,
+  PostedDate: String,
   TransDate: String,
   Balance: Number,
   Details: String,

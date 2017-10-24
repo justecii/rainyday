@@ -31,6 +31,12 @@ header{
   min-height: 300px;
 }
  
+
 .movepage{
   margin-top:100px;
+}
+
+select {
+  display: inline-block;
+  width: 50%;
 }
