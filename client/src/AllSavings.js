@@ -6,7 +6,7 @@ class AllSavings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      childProp:""
+      savings: []
     }
   }
   

@@ -45,17 +45,29 @@ class EnterSavings extends Component {
     console.log("Category: ", this.state.Category);
     console.log("Amount: ", this.state.Amount);
     e.preventDefault();
-    //create variable (let Description = this.state.Descrption, etc)
+    let Description = this.state.Description;
+    let Category = this.state.Category;
+    let Amount = this.state.Amount;
+   
     //add all three variables to object {} -- let Object = {insert object of three variables}
+    let newObject = {
+      Description: Description,
+      Category: Category,
+      Amount: Amount,
+      isSaved: true,
+      userId: 10
+    }
     //data: Ojbect of the three variables
 
     //re-set state based on updated form information...
     let tempArr = this.state.savings;
+    tempArr.push(newObject)
     //add the new object (Object) to tempArr -- Google: ".shift() for objects"
     //setState to tempArr (which is already done below)
+    console.log("state: ", this.state.savings);
     let a = this;
     axios.post('/bankRecords/savedList', {
-      data: a//insert object of the three variables
+      data: newObject//insert object of the three variables
     }).then(function (response) {
       a.setState({
         savings: tempArr
@@ -66,11 +78,11 @@ class EnterSavings extends Component {
 
   }
 
-  // componentDidMount(){
-  //   fetch("/bankRecords/savedList")
-  //   .then((response) => response.json())
-  //   .then((response) => this.setState({savings: response}))
-  // }
+  componentDidMount(){
+    fetch("/bankRecords/savedList")
+    .then((response) => response.json())
+    .then((response) => this.setState({savings: response}))
+  }
   
   render() {
 
