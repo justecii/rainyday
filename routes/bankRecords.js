@@ -10,7 +10,8 @@ router.post('/', function(req, res, next) {
   for (let obj of req.body.data) {
     obj['TransDate'] = obj['Trans Date'];
     obj['Amount'] = obj['\t\t\tAmount'];
-    obj['PostDate'] = obj['Post Date'];
+    obj['PostDate'] = obj['Post Date' || 'Posting Date'];
+    obj['CheckNumber'] = obj['Check or Slip #'];
     delete obj['Trans Date'];
     delete obj['\t\t\tAmount'];
     delete obj['Post Date'];
