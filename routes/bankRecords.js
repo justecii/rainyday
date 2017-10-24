@@ -4,8 +4,10 @@ var BankRecord = require('../models/BankRecord')
 var router = express.Router();
 var flash = require('connect-flash');
 
+
 //COMPLETE: grab data form database and display in client: src/EditBankData.js
 router.post('/', function(req, res, next) {
+
   for (let obj of req.body.data) {
     obj['TransDate'] = obj['Trans Date'];
     obj['Amount'] = obj['\t\t\tAmount'];
@@ -23,7 +25,6 @@ router.post('/', function(req, res, next) {
     trans.push(item[i]);
     BankRecord.create(item[i]);
   }
-  let find = Bank.find({});
 })
 
 /* GET display all the bank records */
@@ -79,13 +80,15 @@ router.put('/:recordId/:toSave', function(req, res, next){
 });
 
 
-//////////////////////////NOT SURE WE NEED THIS ROUTE///////////////
-router.get('/:toSave', function(req, res, next){
+// //////////////////////////NOT SURE WE NEED THIS ROUTE///////////////
+router.get('/savedList', function(req, res, next){
+    console.log("router.get('/savedList,...) in routes on server");
     BankRecord.find({ isSaved: true }, function(err, records){
         if(err) return res.send(err);
         res.send(records);
     });
 });
+
 
 //using node export syntex
 module.exports = router;

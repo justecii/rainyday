@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
+//get all type savings
 class AllSavings extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +17,7 @@ class AllSavings extends Component {
     return (
       <div className="AllSavingsWrapper">
         <p>All Savings Page</p>
+        
       </div>
     );
   }
