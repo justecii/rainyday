@@ -40,6 +40,7 @@ class App extends Component {
   }
 
   render() {
+
     console.log("APP.JS STATE", this.state)
     //if the token exists display the router
     if(!this.isEmpty(this.state.token)){
