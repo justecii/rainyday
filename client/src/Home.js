@@ -75,7 +75,7 @@ class Home extends Component {
                                     <div className="col s4 ">
                                         <div className="card card-panel hoverable">
                                             <div className="card-image">
-                                            <img src="https://static.pexels.com/photos/38867/pexels-photo-38867.jpeg" height='420' alt=""/>
+                                            <img src="https://static.pexels.com/photos/38867/pexels-photo-38867.jpeg" height='320' alt=""/>
                                             <span className="card-title">Import and critique</span>
                                             </div>
                                             <div className="card-content">
@@ -89,8 +89,8 @@ class Home extends Component {
                                     <div className="col s4 ">
                                         <div className="card card-panel hoverable">
                                             <div className="card-image">
-                                            <img src="https://static.pexels.com/photos/4417/black-and-white-people-bar-men.jpg" height='420' alt=""/>
-                                            <span className="card-title">Set goals and track</span>
+                                            <img src="https://static.pexels.com/photos/4417/black-and-white-people-bar-men.jpg" height='320' alt=""/>
+                                            <span className="card-title">Set goals and track them</span>
                                             </div>
                                             <div className="card-content">
                                             <p>Here you can start tracking your purposeful  good spending decisions.</p>
@@ -104,8 +104,8 @@ class Home extends Component {
                                         <div className="card card-panel hoverable">
                                             <div className="card-image  ">
                         
-                                            <img  src="https://static.pexels.com/photos/38867/pexels-photo-38867.jpeg" height='420' alt=""/>
-                                            <span className="card-title">Here you can see on comparison how much you purposely saved compared to how much you usually spend.</span>
+                                            <img  src="https://static.pexels.com/photos/38867/pexels-photo-38867.jpeg" height='320' alt=""/>
+                                            <span className="card-title">Visualize your progress</span>
                                             </div>
                                             <div className="card-content">
                                             <p>Here you can see and compare how much you purposely saved with how much you usually spend.</p>
@@ -119,8 +119,11 @@ class Home extends Component {
                             </div>
 
                         </div>
-                       
-                        
+                        {/*  parallax */}
+                        <div className="parallax-container">
+                            <div className="parallax"><img src="https://static.pexels.com/photos/166639/pexels-photo-166639.jpeg" height="700"/></div>
+                        </div>
+                        {/* end of  Parallax */}
                 </section>
                 <footer>
                     <div className="footer-copyright white-text center #00838f cyan darken-3">

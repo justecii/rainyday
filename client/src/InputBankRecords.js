@@ -38,7 +38,7 @@ class InputBankRecords extends Component {
     return (
       <div>
         <form action="#">
-          <div className="file-field input-field ">
+          <div className="file-field input-field col s12 ">
             <div className="btn #00838f cyan darken-3">
               <span>File</span>
               <input type="file" name="uploadCSV" onChange={this.uploadFile}/>

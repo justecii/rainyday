@@ -43,23 +43,28 @@ class EditBankData extends Component {
 
     return (
         this.state.records.map((records, index) => (
-          <table className="highlight centered responsive-table row" key={index}>
-            <tbody>
-              <tr>
-                <td className='col s3'>{records.TransDate}</td>
-                <td className='col s3'>{records.Description}</td>
-                <td className='col s3'>{records.Amount}</td>
-                <td className='col s2'> <a className='dropdown-button btn '  data-activates='dropdown1'>Catigorize!</a></td>
-                <ul id='dropdown1' className='dropdown-content'>
-                  <li ><a>Entertainment</a></li>
-                  <li><a >Transportation</a></li>
-                  <li><a href="#!"> Dinning out</a></li>
-                  <li><a href="#!">Clothing</a></li>   
-                </ul>
-                <td className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteTransaction}>Delete</td>
-              </tr>
-            </tbody>
-          </table>  ))
+          <section className="row z-depth-1" key={index}>
+            
+             
+                <div className='col s3'>{records.TransDate}</div>
+                <div className='col s3'>{records.Description}</div>
+                <div className='col s3'>{records.Amount}</div>
+                <div className='col s2'> 
+                  <select class="browser-default">
+                  <label>Catigorize!</label>
+                  <option value="" disabled selected>Choose your Catigory</option>
+                  <option value="1">Entertainment</option>
+                  <option value="2">Transportation</option>
+                  <option value="3"> Dinning out</option>
+                  <option value="3">Clothing</option>
+                </select>
+                </div>
+               
+  
+
+                <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteTransaction}>Delete</div>
+              
+          </section>  ))
     );
   }
 }
