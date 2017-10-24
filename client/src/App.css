@@ -14,38 +14,18 @@
 li {
   display: inline-block;
 }
-
-.card {
-  text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 0 auto;
-  max-width: 120px;
-  min-height: 187px;
-  height: 0 auto;
-  display: inline-block;
-  margin: 10px;
-  vertical-align: center;
-  padding: 5px;
-  padding-top: 25px;
-  font-family: monospace;
-  vertical-align: top;
+header{
+  height: 50vh;
+  min-height: 300px;
+  background-image: url("https://static.pexels.com/photos/17739/pexels-photo.jpg");
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-size: 100%;
+  color: rgb(53, 51, 51);
 }
+.parallax-container {
+  height: 50vh;
+  min-height: 300px;
 
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-  text-align: center;
-  box-shadow: 0 10px 25px 0 rgba(0,0,0,0.5);
-  transition: 0.3s;
-  width: 0 auto;
-  max-width: 120px;
-  height: 0 auto;
-  min-height: 187px;
-  display: inline-block;
-  margin: 10px;
-  vertical-align: center;
-  padding: 5px;
-  padding-top: 25px;
-  font-family: monospace;
-  vertical-align: top;
 }
