@@ -65,3 +65,7 @@ header{
   min-height: 300px;
 }
  
+select {
+  display: inline-block;
+  width: 50%;
+}
