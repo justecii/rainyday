@@ -66,9 +66,7 @@ class SavingsSummary extends Component {
         <br />
 
         <div className="totalPerCat">
-        { function
-
-          this.state.totalPerCat.map((catTot, index) => {
+        {this.state.totalPerCat.map((catTot, index) => {
             <div> {console.log("catTot: ", catTot)} </div>
         })}
         </div>
