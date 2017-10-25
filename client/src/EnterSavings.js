@@ -47,6 +47,9 @@ class EnterSavings extends Component {
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
+    console.log("descript: ", Description);
+    console.log("category: ", Category);
+    console.log("Amount: ", Amount);
 
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
@@ -92,8 +95,8 @@ class EnterSavings extends Component {
         <form onSubmit={(e) => this.handleSubmit(e)}>
 
           {/* <label htmlFor="Description">
-            What is the thing you are saving on: 
-          </label> 
+            What is the thing you are saving on:
+          </label>
           <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/> */}
           {/* test */}
           <div class="row highlight">
@@ -107,7 +110,7 @@ class EnterSavings extends Component {
             {/* test */}
             <div class="row highlight">
         <div class="col s12">
-         <h5>Category:</h5> 
+         <h5>Category:</h5>
             <select name="Category " value={this.state.value} onChange={this.handleChange}>
                 <option  value="" disabled selected> </option>
                 <option value="bills">Bills</option>
@@ -123,13 +126,13 @@ class EnterSavings extends Component {
                 <option value="health">Health</option>
                 <option value="miscellaneous">Miscellaneous</option>
               </select>
-         
+
         </div>
         </div>
             {/* test 2 */}
             {/* <label htmlFor="Category flow-text medium">
-             Category:  
-            </label>   
+             Category:
+            </label>
               <select name="Category " value={this.state.value} onChange={this.handleChange}>
                 <option  value="" disabled selected>Choose your Category</option>
                 <option value="bills">Bills</option>
@@ -145,16 +148,16 @@ class EnterSavings extends Component {
                 <option value="health">Health</option>
                 <option value="miscellaneous">Miscellaneous</option>
               </select> */}
-          </div>  
+          </div>
 
-          
+
           <br />
           <label htmlFor="Amount">
-            Money saved ($): 
-          </label> 
+            Money saved ($):
+          </label>
           <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
           <input type="submit" value="Submit" />
-          
+
         </form>
       </div>
     );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './App.css';
 import axios from 'axios';
 
@@ -10,11 +9,9 @@ class AllSavings extends Component {
     this.state = {
       savings: []
     }
-
     this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
     this.deleteSaved = this.deleteSaved.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
   check(e) {
@@ -38,7 +35,6 @@ class AllSavings extends Component {
       console.log("error: ", error);
     })
   }
-
 
   SaveCatChange(e) {
     e.preventDefault();
@@ -65,34 +61,17 @@ class AllSavings extends Component {
 
   componentDidMount() {
 
-    fetch('/bankRecords/SavingsSummary/:id')
+    fetch('/bankRecords/SavingsSummary')
       .then(response => response.json())
-      .then(response => this.setState({savings: response}))
+      .then(response => {
+        this.setState({savings: response})
+      })
     }
 
 
-
-//   deleteSavedItem(recordId) {
-//     let url = "/bankRecords/savedList/" + recordId;
-//     fetch(url, {method: 'delete'}).then((response) => console.log(response))
-//   }
-   
-
   render() {
-    console.log('those are savings', this.state.savings);
 
-    let savedOn = this.state.savings.map((item, index) => (
-      
-        <div className="row" key={index}>
-          <div className='col s5'>{item.Description}</div>
-          <div className='col s3'>{item.Category}</div>
-          <div className='col s2'>{item.Amount}</div>
-          <div className="waves-effect waves-light btn red col s1 "  onClick={(e)=> this.deleteSavedItem(item._id)}>Delete</div> 
-        </div>
-    ))
-    
     return (
-
       this.state.savings.map((saving, index) => (
 
         <section className="row z-depth-1" key={index} onClick={this.check}>
@@ -125,19 +104,6 @@ class AllSavings extends Component {
 
         </section>  ))
     );
-
-      <div>  
-        <h1>Those could be your expenses, instead those are your savings!</h1>
-        <div className="row">
-          <div className='col s5'>Description</div>
-          <div className='col s3'>Category</div>
-          <div className='col s2'>Money Saved ($)</div>
-          <div className='col s1'>Delete</div> 
-        </div> 
-        {savedOn}
-      </div>  
-    )    
-
   }
 }
 export default AllSavings;

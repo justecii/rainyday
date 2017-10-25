@@ -30,6 +30,7 @@ class Savings extends Component {
 
 
         <p>Savings Page</p>
+        <EnterSavings />
         <section className="row movepage">
         <h1>Savings Summary:</h1>
             <ul className="colHeader">
@@ -39,8 +40,6 @@ class Savings extends Component {
             </ul>
 
         </section>
-
-        <EnterSavings />
         <AllSavings />
         <SavingsSummary />
       </div>

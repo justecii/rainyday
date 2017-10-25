@@ -7,114 +7,83 @@ class SavingsSummary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      savings: []
+      savings: [],
+      amountTotal: [],
+      totalPerCat: [],
+      avgAmountPerCat: [],
+      modalCat: []
+
     }
-    // this.check = this.check.bind(this);
-    // this.SaveCatChange = this.SaveCatChange.bind(this);
-    // this.deleteSaved = this.deleteSaved.bind(this);
+    this.check = this.check.bind(this);
   }
 
-  // check(e) {
-  //   console.log(this.state.savings);
-  // }
-  //
-  // //total amounts
-  // //total and Averages by Category
-  //   //highest to lowest category
-  //   //modal category
-  // //total by Date (also, add date to form on EnterSavings.js)
-  //
-  // deleteSaved(e) {
-  //   e.preventDefault();
-  //   let i = e.target.getAttribute('data-key');
-  //   let currentState = this.state.savings;
-  //   let trans = this.state.savings[i]._id;
-  //   let a = this;
-  //   axios.put('/bankRecords', {
-  //     data: trans
-  //   }).then(function (response) {
-  //     currentState.splice(i, 1);
-  //     a.setState({
-  //       savings: currentState
-  //     })
-  //   }).catch(function (error) {
-  //     console.log("error: ", error);
-  //   })
-  // }
-  //
-  // SaveCatChange(e) {
-  //   e.preventDefault();
-  //   let i = e.target.getAttribute('data-key');
-  //   let Category = e.target.value;
-  //   let currentState = this.state.savings;
-  //   let individState = this.state.savings[i];
-  //   console.log("individState: ", individState);
-  //   let categState = this.state.savings[i].Category = Category;
-  //   individState.Category = categState
-  //   let trans = this.state.savings[i]._id;
-  //   let a = this;
-  //   axios.put('/bankRecords/change', {
-  //     data: trans,
-  //     Category: Category
-  //   }).then(function (response) {
-  //     a.setState({
-  //       savings: currentState,
-  //     })
-  //   }).catch(function (error) {
-  //     console.log("error: ", error);
-  //   })
-  // }
-  //
-  // componentDidMount() {
-  //
-  //   fetch('/bankRecords/SavingsSummary/:id')
-  //     .then(response => response.json())
-  //     .then(response => this.setState({savings: response}))
-  //   }
+  check(e) {
+    console.log(this.state.savings);
+    console.log("totalPerCat: ", this.state.totalPerCat);
+    console.log("total in check: ", this.state.total);
+  }
+
+
+  componentDidMount() {
+    fetch('/bankRecords/SavingsSummary')
+      .then(response => response.json())
+      .then(response =>
+        { let amountTotal = []
+          let catAndAmount = []
+          let total = 0
+        for (var i = 0; i < response.length; i++) {
+          amountTotal.push(response[i].Amount)
+          catAndAmount.push(response[i])
+        }
+        for (var j = 0; j < response.length; j++) {
+          delete catAndAmount[j].Description
+          delete catAndAmount[j]._id
+          delete catAndAmount[j].isSaved
+          delete catAndAmount[j].userId
+          delete catAndAmount[j].__v
+          total = total + amountTotal[j]
+        }
+
+        console.log("total in fetch: ", total)
+        this.setState({
+          savings: response,
+          totalPerCat: catAndAmount,
+          total: total
+        })})
+    }
+
+
 
   render() {
+    {console.log("total in render: ", this.state.total)}
+    let total = this.state.total;
 
     return (
-      <div></div>
+
+      <div>
+        <div className="col s3"></div>
+        <div className="col s3">{total}</div>
+        <br />
+
+        <div className="totalPerCat">
+        { function
+
+          this.state.totalPerCat.map((catTot, index) => {
+            <div> {console.log("catTot: ", catTot)} </div>
+        })}
+        </div>
+
+        {this.state.savings.map((saving, index) => (
+          <div>
+            <section onClick={this.check} key={index} onClick={this.check}>
+              <span>{saving.Description}</span>
+              <span>{saving.Amount}</span>
+              <span>{saving.Category}</span>
+            </section>
+          </div> ))}
+
+        </div>
     )
   }
 }
 export default SavingsSummary;
-
-      // this.state.savings.map((saving, index) => (
-      //
-      //   <section className="row z-depth-1" key={index} onClick={this.check}>
-      //     <div className='col s3'>{saving.Description}</div>
-      //     <div className='col s3'>{saving.Amount}</div>
-      //     <div className='col s3'>{saving.Category}</div>
-      //
-      //     <div className='col s2'>
-      //       <select className="browser-default" data-key={index} onChange={this.SaveCatChange}>
-      //         <label>Catigorize!</label>
-      //         <option value="" disabled selected>{saving.Category}</option>
-      //         <option value="Bills" data-key={index}>Bills</option>
-      //         <option value="Groceries" data-key={index}>Groceries</option>
-      //         <option value="Transportation" data-key={index}>Transportation</option>
-      //         <option value="Entertainment" data-key={index}>Entertainment</option>
-      //         <option value="Clothing" data-key={index}>Clothing</option>
-      //         <option value="Dining Out" data-key={index}> Dining out</option>
-      //         <option value="Vices" data-key={index}>Vices</option>
-      //         <option value="Debt" data-key={index}>Debt</option>
-      //         <option value="Housing" data-key={index}>Housing</option>
-      //         <option value="Savings" data-key={index}>Savings</option>
-      //         <option value="Health" data-key={index}>Health</option>
-      //         <option value="Miscellaneous" data-key={index}>Miscellaneous</option>
-      //         <option value="Income" data-key={index}>Income</option>
-      //       </select>
-      //     </div>
-      //
-      //
-      //
-      //     <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteSaved}>Delete</div>
-      //
-      //   </section>  ))
-//
-//     )
-//   }
-// }
-// export default SavingsSummary;

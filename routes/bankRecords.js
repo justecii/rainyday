@@ -39,7 +39,7 @@ router.put('/change', function(req, res, next){
     });
 });
 
-/* COMPLETE: GET display all the bank records */
+//COMPLETE: GET display all the bank records
 router.get('/', function(req, res, next) {
   BankRecord.find({}, function(err, records){
       if(err) return res.send(err);
@@ -47,15 +47,15 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* GET specific record from bank records by id */
-router.get('/:recordId', function(req, res, next) {
-    BankRecord.findById(req.params.recordId, function(err, record){
-        if(err) return res.send(err);
-        res.send(record);
-    });
-});
+// /* GET specific record from bank records by id */
+// router.get('/:recordId', function(req, res, next) {
+//     BankRecord.findById(req.params.recordId, function(err, record){
+//         if(err) return res.send(err);
+//         res.send(record);
+//     });
+// });
 
-//COMPLETE: user can delete specific transaction from database
+//COMPLETE: delete from db - coming from AllSavings.js
 router.put('/', function(req, res, next){
     let id = req.body.data
     BankRecord.findByIdAndRemove({_id: id},
@@ -75,9 +75,9 @@ router.put('/:recordId/category/:categoryId', function(req, res, next){
         }
     );
 });
-//////////////////////////////
-////AJ EDITED TO TEST, CAN CHANGE///
-////////////////////////
+////////////////////////////////////////////////////////////////
+// WE PROBABLY DON'T NEED THIS
+////////////////////////////////////////////////////////////////
 //user can assign specific record to his savings, needs button on front end, isSaved is eather undefined or true if we hit this route...
 router.put('/:recordId/:toSave', function(req, res, next){
     BankRecord.find(req.params.recordId,
@@ -90,19 +90,19 @@ router.put('/:recordId/:toSave', function(req, res, next){
 });
 
 
-// //////////////////////////NOT SURE WE NEED THIS ROUTE///////////////
+////////////////////////////////////////////////////////////////
+// WE PROBABLY DON'T NEED THIS
+////////////////////////////////////////////////////////////////
 router.get('/savedList', function(req, res, next){
     console.log("router.get('/savedList,...) in routes on server");
-    BankRecord.find({isSaved: true}, function(err, records){
+    BankRecord.find({ isSaved: true }, function(err, records){
         if(err) return res.send(err);
         console.log(records);
         res.send(records);
     });
 });
-////////////////////////////////////////////////////////////////
-//AJ ADDED THIS BC HE MUST HAVE ACCIDENTALLY DELETED IT SOMEHOW
-//IT IS PROBABLY STILL IN THE MASTER FILE
-////////////////////////////////////////////////////////////////
+
+// TODO: need this to add savedlist items to db - from EnterSavings.js
 router.post('/savedList', function(req, res, next){
      let item = req.body.data;
      console.log("item: ", item);
@@ -115,20 +115,8 @@ router.post('/savedList', function(req, res, next){
 
  })
 
- router.delete('/savedList/:recordId', function(req, res, next){
-    console.log('deleting record');
-    BankRecord.findByIdAndRemove(req.params.recordId, function(err) {
-        if (err) return res.send(err);
-        console.log('RecordId deleted!');
-        res.redirect('/bankRecords/savedList');
-    });
-})
-////////////////////////////////////////////////////////////////
-//AJ ADDED THIS TO DISPLAY DATA IN SAVINGSSUMARY.JS IN CLIENT///
-////////////////////////////////////////////////////////////////
-router.get('/SavingsSummary/:id', function(req, res, next){
-    console.log("SavingsSummary Route...");
-    console.log("savingssummary route: ", req.body);
+//COMPLETE: get route to display saved item in AllSavings.js
+router.get('/SavingsSummary', function(req, res, next){
     BankRecord.find({isSaved: true}, function(err, records){
         if(err) return res.send(err);
         console.log(records);
@@ -138,14 +126,5 @@ router.get('/SavingsSummary/:id', function(req, res, next){
 
 
 
-
-router.delete('/savedList/:recordId', function(req, res, next){
-    console.log('deleting record');
-    BankRecord.findByIdAndRemove(req.params.recordId, function(err) {
-        if (err) return res.send(err);
-        console.log('RecordId deleted!');
-        res.redirect('/bankRecords/savedList');
-    });
-})
 //using node export syntex
 module.exports = router;
