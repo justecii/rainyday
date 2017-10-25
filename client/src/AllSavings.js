@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
 import axios from 'axios';
+import './App.css';
 
 //get all type savings
 class AllSavings extends Component {
@@ -9,15 +9,25 @@ class AllSavings extends Component {
     this.state = {
       savings: []
     }
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
     this.deleteSaved = this.deleteSaved.bind(this);
   }
-
+  
+  componentDidMount(){
+    fetch("/bankRecords/savedList")
+    .then((response) => response.json())
+    .then((response) => this.setState({savings: response}))
+  }
+  
   check(e) {
     console.log(this.state.savings);
   }
-
+  // deleteSavedItem(recordId) {
+  //   let url = "/bankRecords/savedList/" + recordId;
+  //   fetch(url, {method: 'delete'}).then((response) => console.log(response))
+  // }
   deleteSaved(e) {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
@@ -59,14 +69,7 @@ class AllSavings extends Component {
     })
   }
 
-  componentDidMount() {
-
-    fetch('/bankRecords/SavingsSummary/:id')
-      .then(response => response.json())
-      .then(response => this.setState({savings: response}))
-    }
-
-
+   
   render() {
     let savedOn = this.state.savings.map((saving, index) => (
       

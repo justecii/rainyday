@@ -18,7 +18,7 @@ class EnterSavings extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  
   handleChange(event) {
 
     const target = event.target;
@@ -43,11 +43,11 @@ class EnterSavings extends Component {
     console.log("Description: ", this.state.Description);
     console.log("Category: ", this.state.Category);
     console.log("Amount: ", this.state.Amount);
-    e.preventDefault();
+    // e.preventDefault();
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
-
+   
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
       Description: Description,
@@ -59,9 +59,8 @@ class EnterSavings extends Component {
     //data: Ojbect of the three variables
 
     //re-set state based on updated form information...
-    let tempArr = [];
-    tempArr.push(this.state.savings);
-    tempArr.push("newObject: ", newObject);
+    let tempArr = this.state.savings;
+    tempArr.push(newObject)
     //add the new object (Object) to tempArr -- Google: ".shift() for objects"
     //setState to tempArr (which is already done below)
     console.log("state: ", this.state.savings);
@@ -70,12 +69,12 @@ class EnterSavings extends Component {
       data: newObject//insert object of the three variables
     }).then(function (response) {
       a.setState({
-        savings: tempArr,
+        savings: tempArr
       })
     }).catch(function (error) {
       console.log("error: ", error);
     })
-    
+
   }
 
   componentDidMount(){
@@ -83,33 +82,22 @@ class EnterSavings extends Component {
     .then((response) => response.json())
     .then((response) => this.setState({savings: response}))
   }
-
+  
   render() {
 
     return (
-      <div className="EnterSavingsWrapper flow-text medium ">
-        <h1>Choose your savings</h1>
+      <div className="EnterSavingsWrapper">
+        <h4>Choose your savings</h4>
         <form onSubmit={(e) => this.handleSubmit(e)}>
-
-          {/* <label htmlFor="Description">
+          <label htmlFor="Description">
             What is the thing you are saving on: 
           </label> 
-          <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/> */}
-          {/* test */}
-          <div className="row highlight">
-        <div className="input-field col s12">
-          <input id="Description" type="text" className="validate" onChange={this.handleChange}/>
-          <label htmlFor="Description">Saved on...</label>
-        </div>
-      </div>
-      {/* end test */}
+          <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/>
           <div>
-            {/* test */}
-            <div className="row highlight">
-        <div className="col s12">
-         <h5>Category:</h5> 
-            <select name="Category " value={this.state.value} onChange={this.handleChange}>
-                <option  value="" defaultValue> </option>
+            <label htmlFor="Category">
+              Category:
+            </label>   
+              <select name="Category" value={this.state.value} onChange={this.handleChange}>
                 <option value="bills">Bills</option>
                 <option value="groceries">Groceries</option>
                 <option value="transportation">Transportation</option>
@@ -123,20 +111,13 @@ class EnterSavings extends Component {
                 <option value="health">Health</option>
                 <option value="miscellaneous">Miscellaneous</option>
               </select>
-         
-        </div>
-        </div>
-            
           </div>  
-
-          
           <br />
           <label htmlFor="Amount">
             Money saved ($): 
           </label> 
           <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
           <input type="submit" value="Submit" />
-          
         </form>
       </div>
     );
