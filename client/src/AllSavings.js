@@ -74,8 +74,8 @@ class AllSavings extends Component {
     let savedOn = this.state.savings.map((saving, index) => (
       
               <section className="row z-depth-1" key={index} onClick={this.check}>
-                <div className='col s5'>{saving.Description}</div>
-                <div className='col s4'>
+                <div className='col s4'>{saving.Description}</div>
+                <div className='col s3'>
                   <select className="browser-default" data-key={index} onChange={this.SaveCatChange}>
                     <label>{saving.Category}</label>
                     <option value="" disabled selected>{saving.Category}</option>
@@ -95,6 +95,7 @@ class AllSavings extends Component {
                   </select>
                 </div>
                 <div className='col s2'>{saving.Amount}</div>
+                <div className='col s2'>{saving.date}</div>
       
       
                 <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteSaved}>Delete</div>
@@ -104,9 +105,10 @@ class AllSavings extends Component {
       <div>  
         <h4>Those could be your expenses, instead those are your savings!</h4>
         <div className="row">
-          <div className='col s5'>Description</div>
-          <div className='col s4'>Category</div>
+          <div className='col s4'>Description</div>
+          <div className='col s3'>Category</div>
           <div className='col s2'>Money Saved ($)</div>
+          <div className='col s2'>Created on</div>
           <div className='col s1'>Delete</div> 
         </div> 
         {savedOn}

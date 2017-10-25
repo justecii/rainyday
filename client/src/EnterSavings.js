@@ -11,6 +11,7 @@ class EnterSavings extends Component {
       savings: [],
       Description: "",
       Category: "",
+      date: "",
       Amount: ""
     };
     //thisis the binding line necessary to keep this bound correctly
@@ -32,10 +33,14 @@ class EnterSavings extends Component {
       this.setState({
         Category: value
       });
-    } else {
+    } else if (name === "Amount") {
       this.setState({
         Amount: value
       });
+    } else {
+      this.setState({
+        date: value
+      });  
     }
   }
 
@@ -43,16 +48,19 @@ class EnterSavings extends Component {
     console.log("Description: ", this.state.Description);
     console.log("Category: ", this.state.Category);
     console.log("Amount: ", this.state.Amount);
+    console.log("date: ", this.state.date);
     // e.preventDefault();
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
+    let date = this.state.date;
    
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
       Description: Description,
       Category: Category,
       Amount: Amount,
+      date: date,
       isSaved: true,
       userId: 10
     }
@@ -92,8 +100,8 @@ class EnterSavings extends Component {
           
           <div className="row highlight">
             <div className="input-field col s12">
-              <input id="Description" type="text" class="validate" name="Description" onChange={this.handleChange}/>
-              <label htmlFor="Description">Saved on...</label>
+              <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChange}/>
+              <label htmlFor="Description">Describe what you are saving on..</label>
             </div>
           </div>
       
@@ -121,11 +129,16 @@ class EnterSavings extends Component {
       
           <div className="row highlight">
             <div className="input-field col s12">
-              <input type="number" name="Amount" class="validate"  onChange={this.handleChange}/>  
+              <input type="number" name="Amount" className="validate"  onChange={this.handleChange}/>  
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>
           
+            <div className="input-field col s12">
+              <input type="text" name="date" className="datepicker" onChange={this.handleChange}/>  
+              <label htmlFor="date">Created on</label>
+            </div>
+       
           <input type="submit" value="Submit" />
           
         </form>
