@@ -60,11 +60,10 @@ class App extends Component {
               render={() => <Home childProp={this.state.childProp} />}/>
               <Route exact path="/savingsReactRoute" component={Savings} />
               <Route exact path="/bankRecordsReactRoute" component={BankRecords} />
-              <Route exact path="/bankRecordsReactRoute" component={EditBankData} />
               <Route exact path="/userDataReactRoute" component={UserData} />
             </div>
           </div>
-        </Router> 
+        </Router>
       );
     } else{ //if it doesn't exist go to the login page
       return(

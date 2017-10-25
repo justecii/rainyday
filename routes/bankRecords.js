@@ -50,7 +50,7 @@ router.get('/', function(req, res, next) {
   BankRecord.find({}, function(err, records){
       if(err) return res.send(err);
       console.log("records in router.get: ", records);
-      res.send(records);
+      res.end();
   });
 });
 

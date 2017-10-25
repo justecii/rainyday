@@ -37,15 +37,11 @@ class EditBankData extends Component {
     let i = e.target.getAttribute('data-key');
     let Category = e.target.value;
     let currentState = this.state.records;
-    console.log("data-value: ", Category);
-    console.log("currentState: ", this.state.records);
     let individState = this.state.records[i];
     let categState = this.state.records[i].Category = Category;
     individState.Category = categState
-    console.log("individState: ", individState);
     let trans = this.state.records[i]._id;
     let a = this;
-    console.log("state: ", this.state.records);
     axios.put('/bankRecords/change', {
       data: trans,
       Category: Category
@@ -74,18 +70,27 @@ class EditBankData extends Component {
           <section className="row z-depth-1" key={index}>
 
 
-                <div className='col s3'>{records.TransDate} {records.PostedDate} {records.Category}</div>
+                <div className='col s3'>{records.TransDate} {records.PostedDate}</div>
                 <div className='col s3'>{records.Description}</div>
                 <div className='col s3'>{records.Amount}</div>
                 <div className='col s2'>
-                  <select class="browser-default" data-key={index} onChange={this.categoryChange}>
-                  <label>Catigorize!</label>
-                  <option value="" disabled selected>{records.Category}</option>
-                  <option value="Entertainment" data-key={index}>Entertainment</option>
-                  <option value="Transportation" data-key={index}>Transportation</option>
-                  <option value="Dining Out" data-key={index}> Dining out</option>
-                  <option value="Clothing" data-key={index}>Clothing</option>
-                </select>
+                  <select className="browser-default" data-key={index} onChange={this.categoryChange}>
+                    <label>Catigorize!</label>
+                    <option value="" disabled selected>{records.Category}</option>
+                    <option value="Bills" data-key={index}>Bills</option>
+                    <option value="Groceries" data-key={index}>Groceries</option>
+                    <option value="Transportation" data-key={index}>Transportation</option>
+                    <option value="Entertainment" data-key={index}>Entertainment</option>
+                    <option value="Clothing" data-key={index}>Clothing</option>
+                    <option value="Dining Out" data-key={index}> Dining out</option>
+                    <option value="Vices" data-key={index}>Vices</option>
+                    <option value="Debt" data-key={index}>Debt</option>
+                    <option value="Housing" data-key={index}>Housing</option>
+                    <option value="Savings" data-key={index}>Savings</option>
+                    <option value="Health" data-key={index}>Health</option>
+                    <option value="Miscellaneous" data-key={index}>Miscellaneous</option>
+                    <option value="Income" data-key={index}>Income</option>
+                  </select>
                 </div>
 
 

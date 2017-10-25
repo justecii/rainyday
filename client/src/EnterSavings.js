@@ -19,7 +19,7 @@ class EnterSavings extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
   handleChange(event) {
 
     const target = event.target;
@@ -48,7 +48,7 @@ class EnterSavings extends Component {
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
-   
+
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
       Description: Description,
@@ -83,7 +83,7 @@ class EnterSavings extends Component {
     .then((response) => response.json())
     .then((response) => this.setState({savings: response}))
   }
-  
+
   render() {
 
     return (
@@ -91,32 +91,33 @@ class EnterSavings extends Component {
         <h1>Choose your savings</h1>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <label htmlFor="Description">
-            What is the thing you are saving on: 
-          </label> 
+            What is the thing you are saving on:
+          </label>
           <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/>
           <div>
             <label htmlFor="Category">
               Category:
-            </label>   
+            </label>
               <select name="Category" value={this.state.value} onChange={this.handleChange}>
-                <option value="bills">Bills</option>
-                <option value="groceries">Groceries</option>
-                <option value="transportation">Transportation</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="clothes">Clothes</option>
-                <option value="dining Out">Dining Out</option>
-                <option value="vices">Vices</option>
-                <option value="debt">Debt</option>
-                <option value="housing">Housing</option>
-                <option value="savings">Savings</option>
-                <option value="health">Health</option>
-                <option value="miscellaneous">Miscellaneous</option>
+                <option value="Bills">Bills</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Dining Out">Dining Out</option>
+                <option value="Vices">Vices</option>
+                <option value="Debt">Debt</option>
+                <option value="Housing">Housing</option>
+                <option value="Savings">Savings</option>
+                <option value="Health">Health</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Income">Income</option>
               </select>
-          </div>  
+          </div>
           <br />
           <label htmlFor="Amount">
-            Amount: 
-          </label> 
+            Amount:
+          </label>
           <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
           <input type="submit" value="Submit" />
         </form>
