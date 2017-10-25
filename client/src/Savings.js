@@ -24,7 +24,10 @@ class Savings extends Component {
   render() {
 
     return (
-      <div className="SavingsWrapper">
+
+      <div className="SavingsWrapper container ">
+
+
 
         <p>Savings Page</p>
         <section className="row movepage">

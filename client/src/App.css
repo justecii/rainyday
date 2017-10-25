@@ -41,6 +41,33 @@ select {
   width: 50%;
 }
 
+html {
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+}
+
+
+.movedown{
+  margin-top:60px;
+}
+
+/* .notmoving{
+  position: fixed; 
+  top: 0;
+  overflow: hidden;
+  background-color: #333;
+  margin-top: 20px;
+  width: 100%;
+
+  
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+} */
+
+
 
 .colHeader {
   font-size: 30px;
@@ -66,4 +93,5 @@ select {
   margin: 0;
   padding: 5px 0;
 }
+
 

@@ -17,10 +17,13 @@ class BankRecords extends Component {
   render() {
 
     return (
-      <div className="BankRecordsWrapper">
+      <div className="BankRecordsWrapper ">
         <p>BankRecords Page</p>
         <InputBankRecords />
-        <section className="row movepage">
+
+       
+        <div className="row movepage notmoving">
+         
 
             <ul>
               <li className='col s3'>Date</li>
@@ -29,7 +32,10 @@ class BankRecords extends Component {
               <li className='col s2'>Category</li>
             </ul>
 
-        </section>
+         
+        </div>
+        <div className='movepage'></div>
+
         <EditBankData />
       </div>
     );
