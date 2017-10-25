@@ -93,7 +93,7 @@ router.put('/:recordId/:toSave', function(req, res, next){
 // //////////////////////////NOT SURE WE NEED THIS ROUTE///////////////
 router.get('/savedList', function(req, res, next){
     console.log("router.get('/savedList,...) in routes on server");
-    BankRecord.find({ isSaved: true }, function(err, records){
+    BankRecord.find({isSaved: true}, function(err, records){
         if(err) return res.send(err);
         console.log(records);
         res.send(records);
@@ -138,5 +138,14 @@ router.get('/SavingsSummary/:id', function(req, res, next){
 
 
 
+
+router.delete('/savedList/:recordId', function(req, res, next){
+    console.log('deleting record');
+    BankRecord.findByIdAndRemove(req.params.recordId, function(err) {
+        if (err) return res.send(err);
+        console.log('RecordId deleted!');
+        res.redirect('/bankRecords/savedList');
+    });
+})
 //using node export syntex
 module.exports = router;

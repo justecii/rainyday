@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import axios from 'axios';
 import './App.css';
 
@@ -117,8 +116,8 @@ class EnterSavings extends Component {
           </div>
           <br />
           <label htmlFor="Amount">
-            Amount:
-          </label>
+            Money saved ($): 
+          </label> 
           <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
           <input type="submit" value="Submit" />
         </form>
