@@ -120,5 +120,12 @@ router.post('/savedList', function(req, res, next){
     
 })
 
+router.delete('/savedList/:recordId', function(req, res, next){
+    BankRecord.findByIdAndRemove(req.params.recordId, function(err) {
+        if (err) return res.send(err);
+        console.log('RecordId deleted!');
+        res.redirect('/savedList');
+    });
+})
 //using node export syntex
 module.exports = router;

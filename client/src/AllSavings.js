@@ -17,27 +17,48 @@ class AllSavings extends Component {
     .then((response) => this.setState({savings: response}))
   }
   
+  deleteTransaction(e) {
+    e.preventDefault();
+    let i = e.target.getAttribute('data-key');
+    let currentState = this.state.records;
+    let trans = this.state.records[i]._id;
+    let a = this;
+    axios.put('/bankRecords', {
+      data: trans
+    }).then(function (response) {
+      currentState.splice(i, 1);
+      a.setState({
+        records: currentState
+      })
+    }).catch(function (error) {
+      console.log("error: ", error);
+    })
+  }
 
   render() {
     console.log('those are savings', this.state.savings);
 
     let savedOn = this.state.savings.map((item, index) => (
-      <p className='savedOn' key={item._id}>
-        {item.Description} that belong to category {item.Category} and the amount you want to save is {item.Amount} 
-      </p>
-
-    ));
-   
+      
+        <div className="row" key={index}>
+          <div className='col s5'>{item.Description}</div>
+          <div className='col s3'>{item.Category}</div>
+          <div className='col s3'>{item.Amount}</div>
+          <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteSavedItem}>Delete</div> 
+        </div>
+    ))
+    
     return (
-      <div className="AllSavingsWrapper">
-        <h1>Things you are going to save on:</h1>
-        <ul>
-          <li>
-            {savedOn}
-          </li>
-        </ul>
-      </div>
-    );
+      <div>  
+        <div className="row">
+          <div className='col s5'>Description</div>
+          <div className='col s3'>Category</div>
+          <div className='col s3'>Amount</div>
+          <div className='col s1'>Delete</div> 
+        </div> 
+        {savedOn}
+      </div>  
+    )    
   }
 }
 export default AllSavings;
