@@ -97,7 +97,6 @@ class UserPieCharts extends Component {
   }
 
   showToolTip(e){
-    console.log(e.x,e.y)
     let cssVal={};
     if (e.x>0 && e.y>0){
       cssVal = {'left':(e.x)+225,'top':(e.y*-1)+225};
