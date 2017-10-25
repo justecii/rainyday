@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import axios from 'axios';
 import './App.css';
 
@@ -19,7 +18,7 @@ class EnterSavings extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
   handleChange(event) {
 
     const target = event.target;
@@ -48,7 +47,7 @@ class EnterSavings extends Component {
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
-   
+
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
       Description: Description,
@@ -60,8 +59,9 @@ class EnterSavings extends Component {
     //data: Ojbect of the three variables
 
     //re-set state based on updated form information...
-    let tempArr = this.state.savings;
-    tempArr.push(newObject)
+    let tempArr = [];
+    tempArr.push(this.state.savings);
+    tempArr.push("newObject: ", newObject);
     //add the new object (Object) to tempArr -- Google: ".shift() for objects"
     //setState to tempArr (which is already done below)
     console.log("state: ", this.state.savings);
@@ -83,13 +83,14 @@ class EnterSavings extends Component {
     .then((response) => response.json())
     .then((response) => this.setState({savings: response}))
   }
-  
+
   render() {
 
     return (
       <div className="EnterSavingsWrapper flow-text medium ">
         <h1>Choose your savings</h1>
         <form onSubmit={(e) => this.handleSubmit(e)}>
+
           {/* <label htmlFor="Description">
             What is the thing you are saving on: 
           </label> 
@@ -145,9 +146,11 @@ class EnterSavings extends Component {
                 <option value="miscellaneous">Miscellaneous</option>
               </select> */}
           </div>  
+
+          
           <br />
           <label htmlFor="Amount">
-            Amount: 
+            Money saved ($): 
           </label> 
           <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
           <input type="submit" value="Submit" />
