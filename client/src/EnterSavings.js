@@ -89,15 +89,19 @@ class EnterSavings extends Component {
       <div className="EnterSavingsWrapper">
         <h4>Choose your savings</h4>
         <form onSubmit={(e) => this.handleSubmit(e)}>
-          <label htmlFor="Description">
-            What is the thing you are saving on: 
-          </label> 
-          <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/>
-          <div>
-            <label htmlFor="Category">
-              Category:
-            </label>   
+          
+          <div className="row highlight">
+            <div className="input-field col s12">
+              <input id="Description" type="text" class="validate" name="Description" onChange={this.handleChange}/>
+              <label htmlFor="Description">Saved on...</label>
+            </div>
+          </div>
+      
+          <div className="row highlight">
+            <div className="col s12">  
+              <h5>Category</h5>  
               <select name="Category" value={this.state.value} onChange={this.handleChange}>
+                <option  value="" disabled selected> </option>
                 <option value="bills">Bills</option>
                 <option value="groceries">Groceries</option>
                 <option value="transportation">Transportation</option>
@@ -111,13 +115,19 @@ class EnterSavings extends Component {
                 <option value="health">Health</option>
                 <option value="miscellaneous">Miscellaneous</option>
               </select>
+            </div>  
           </div>  
           <br />
-          <label htmlFor="Amount">
-            Money saved ($): 
-          </label> 
-          <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
+      
+          <div className="row highlight">
+            <div className="input-field col s12">
+              <input type="number" name="Amount" class="validate"  onChange={this.handleChange}/>  
+              <label htmlFor="Amount">Money saved ($)</label>
+            </div>
+          </div>
+          
           <input type="submit" value="Submit" />
+          
         </form>
       </div>
     );
