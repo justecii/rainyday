@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/react-vis/dist/style.css';
-import {XYPlot, ArcSeries, Hint} from 'react-vis';
+import {XYPlot, ArcSeries} from 'react-vis';
+import $ from 'jquery';
 
 
 class UserPieCharts extends Component {
@@ -56,14 +57,17 @@ class UserPieCharts extends Component {
       radius: 75,
       radius0: 0,
       toolTipValue:{
-        Category:{},
-        Amount:{},
-        Percent:{}
+        Category:'empty',
+        Amount:0,
+        Percent:0
       },
+      width: 400,
+      height:400
     }
   }
 
   componentDidMount() {
+    $('.tooltip').hide();
     let dataArr = this.state.propData
     let total = 0;
 
@@ -94,7 +98,18 @@ class UserPieCharts extends Component {
 
   showToolTip(e){
     console.log(e.x,e.y)
-    // $(e).css({'top':e.x,'left':e.y}).fadeIn('slow');
+    let cssVal={};
+    if (e.x>0 && e.y>0){
+      cssVal = {'left':(e.x)+225,'top':(e.y*-1)+225};
+    } else if (e.x>0 && e.y<0){
+      cssVal = {'left':(e.x)+225,'top':(e.y*-1)+375};
+    } else if (e.x<0 && e.y<0){
+      cssVal = {'left':(e.x)+100,'top':(e.y*-1)+375};
+    } else if (e.x<0 && e.y>0){
+      cssVal = {'left':(e.x)+100,'top':(e.y*-1)+225};
+    }
+
+    $('.tooltip').css(cssVal).show();
     this.setState({
       toolTipValue:{
         category: e.category,
@@ -105,35 +120,31 @@ class UserPieCharts extends Component {
   }
 
   hideToolTip(e){
+    $('.tooltip').hide();
     this.setState({
-      toolTipValue:{},
+      toolTipValue:{
+        Category:'empty',
+        Amount:0,
+        Percent:0
+      }
     })
   }
 
   render() {
-    console.log("PIE CHART STATE", this.state)
+    // console.log("PIE CHART STATE", this.state)
     return (
       <div className="UserPieChartsWrapper">
         <p>User Pie Charts Page</p>
+        <div className="tooltip">
+            <p>{this.state.toolTipValue.category}</p>
+            <p>${this.state.toolTipValue.amount}</p>
+            <p>{this.state.toolTipValue.percent*100}%</p>
+        </div>
         <XYPlot
           xDomain={[0, 6]}
           yDomain={[0, 6]}
-          width={300}
-          height={300}>
-          <div className="container tooltip">
-            <div className="row">
-              <div className='col 3'>Category:</div>
-              <div className='col 2'>{this.state.toolTipValue.category}</div>
-            </div>
-            <div className="row">
-              <div className='col 3'>Amount:</div>
-              <div className='col 2'>{this.state.toolTipValue.amount}</div>
-            </div>
-            <div className="row">
-              <div className='col 3'>Percent:</div>
-              <div className='col 2'>{this.state.toolTipValue.percent*100}%</div>
-            </div>
-          </div>
+          width={this.state.width}
+          height={this.state.height}>
           <ArcSeries
             animation
             radiusType={'literal'}

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/react-vis/dist/style.css';
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries} from 'react-vis';
-
+// import $ from 'jquery';
 
 class UserBarGraph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data1: [
+      data1: [ //category,amount
         {x: 0, y: 8},
         {x: 1, y: 5},
         {x: 2, y: 4},
