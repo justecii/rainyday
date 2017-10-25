@@ -8,6 +8,7 @@ class AllSavings extends Component {
     this.state = {
       savings: []
     }
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
   
   componentDidMount(){
@@ -15,14 +16,26 @@ class AllSavings extends Component {
     .then((response) => response.json())
     .then((response) => this.setState({savings: response}))
   }
-
+  
 
   render() {
+    console.log('those are savings', this.state.savings);
 
+    let savedOn = this.state.savings.map((item, index) => (
+      <p className='savedOn' key={item._id}>
+        {item.Description} that belong to category {item.Category} and the amount you want to save is {item.Amount} 
+      </p>
+
+    ));
+   
     return (
       <div className="AllSavingsWrapper">
-        <p>All Savings Page</p>
-        
+        <h1>Things you are going to save on:</h1>
+        <ul>
+          <li>
+            {savedOn}
+          </li>
+        </ul>
       </div>
     );
   }

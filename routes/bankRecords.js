@@ -102,7 +102,7 @@ router.put('/', function(req, res, next){
 
 router.get('/savedList', function(req, res, next){
     console.log("router.get('/savedList,...) in routes on server");
-    BankRecord.find({ isSaved: true }, function(err, records){
+    BankRecord.find({isSaved: true}, function(err, records){
         if(err) return res.send(err);
         res.send(records);
     });

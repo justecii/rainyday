@@ -25,9 +25,8 @@ class Savings extends Component {
 
     return (
       <div className="SavingsWrapper">
-        <p>Savings Page</p>
-        <AllSavings />
         <EnterSavings />
+        <AllSavings />
         <SavingsSummary />
       </div>
     );
