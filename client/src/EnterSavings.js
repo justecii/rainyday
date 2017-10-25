@@ -70,12 +70,12 @@ class EnterSavings extends Component {
       data: newObject//insert object of the three variables
     }).then(function (response) {
       a.setState({
-        savings: tempArr
+        savings: tempArr,
       })
     }).catch(function (error) {
       console.log("error: ", error);
     })
-
+    
   }
 
   componentDidMount(){
@@ -96,20 +96,20 @@ class EnterSavings extends Component {
           </label> 
           <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/> */}
           {/* test */}
-          <div class="row highlight">
-        <div class="input-field col s12">
-          <input id="Description" type="text" class="validate" onChange={this.handleChange}/>
-          <label for="Description">Saved on...</label>
+          <div className="row highlight">
+        <div className="input-field col s12">
+          <input id="Description" type="text" className="validate" onChange={this.handleChange}/>
+          <label htmlFor="Description">Saved on...</label>
         </div>
       </div>
       {/* end test */}
           <div>
             {/* test */}
-            <div class="row highlight">
-        <div class="col s12">
+            <div className="row highlight">
+        <div className="col s12">
          <h5>Category:</h5> 
             <select name="Category " value={this.state.value} onChange={this.handleChange}>
-                <option  value="" disabled selected> </option>
+                <option  value="" defaultValue> </option>
                 <option value="bills">Bills</option>
                 <option value="groceries">Groceries</option>
                 <option value="transportation">Transportation</option>
@@ -126,25 +126,7 @@ class EnterSavings extends Component {
          
         </div>
         </div>
-            {/* test 2 */}
-            {/* <label htmlFor="Category flow-text medium">
-             Category:  
-            </label>   
-              <select name="Category " value={this.state.value} onChange={this.handleChange}>
-                <option  value="" disabled selected>Choose your Category</option>
-                <option value="bills">Bills</option>
-                <option value="groceries">Groceries</option>
-                <option value="transportation">Transportation</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="clothes">Clothes</option>
-                <option value="dining Out">Dining Out</option>
-                <option value="vices">Vices</option>
-                <option value="debt">Debt</option>
-                <option value="housing">Housing</option>
-                <option value="savings">Savings</option>
-                <option value="health">Health</option>
-                <option value="miscellaneous">Miscellaneous</option>
-              </select> */}
+            
           </div>  
 
           

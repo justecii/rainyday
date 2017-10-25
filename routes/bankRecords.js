@@ -90,7 +90,7 @@ router.put('/:recordId/:toSave', function(req, res, next){
 });
 
 
-// //////////////////////////NOT SURE WE NEED THIS ROUTE///////////////
+//dispkaying all the data from savedList
 router.get('/savedList', function(req, res, next){
     console.log("router.get('/savedList,...) in routes on server");
     BankRecord.find({isSaved: true}, function(err, records){
@@ -115,6 +115,8 @@ router.post('/savedList', function(req, res, next){
 
  })
 
+
+ //delete from savedList by id 
  router.delete('/savedList/:recordId', function(req, res, next){
     console.log('deleting record');
     BankRecord.findByIdAndRemove(req.params.recordId, function(err) {
@@ -123,6 +125,7 @@ router.post('/savedList', function(req, res, next){
         res.redirect('/bankRecords/savedList');
     });
 })
+
 ////////////////////////////////////////////////////////////////
 //AJ ADDED THIS TO DISPLAY DATA IN SAVINGSSUMARY.JS IN CLIENT///
 ////////////////////////////////////////////////////////////////
@@ -137,15 +140,5 @@ router.get('/SavingsSummary/:id', function(req, res, next){
 });
 
 
-
-
-router.delete('/savedList/:recordId', function(req, res, next){
-    console.log('deleting record');
-    BankRecord.findByIdAndRemove(req.params.recordId, function(err) {
-        if (err) return res.send(err);
-        console.log('RecordId deleted!');
-        res.redirect('/bankRecords/savedList');
-    });
-})
 //using node export syntex
 module.exports = router;
