@@ -60,8 +60,9 @@ class EnterSavings extends Component {
     //data: Ojbect of the three variables
 
     //re-set state based on updated form information...
-    let tempArr = this.state.savings;
-    tempArr.push(newObject)
+    let tempArr = [];
+    tempArr.push(this.state.savings);
+    tempArr.push("newObject: ", newObject);
     //add the new object (Object) to tempArr -- Google: ".shift() for objects"
     //setState to tempArr (which is already done below)
     console.log("state: ", this.state.savings);

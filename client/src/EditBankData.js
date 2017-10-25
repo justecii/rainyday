@@ -38,6 +38,7 @@ class EditBankData extends Component {
     let Category = e.target.value;
     let currentState = this.state.records;
     let individState = this.state.records[i];
+    console.log("individState: ", individState);
     let categState = this.state.records[i].Category = Category;
     individState.Category = categState
     let trans = this.state.records[i]._id;
