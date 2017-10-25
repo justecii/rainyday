@@ -46,32 +46,24 @@ class UserPieCharts extends Component {
           amount: 5
         }],
       myData: [
-        {angle0: 0, angle: Math.PI / 4, opacity: 0.2, radius: 50, radius0: 0, color:'blue'},
+        {angle0: 0 * Math.PI / 4, angle: 1 * Math.PI / 4, opacity: 0.2, radius: 50, radius0: 0, color:'blue'},
         {angle0: 1 * Math.PI / 4, angle: 2 * Math.PI / 4, radius: 50, radius0: 0, color:'red'},
         {angle0: 2 * Math.PI / 4, angle: 3 * Math.PI / 4, radius: 50, radius0: 0, color:'green'},
         {angle0: 3 * Math.PI / 4, angle: 4 * Math.PI / 4, radius: 50, radius0: 0, color:'yellow'},
         {angle0: 4 * Math.PI / 4, angle: 5 * Math.PI / 4, radius: 50, radius0: 0, color:'purple'},
         {angle0: 5 * Math.PI / 4, angle: 6 * Math.PI / 4, radius: 50, radius0: 0, color:'blue'}
       ],
-      data: [],
       radius: 75,
       radius0: 0,
-      tooltip:{
-        category:"",
-        amount:"",
-        percent:"",
-        xVal:0,
-        yVal:0
+      toolTipValue:{
+        Category:{},
+        Amount:{},
+        Percent:{}
       },
-      toolTipValue:{}
-
     }
   }
 
   componentDidMount() {
-    //calculate total amount
-    //calculate % and radians
-    //calculate starting radians i.e. angle0
     let dataArr = this.state.propData
     let total = 0;
 
@@ -81,10 +73,6 @@ class UserPieCharts extends Component {
     for(var j = 0; j<dataArr.length;j++){ //assigns a % of total for each category
       dataArr[j].percent = dataArr[j].amount/total;
     }
-    //GO BACK TO THIS IF THIS BREAKS
-    // for(var k = 0; k<dataArr.length;k++){ //converts % to radians
-    //   dataArr[k].angle = dataArr[k].percent*2*Math.PI;
-    // }
     dataArr[0].angle0 = 0;//first slice starts at 0 degrees
     for(var l = 1; l<dataArr.length;l++){ //each angle starts where the last one left off
       dataArr[l].angle0 = dataArr[l-1].angle0 + dataArr[l-1].percent*2*Math.PI;
@@ -96,12 +84,8 @@ class UserPieCharts extends Component {
     for(var m = 0; m<dataArr.length;m++){//assigning radius, radius from state and color based on index
       dataArr[m].radius = this.state.radius;
       dataArr[m].radius0 = this.state.radius0;
-<<<<<<< HEAD
-      dataArr[m].color = m+1;
-=======
       dataArr[m].opacity = 0.5;
       dataArr[m].color = CSS_COLOR_NAMES[Math.floor(Math.random()*CSS_COLOR_NAMES.length)];
->>>>>>> 9873569c7f38ebd4ef4aae3f6c4f4673272a9741
     }
     this.setState({
       myData:dataArr
@@ -109,14 +93,20 @@ class UserPieCharts extends Component {
   }
 
   showToolTip(e){
+    console.log(e.x,e.y)
+    // $(e).css({'top':e.x,'left':e.y}).fadeIn('slow');
     this.setState({
-      toolTipValue:e
+      toolTipValue:{
+        category: e.category,
+        amount: e.amount,
+        percent: e.percent
+      }
     })
   }
 
   hideToolTip(e){
     this.setState({
-      toolTipValue:{}
+      toolTipValue:{},
     })
   }
 
@@ -126,36 +116,33 @@ class UserPieCharts extends Component {
       <div className="UserPieChartsWrapper">
         <p>User Pie Charts Page</p>
         <XYPlot
-          xDomain={[-5, 5]}
-          yDomain={[-5, 5]}
+          xDomain={[0, 6]}
+          yDomain={[0, 6]}
           width={300}
           height={300}>
+          <div className="container tooltip">
+            <div className="row">
+              <div className='col 3'>Category:</div>
+              <div className='col 2'>{this.state.toolTipValue.category}</div>
+            </div>
+            <div className="row">
+              <div className='col 3'>Amount:</div>
+              <div className='col 2'>{this.state.toolTipValue.amount}</div>
+            </div>
+            <div className="row">
+              <div className='col 3'>Percent:</div>
+              <div className='col 2'>{this.state.toolTipValue.percent*100}%</div>
+            </div>
+          </div>
           <ArcSeries
             animation
             radiusType={'literal'}
-            center={{x: 0, y: 0}}
+            center={{x: 3, y: 3}}
             data={this.state.myData}
-<<<<<<< HEAD
-            colorDomain={[0, this.state.myData.length/2, this.state.myData.length]} 
-            colorRange={['#fff', 'pink', 'blue']} 
-            colorType={'linear'}/>
-=======
             colorType={'literal'}
             onValueMouseOver={(e)=>{this.showToolTip(e)}}
             onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-          />
-          <Hint id="merr" value={
-              this.state.toolTipValue
-            } style={{
-            left:this.state.tooltip.xVal,
-            top:this.state.tooltip.yVal,
-            position:'relative',
-            value: {
-              color: 'white'
-            }
-          }}/>
-          
->>>>>>> 9873569c7f38ebd4ef4aae3f6c4f4673272a9741
+          />      
         </XYPlot>
       </div>
     );
