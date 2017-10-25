@@ -87,18 +87,28 @@ class EnterSavings extends Component {
   render() {
 
     return (
-      <div className="EnterSavingsWrapper">
+      <div className="EnterSavingsWrapper flow-text medium ">
         <h1>Choose your savings</h1>
         <form onSubmit={(e) => this.handleSubmit(e)}>
-          <label htmlFor="Description">
+          {/* <label htmlFor="Description">
             What is the thing you are saving on: 
           </label> 
-          <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/>
+          <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/> */}
+          {/* test */}
+          <div class="row highlight">
+        <div class="input-field col s12">
+          <input id="Description" type="text" class="validate" onChange={this.handleChange}/>
+          <label for="Description">Saved on...</label>
+        </div>
+      </div>
+      {/* end test */}
           <div>
-            <label htmlFor="Category">
-              Category:
-            </label>   
-              <select name="Category" value={this.state.value} onChange={this.handleChange}>
+            {/* test */}
+            <div class="row highlight">
+        <div class="col s12">
+         <h5>Category:</h5> 
+            <select name="Category " value={this.state.value} onChange={this.handleChange}>
+                <option  value="" disabled selected> </option>
                 <option value="bills">Bills</option>
                 <option value="groceries">Groceries</option>
                 <option value="transportation">Transportation</option>
@@ -112,6 +122,28 @@ class EnterSavings extends Component {
                 <option value="health">Health</option>
                 <option value="miscellaneous">Miscellaneous</option>
               </select>
+         
+        </div>
+        </div>
+            {/* test 2 */}
+            {/* <label htmlFor="Category flow-text medium">
+             Category:  
+            </label>   
+              <select name="Category " value={this.state.value} onChange={this.handleChange}>
+                <option  value="" disabled selected>Choose your Category</option>
+                <option value="bills">Bills</option>
+                <option value="groceries">Groceries</option>
+                <option value="transportation">Transportation</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="clothes">Clothes</option>
+                <option value="dining Out">Dining Out</option>
+                <option value="vices">Vices</option>
+                <option value="debt">Debt</option>
+                <option value="housing">Housing</option>
+                <option value="savings">Savings</option>
+                <option value="health">Health</option>
+                <option value="miscellaneous">Miscellaneous</option>
+              </select> */}
           </div>  
           <br />
           <label htmlFor="Amount">
@@ -119,6 +151,7 @@ class EnterSavings extends Component {
           </label> 
           <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
           <input type="submit" value="Submit" />
+          
         </form>
       </div>
     );

@@ -36,7 +36,7 @@ class InputBankRecords extends Component {
   render() {
     return (
       <div>
-
+          
         <form action="/bankRecordsReactRoute">
           <div className="file-field input-field col s12 ">
 
