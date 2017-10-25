@@ -28,11 +28,8 @@ router.post('/', function(req, res, next) {
   }
 })
 
-//
+//COMPLETE: Edit transactions in EditBankData/js and send changes to db
 router.put('/change', function(req, res, next){
-    console.log("/change in put route");
-    console.log("req: ", req.body.data);
-    console.log("category: ", req.body.Category)
     let id = req.body.data;
     let Category = req.body.Category;
     BankRecord.update(
@@ -44,13 +41,13 @@ router.put('/change', function(req, res, next){
     });
 });
 
-/* GET display all the bank records */
+/* COMPLETE: GET display all the bank records */
 router.get('/', function(req, res, next) {
   console.log('in the /bankData route get');
   BankRecord.find({}, function(err, records){
       if(err) return res.send(err);
       console.log("records in router.get: ", records);
-      res.end();
+      res.send(records);
   });
 });
 
