@@ -71,7 +71,7 @@ class AllSavings extends Component {
 
   render() {
     let user = this.props.user
-    console.log("user2: ", user);
+    console.log("user in client/AllSavings.js: ", user);
 
     return (
       this.state.savings.map((saving, index) => (

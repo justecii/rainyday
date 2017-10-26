@@ -23,7 +23,7 @@ class Savings extends Component {
 
   render() {
     let user = this.props.user
-    console.log("user2: ", user);
+    console.log("user in client/Savings.js: ", user);
 
     return (
 
@@ -32,7 +32,7 @@ class Savings extends Component {
 
 
         <p>Savings Page</p>
-        <EnterSavings />
+        <EnterSavings user={user}/>
         <section className="row movepage">
         <h1>Savings Summary:</h1>
             <ul className="colHeader">
@@ -42,8 +42,8 @@ class Savings extends Component {
             </ul>
 
         </section>
-        <AllSavings />
-        <SavingsSummary />
+        <AllSavings user={user}/>
+        <SavingsSummary user={user}/>
       </div>
     );
   }

@@ -18,6 +18,7 @@ class EditBankData extends Component {
 
   change(e) {
     console.log(this.state.records);
+    console.log("user: ", this.state.user)
   }
 
   deleteTransaction(e) {
@@ -44,7 +45,6 @@ class EditBankData extends Component {
     let Category = e.target.value;
     let currentState = this.state.records;
     let individState = this.state.records[i];
-    console.log("individState: ", individState);
     let categState = this.state.records[i].Category = Category;
     individState.Category = categState
     let trans = this.state.records[i]._id;
@@ -62,7 +62,10 @@ class EditBankData extends Component {
   }
 
   componentDidMount() {
-
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
     fetch('/bankRecords')
       .then(response => response.json())
       .then(response => this.setState({records: response}))
@@ -71,7 +74,7 @@ class EditBankData extends Component {
 
   render() {
     let user = this.props.user
-    console.log("user2: ", user);
+    console.log("user in client/EditBankData.js: ", user);
 
     return (
         this.state.records.map((records, index) => (

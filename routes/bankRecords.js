@@ -9,22 +9,23 @@ var flash = require('connect-flash');
 router.post('/', function(req, res, next) {
   for (let obj of req.body.data) {
     obj['TransDate'] = obj['Trans Date'];
-    // obj['Amount'] = obj['\t\t\tAmount'];
     obj['PostDate'] = obj['Post Date'];
     obj['PostedDate'] = obj['Posting Date'];
     obj['CheckNumber'] = obj['Check or Slip #'];
     delete obj['Trans Date'];
-    // delete obj['\t\t\tAmount'];
     delete obj['Post Date'];
     delete obj['Posting Date'];
   }
   let item = req.body.data;
+  console.log("item in router.post: ", item);
   //TODO: add user ID to item
   //will have to make sure that it's
     //adding a new key/value pair
   let trans = []
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < item.length; i++) {
     trans.push(item[i]);
+    // console.log("trans in for loop: ", trans)
+    console.log("item[i]: ", item[i])
     BankRecord.create(item[i]);
   }
 })

@@ -90,7 +90,7 @@ class EnterSavings extends Component {
 
   render() {
     let user = this.props.user
-    console.log("user2: ", user);
+    console.log("user in client/EnterSavings.js: ", user);
 
     return (
       <div className="EnterSavingsWrapper flow-text medium ">

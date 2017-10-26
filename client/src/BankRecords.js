@@ -10,13 +10,25 @@ class BankRecords extends Component {
     this.state = {
     user: {}
     }
+    this.change = this.change.bind(this);
   }
 
+  change(e) {
+    console.log(this.state.records);
+    console.log("user: ", this.state.user)
+  }
+
+  componentDidMount() {
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+  }
 
 
   render() {
     let user = this.props.user
-    console.log("user2: ", user);
+    console.log("user in client/BankRecords.js: ", user);
 
     return (
       <div className="BankRecordsWrapper ">
@@ -27,7 +39,7 @@ class BankRecords extends Component {
         <div className="row movepage notmoving">
 
 
-            <ul>
+            <ul onClick={this.change}>
               <li className='col s3'>Date</li>
               <li className='col s3'>Description</li>
               <li className='col s3'>Amount</li>

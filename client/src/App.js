@@ -43,7 +43,8 @@ class App extends Component {
   }
 
   render() {
-
+    let user = this.props.user
+    console.log("user in client/App.js: ", user);
     console.log("APP.JS STATE", this.state)
     //if the token exists display the router
     // if(this.state.token!==""){ //need this active to use auth
