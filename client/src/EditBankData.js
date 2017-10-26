@@ -89,15 +89,15 @@ class EditBankData extends Component {
 
     let mappedItems = this.state.records.map((records, index) => (
           <section onClick={this.change} className="row z-depth-1" key={index}>
-                <div className='col s3'>{records.TransDate} {records.PostedDate}</div>
-                <div className='col s3'>{records.Description}</div>
-                <div className='col s3'>{records.Amount}</div>
+                <div className='col s3' data-key={index}>{records.TransDate} {records.PostedDate}</div>
+                <div className='col s3' data-key={index}>{records.Description}</div>
+                <div className='col s3' data-key={index}>{records.Amount}</div>
                 <div className='col s2'>
                   <select className="browser-default " data-key={index} onChange={this.categoryChange}>
-                    <label>Catigorize!</label>
-                    if({records.Category} === "" || {records.Category} === undefined || {records.Category} === null) {
-                      <option value="" disabled  selected></option>
-                    } else { <option value="" disabled  selected>{records.Category}</option> }
+
+                    if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
+                      <option value="" disabled  selected data-key={index}></option>
+                    } else { <option value="" disabled  selected data-key={index}>{records.Category}</option> }
                     <option value="Bills" data-key={index}>Bills</option>
                     <option value="Groceries" data-key={index}>Groceries</option>
                     <option value="Transportation" data-key={index}>Transportation</option>

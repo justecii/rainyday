@@ -8,7 +8,7 @@ class InputBankRecords extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bank: [],
+      records: [],
       user: {}
     }
     this.uploadFile = this.uploadFile.bind(this);
@@ -16,7 +16,7 @@ class InputBankRecords extends Component {
   }
 
   change(e) {
-    console.log(this.state.records);
+    console.log("records: ", this.state.records);
     console.log("user: ", this.state.user)
   }
 
@@ -24,20 +24,24 @@ class InputBankRecords extends Component {
     e.preventDefault();
     let uploaded = e.target.files[0];
     let user = this.state.user;
-    console.log("user in uploadFile(): ", user);
+    // console.log("user in uploadFile(): ", user);
+    let a = this;
     let papaData = Papa.parse(uploaded, {
       header: true,
       delimiter: ",",
       complete( result, file ) {
         let data = result.data;
+        a.setState({
+          records: data
+        })
         data.map(id => id.userId = user)
-        console.log("data userId: ", data);
+        // console.log("data userId: ", data);
         data.map(saved => saved.isSaved = false)
-        console.log("data isSaved: ", data);
+        // console.log("data isSaved: ", data);
         axios.post('/bankRecords', {
           data: data
         }).then(function (response) {
-          console.log("response: ", response);
+          console.log("data: ", data);
         }).catch(function (error) {
           console.log("error: ", error)
         })
@@ -58,7 +62,6 @@ class InputBankRecords extends Component {
 
     return (
       <div>
-
         <form action="/bankRecordsReactRoute">
           <div onClick={this.change} className="file-field input-field col s12 ">
 
