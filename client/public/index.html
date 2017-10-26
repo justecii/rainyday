@@ -8,27 +8,26 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-  
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+       <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
 
    
     <title>Rainy Day</title>
   </head>
-  <body>
+  <body >
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-  
-    <script
-    src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+     <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
    <script>
       $(document).ready(function(){
       $('.parallax').parallax();
@@ -45,6 +44,18 @@
  // Initialize collapse button
  $(".button-collapse").sideNav();
 
+//  tablelable  does not work yet
+var tableLable = document.getElementById("tableLable");
+var sticky = tableLable.offsetTop;
+
+function myFunction() {
+  console.log('scrolling')
+  if (window.pageYOffset >= sticky) {
+    tableLable.classList.add("sticky")
+  } else {
+    tableLable.classList.remove("sticky");
+  }
+}
 
  
   
