@@ -93,16 +93,18 @@ class App extends Component {
              </div>
             </nav>
             <div>
-              <Route
-              exact path="/homeReactRoute"
-              render={() => <Home childProp={this.state.childProp} />}/>
+              <Route exact path="/homeReactRoute"
+                render={() => <Home childProp={this.state.childProp} />}
+              />
               <Route exact path="/savingsReactRoute"
-                  render={() => <Savings user={this.state.user} />}
+                render={() => <Savings user={this.state.user} />}
               />
               <Route exact path="/bankRecordsReactRoute"
-                  render={() => <BankRecords user={this.state.user} />}
-                />
-              <Route exact path="/userDataReactRoute" component={UserData} />
+                render={() => <BankRecords user={this.state.user} />}
+              />
+              <Route exact path="/userDataReactRoute" 
+                render={() => <UserData user={this.state.user} />}
+              />
             </div>
           </div>
         </Router>

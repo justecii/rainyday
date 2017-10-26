@@ -32,11 +32,11 @@ class BankRecords extends Component {
     console.log("this.state.user bankrecords: ", this.state.user);
 
     return (
-      <div className="BankRecordsWrapper  " onscroll='myFunction() '>
+      <div className="BankRecordsWrapper" onScroll="">
         <p>BankRecords Page</p>
         <InputBankRecords user={user}/>
 
-
+        {/*}
         <div className="row movepage notmoving">
 
 
@@ -49,15 +49,13 @@ class BankRecords extends Component {
 
 
         </div>
-        <div className='movepage'></div>
+        <div className='movepage'></div> 
+      */}
 
 
         <EditBankData user={user}/>
       </div>
 
-     
-
-      </div>
     );
   }
 }

@@ -16,32 +16,37 @@ class UserData extends Component {
     super(props);
     this.state = {
       allCatAmt:[],
-      bankRecords:[]
+      bankRecords:[],
+      startDate1: "",
+      endDate1:"",
+      startDate2: "",
+      endDate2: ""
     }
   }
 
   componentDidMount(){
-    fetch("/bankRecords")
+
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/' + user)
     .then((response) => response.json())
     .then((response) => this.setState({bankRecords: response}))
     .then((response) => this.updateUncat(this.state.bankRecords))
+    .then((response) => {
+      var newbr = this.consoliDate(this.state.bankRecords);
+      this.setState({bankRecords:newbr})
+    })
   }
 
   updateUncat(){
     let newRecords=[];
-    // list of categories
-    // amount per category
-    // amount saved (isSavedTrue)
-    // array of saved
-    // amt by date
-    // saved by date
-    // sort dates
-
     this.state.bankRecords.forEach(function(record){
       if(record.Category!==undefined && !record.isSaved){
         newRecords.push({
           category: record.Category,
-          amount: record.Amount
+          amount: record.Amount,
         });
       } else if(record.Category===undefined && !record.isSaved){
         newRecords.push({
@@ -53,6 +58,33 @@ class UserData extends Component {
     this.setState({
         allCatAmt: newRecords
       })
+  }
+
+  consoliDate(array){//you love this pun, you know it
+    let updated = array;
+    for(var i = 0; i<array.length;i++){
+      if(array[i].date===undefined){
+        if(array[i].TransDate===undefined){
+          updated[i].date=array[i].PostedDate
+        } else if(array[i].PostedDate===undefined){
+          updated[i].date=array[i].TransDate
+        }
+      }
+      console.log(array[i])
+    }
+      // console.log("###TransDate###",record.TransDate)
+      // console.log("###PostedDate###",record.PostedDate)
+      // console.log("###Date###",record.Date)
+    console.log(updated);
+    return updated;
+  }
+
+  uniqueCatByRange(array,start,end){
+    let a = array;
+    let b = [];
+    a.forEach(function(rec){
+      ///need date first
+    })
   }
 
   handleDateChange(e){
