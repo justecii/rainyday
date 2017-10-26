@@ -11,6 +11,7 @@ class EnterSavings extends Component {
       savings: [],
       Description: "",
       Category: "",
+      date: "",
       Amount: ""
     };
     //thisis the binding line necessary to keep this bound correctly
@@ -18,7 +19,7 @@ class EnterSavings extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  
   handleChange(event) {
 
     const target = event.target;
@@ -32,10 +33,15 @@ class EnterSavings extends Component {
       this.setState({
         Category: value
       });
-    } else {
+    } else if (name === "Amount") {
       this.setState({
         Amount: value
       });
+    } else {
+      this.setState({
+        date: value
+      });  
+      console.log(this.date.value)
     }
   }
 
@@ -43,25 +49,29 @@ class EnterSavings extends Component {
     console.log("Description: ", this.state.Description);
     console.log("Category: ", this.state.Category);
     console.log("Amount: ", this.state.Amount);
-    e.preventDefault();
+    console.log("date: ", this.state.date);
+    // e.preventDefault();
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
+
+    let date = this.state.date;
+   
 
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
       Description: Description,
       Category: Category,
       Amount: Amount,
+      date: date,
       isSaved: true,
       userId: 10
     }
     //data: Ojbect of the three variables
 
     //re-set state based on updated form information...
-    let tempArr = [];
-    tempArr.push(this.state.savings);
-    tempArr.push("newObject: ", newObject);
+    let tempArr = this.state.savings;
+    tempArr.push(newObject)
     //add the new object (Object) to tempArr -- Google: ".shift() for objects"
     //setState to tempArr (which is already done below)
     console.log("state: ", this.state.savings);
@@ -83,78 +93,56 @@ class EnterSavings extends Component {
     .then((response) => response.json())
     .then((response) => this.setState({savings: response}))
   }
-
+  
   render() {
 
     return (
-      <div className="EnterSavingsWrapper flow-text medium ">
-        <h1>Choose your savings</h1>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-
-          {/* <label htmlFor="Description">
-            What is the thing you are saving on: 
-          </label> 
-          <input type="text" name="Description" placeholder="saving on" onChange={this.handleChange}/> */}
-          {/* test */}
-          <div class="row highlight">
-        <div class="input-field col s12">
-          <input id="Description" type="text" class="validate" onChange={this.handleChange}/>
-          <label for="Description">Saved on...</label>
-        </div>
-      </div>
-      {/* end test */}
-          <div>
-            {/* test */}
-            <div class="row highlight">
-        <div class="col s12">
-         <h5>Category:</h5> 
-            <select className='btn ' name="Category " value={this.state.value} onChange={this.handleChange}>
+      <div className="EnterSavingsWrapper">
+        <h4>Choose your savings</h4>
+        <form onSubmit={(e) => this.handleSubmit(e)}>       
+          <div className="row highlight">
+            <div className="input-field col s12">
+              <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChange}/>
+              <label htmlFor="Description">Describe what you are saving on..</label>
+            </div>
+          </div>
+      
+          <div className="row highlight">
+            <div className="col s12">  
+              <h5>Category</h5>  
+              <select name="Category" value={this.state.value} onChange={this.handleChange}>
                 <option  value="" disabled selected> </option>
-                <option value="bills">Bills</option>
-                <option value="groceries">Groceries</option>
-                <option value="transportation">Transportation</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="clothes">Clothes</option>
-                <option value="dining Out">Dining Out</option>
-                <option value="vices">Vices</option>
-                <option value="debt">Debt</option>
-                <option value="housing">Housing</option>
-                <option value="savings">Savings</option>
-                <option value="health">Health</option>
-                <option value="miscellaneous">Miscellaneous</option>
+                <option value="Bills">Bills</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Clothes">Clothes</option>
+                <option value="Dining Out">Dining Out</option>
+                <option value="Vices">Vices</option>
+                <option value="Debt">Debt</option>
+                <option value="Housing">Housing</option>
+                <option value="Savings">Savings</option>
+                <option value="Health">Health</option>
+                <option value="Miscellaneous">Miscellaneous</option>
               </select>
-         
-        </div>
-        </div>
-            {/* test 2 */}
-            {/* <label htmlFor="Category flow-text medium">
-             Category:  
-            </label>   
-              <select name="Category " value={this.state.value} onChange={this.handleChange}>
-                <option  value="" disabled selected>Choose your Category</option>
-                <option value="bills">Bills</option>
-                <option value="groceries">Groceries</option>
-                <option value="transportation">Transportation</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="clothes">Clothes</option>
-                <option value="dining Out">Dining Out</option>
-                <option value="vices">Vices</option>
-                <option value="debt">Debt</option>
-                <option value="housing">Housing</option>
-                <option value="savings">Savings</option>
-                <option value="health">Health</option>
-                <option value="miscellaneous">Miscellaneous</option>
-              </select> */}
+            </div>  
           </div>  
-
-          
           <br />
-          <label htmlFor="Amount">
-            Money saved ($): 
-          </label> 
-          <input type="number" name="Amount" placeholder="enter number" onChange={this.handleChange}/>
+      
+          <div className="row highlight">
+            <div className="input-field col s12">
+              <input type="number" name="Amount" className="validate"  onChange={this.handleChange}/>  
+              <label htmlFor="Amount">Money saved ($)</label>
+            </div>
+          </div>
+          <div className="row highlight">
+            <div className="input-field col s12">
+              <input type="text" name="date" className="datepicker" onChange={this.handleChange}/>  
+              <label htmlFor="date">Created on</label>
+            </div>
+          </div>
           <input type="submit" value="Submit" />
-          
+
         </form>
       </div>
     );

@@ -15,18 +15,20 @@ import EditBankData from './EditBankData';
 import UserData from './UserData.js';
 
 
+
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      token: {},
+      token: "",
+      user: {},
       childProp:""
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
   }
 
-  liftTokenToState(token) {
-    this.setState({token: token})
+  liftTokenToState(token,user) {
+    this.setState({token: token,user: user})
   }
 
   isEmpty(obj) {
@@ -39,11 +41,12 @@ class App extends Component {
     }
   }
 
-  render() {
 
+  render() {
     console.log("APP.JS STATE", this.state)
     //if the token exists display the router
-    if(!this.isEmpty(this.state.token)){
+    // if(this.state.token!==""){ //need this active to use auth
+      if(true){
       return (
         <Router>
           <div className='row'>
@@ -51,7 +54,6 @@ class App extends Component {
             <div className="nav-wrapper">
             <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access </i>RainyDay </a>
             <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
-
               <div className='hide-on-med-and-down'>
               <Link to="/homeReactRoute" className="btn btn-large #99d3df cyan darken-3 ">Home</Link>
               <Link to="/savingsReactRoute" className="btn btn-large #88bbd6 cyan darken-3 ">Savings</Link>

@@ -155,7 +155,7 @@ class Home extends Component {
                 {/* about the Developers */}
              <div className="valign-wrapper section-box top-page top-page-landing  movedown" >
 
-                <div class="section-box row section-prices">
+                <div className="section-box row section-prices">
                    
                 <div className="col s3 ">
                 <div className="card  hoverable  ">
