@@ -4,6 +4,12 @@ import UserPieCharts from './UserPieCharts.js'
 import UserBarGraph from './UserBarGraph.js'
 import './App.css';
 
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import moment from 'moment';
+
+import { DateRangePicker, SingleDatePicker } from 'react-dates';
+
 
 class UserData extends Component {
   constructor(props) {
@@ -18,11 +24,11 @@ class UserData extends Component {
     fetch("/bankRecords")
     .then((response) => response.json())
     .then((response) => this.setState({bankRecords: response}))
-    .then((response) => this.updateCatAmt(this.state.bankRecords))
+    .then((response) => this.updateUncat(this.state.bankRecords))
   }
 
-  updateCatAmt(){
-    let newCatAmt=this.state.allCatAmt;
+  updateUncat(){
+    let newRecords=[];
     // list of categories
     // amount per category
     // amount saved (isSavedTrue)
@@ -32,21 +38,28 @@ class UserData extends Component {
     // sort dates
 
     this.state.bankRecords.forEach(function(record){
-      if(record.Category!==undefined){
-        newCatAmt.push({
+      if(record.Category!==undefined && !record.isSaved){
+        newRecords.push({
           category: record.Category,
           amount: record.Amount
         });
-      } else{
-        newCatAmt.push({
+      } else if(record.Category===undefined && !record.isSaved){
+        newRecords.push({
           category: "uncategorized",
           amount: record.Amount
         });
       }
     });
     this.setState({
-        allCatAmt: newCatAmt
+        allCatAmt: newRecords
       })
+  }
+
+  handleDateChange(e){
+    console.log(e.format("YYYY-MM-DD"))
+    // this.setState({
+    //   date:e.target.value
+    // })
   }
 
 
@@ -54,6 +67,12 @@ class UserData extends Component {
     console.log("USER DATA STATE", this.state)
     return (
       <div className="UserDataWrapper">
+        <SingleDatePicker
+               // momentPropTypes.momentObj or null
+              onDateChange={(e) => this.handleDateChange( e )} // PropTypes.func.isRequired
+              focused={this.state.focused} // PropTypes.bool
+              onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+            />
         <p>UserData Page</p>
         <UserSummary />
         <UserPieCharts />
