@@ -33,6 +33,7 @@ class BankRecords extends Component {
     console.log("this.state.user bankrecords: ", this.state.user);
 
     return (
+
       <div className="BankRecordsWrapper  "  >
         <p>BankRecords Page</p>
         <InputBankRecords user={user}/>
@@ -41,12 +42,8 @@ class BankRecords extends Component {
         <section className="row  " >
 {/* movepage */}
    
-            <ul id='' className='movepage' onClick={this.change}>
-              <li className='col s3'>Date</li>
-              <li className='col s3'>Description</li>
-              <li className='col s3'>Amount</li>
-              <li className='col s2'>Category</li>
-            </ul>
+            
+
 
             <ul id='tableLable' className='notmoving ' onClick={this.change}>
               <li className='col s3'>Date</li>
@@ -56,7 +53,10 @@ class BankRecords extends Component {
             </ul>
 <br/><br/>
        
-        <div className='movepage '>
+       
+        <div className='movepage'></div> 
+   
+
 
 
         <EditBankData user={user}/>
@@ -65,9 +65,7 @@ class BankRecords extends Component {
         
       </div>
 
-     
 
-     
     );
   }
 }
