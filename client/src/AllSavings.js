@@ -16,6 +16,7 @@ class AllSavings extends Component {
     this.SaveCatChange = this.SaveCatChange.bind(this);
     // this.deleteSaved = this.deleteSaved.bind(this);
   }
+
   
   // componentDidMount(){
   //   fetch("/bankRecords/savedList")
@@ -24,14 +25,12 @@ class AllSavings extends Component {
     
   // }
   
+
   check(e) {
     console.log("savings state: ", this.state.savings);
     console.log("user state: ", this.state.user);
   }
-  // deleteSavedItem(recordId) {
-  //   let url = "/bankRecords/savedList/" + recordId;
-  //   fetch(url, {method: 'delete'}).then((response) => console.log(response))
-  // }
+
   deleteSaved(e) {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
@@ -49,6 +48,7 @@ class AllSavings extends Component {
       console.log("error: ", error);
     })
   }
+
 
 
   SaveCatChange(e) {
@@ -95,7 +95,7 @@ class AllSavings extends Component {
 //       })
 //     }
 
-   
+
   render() {
 
     console.log('savings', this.state.savings)
@@ -105,7 +105,7 @@ class AllSavings extends Component {
 
 
     let savedOn = this.state.savings.map((saving, index) => (
-      
+
               <section className="row z-depth-1" key={index} onClick={this.check}>
                 <div className='col s4'>{saving.Description}</div>
                 <div className='col s3'>
@@ -131,24 +131,24 @@ class AllSavings extends Component {
                 </div>
                 <div className='col s2'>{saving.Amount}</div>
                 <div className='col s2'>{saving.date}</div>
-      
-      
+
+
                 <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteSaved}>Delete</div>
-      
+
               </section>  ))
 
     return (
-      <div className="allSavings">  
+      <div className="allSavings">
         <h4>Those could be your expenses, instead those are your savings!</h4>
         <div className="row">
           <div className='col s4'>Description</div>
           <div className='col s3'>Category</div>
           <div className='col s2'>Money Saved ($)</div>
           <div className='col s2'>Created on</div>
-          <div className='col s1'>Delete</div> 
-        </div> 
+          <div className='col s1'>Delete</div>
+        </div>
         {savedOn}
-      </div>  
+      </div>
 
     );
   }

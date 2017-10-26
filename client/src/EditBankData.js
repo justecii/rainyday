@@ -29,6 +29,12 @@ class EditBankData extends Component {
     let a = this;
     axios.put('/bankRecords', {
       data: trans
+    }).then(function(response) {
+      // let user = this.state.user;
+      // fetch('/bankRecords/' + user)
+      //   .then(response => response.json())
+      //   .then(response => this.setState({records: response}))
+      // }
     }).then(function (response) {
       currentState.splice(i, 1);
       a.setState({
@@ -77,31 +83,24 @@ class EditBankData extends Component {
     let user = this.props.user
     console.log("user in client/EditBankData.js: ", user);
     console.log("this.state.user editbankdata: ", this.state.user);
+    // let categName = this.state.records.map((categ, index) => (
+    //     {if (categ.Category !== "" || {categ.Category} !== undefined || {categ.Category} !== null) {
+    //      {categ.Category} } else { } }</option>
+    //   ))
 
-    return (
-        this.state.records.map((records, index) => (
-
+    let mappedItems = this.state.records.map((records, index) => (
           <section onClick={this.change} className="row z-depth-1" key={index}>
-
-
-                <div className='col s3'>{records.TransDate} {records.PostedDate}</div>
-                <div className='col s3'>{records.Description}</div>
-                <div className='col s3'>{records.Amount}</div>
+                <div className='col s3' data-key={index}>{records.TransDate} {records.PostedDate}</div>
+                <div className='col s3' data-key={index}>{records.Description}</div>
+                <div className='col s3' data-key={index}>{records.Amount}</div>
                 <div className='col s2'>
 
                   <select className="browser-default " data-key={index} onChange={this.categoryChange}>
-                   
-                    <option  value="" disabled  selected>{records.Category}</option>
 
-                  <label >Catigorize!</label>
-                  <select 
-                    className="browser-default " 
-                    data-key={index} 
-                    onChange={this.categoryChange}
-                    value={records.Category}
-                  >
-                    
-                    <option  value="" disabled  defaultValue>Select Value</option>
+
+                    if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
+                      <option value="" disabled  selected data-key={index}></option>
+                    } else { <option value="" disabled  selected data-key={index}>{records.Category}</option> }
 
                     <option value="Bills" data-key={index}>Bills</option>
                     <option value="Groceries" data-key={index}>Groceries</option>
@@ -124,7 +123,8 @@ class EditBankData extends Component {
                 <div className="waves-effect waves-light btn red col s1  " data-key={index} onClick={this.deleteTransaction}>Delete</div>
 
           </section>  ))
-
+    return (
+      <div>{mappedItems}</div>
     );
   }
 }
