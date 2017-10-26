@@ -12,7 +12,7 @@ var BankRecordSchema = new mongoose.Schema({
   CheckNumber: String,
   Calc: String,
   Category: String,
-  userId: String,
+  userId: [{ type: String, ref: 'User'}],
   date: String,
   isSaved: Boolean
 });

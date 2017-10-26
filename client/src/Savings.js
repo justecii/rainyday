@@ -9,26 +9,43 @@ class Savings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      childProp:""
+      user: {}
     }
   }
 
 
-  componentDidMount(){
-    fetch("/bankRecords")
-    .then((response) => response.json())
-    .then((response) => this.setState({jobs: response}))
-  }
+  componentDidMount() {
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/' + user)
+      .then(response => response.json())
+      .then(response => this.setState({records: response}))
+    }
 
 
   render() {
+    let user = this.props.user
+    console.log("user in client/Savings.js: ", user);
 
     return (
-      <div>
-        <EnterSavings />
-        <AllSavings />
-        <SavingsSummary />
-      </div>  
+
+      <div className="SavingsWrapper container ">
+        <p>Savings Page</p>
+        <EnterSavings user={user}/>
+        <section className="row movepage">
+        <h1>Savings Summary:</h1>
+            <ul className="colHeader">
+              <li className='col s3'>Description</li>
+              <li className='col s3'>Amount</li>
+              <li className='col s3'>Category</li>
+            </ul>
+        </section>
+        <AllSavings user={user}/>
+        <SavingsSummary user={user}/>
+      </div>
+
     );
   }
 }

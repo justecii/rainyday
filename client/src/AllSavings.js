@@ -7,7 +7,8 @@ class AllSavings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      savings: []
+      savings: [],
+      user: {}
     }
 
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -71,6 +72,40 @@ class AllSavings extends Component {
   // }
 
 
+  SaveCatChange(e) {
+    e.preventDefault();
+    let i = e.target.getAttribute('data-key');
+    let Category = e.target.value;
+    let currentState = this.state.savings;
+    let individState = this.state.savings[i];
+    let categState = this.state.savings[i].Category = Category;
+    individState.Category = categState
+    let trans = this.state.savings[i]._id;
+    let a = this;
+    axios.put('/bankRecords/change', {
+      data: trans,
+      Category: Category
+    }).then(function (response) {
+      a.setState({
+        savings: currentState,
+      })
+    }).catch(function (error) {
+      console.log("error: ", error);
+    })
+  }
+
+  componentDidMount() {
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/SavingsSummary/' + user)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({savings: response})
+        console.log("response in AllSavings fetch: ", response)
+      })
+    }
 
 
 //   componentDidMount() {
@@ -83,6 +118,11 @@ class AllSavings extends Component {
 
    
   render() {
+
+    let user = this.props.user
+    console.log("user in client/AllSavings.js: ", user);
+
+
     let savedOn = this.state.savings.map((saving, index) => (
       
               <section className="row z-depth-1" key={index} onClick={this.check}>
@@ -113,6 +153,7 @@ class AllSavings extends Component {
                 <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteSaved}>Delete</div>
       
               </section>  ))
+
     return (
       <div className="allSavings">  
         <h4>Those could be your expenses, instead those are your savings!</h4>

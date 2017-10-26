@@ -12,8 +12,9 @@ class EnterSavings extends Component {
       savings: [],
       Description: "",
       Category: "",
-      date: "",
-      Amount: ""
+      Amount: "",
+      user: {}
+
     };
     //thisis the binding line necessary to keep this bound correctly
     // this.componentDidMount = this.componentDidMount.bind(this);
@@ -70,18 +71,21 @@ class EnterSavings extends Component {
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
-
+    console.log("descript: ", Description);
+    console.log("category: ", Category);
+    console.log("Amount: ", Amount);
+    let user = this.state.user;
     let date = this.state.date;
-   
-
+  
     //add all three variables to object {} -- let Object = {insert object of three variables}
+
     let newObject = {
       Description: Description,
       Category: Category,
       Amount: Amount,
       date: date,
       isSaved: true,
-      userId: 10
+      userId: user
     }
     //data: Ojbect of the three variables
 
@@ -104,14 +108,29 @@ class EnterSavings extends Component {
 
   }
 
+
+  componentDidMount() {
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/' + user)
+      .then(response => response.json())
+      .then(response => this.setState({records: response}))
+//     .then(response => this.setState({savings: response}))
+    }
+
+//////// for reference...
   componentDidMount(){
     fetch("/bankRecords/savedList")
     .then((response) => response.json())
     .then((response) => this.setState({savings: response}))
   }
-  
-  
+  ////////////////////////
+
   render() {
+    let user = this.props.user
+    console.log("user in client/EnterSavings.js: ", user);
 
     return (
       <div className="EnterSavingsWrapper">

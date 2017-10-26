@@ -11,7 +11,10 @@ import Login from './Login';
 import Home from './Home.js';
 import Savings from './Savings.js';
 import BankRecords from './BankRecords.js';
+//////////////////////////////////////////////////
+// may not need EditBankData here
 import EditBankData from './EditBankData';
+//////////////////////////////////////////////////
 import UserData from './UserData.js';
 
 
@@ -20,16 +23,24 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      token: "",
-      user: {},
-      childProp:""
+      token: '',
+      user: {}
+
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
   }
 
-  liftTokenToState(token,user) {
-    this.setState({token: token,user: user})
+
+  liftTokenToState(token, user) {
+    console.log("token: ", token)
+    console.log("user: ", user)
+    this.setState({
+      token: token,
+      user: user
+  })
+
   }
+
 
   isEmpty(obj) {
     for(var prop in obj) {
@@ -42,18 +53,31 @@ class App extends Component {
   }
 
 
+  componentDidMount() {
+    let user = this.props.user
+    // this.setState({
+    //   user: user
+    // })
+    console.log("user props: ", this.props.user)
+    console.log("user state: ", this.state.user)
+    }
+
   render() {
-    console.log("APP.JS STATE", this.state)
-    //if the token exists display the router
-    // if(this.state.token!==""){ //need this active to use auth
-      if(true){
+    // console.log("XXXXXXXXXX: ", this.state)
+    // let user = this.props.user
+    // console.log("user in client/App.js: ", user);
+    // console.log("APP.JS STATE", this.state)
+    // if the token exists display the router
+    if(this.state.token!==""){ //need this active to use auth
+  // if(true){
+
       return (
         <Router>
           <div className='row'>
             <nav className="RouterLinks  #00838f cyan darken-3  navbar">
             <div className="nav-wrapper">
-            <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access </i>RainyDay </a>
-            <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+            <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access RainyDay </i></a>
+            <a href="/homeReactRoute" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
               <div className='hide-on-med-and-down'>
               <Link to="/homeReactRoute" className="btn btn-large #99d3df cyan darken-3 ">Home</Link>
               <Link to="/savingsReactRoute" className="btn btn-large #88bbd6 cyan darken-3 ">Savings</Link>
@@ -72,8 +96,12 @@ class App extends Component {
               <Route
               exact path="/homeReactRoute"
               render={() => <Home childProp={this.state.childProp} />}/>
-              <Route exact path="/savingsReactRoute" component={Savings} />
-              <Route exact path="/bankRecordsReactRoute" component={BankRecords} />
+              <Route exact path="/savingsReactRoute"
+                  render={() => <Savings user={this.state.user} />}
+              />
+              <Route exact path="/bankRecordsReactRoute"
+                  render={() => <BankRecords user={this.state.user} />}
+                />
               <Route exact path="/userDataReactRoute" component={UserData} />
             </div>
           </div>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
 
-//
 class SavingsSummary extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +9,8 @@ class SavingsSummary extends Component {
       amountTotal: [],
       totalPerCat: [],
       avgAmountPerCat: [],
-      modalCat: []
+      modalCat: [],
+      user: {}
 
     }
     this.check = this.check.bind(this);
@@ -25,7 +24,11 @@ class SavingsSummary extends Component {
 
 
   componentDidMount() {
-    fetch('/bankRecords/SavingsSummary')
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/SavingsSummary/' + user)
       .then(response => response.json())
       .then(response =>
         { let amountTotal = []
@@ -43,13 +46,14 @@ class SavingsSummary extends Component {
           delete catAndAmount[j].__v
           total = total + amountTotal[j]
         }
-
-        console.log("total in fetch: ", total)
+        console.log("total in SavingsSummary fetch: ", total)
+        console.log("response in SavingsSummary fetch: ", response)
         this.setState({
           savings: response,
           totalPerCat: catAndAmount,
           total: total
-        })})
+        })
+      })
     }
 
 
@@ -57,6 +61,9 @@ class SavingsSummary extends Component {
   render() {
     {console.log("total in render: ", this.state.total)}
     let total = this.state.total;
+    let user = this.props.user
+    console.log("user in client/SavingsSummary.js: ", this.state);
+    console.log("savings state in client/SavingsSummary.js: ", this.state.savings);
 
     return (
 
@@ -64,23 +71,19 @@ class SavingsSummary extends Component {
         <div className="col s3"></div>
         <div className="col s3">{total}</div>
         <br />
-
-        <div className="totalPerCat">
-        {this.state.totalPerCat.map((catTot, index) => {
-            <div> {console.log("catTot: ", catTot)} </div>
-        })}
-        </div>
+          {this.state.totalPerCat.map((catTot, index) => {
+              <div> {console.log("catTot: ", catTot)} {catTot}</div>
+          })}
 
         {this.state.savings.map((saving, index) => (
-          <div>
-            <section onClick={this.check} key={index} onClick={this.check}>
+          <section key={index} onClick={this.check}>
               <span>{saving.Description}</span>
               <span>{saving.Amount}</span>
               <span>{saving.Category}</span>
-            </section>
-          </div> ))}
+          </section> ))}
 
-        </div>
+
+      </div>
     )
   }
 }

@@ -7,11 +7,18 @@ class EditBankData extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      records: []
+      records: [],
+      user: {}
     }
     this.deleteTransaction = this.deleteTransaction.bind(this);
     this.categoryChange = this.categoryChange.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.change = this.change.bind(this);
+  }
+
+  change(e) {
+    console.log(this.state.records);
+    console.log("user: ", this.state.user)
   }
 
   deleteTransaction(e) {
@@ -38,7 +45,6 @@ class EditBankData extends Component {
     let Category = e.target.value;
     let currentState = this.state.records;
     let individState = this.state.records[i];
-    console.log("individState: ", individState);
     let categState = this.state.records[i].Category = Category;
     individState.Category = categState
     let trans = this.state.records[i]._id;
@@ -56,19 +62,25 @@ class EditBankData extends Component {
   }
 
   componentDidMount() {
-
-    fetch('/bankRecords')
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/' + user)
       .then(response => response.json())
       .then(response => this.setState({records: response}))
     }
 
 
   render() {
+    let user = this.props.user
+    console.log("user in client/EditBankData.js: ", user);
+    console.log("this.state.user editbankdata: ", this.state.user);
 
     return (
         this.state.records.map((records, index) => (
 
-          <section className="row z-depth-1" key={index}>
+          <section onClick={this.change} className="row z-depth-1" key={index}>
 
 
                 <div className='col s3'>{records.TransDate} {records.PostedDate}</div>
