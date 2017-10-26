@@ -78,7 +78,7 @@ class App extends Component {
             <div className="nav-wrapper">
             <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access  </i>RainyDay</a>
             <a href="/homeReactRoute" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
-              <div className='hide-on-med-and-down'>
+              <div className='hide-on-sm-and-down'>
               <Link to="/homeReactRoute" className="btn btn-large #99d3df cyan darken-3 ">Home</Link>
               <Link to="/savingsReactRoute" className="btn btn-large #88bbd6 cyan darken-3 ">Savings</Link>
               <Link to="/bankRecordsReactRoute" className="btn btn-large #00838f cyan darken-3 ">Bank Records</Link>
@@ -93,16 +93,18 @@ class App extends Component {
              </div>
             </nav>
             <div>
-              <Route
-              exact path="/homeReactRoute"
-              render={() => <Home childProp={this.state.childProp} />}/>
+              <Route exact path="/homeReactRoute"
+                render={() => <Home childProp={this.state.childProp} />}
+              />
               <Route exact path="/savingsReactRoute"
-                  render={() => <Savings user={this.state.user} />}
+                render={() => <Savings user={this.state.user} />}
               />
               <Route exact path="/bankRecordsReactRoute"
-                  render={() => <BankRecords user={this.state.user} />}
-                />
-              <Route exact path="/userDataReactRoute" component={UserData} />
+                render={() => <BankRecords user={this.state.user} />}
+              />
+              <Route exact path="/userDataReactRoute" 
+                render={() => <UserData user={this.state.user} />}
+              />
             </div>
           </div>
         </Router>

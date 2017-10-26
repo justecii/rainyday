@@ -14,7 +14,7 @@ class AllSavings extends Component {
     this.componentDidMount = this.componentDidMount.bind(this);
     this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
-    this.deleteSaved = this.deleteSaved.bind(this);
+    // this.deleteSaved = this.deleteSaved.bind(this);
   }
   
   // componentDidMount(){

@@ -6,7 +6,6 @@ import './App.css';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
-
 import { DateRangePicker, SingleDatePicker } from 'react-dates';
 
 
@@ -22,7 +21,6 @@ class EnterSavings extends Component {
       Amount: "",
       date: Date,
       user: {}
-
     };
     //thisis the binding line necessary to keep this bound correctly
     // this.componentDidMount = this.componentDidMount.bind(this);
@@ -39,7 +37,6 @@ class EnterSavings extends Component {
       Description: e.target.value
     })
   }
-
   handleChangeCategory(e){
     // console.log('handleChangeCategory', e.target.value)
     this.setState({
@@ -52,7 +49,6 @@ class EnterSavings extends Component {
       Category: e.target.value
     });
   }
-
   handleChangeAmount(e){
     // console.log('handleChangeAmount', e.target.value)
     this.setState({
@@ -62,6 +58,7 @@ class EnterSavings extends Component {
   
   handleChangeDate(e){
     console.log('handleChangeDate', e)
+
     console.log(e.format("MM/DD/YY"))
     console.log(this.props.showClearDate)
     this.setState({
@@ -73,6 +70,7 @@ class EnterSavings extends Component {
     document.getElementById("myform").reset();
   }
 
+
   handleSubmit(e) {
     // console.log('in savings value this is this.date.value', e)
     // console.log("Description: ", this.state.Description);
@@ -83,14 +81,20 @@ class EnterSavings extends Component {
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
+
+    console.log("descript: ", Description);
+    console.log("category: ", Category);
+    console.log("Amount: ", Amount);
+   
+
     // console.log("descript: ", Description);
     // console.log("category: ", Category);
     // console.log("Amount: ", Amount);
     let user = this.state.user;
+
     let date = this.state.date;
   
     //add all three variables to object {} -- let Object = {insert object of three variables}
-
     let newObject = {
       Description: Description,
       Category: Category,
@@ -100,7 +104,6 @@ class EnterSavings extends Component {
       userId: user
     }
     //data: Ojbect of the three variables
-
     //re-set state based on updated form information...
     let tempArr = this.state.savings;
     tempArr.push(newObject)
@@ -117,8 +120,9 @@ class EnterSavings extends Component {
     }).catch(function (error) {
       console.log("error: ", error);
     })
-
   }
+
+  
   
   
 
@@ -140,6 +144,7 @@ class EnterSavings extends Component {
   render() {
     let user = this.props.user
     // console.log("user in client/EnterSavings.js: ", user);
+
 
     return (
       <div className="EnterSavingsWrapper">
@@ -181,16 +186,13 @@ class EnterSavings extends Component {
             </div>
           </div>
           <SingleDatePicker
-             
-              showClearDate={this.state.true}
               onDateChange={(e) => this.handleChangeDate( e )} // PropTypes.func.isRequired
               focused={this.state.focused} // PropTypes.bool
               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
             />  
-            
+
             <br/>
           <input type="submit" value="Submit" />
-
         </form>
       </div>
     );
