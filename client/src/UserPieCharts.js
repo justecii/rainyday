@@ -133,7 +133,7 @@ class UserPieCharts extends Component {
     // console.log("PIE CHART STATE", this.state)
     return (
       <div className="UserPieChartsWrapper">
-        <p>User Pie Charts Page</p>
+        <p>User Pie Charts Component</p>
         <div className="tooltip">
             <p>{this.state.toolTipValue.category}</p>
             <p>${this.state.toolTipValue.amount}</p>

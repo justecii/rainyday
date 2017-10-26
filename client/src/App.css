@@ -97,4 +97,25 @@ html {
   padding: 5px 0;
 }
 
+.barTooltip {
+  z-index: 1;
+  text-align: center;
+  position: absolute;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  display:block;
+  padding: 0 5px;
+  min-width: 75px;
+  border-radius: 5px
+}
+
+.barTooltip .row{
+  margin: 0;
+  padding: 0;
+}
+.barTooltip p{
+  margin: 0;
+  padding: 5px 0;
+}
+
 
