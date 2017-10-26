@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 import './App.css';
-
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import moment from 'moment';
+import { DateRangePicker, SingleDatePicker } from 'react-dates';
 //form for entering
 class EnterSavings extends Component {
   constructor(props) {
@@ -13,8 +16,8 @@ class EnterSavings extends Component {
       Description: "",
       Category: "",
       Amount: "",
-      user: {}
-
+      date: Date,
+      // user: {}
     };
     //thisis the binding line necessary to keep this bound correctly
     // this.componentDidMount = this.componentDidMount.bind(this);
@@ -31,7 +34,6 @@ class EnterSavings extends Component {
       Description: e.target.value
     });
   }
-
   handleChangeCategory(e){
     console.log('handleChangeCategory', e.target.value)
     this.setState({
@@ -44,7 +46,6 @@ class EnterSavings extends Component {
       Category: e.target.value
     });
   }
-
   handleChangeAmount(e){
     console.log('handleChangeAmount', e.target.value)
     this.setState({
@@ -54,13 +55,12 @@ class EnterSavings extends Component {
   
   handleChangeDate(e){
     console.log('handleChangeDate', e)
+    console.log(e.format("YYYY-MM-DD"))
     this.setState({
-      date: e.target.value
+      date: e.format("MM/DD/YY")
     });
   }
-
   
-
   handleSubmit(e) {
     console.log('in savings value this is this.date.value', e)
     console.log("Description: ", this.state.Description);
@@ -74,21 +74,19 @@ class EnterSavings extends Component {
     console.log("descript: ", Description);
     console.log("category: ", Category);
     console.log("Amount: ", Amount);
-    let user = this.state.user;
+    // let user = this.state.user;
     let date = this.state.date;
   
     //add all three variables to object {} -- let Object = {insert object of three variables}
-
     let newObject = {
       Description: Description,
       Category: Category,
       Amount: Amount,
       date: date,
       isSaved: true,
-      userId: user
+      // userId: user
     }
     //data: Ojbect of the three variables
-
     //re-set state based on updated form information...
     let tempArr = this.state.savings;
     tempArr.push(newObject)
@@ -105,33 +103,26 @@ class EnterSavings extends Component {
     }).catch(function (error) {
       console.log("error: ", error);
     })
-
   }
-
-
-  componentDidMount() {
-    let user = this.props.user
-    this.setState({
-      user: user
-    })
-    fetch('/bankRecords/' + user)
-      .then(response => response.json())
-      .then(response => this.setState({records: response}))
-//     .then(response => this.setState({savings: response}))
-    }
-
-//////// for reference...
+//   componentDidMount() {
+//     let user = this.props.user
+//     this.setState({
+//       user: user
+//     })
+//     fetch('/bankRecords/' + user)
+//       .then(response => response.json())
+//       .then(response => this.setState({records: response}))
+// //     .then(response => this.setState({savings: response}))
+//     }
   componentDidMount(){
     fetch("/bankRecords/savedList")
     .then((response) => response.json())
     .then((response) => this.setState({savings: response}))
   }
-  ////////////////////////
-
+  
   render() {
-    let user = this.props.user
-    console.log("user in client/EnterSavings.js: ", user);
-
+    // let user = this.props.user
+    // console.log("user in client/EnterSavings.js: ", user);
     return (
       <div className="EnterSavingsWrapper">
         <h4>Choose your savings</h4>
@@ -171,14 +162,14 @@ class EnterSavings extends Component {
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>
-          <div className="row highlight">
-            <div className="input-field col s12">
-              <input type="date" name="date" className="datepicker" onSelect={this.handleChangeDate}/>  
-              <label htmlFor="date">Created on</label>
-            </div>
-          </div>
+          <SingleDatePicker
+               // momentPropTypes.momentObj or null
+              onDateChange={(e) => this.handleChangeDate( e )} // PropTypes.func.isRequired
+              focused={this.state.focused} // PropTypes.bool
+              onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+            />  
+            <br/>
           <input type="submit" value="Submit" />
-
         </form>
       </div>
     );
