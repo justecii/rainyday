@@ -14,11 +14,15 @@ class Savings extends Component {
   }
 
 
-  componentDidMount(){
-    fetch("/bankRecords")
-    .then((response) => response.json())
-    .then((response) => this.setState({jobs: response}))
-  }
+  componentDidMount() {
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/' + user)
+      .then(response => response.json())
+      .then(response => this.setState({records: response}))
+    }
 
 
   render() {

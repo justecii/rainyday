@@ -66,7 +66,7 @@ class EditBankData extends Component {
     this.setState({
       user: user
     })
-    fetch('/bankRecords')
+    fetch('/bankRecords/' + user)
       .then(response => response.json())
       .then(response => this.setState({records: response}))
     }

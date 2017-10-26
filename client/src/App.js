@@ -32,6 +32,7 @@ class App extends Component {
     this.setState({token: token})
   }
 
+
   isEmpty(obj) {
     for(var prop in obj) {
       if(obj.hasOwnProperty(prop)){

@@ -43,14 +43,6 @@ router.put('/change', function(req, res, next){
     });
 });
 
-//COMPLETE: GET display all the bank records
-router.get('/', function(req, res, next) {
-  BankRecord.find({}, function(err, records){
-      if(err) return res.send(err);
-      res.send(records);
-  });
-});
-
 // /* GET specific record from bank records by id */
 // router.get('/:recordId', function(req, res, next) {
 //     BankRecord.findById(req.params.recordId, function(err, record){
@@ -120,12 +112,28 @@ router.post('/savedList', function(req, res, next){
  })
 
 //COMPLETE: get route to display saved item in AllSavings.js
-router.get('/SavingsSummary', function(req, res, next){
-    BankRecord.find({isSaved: true}, function(err, records){
+router.get('/SavingsSummary/:user', function(req, res, next){
+  let user = req.params.user
+  console.log("userId in savings route: ", user);
+    BankRecord.find({
+      isSaved: 'true',
+      userId: user
+    }, function(err, records){
         if(err) return res.send(err);
-        console.log(records);
+        console.log("results of SavingsSummary get: ", records);
         res.send(records);
     })
+});
+
+//COMPLETE: GET display all the bank records
+  //moved from top of page
+router.get('/:user', function(req, res, next) {
+  let user = req.params.user
+  console.log("userId in BankRecords routes: ", user);
+  BankRecord.find({userId: user}, function(err, records){
+      if(err) return res.send(err);
+      res.send(records);
+  });
 });
 
 

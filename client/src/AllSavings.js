@@ -60,11 +60,15 @@ class AllSavings extends Component {
   }
 
   componentDidMount() {
-
-    fetch('/bankRecords/SavingsSummary')
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/SavingsSummary/' + user)
       .then(response => response.json())
       .then(response => {
         this.setState({savings: response})
+        console.log("response in AllSavings fetch: ", response)
       })
     }
 

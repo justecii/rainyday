@@ -31,7 +31,9 @@ class InputBankRecords extends Component {
       complete( result, file ) {
         let data = result.data;
         data.map(id => id.userId = user)
-        console.log("data final: ", data);
+        console.log("data userId: ", data);
+        data.map(saved => saved.isSaved = false)
+        console.log("data isSaved: ", data);
         axios.post('/bankRecords', {
           data: data
         }).then(function (response) {

@@ -24,7 +24,11 @@ class SavingsSummary extends Component {
 
 
   componentDidMount() {
-    fetch('/bankRecords/SavingsSummary')
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/SavingsSummary/' + user)
       .then(response => response.json())
       .then(response =>
         { let amountTotal = []
@@ -42,13 +46,14 @@ class SavingsSummary extends Component {
           delete catAndAmount[j].__v
           total = total + amountTotal[j]
         }
-
-        console.log("total in fetch: ", total)
+        console.log("total in SavingsSummary fetch: ", total)
+        console.log("response in SavingsSummary fetch: ", response)
         this.setState({
           savings: response,
           totalPerCat: catAndAmount,
           total: total
-        })})
+        })
+      })
     }
 
 

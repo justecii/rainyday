@@ -51,14 +51,13 @@ class EnterSavings extends Component {
     console.log("descript: ", Description);
     console.log("category: ", Category);
     console.log("Amount: ", Amount);
-
-    //add all three variables to object {} -- let Object = {insert object of three variables}
+    let user = this.state.user;
     let newObject = {
       Description: Description,
       Category: Category,
       Amount: Amount,
       isSaved: true,
-      userId: 10
+      userId: user
     }
     //data: Ojbect of the three variables
 
@@ -82,11 +81,15 @@ class EnterSavings extends Component {
 
   }
 
-  componentDidMount(){
-    fetch("/bankRecords/savedList")
-    .then((response) => response.json())
-    .then((response) => this.setState({savings: response}))
-  }
+  componentDidMount() {
+    let user = this.props.user
+    this.setState({
+      user: user
+    })
+    fetch('/bankRecords/' + user)
+      .then(response => response.json())
+      .then(response => this.setState({records: response}))
+    }
 
   render() {
     let user = this.props.user
