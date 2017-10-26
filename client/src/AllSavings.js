@@ -102,7 +102,7 @@ class AllSavings extends Component {
       
               </section>  ))
     return (
-      <div>  
+      <div className="allSavings">  
         <h4>Those could be your expenses, instead those are your savings!</h4>
         <div className="row">
           <div className='col s4'>Description</div>
