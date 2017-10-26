@@ -18,7 +18,12 @@ class Home extends Component {
             $(this).toggleClass('share-expanded');
         });
        
-    }
+            // $('.parallax').parallax();
+        
+       
+        }
+       
+    
     render() {
       
         return (

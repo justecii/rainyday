@@ -88,7 +88,7 @@ class EditBankData extends Component {
                 <div className='col s3'>{records.Amount}</div>
                 <div className='col s2'>
                   <select className="browser-default " data-key={index} onChange={this.categoryChange}>
-                    <label >Catigorize!</label>
+                   
                     <option  value="" disabled  selected>{records.Category}</option>
                     <option value="Bills" data-key={index}>Bills</option>
                     <option value="Groceries" data-key={index}>Groceries</option>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import InputBankRecords from './InputBankRecords.js'
 import EditBankData from './EditBankData.js'
 import './App.css';
-
+import $ from 'jquery';
 
 class BankRecords extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class BankRecords extends Component {
     console.log("user: ", this.state.user)
   }
 
+
   componentDidMount() {
     let user = this.props.user
     this.setState({
@@ -32,27 +33,36 @@ class BankRecords extends Component {
     console.log("this.state.user bankrecords: ", this.state.user);
 
     return (
-      <div className="BankRecordsWrapper  " onscroll='myFunction() '>
+      <div className="BankRecordsWrapper  "  >
         <p>BankRecords Page</p>
         <InputBankRecords user={user}/>
 
 
-        <div className="row movepage notmoving">
-
-
-            <ul onClick={this.change}>
+        <section className="row  " >
+{/* movepage */}
+   
+            <ul id='' className='movepage' onClick={this.change}>
               <li className='col s3'>Date</li>
               <li className='col s3'>Description</li>
               <li className='col s3'>Amount</li>
               <li className='col s2'>Category</li>
             </ul>
 
-
-        </div>
-        <div className='movepage'></div>
+            <ul id='tableLable' className='notmoving ' onClick={this.change}>
+              <li className='col s3'>Date</li>
+              <li className='col s3'>Description</li>
+              <li className='col s3'>Amount</li>
+              <li className='col s2'>Category</li>
+            </ul>
+<br/><br/>
+       
+        <div className='movepage '>
 
 
         <EditBankData user={user}/>
+        </div>
+        </section>
+        
       </div>
 
      

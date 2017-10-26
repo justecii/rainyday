@@ -16,6 +16,7 @@ li {
 }
 
 
+
 header{
   height: 50vh;
   min-height: 300px;
@@ -32,9 +33,7 @@ header{
 }
 
 
-.movepage{
-  margin-top:100px;
-}
+
 
 select {
   display: inline-block;
@@ -55,15 +54,31 @@ html {
 
 .notmoving{
   position: fixed; 
+	background-color: rgb(92, 119, 177);
+  overflow: hidden;
+  width: 100%;
+	z-index:2;
+	opacity: 0.5;
+  display: block;
+  padding: 14px 16px;
+	
+	font-size: 17px;
+	color: white;
+}
 
+.notmoving:hover{
+  position: fixed; 
+	background-color: rgb(92, 119, 177);
   overflow: hidden;
   width: 100%;
   z-index:2;
   display: block;
   padding: 14px 16px;
-
-  font-size: 17px;
+	top:0;
+	font-size: 17px;
+	color: white;
 }
+
 
 /* #tableLable {
   overflow: hidden;
@@ -377,7 +392,10 @@ h2 {
   .space{
     margin-top:30px;
     margin-bottom: 30px;
-  }
+	}
+	.movepage{
+		margin-top:120px;
+	}
 /* .CalendarDay__highlighted_calendar {
   background: #82E0AA;
   color: #186A3B;
