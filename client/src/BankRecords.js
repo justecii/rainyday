@@ -57,7 +57,7 @@ class BankRecords extends Component {
 
      
 
-      </div>
+     
     );
   }
 }
