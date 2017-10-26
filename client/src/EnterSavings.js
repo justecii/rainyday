@@ -108,7 +108,7 @@ class EnterSavings extends Component {
             <div class="row highlight">
         <div class="col s12">
          <h5>Category:</h5> 
-            <select name="Category " value={this.state.value} onChange={this.handleChange}>
+            <select className='btn ' name="Category " value={this.state.value} onChange={this.handleChange}>
                 <option  value="" disabled selected> </option>
                 <option value="bills">Bills</option>
                 <option value="groceries">Groceries</option>

@@ -49,7 +49,7 @@ class App extends Component {
           <div className='row'>
             <nav className="RouterLinks  #00838f cyan darken-3  navbar">
             <div className="nav-wrapper">
-            <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access RainyDay </i></a>
+            <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access </i>RainyDay </a>
             <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
 
               <div className='hide-on-med-and-down'>

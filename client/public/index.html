@@ -15,7 +15,7 @@
    
     <title>Rainy Day</title>
   </head>
-  <body>
+  <body >
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
@@ -31,6 +31,18 @@
  // Initialize collapse button
  $(".button-collapse").sideNav();
 
+//  tablelable  does not work yet
+var tableLable = document.getElementById("tableLable");
+var sticky = tableLable.offsetTop;
+
+function myFunction() {
+  console.log('scrolling')
+  if (window.pageYOffset >= sticky) {
+    tableLable.classList.add("sticky")
+  } else {
+    tableLable.classList.remove("sticky");
+  }
+}
 
  
   
