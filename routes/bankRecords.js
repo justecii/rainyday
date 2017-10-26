@@ -26,6 +26,8 @@ router.post('/', function(req, res, next) {
     BankRecord.create(item[i]);
   }
 })
+
+
 //COMPLETE: Edit transactions in EditBankData/js and send changes to db
 router.put('/change', function(req, res, next){
     let id = req.body.data;
@@ -38,6 +40,7 @@ router.put('/change', function(req, res, next){
         else res.send(item);
     });
 });
+
 //COMPLETE: GET display all the bank records
 router.get('/', function(req, res, next) {
   BankRecord.find({}, function(err, records){
@@ -61,6 +64,7 @@ router.put('/', function(req, res, next){
         else res.end();
     });
 });
+
 //user can assign specific record to his specific category, needs button/href/stimulation on front end
 router.put('/:recordId/category/:categoryId', function(req, res, next){
     BankRecord.findByIdAndUpdate(req.params.recordId,
@@ -84,6 +88,7 @@ router.put('/:recordId/:toSave', function(req, res, next){
         }
     );
 });
+
 ////////////////////////////////////////////////////////////////
 // WE PROBABLY DON'T NEED THIS
 ////////////////////////////////////////////////////////////////
@@ -95,6 +100,7 @@ router.get('/savedList', function(req, res, next){
         res.send(records);
     });
 });
+
 // TODO: need this to add savedlist items to db - from EnterSavings.js
 router.post('/savedList', function(req, res, next){
      let item = req.body.data;
@@ -114,5 +120,6 @@ router.get('/SavingsSummary', function(req, res, next){
         res.send(records);
     })
 });
+
 //using node export syntex
 module.exports = router;
