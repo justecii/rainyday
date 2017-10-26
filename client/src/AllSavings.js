@@ -89,8 +89,8 @@ class AllSavings extends Component {
                 <div className='col s4'>{saving.Description}</div>
                 <div className='col s3'>
                   <select className="browser-default" data-key={index} onChange={this.SaveCatChange}>
-                    <label>{saving.Category}</label>
-                    <option value="" disabled selected>{saving.Category}</option>
+                    {/* <label>{saving.Category}</label> */}
+                    <option value="" disabled defaultValue>{saving.Category}</option>
                     <option value="Bills" data-key={index}>Bills</option>
                     <option value="Groceries" data-key={index}>Groceries</option>
                     <option value="Transportation" data-key={index}>Transportation</option>
