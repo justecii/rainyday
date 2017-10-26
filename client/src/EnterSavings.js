@@ -41,6 +41,7 @@ class EnterSavings extends Component {
       this.setState({
         date: value
       });  
+      console.log(this.date.value)
     }
   }
 
@@ -133,12 +134,12 @@ class EnterSavings extends Component {
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>
-          
+          <div className="row highlight">
             <div className="input-field col s12">
               <input type="text" name="date" className="datepicker" onChange={this.handleChange}/>  
               <label htmlFor="date">Created on</label>
             </div>
-       
+          </div>
           <input type="submit" value="Submit" />
           
         </form>
