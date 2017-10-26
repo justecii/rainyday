@@ -75,6 +75,7 @@ class EditBankData extends Component {
   render() {
     let user = this.props.user
     console.log("user in client/EditBankData.js: ", user);
+    console.log("this.state.user editbankdata: ", this.state.user);
 
     return (
         this.state.records.map((records, index) => (

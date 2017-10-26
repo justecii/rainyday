@@ -13,7 +13,7 @@ import Savings from './Savings.js';
 import BankRecords from './BankRecords.js';
 //////////////////////////////////////////////////
 // may not need EditBankData here
-// import EditBankData from './EditBankData';
+import EditBankData from './EditBankData';
 //////////////////////////////////////////////////
 import UserData from './UserData.js';
 
@@ -22,14 +22,19 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      token: {},
-      user: 1
+      token: '',
+      user: {}
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
   }
 
-  liftTokenToState(token) {
-    this.setState({token: token})
+  liftTokenToState(token, user) {
+    console.log("token: ", token)
+    console.log("user: ", user)
+    this.setState({
+      token: token,
+      user: user
+  })
   }
 
 
@@ -43,13 +48,23 @@ class App extends Component {
     }
   }
 
-  render() {
+  componentDidMount() {
     let user = this.props.user
-    console.log("user in client/App.js: ", user);
-    console.log("APP.JS STATE", this.state)
-    //if the token exists display the router
-    // if(this.state.token!==""){ //need this active to use auth
-  if(true){
+    // this.setState({
+    //   user: user
+    // })
+    console.log("user props: ", this.props.user)
+    console.log("user state: ", this.state.user)
+    }
+
+  render() {
+    // console.log("XXXXXXXXXX: ", this.state)
+    // let user = this.props.user
+    // console.log("user in client/App.js: ", user);
+    // console.log("APP.JS STATE", this.state)
+    // if the token exists display the router
+    if(this.state.token!==""){ //need this active to use auth
+  // if(true){
       return (
         <Router>
           <div className='row'>

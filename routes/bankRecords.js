@@ -61,31 +61,6 @@ router.put('/', function(req, res, next){
     });
 });
 
-//user can assign specific record to his specific category, needs button/href/stimulation on front end
-router.put('/:recordId/category/:categoryId', function(req, res, next){
-    BankRecord.findByIdAndUpdate(req.params.recordId,
-        { $set: {categoryId: req.params.categoryId}},
-        function(err, record) {
-            if (err) return res.send(err);
-            res.send(record);
-        }
-    );
-});
-////////////////////////////////////////////////////////////////
-// WE PROBABLY DON'T NEED THIS
-////////////////////////////////////////////////////////////////
-//user can assign specific record to his savings, needs button on front end, isSaved is eather undefined or true if we hit this route...
-router.put('/:recordId/:toSave', function(req, res, next){
-    BankRecord.find(req.params.recordId,
-        { $set: {isSaved: true}},
-        function(err, record) {
-            if (err) return res.send(err);
-            res.send(record);
-        }
-    );
-});
-
-
 ////////////////////////////////////////////////////////////////
 // WE PROBABLY DON'T NEED THIS
 ////////////////////////////////////////////////////////////////
@@ -97,19 +72,6 @@ router.get('/savedList', function(req, res, next){
         res.send(records);
     });
 });
-
-// TODO: need this to add savedlist items to db - from EnterSavings.js
-router.post('/savedList', function(req, res, next){
-     let item = req.body.data;
-     console.log("item: ", item);
-     BankRecord.create(
-         item
-     , function(err, record){
-         if(err) return res.send(err);
-         res.send(record);
-    })
-
- })
 
 //COMPLETE: get route to display saved item in AllSavings.js
 router.get('/SavingsSummary/:user', function(req, res, next){
@@ -125,6 +87,19 @@ router.get('/SavingsSummary/:user', function(req, res, next){
     })
 });
 
+// TODO: need this to add savedlist items to db - from EnterSavings.js
+router.post('/savedList', function(req, res, next){
+     let item = req.body.data;
+     console.log("item: ", item);
+     BankRecord.create(
+         item
+     , function(err, record){
+         if(err) return res.send(err);
+         res.send(record);
+    })
+
+ })
+
 //COMPLETE: GET display all the bank records
   //moved from top of page
 router.get('/:user', function(req, res, next) {
@@ -135,6 +110,31 @@ router.get('/:user', function(req, res, next) {
       res.send(records);
   });
 });
+
+// //user can assign specific record to his specific category, needs button/href/stimulation on front end
+// router.put('/:recordId/category/:categoryId', function(req, res, next){
+//     BankRecord.findByIdAndUpdate(req.params.recordId,
+//         { $set: {categoryId: req.params.categoryId}},
+//         function(err, record) {
+//             if (err) return res.send(err);
+//             res.send(record);
+//         }
+//     );
+// });
+
+////////////////////////////////////////////////////////////////
+// WE PROBABLY DON'T NEED THIS
+////////////////////////////////////////////////////////////////
+//user can assign specific record to his savings, needs button on front end, isSaved is eather undefined or true if we hit this route...
+// router.put('/:recordId/:toSave', function(req, res, next){
+//     BankRecord.find(req.params.recordId,
+//         { $set: {isSaved: true}},
+//         function(err, record) {
+//             if (err) return res.send(err);
+//             res.send(record);
+//         }
+//     );
+// });
 
 
 

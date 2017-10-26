@@ -54,6 +54,7 @@ class InputBankRecords extends Component {
   render() {
     let user = this.props.user
     console.log("user in client/InputBankRecords: ", user);
+    console.log("this.state.user inputbankrecords: ", this.state.user);
 
     return (
       <div>

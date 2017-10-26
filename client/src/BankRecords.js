@@ -29,6 +29,7 @@ class BankRecords extends Component {
   render() {
     let user = this.props.user
     console.log("user in client/BankRecords.js: ", user);
+    console.log("this.state.user bankrecords: ", this.state.user);
 
     return (
       <div className="BankRecordsWrapper ">

@@ -62,7 +62,8 @@ class SavingsSummary extends Component {
     {console.log("total in render: ", this.state.total)}
     let total = this.state.total;
     let user = this.props.user
-    console.log("user in client/SavingsSummary.js: ", user);
+    console.log("user in client/SavingsSummary.js: ", this.state);
+    console.log("savings state in client/SavingsSummary.js: ", this.state.savings);
 
     return (
 
