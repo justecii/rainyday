@@ -17,11 +17,12 @@ class AllSavings extends Component {
     this.deleteSaved = this.deleteSaved.bind(this);
   }
   
-  componentDidMount(){
-    fetch("/bankRecords/savedList")
-    .then((response) => response.json())
-    .then((response) => this.setState({savings: response}))
-  }
+  // componentDidMount(){
+  //   fetch("/bankRecords/savedList")
+  //   .then((response) => response.json())
+  //   .then((response) => this.setState({savings: response})) 
+    
+  // }
   
   check(e) {
     console.log(this.state.savings);
@@ -30,46 +31,23 @@ class AllSavings extends Component {
   //   let url = "/bankRecords/savedList/" + recordId;
   //   fetch(url, {method: 'delete'}).then((response) => console.log(response))
   // }
-  // deleteSaved(e) {
-  //   e.preventDefault();
-  //   let i = e.target.getAttribute('data-key');
-  //   let currentState = this.state.savings;
-  //   let trans = this.state.savings[i]._id;
-  //   let a = this;
-  //   axios.put('/bankRecords', {
-  //     data: trans
-  //   }).then(function (response) {
-  //     currentState.splice(i, 1);
-  //     a.setState({
-  //       savings: currentState
-  //     })
-  //   }).catch(function (error) {
-  //     console.log("error: ", error);
-  //   })
-  // }
-
-  // SaveCatChange(e) {
-  //   e.preventDefault();
-  //   let i = e.target.getAttribute('data-key');
-  //   let Category = e.target.value;
-  //   let currentState = this.state.savings;
-  //   let individState = this.state.savings[i];
-  //   console.log("individState: ", individState);
-  //   let categState = this.state.savings[i].Category = Category;
-  //   individState.Category = categState
-  //   let trans = this.state.savings[i]._id;
-  //   let a = this;
-  //   axios.put('/bankRecords/change', {
-  //     data: trans,
-  //     Category: Category
-  //   }).then(function (response) {
-  //     a.setState({
-  //       savings: currentState,
-  //     })
-  //   }).catch(function (error) {
-  //     console.log("error: ", error);
-  //   })
-  // }
+  deleteSaved(e) {
+    e.preventDefault();
+    let i = e.target.getAttribute('data-key');
+    let currentState = this.state.savings;
+    let trans = this.state.savings[i]._id;
+    let a = this;
+    axios.put('/bankRecords', {
+      data: trans
+    }).then(function (response) {
+      currentState.splice(i, 1);
+      a.setState({
+        savings: currentState
+      })
+    }).catch(function (error) {
+      console.log("error: ", error);
+    })
+  }
 
 
   SaveCatChange(e) {
@@ -99,7 +77,7 @@ class AllSavings extends Component {
     this.setState({
       user: user
     })
-    fetch('/bankRecords/SavingsSummary/' + user)
+    fetch('/bankRecords/SavingsSummary')
       .then(response => response.json())
       .then(response => {
         this.setState({savings: response})
@@ -118,6 +96,8 @@ class AllSavings extends Component {
 
    
   render() {
+
+    console.log('savings', this.state.savings)
 
     let user = this.props.user
     console.log("user in client/AllSavings.js: ", user);

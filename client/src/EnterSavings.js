@@ -3,6 +3,13 @@ import axios from 'axios';
 import $ from 'jquery';
 import './App.css';
 
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import moment from 'moment';
+
+import { DateRangePicker, SingleDatePicker } from 'react-dates';
+
+
 //form for entering
 class EnterSavings extends Component {
   constructor(props) {
@@ -13,6 +20,7 @@ class EnterSavings extends Component {
       Description: "",
       Category: "",
       Amount: "",
+      date: "",
       user: {}
 
     };
@@ -26,54 +34,57 @@ class EnterSavings extends Component {
   }
   
   handleChangeDescription(e){
-    console.log('handleChangeDescription', e.target.value)
+    // console.log('handleChangeDescription', e.target.value)
     this.setState({
       Description: e.target.value
-    });
+    })
   }
 
   handleChangeCategory(e){
-    console.log('handleChangeCategory', e.target.value)
+    // console.log('handleChangeCategory', e.target.value)
     this.setState({
       Category: e.target.value
     });
   }
   handleChangeCategory(e){
-    console.log('handleChangeCategory', e.target.value)
+    // console.log('handleChangeCategory', e.target.value)
     this.setState({
       Category: e.target.value
     });
   }
 
   handleChangeAmount(e){
-    console.log('handleChangeAmount', e.target.value)
+    // console.log('handleChangeAmount', e.target.value)
     this.setState({
       Amount: e.target.value
     });
   }
   
   handleChangeDate(e){
-    console.log('handleChangeDate', e)
+    // console.log('handleChangeDate', e)
+    // console.log(e.format("MM/DD/YY"))
     this.setState({
-      date: e.target.value
-    });
+      date: e.format("MM/DD/YY")
+    })
   }
 
-  
+  resetForm(e) { 
+    document.getElementById("myform").reset();
+  }
 
   handleSubmit(e) {
-    console.log('in savings value this is this.date.value', e)
-    console.log("Description: ", this.state.Description);
-    console.log("Category: ", this.state.Category);
-    console.log("Amount: ", this.state.Amount);
-    console.log("date: ", this.state.date);
-    // e.preventDefault();
+    // console.log('in savings value this is this.date.value', e)
+    // console.log("Description: ", this.state.Description);
+    // console.log("Category: ", this.state.Category);
+    // console.log("Amount: ", this.state.Amount);
+    // console.log("date: ", this.state.date);
+    e.preventDefault();
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
-    console.log("descript: ", Description);
-    console.log("category: ", Category);
-    console.log("Amount: ", Amount);
+    // console.log("descript: ", Description);
+    // console.log("category: ", Category);
+    // console.log("Amount: ", Amount);
     let user = this.state.user;
     let date = this.state.date;
   
@@ -94,20 +105,21 @@ class EnterSavings extends Component {
     tempArr.push(newObject)
     //add the new object (Object) to tempArr -- Google: ".shift() for objects"
     //setState to tempArr (which is already done below)
-    console.log("state: ", this.state.savings);
+    // console.log("state: ", this.state.savings);
     let a = this;
     axios.post('/bankRecords/savedList', {
       data: newObject//insert object of the three variables
     }).then(function (response) {
       a.setState({
-        savings: tempArr
+        savings: tempArr,
       })
     }).catch(function (error) {
       console.log("error: ", error);
     })
 
   }
-
+  
+  
 
   componentDidMount() {
     let user = this.props.user
@@ -116,17 +128,17 @@ class EnterSavings extends Component {
     })
     fetch('/bankRecords/' + user)
       .then(response => response.json())
-      .then(response => this.setState({records: response}))
-//     .then(response => this.setState({savings: response}))
+      // .then(response => this.setState({records: response}))
+    .then(response => this.setState({savings: response}))
     }
 
-//////// for reference...
-  componentDidMount(){
-    fetch("/bankRecords/savedList")
-    .then((response) => response.json())
-    .then((response) => this.setState({savings: response}))
-  }
-  ////////////////////////
+
+  // componentDidMount(){
+  //   fetch("/bankRecords/savedList")
+  //   .then((response) => response.json())
+  //   .then((response) => this.setState({savings: response}))
+  // }
+  
 
   render() {
     let user = this.props.user
@@ -135,7 +147,7 @@ class EnterSavings extends Component {
     return (
       <div className="EnterSavingsWrapper">
         <h4>Choose your savings</h4>
-        <form onSubmit={(e) => this.handleSubmit(e)}>       
+        <form id="myform" onSubmit={(e) => {this.handleSubmit(e); this.resetForm(e)}}>    
           <div className="row highlight">
             <div className="input-field col s12">
               <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChangeDescription}/>
@@ -171,12 +183,13 @@ class EnterSavings extends Component {
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>
-          <div className="row highlight">
-            <div className="input-field col s12">
-              <input type="date" name="date" className="datepicker" onSelect={this.handleChangeDate}/>  
-              <label htmlFor="date">Created on</label>
-            </div>
-          </div>
+          <SingleDatePicker
+               // momentPropTypes.momentObj or null
+              onDateChange={(e) => this.handleChangeDate( e )} // PropTypes.func.isRequired
+              focused={this.state.focused} // PropTypes.bool
+              onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+            />  
+            <br/>
           <input type="submit" value="Submit" />
 
         </form>

@@ -32,18 +32,10 @@ class Savings extends Component {
     return (
 
       <div className="SavingsWrapper container ">
-        <p>Savings Page</p>
+       
         <EnterSavings user={user}/>
-        <section className="row movepage">
-        <h1>Savings Summary:</h1>
-            <ul className="colHeader">
-              <li className='col s3'>Description</li>
-              <li className='col s3'>Amount</li>
-              <li className='col s3'>Category</li>
-            </ul>
-        </section>
         <AllSavings user={user}/>
-        <SavingsSummary user={user}/>
+        {/* <SavingsSummary user={user}/> */}
       </div>
 
     );
