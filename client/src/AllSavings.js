@@ -9,9 +9,7 @@ class AllSavings extends Component {
       savings: []
     }
 
-
     this.componentDidMount = this.componentDidMount.bind(this);
-
     this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
     this.deleteSaved = this.deleteSaved.bind(this);
