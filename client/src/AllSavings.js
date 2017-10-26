@@ -14,17 +14,21 @@ class AllSavings extends Component {
     this.componentDidMount = this.componentDidMount.bind(this);
     this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
-    this.deleteSaved = this.deleteSaved.bind(this);
+    // this.deleteSaved = this.deleteSaved.bind(this);
   }
 
-  componentDidMount(){
-    fetch("/bankRecords/savedList")
-    .then((response) => response.json())
-    .then((response) => this.setState({savings: response}))
-  }
+  
+  // componentDidMount(){
+  //   fetch("/bankRecords/savedList")
+  //   .then((response) => response.json())
+  //   .then((response) => this.setState({savings: response})) 
+    
+  // }
+  
 
   check(e) {
-    console.log(this.state.savings);
+    console.log("savings state: ", this.state.savings);
+    console.log("user state: ", this.state.user);
   }
 
   deleteSaved(e) {
@@ -94,6 +98,8 @@ class AllSavings extends Component {
 
   render() {
 
+    console.log('savings', this.state.savings)
+
     let user = this.props.user
     console.log("user in client/AllSavings.js: ", user);
 
@@ -105,6 +111,8 @@ class AllSavings extends Component {
                 <div className='col s3'>
                   <select className="browser-default" data-key={index} onChange={this.SaveCatChange}>
                     {/* <label>{saving.Category}</label> */}
+                    {console.log('this.state.savings.Description', this.state.savings.Description)}
+                    if else
                     <option value="" disabled defaultValue>{saving.Category}</option>
                     <option value="Bills" data-key={index}>Bills</option>
                     <option value="Groceries" data-key={index}>Groceries</option>

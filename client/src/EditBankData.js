@@ -68,6 +68,7 @@ class EditBankData extends Component {
   }
 
   componentDidMount() {
+    //add function to add blank for uncategorized
     let user = this.props.user
     this.setState({
       user: user
@@ -93,11 +94,14 @@ class EditBankData extends Component {
                 <div className='col s3' data-key={index}>{records.Description}</div>
                 <div className='col s3' data-key={index}>{records.Amount}</div>
                 <div className='col s2'>
+
                   <select className="browser-default " data-key={index} onChange={this.categoryChange}>
+
 
                     if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
                       <option value="" disabled  selected data-key={index}></option>
                     } else { <option value="" disabled  selected data-key={index}>{records.Category}</option> }
+
                     <option value="Bills" data-key={index}>Bills</option>
                     <option value="Groceries" data-key={index}>Groceries</option>
                     <option value="Transportation" data-key={index}>Transportation</option>
