@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import $ from 'jquery';
 import './App.css';
 
 //form for entering
@@ -16,36 +17,51 @@ class EnterSavings extends Component {
     };
     //thisis the binding line necessary to keep this bound correctly
     // this.componentDidMount = this.componentDidMount.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeDescription = this.handleChangeDescription.bind(this);
+    this.handleChangeCategory = this.handleChangeCategory.bind(this);
+    this.handleChangeAmount = this.handleChangeAmount.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   
-  handleChange(event) {
-
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    if (name === "Description") {
-      this.setState({
-        Description: value
-      });
-    } else if (name === "Category") {
-      this.setState({
-        Category: value
-      });
-    } else if (name === "Amount") {
-      this.setState({
-        Amount: value
-      });
-    } else {
-      this.setState({
-        date: value
-      });  
-      console.log(this.date.value)
-    }
+  handleChangeDescription(e){
+    console.log('handleChangeDescription', e.target.value)
+    this.setState({
+      Description: e.target.value
+    });
   }
 
+  handleChangeCategory(e){
+    console.log('handleChangeCategory', e.target.value)
+    this.setState({
+      Category: e.target.value
+    });
+  }
+  handleChangeCategory(e){
+    console.log('handleChangeCategory', e.target.value)
+    this.setState({
+      Category: e.target.value
+    });
+  }
+
+  handleChangeAmount(e){
+    console.log('handleChangeAmount', e.target.value)
+    this.setState({
+      Amount: e.target.value
+    });
+  }
+  
+  handleChangeDate(e){
+    console.log('handleChangeDate', e)
+    this.setState({
+      date: e.target.value
+    });
+  }
+
+  
+
   handleSubmit(e) {
+    console.log('in savings value this is this.date.value', e)
     console.log("Description: ", this.state.Description);
     console.log("Category: ", this.state.Category);
     console.log("Amount: ", this.state.Amount);
@@ -92,6 +108,7 @@ class EnterSavings extends Component {
     .then((response) => this.setState({savings: response}))
   }
   
+  
   render() {
 
     return (
@@ -101,7 +118,7 @@ class EnterSavings extends Component {
           
           <div className="row highlight">
             <div className="input-field col s12">
-              <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChange}/>
+              <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChangeDescription}/>
               <label htmlFor="Description">Describe what you are saving on..</label>
             </div>
           </div>
@@ -109,8 +126,8 @@ class EnterSavings extends Component {
           <div className="row highlight">
             <div className="col s12">  
               <h5>Category</h5>  
-              <select name="Category" value={this.state.value} onChange={this.handleChange}>
-                <option  value="" disabled selected> </option>
+              <select name="Category" value={this.state.value} onChange={this.handleChangeCategory}>
+                <option  value="" disabled defaultValue> </option>
                 <option value="Bills">Bills</option>
                 <option value="Groceries">Groceries</option>
                 <option value="Transportation">Transportation</option>
@@ -130,13 +147,13 @@ class EnterSavings extends Component {
       
           <div className="row highlight">
             <div className="input-field col s12">
-              <input type="number" name="Amount" className="validate"  onChange={this.handleChange}/>  
+              <input type="number" name="Amount" className="validate"  onChange={this.handleChangeAmount}/>  
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>
           <div className="row highlight">
             <div className="input-field col s12">
-              <input type="text" name="date" className="datepicker" onChange={this.handleChange}/>  
+              <input type="date" name="date" className="datepicker" onSelect={this.handleChangeDate}/>  
               <label htmlFor="date">Created on</label>
             </div>
           </div>
