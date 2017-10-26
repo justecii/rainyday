@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import $ from 'jquery';
 
 class Home extends Component {
     constructor(props) {
@@ -9,89 +9,158 @@ class Home extends Component {
             childProp:""
         }
     }
+
+
+    componentDidMount() {
+        $('.card__share > a').on('click', function(e){
+            e.preventDefault() // prevent default action - hash doesn't appear in url
+               $(this).parent().find( 'div' ).toggleClass( 'card__social--active' );
+            $(this).toggleClass('share-expanded');
+        });
+       
+       
+            // $('.parallax').parallax();
+        
+       
+        }
+    
+       
+       
+    
     render() {
       
         return (
             <div >
             
-                             <div id="index-banner" class="parallax-container">
-                               <div class="section no-pad-bot">
-                                 <div class="container">
+                             <div id="index-banner" className="parallax-container">
+                               <div className="section no-pad-bot">
+                                 <div className="container">
                                  <br/>
-                                   <h1 class="header center teal-text text-lighten-2">Rainy Day</h1>
-                                   <div class="row center">
-                                     <h5 class="header col s12 light">A more rewarding way to track your savings</h5>
+                                   <h1 className="header center teal-text text-lighten-2">Rainy Day</h1>
+                                   <div className="row center">
+                                     <h5 className="header col s12 light">A more rewarding way to track your savings</h5>
                                    </div>
                                    <br/>
                            
                                  </div>
                                </div>
-                               <div class="parallax"><img src="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg" height='1200' alt="head"/></div>
+                               <div className="parallax"><img src="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg" height='1200' alt="head"/></div>
                              </div>
                            
                            
-                             <div class="container space">
-                               <div class="section">
-                           <br/><br/>
-                                 {/* <!--   Icon Section   --> */}
-                                 <div class="row">
-                                   <div class="col s12 m4">
-                                     <div class="icon-block">
-                                       <h2 class="center brown-text"><i class="large material-icons">dashboard</i></h2>
-                                       <h5 class="center">Import and critique</h5>
-                           
-                                       <p class="light">Here you can start tracking your spending habits by importing your bank statement and seporate your neccisary
-                                            spending with your lessure spending. That way you can see how much money you can work on saving.</p>
-            
+                             <br/><br/>
+                             
+                               <div className="container space">
+                                 <div className="section">
+                            
+                                   {/* <!--   Icon Section   --> */}
+                                   <div className="row">
+                                     <div className="col s12 m4">
+                                       <div className="icon-block  hoverable">
+                                         <h2 className="center brown-text"><i className="large material-icons">dashboard</i></h2>
+                                         <h5 className="center">Import and critique</h5>
+                             
+                                         <p className="light">Here you can start tracking your spending habits by importing your bank statement </p>
+                                                  {/* and seporate your neccisary
+                                              spending with your lessure spending. That way you can see how much money you can work on saving. */}
+                                       </div>
+                                     </div>
+                             
+                                     <div className="col s12 m4">
+                                       <div className="icon-block  hoverable">
+                                         <h2 className="center brown-text"><i class="large material-icons">assignment</i></h2>
+                                         <h5 className="center">Categorize and disifer </h5>
+                             
+                                         <p className="light">
+                                        Next seporate your neccisary spending with your lessure spending. That way you can see how much money you can work on saving.
+                                         </p>
+                                         {/* Next, you can start tracking your good spending habbits by saving each time you would have 
+                                             spent on either Entertainment, Shopping, Dinning out, Uber/lyft, or and other 
+                                             non-neccisary vice. This way you can track your good decisions, and can track how much money
+                                             you have saved. */}
+                                       </div>
+                                     </div>
+                             
+                                     <div className="col s12 m4">
+                                       <div className="icon-block  hoverable">
+                                         <h2 className="center brown-text"><i className="large material-icons">map</i></h2>
+                                         <h5 className="center">Set goals to cut down </h5>
+                             
+                                         <p className="light">
+                                             once you have seporated your necessary spending with you lesure spending, you can better determine what you want to cut down on.
+                                          </p>
+                                              {/* Finally, here you can see and compare how much you purposely saved with how much you usually spend. */}
+                                       </div>
                                      </div>
                                    </div>
-                           
-                                   <div class="col s12 m4">
-                                     <div class="icon-block">
-                                       <h2 class="center brown-text"><i class="material-icons">border_color</i></h2>
-                                       <h5 class="center">Set goals and track them</h5>
-                           
-                                       <p class="light">Next, you can start tracking your good spending habbits by saving each time you would have 
-                                           spent on either Entertainment, Shopping, Dinning out, Uber/lyft, or and other 
-                                           non-neccisary vice. This way you can track your good decisions, and can track how much money
-                                           you have saved.
-                                       </p>
-                                     </div>
-                                   </div>
-                           
-                                   <div class="col s12 m4">
-                                     <div class="icon-block">
-                                       <h2 class="center brown-text"><i class="material-icons">directions_boat</i></h2>
-                                       <h5 class="center">Visualize your progress</h5>
-                           
-                                       <p class="light">Finally, here you can see and compare how much you purposely saved with how much you usually spend. </p>
-                                     </div>
-                                   </div>
+                             
                                  </div>
-                           
                                </div>
-                             </div>
-                             <br /><br />
+                              
+                               {/* secound row of info button */}
+                 <div className="container space">
+                   <div className="section">
+              
+                     {/* <!--   Icon Section   --> */}
+                     <div className="row">
+                       <div className="col s12 m4">
+                         <div className="icon-block  hoverable">
+                           <h2 className="center brown-text"><i className="large material-icons">border_color</i></h2>
+                           <h5 className="center">Track occasions that you purposfly didn't spend</h5>
+               
+                           <p className="light">
+                               Every time you go to the store and almost buy an unnessisary product, submit the product by catigory, description, amount and date.
+                               this way you can document your good spending decision.
+                           </p>
+
+                         </div>
+                       </div>
+               
+                       <div className="col s12 m4">
+                         <div className="icon-block  hoverable">
+                           <h2 className="center brown-text"><i className="large material-icons">insert_chart</i></h2>
+                           <h5 className="center">Compare and Track</h5>
+               
+                           <p className="light">After you have been tracking you good spending habits. you can then see a collabitive amount of 
+                               money you saved, ontop of what you had spent before you had tracked it.
+                           </p>
+                         </div>
+                       </div>
+               
+                       <div className="col s12 m4">
+                         <div className="icon-block  hoverable">
+                           <h2 className="center brown-text"><i className="large material-icons">dashboard</i></h2>
+                           <h5 className="center">Keep track and save</h5>
+               
+                           <p className="light">to continue to track your progress import you next months bank statement to compare data and track for the next month </p>
+                         </div>
+                       </div>
+                     </div>
+               
+                   </div>
+                 </div>
+                 <br /><br />
+                 {/* end of info button */}
                            
-                             <div class="parallax-container valign-wrapper">
-                               <div class="section no-pad-bot">
-                                 <div class="container">
-                                   <div class="row ">
+                             <div className="parallax-container valign-wrapper">
+                               <div className="section no-pad-bot">
+                                 <div className="container">
+                                   <div className="row ">
                                      <h3 className="header col s12 light">Making better spending choices, set goals, and improve your quality of life for tomorrow</h3>
                                    </div>
                                  </div>
                                </div>
-                               <div class="parallax"><img src="https://static.pexels.com/photos/166639/pexels-photo-166639.jpeg" height='800'alt="Unsplashed background img 2"/></div>
+                               <div className="parallax"><img src="https://static.pexels.com/photos/166639/pexels-photo-166639.jpeg" height='800'alt="Unsplashed background img 2"/></div>
                              </div>
                            
-                             <div class="container">
-                               <div class="section">
+                             <div className="container">
+                               <div className="section">
                            
-                                 <div class="row">
-                                   <div class="col s12 center">
-                                     <h3><i class="mdi-content-send brown-text"></i></h3>
+                                 <div className="row">
+                                   <div className="col s12 center">
+                                     <h3><i className="mdi-content-send brown-text"></i></h3>
                                      <h4>Contact Us</h4>
-                                     <p class="center-align light">Meet the developers</p>
+                                     <p className="center-align light">Meet the developers</p>
                                    </div>
                                  </div>
                            
@@ -194,7 +263,7 @@ class Home extends Component {
                                 <div className="card  hoverable  ">
                                         <div className="card-image border-tlr-radius">
                                             <img className='border-tlr-radius responsive-img' src="http://38.media.tumblr.com/4d7b2c7624eca03c7271c5294e2b9c13/tumblr_mltee6NXLH1qjmb9ko1_500.png"  alt=""/>
-                                            <span className="card-title">Part in the project</span>
+                                            <span className="card-title">Front End Developer</span>
                                         </div>
                                     <div className="card__content card__padding" >
                                             <div className="card__share">
@@ -207,14 +276,14 @@ class Home extends Component {
                                           <a id="share" className="share-toggle share-icon" ></a>
                                       </div>
                                       <div className="card__meta">
-                                                      <a >Your Name</a>
-                                                      <time>17th March</time>
+                                                      <a >Elizabeth Friedland</a>
+                                                      <time>30th October</time>
                                                   </div>
             
                                                   <article className="card__article">
-                                                      <h2><a>Branding statment goes here</a></h2>
+                                                      <h2><a>Front-end leaning full stack developer</a></h2>
             
-                                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...</p>
+                                                      <p> Aspiring web developer with a human resource background that complements my technical skillset allowing novel perspectives on tough problems for users.</p>
                                                   </article>
                                
                                      </div>
@@ -278,9 +347,10 @@ class Home extends Component {
                                       </div>
                              {/* person 4 */}
                              <img src=" https://s-media-cache-ak0.pinimg.com/originals/c9/6d/48/c96d489d4db197a43f9b5d78721b1625.gif" alt="user" className='circle responsive-img'/>
+                                   
                                     <div className="card__author-content border-tlr-radius">
-                                        title <a>your name</a>
-                                        
+                                        Front-end Developer:  <br /> <a>Elizabeth Friedland</a>
+                                       
                                     </div>
                                     <div className="card__share">
                                           <div className="card__social">
@@ -336,7 +406,9 @@ class Home extends Component {
                                </div>
                              </footer>
                    
-                 
+            
+
+
                   </div>
 
         );
