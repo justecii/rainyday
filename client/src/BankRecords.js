@@ -55,9 +55,6 @@ class BankRecords extends Component {
         <EditBankData user={user}/>
       </div>
 
-     
-
-      </div>
     );
   }
 }
