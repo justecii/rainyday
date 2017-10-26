@@ -7,11 +7,17 @@ class EditBankData extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      records: []
+      records: [],
+      user: {}
     }
     this.deleteTransaction = this.deleteTransaction.bind(this);
     this.categoryChange = this.categoryChange.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.change = this.change.bind(this);
+  }
+
+  change(e) {
+    console.log(this.state.records);
   }
 
   deleteTransaction(e) {
@@ -64,11 +70,13 @@ class EditBankData extends Component {
 
 
   render() {
+    let user = this.props.user
+    console.log("user2: ", user);
 
     return (
         this.state.records.map((records, index) => (
 
-          <section className="row z-depth-1" key={index}>
+          <section onClick={this.change} className="row z-depth-1" key={index}>
 
 
                 <div className='col s3'>{records.TransDate} {records.PostedDate}</div>

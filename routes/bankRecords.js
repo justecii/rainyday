@@ -19,6 +19,9 @@ router.post('/', function(req, res, next) {
     delete obj['Posting Date'];
   }
   let item = req.body.data;
+  //TODO: add user ID to item
+  //will have to make sure that it's
+    //adding a new key/value pair
   let trans = []
   for (var i = 0; i < 100; i++) {
     trans.push(item[i]);

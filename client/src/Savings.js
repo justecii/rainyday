@@ -9,7 +9,7 @@ class Savings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      childProp:""
+      user: {}
     }
   }
 
@@ -22,6 +22,8 @@ class Savings extends Component {
 
 
   render() {
+    let user = this.props.user
+    console.log("user2: ", user);
 
     return (
 

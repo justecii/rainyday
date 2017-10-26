@@ -9,7 +9,8 @@ class InputBankRecords extends Component {
     super(props);
     this.state = {
       childProp:"",
-      bank: []
+      bank: [],
+      user: {}
     }
     this.uploadFile = this.uploadFile.bind(this);
   }
@@ -34,9 +35,12 @@ class InputBankRecords extends Component {
   }
 
   render() {
+    let user = this.props.user
+    console.log("user2: ", user);
+    
     return (
       <div>
-          
+
         <form action="/bankRecordsReactRoute">
           <div className="file-field input-field col s12 ">
 
@@ -46,7 +50,7 @@ class InputBankRecords extends Component {
             </div>
           </div>
         </form>
-        
+
       </div>
     );
   }

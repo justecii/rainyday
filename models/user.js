@@ -20,7 +20,8 @@ var userSchema = new mongoose.Schema({
     required: true,
     minlength: 8,
     maxlength: 99
-  }
+  },
+  transactions: [{type: mongoose.Schema.Types.ObjectId, ref: 'BankRecord'}]
 });
 
 // Override 'toJSON' to prevent the password from being returned with the user

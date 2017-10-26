@@ -11,7 +11,8 @@ class EnterSavings extends Component {
       savings: [],
       Description: "",
       Category: "",
-      Amount: ""
+      Amount: "",
+      user: {}
     };
     //thisis the binding line necessary to keep this bound correctly
     // this.componentDidMount = this.componentDidMount.bind(this);
@@ -88,6 +89,8 @@ class EnterSavings extends Component {
   }
 
   render() {
+    let user = this.props.user
+    console.log("user2: ", user);
 
     return (
       <div className="EnterSavingsWrapper flow-text medium ">

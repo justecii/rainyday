@@ -8,22 +8,24 @@ class BankRecords extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      childProp:""
+    user: {}
     }
   }
 
 
 
   render() {
+    let user = this.props.user
+    console.log("user2: ", user);
 
     return (
       <div className="BankRecordsWrapper ">
         <p>BankRecords Page</p>
-        <InputBankRecords />
+        <InputBankRecords user={user}/>
 
-       
+
         <div className="row movepage notmoving">
-         
+
 
             <ul>
               <li className='col s3'>Date</li>
@@ -32,11 +34,11 @@ class BankRecords extends Component {
               <li className='col s2'>Category</li>
             </ul>
 
-         
+
         </div>
         <div className='movepage'></div>
 
-        <EditBankData />
+        <EditBankData user={user}/>
       </div>
     );
   }

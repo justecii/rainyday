@@ -7,7 +7,8 @@ class AllSavings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      savings: []
+      savings: [],
+      user: {}
     }
     this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
@@ -42,7 +43,6 @@ class AllSavings extends Component {
     let Category = e.target.value;
     let currentState = this.state.savings;
     let individState = this.state.savings[i];
-    console.log("individState: ", individState);
     let categState = this.state.savings[i].Category = Category;
     individState.Category = categState
     let trans = this.state.savings[i]._id;
@@ -70,6 +70,8 @@ class AllSavings extends Component {
 
 
   render() {
+    let user = this.props.user
+    console.log("user2: ", user);
 
     return (
       this.state.savings.map((saving, index) => (

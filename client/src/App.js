@@ -11,7 +11,10 @@ import Login from './Login';
 import Home from './Home.js';
 import Savings from './Savings.js';
 import BankRecords from './BankRecords.js';
-import EditBankData from './EditBankData';
+//////////////////////////////////////////////////
+// may not need EditBankData here
+// import EditBankData from './EditBankData';
+//////////////////////////////////////////////////
 import UserData from './UserData.js';
 
 
@@ -20,7 +23,7 @@ class App extends Component {
     super(props)
     this.state = {
       token: {},
-      childProp:""
+      user: 1
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
   }
@@ -43,14 +46,15 @@ class App extends Component {
 
     console.log("APP.JS STATE", this.state)
     //if the token exists display the router
-    if(!this.isEmpty(this.state.token)){
+    // if(this.state.token!==""){ //need this active to use auth
+  if(true){
       return (
         <Router>
           <div className='row'>
             <nav className="RouterLinks  #00838f cyan darken-3  navbar">
             <div className="nav-wrapper">
             <a href="/homeReactRoute" className="brand-logo right"><i className="material-icons left">beach_access RainyDay </i></a>
-            <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+            <a href="/homeReactRoute" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
 
               <div className='hide-on-med-and-down'>
               <Link to="/homeReactRoute" className="btn btn-large #99d3df cyan darken-3 ">Home</Link>
@@ -70,8 +74,12 @@ class App extends Component {
               <Route
               exact path="/homeReactRoute"
               render={() => <Home childProp={this.state.childProp} />}/>
-              <Route exact path="/savingsReactRoute" component={Savings} />
-              <Route exact path="/bankRecordsReactRoute" component={BankRecords} />
+              <Route exact path="/savingsReactRoute"
+                  render={() => <Savings user={this.state.user} />}
+              />
+              <Route exact path="/bankRecordsReactRoute"
+                  render={() => <BankRecords user={this.state.user} />}
+                />
               <Route exact path="/userDataReactRoute" component={UserData} />
             </div>
           </div>
