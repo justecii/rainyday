@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './App.css';
 
 //get all type savings
@@ -9,6 +8,7 @@ class AllSavings extends Component {
     this.state = {
       savings: []
     }
+
     this.componentDidMount = this.componentDidMount.bind(this);
     this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
@@ -68,6 +68,15 @@ class AllSavings extends Component {
       console.log("error: ", error);
     })
   }
+
+
+//   componentDidMount() {
+//     fetch('/bankRecords/SavingsSummary')
+//       .then(response => response.json())
+//       .then(response => {
+//         this.setState({savings: response})
+//       })
+//     }
 
    
   render() {

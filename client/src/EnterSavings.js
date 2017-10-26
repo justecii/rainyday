@@ -54,8 +54,10 @@ class EnterSavings extends Component {
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
+
     let date = this.state.date;
    
+
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
       Description: Description,
@@ -97,8 +99,7 @@ class EnterSavings extends Component {
     return (
       <div className="EnterSavingsWrapper">
         <h4>Choose your savings</h4>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          
+        <form onSubmit={(e) => this.handleSubmit(e)}>       
           <div className="row highlight">
             <div className="input-field col s12">
               <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChange}/>
@@ -141,7 +142,7 @@ class EnterSavings extends Component {
             </div>
           </div>
           <input type="submit" value="Submit" />
-          
+
         </form>
       </div>
     );
