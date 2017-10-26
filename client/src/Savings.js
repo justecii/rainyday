@@ -27,7 +27,7 @@ class Savings extends Component {
 
   render() {
     let user = this.props.user
-    console.log("user in client/Savings.js: ", user);
+    // console.log("user in client/Savings.js: ", user);
 
     return (
 

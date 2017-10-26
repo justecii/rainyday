@@ -20,7 +20,7 @@ class EnterSavings extends Component {
       Description: "",
       Category: "",
       Amount: "",
-      date: "",
+      date: Date,
       user: {}
 
     };
@@ -61,8 +61,9 @@ class EnterSavings extends Component {
   }
   
   handleChangeDate(e){
-    // console.log('handleChangeDate', e)
-    // console.log(e.format("MM/DD/YY"))
+    console.log('handleChangeDate', e)
+    console.log(e.format("MM/DD/YY"))
+    console.log(this.props.showClearDate)
     this.setState({
       date: e.format("MM/DD/YY")
     })
@@ -133,16 +134,12 @@ class EnterSavings extends Component {
     }
 
 
-  // componentDidMount(){
-  //   fetch("/bankRecords/savedList")
-  //   .then((response) => response.json())
-  //   .then((response) => this.setState({savings: response}))
-  // }
+  
   
 
   render() {
     let user = this.props.user
-    console.log("user in client/EnterSavings.js: ", user);
+    // console.log("user in client/EnterSavings.js: ", user);
 
     return (
       <div className="EnterSavingsWrapper">
@@ -184,11 +181,13 @@ class EnterSavings extends Component {
             </div>
           </div>
           <SingleDatePicker
-               // momentPropTypes.momentObj or null
+             
+              showClearDate={this.state.true}
               onDateChange={(e) => this.handleChangeDate( e )} // PropTypes.func.isRequired
               focused={this.state.focused} // PropTypes.bool
               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
             />  
+            
             <br/>
           <input type="submit" value="Submit" />
 

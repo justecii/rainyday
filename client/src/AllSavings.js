@@ -25,7 +25,8 @@ class AllSavings extends Component {
   // }
   
   check(e) {
-    console.log(this.state.savings);
+    console.log("savings state: ", this.state.savings);
+    console.log("user state: ", this.state.user);
   }
   // deleteSavedItem(recordId) {
   //   let url = "/bankRecords/savedList/" + recordId;
@@ -77,7 +78,7 @@ class AllSavings extends Component {
     this.setState({
       user: user
     })
-    fetch('/bankRecords/SavingsSummary')
+    fetch('/bankRecords/SavingsSummary/' + user)
       .then(response => response.json())
       .then(response => {
         this.setState({savings: response})
@@ -110,6 +111,8 @@ class AllSavings extends Component {
                 <div className='col s3'>
                   <select className="browser-default" data-key={index} onChange={this.SaveCatChange}>
                     {/* <label>{saving.Category}</label> */}
+                    {console.log('this.state.savings.Description', this.state.savings.Description)}
+                    if else
                     <option value="" disabled defaultValue>{saving.Category}</option>
                     <option value="Bills" data-key={index}>Bills</option>
                     <option value="Groceries" data-key={index}>Groceries</option>
