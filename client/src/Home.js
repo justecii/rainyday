@@ -18,10 +18,13 @@ class Home extends Component {
             $(this).toggleClass('share-expanded');
         });
        
+       
             // $('.parallax').parallax();
         
        
         }
+    
+       
        
     
     render() {
@@ -41,7 +44,7 @@ class Home extends Component {
                            
                                  </div>
                                </div>
-                               <div className="parallax"><img src="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg" height='1200' alt="head"/></div>
+                               <div className="parallax"><img src="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg" height='1200' alt="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg"/></div>
                              </div>
                            
                            
