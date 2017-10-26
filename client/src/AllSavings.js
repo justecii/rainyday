@@ -29,46 +29,46 @@ class AllSavings extends Component {
   //   let url = "/bankRecords/savedList/" + recordId;
   //   fetch(url, {method: 'delete'}).then((response) => console.log(response))
   // }
-  deleteSaved(e) {
-    e.preventDefault();
-    let i = e.target.getAttribute('data-key');
-    let currentState = this.state.savings;
-    let trans = this.state.savings[i]._id;
-    let a = this;
-    axios.put('/bankRecords', {
-      data: trans
-    }).then(function (response) {
-      currentState.splice(i, 1);
-      a.setState({
-        savings: currentState
-      })
-    }).catch(function (error) {
-      console.log("error: ", error);
-    })
-  }
+  // deleteSaved(e) {
+  //   e.preventDefault();
+  //   let i = e.target.getAttribute('data-key');
+  //   let currentState = this.state.savings;
+  //   let trans = this.state.savings[i]._id;
+  //   let a = this;
+  //   axios.put('/bankRecords', {
+  //     data: trans
+  //   }).then(function (response) {
+  //     currentState.splice(i, 1);
+  //     a.setState({
+  //       savings: currentState
+  //     })
+  //   }).catch(function (error) {
+  //     console.log("error: ", error);
+  //   })
+  // }
 
-  SaveCatChange(e) {
-    e.preventDefault();
-    let i = e.target.getAttribute('data-key');
-    let Category = e.target.value;
-    let currentState = this.state.savings;
-    let individState = this.state.savings[i];
-    console.log("individState: ", individState);
-    let categState = this.state.savings[i].Category = Category;
-    individState.Category = categState
-    let trans = this.state.savings[i]._id;
-    let a = this;
-    axios.put('/bankRecords/change', {
-      data: trans,
-      Category: Category
-    }).then(function (response) {
-      a.setState({
-        savings: currentState,
-      })
-    }).catch(function (error) {
-      console.log("error: ", error);
-    })
-  }
+  // SaveCatChange(e) {
+  //   e.preventDefault();
+  //   let i = e.target.getAttribute('data-key');
+  //   let Category = e.target.value;
+  //   let currentState = this.state.savings;
+  //   let individState = this.state.savings[i];
+  //   console.log("individState: ", individState);
+  //   let categState = this.state.savings[i].Category = Category;
+  //   individState.Category = categState
+  //   let trans = this.state.savings[i]._id;
+  //   let a = this;
+  //   axios.put('/bankRecords/change', {
+  //     data: trans,
+  //     Category: Category
+  //   }).then(function (response) {
+  //     a.setState({
+  //       savings: currentState,
+  //     })
+  //   }).catch(function (error) {
+  //     console.log("error: ", error);
+  //   })
+  // }
 
 
 

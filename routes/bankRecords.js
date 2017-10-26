@@ -3,8 +3,6 @@ var mongoose = require('mongoose');
 var BankRecord = require('../models/BankRecord')
 var router = express.Router();
 var flash = require('connect-flash');
-
-
 //COMPLETE: grab data form database and display in client: src/EditBankData.js
 router.post('/', function(req, res, next) {
   for (let obj of req.body.data) {
@@ -29,6 +27,7 @@ router.post('/', function(req, res, next) {
   }
 })
 
+
 //COMPLETE: Edit transactions in EditBankData/js and send changes to db
 router.put('/change', function(req, res, next){
     let id = req.body.data;
@@ -49,7 +48,6 @@ router.get('/', function(req, res, next) {
       res.send(records);
   });
 });
-
 // /* GET specific record from bank records by id */
 // router.get('/:recordId', function(req, res, next) {
 //     BankRecord.findById(req.params.recordId, function(err, record){
@@ -57,7 +55,6 @@ router.get('/', function(req, res, next) {
 //         res.send(record);
 //     });
 // });
-
 //COMPLETE: delete from db - coming from AllSavings.js
 router.put('/', function(req, res, next){
     let id = req.body.data
@@ -92,7 +89,6 @@ router.put('/:recordId/:toSave', function(req, res, next){
     );
 });
 
-
 ////////////////////////////////////////////////////////////////
 // WE PROBABLY DON'T NEED THIS
 ////////////////////////////////////////////////////////////////
@@ -115,9 +111,7 @@ router.post('/savedList', function(req, res, next){
          if(err) return res.send(err);
          res.send(record);
     })
-
  })
-
 //COMPLETE: get route to display saved item in AllSavings.js
 router.get('/SavingsSummary', function(req, res, next){
     BankRecord.find({isSaved: true}, function(err, records){
@@ -126,8 +120,6 @@ router.get('/SavingsSummary', function(req, res, next){
         res.send(records);
     })
 });
-
-
 
 //using node export syntex
 module.exports = router;
