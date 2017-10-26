@@ -30,6 +30,7 @@ router.post('/', function(req, res, next) {
   }
 })
 
+
 //COMPLETE: Edit transactions in EditBankData/js and send changes to db
 router.put('/change', function(req, res, next){
     let id = req.body.data;
@@ -43,6 +44,8 @@ router.put('/change', function(req, res, next){
     });
 });
 
+
+
 // /* GET specific record from bank records by id */
 // router.get('/:recordId', function(req, res, next) {
 //     BankRecord.findById(req.params.recordId, function(err, record){
@@ -50,6 +53,7 @@ router.put('/change', function(req, res, next){
 //         res.send(record);
 //     });
 // });
+
 
 //COMPLETE: delete from db - coming from AllSavings.js
 router.put('/', function(req, res, next){
@@ -61,9 +65,21 @@ router.put('/', function(req, res, next){
     });
 });
 
-////////////////////////////////////////////////////////////////
-// WE PROBABLY DON'T NEED THIS
-////////////////////////////////////////////////////////////////
+
+// ////////////////////////////////////////////////////////////////
+// // WE PROBABLY DON'T NEED THIS
+// ////////////////////////////////////////////////////////////////
+// //user can assign specific record to his savings, needs button on front end, isSaved is eather undefined or true if we hit this route...
+// router.put('/:recordId/:toSave', function(req, res, next){
+//     BankRecord.find(req.params.recordId,
+//         { $set: {isSaved: true}},
+//         function(err, record) {
+//             if (err) return res.send(err);
+//             res.send(record);
+//         }
+//     );
+// });
+
 router.get('/savedList', function(req, res, next){
     console.log("router.get('/savedList,...) in routes on server");
     BankRecord.find({ isSaved: true }, function(err, records){
@@ -87,7 +103,7 @@ router.get('/SavingsSummary/:user', function(req, res, next){
     })
 });
 
-// TODO: need this to add savedlist items to db - from EnterSavings.js
+// COMPLETE: need this to add savedlist items to db - from EnterSavings.js
 router.post('/savedList', function(req, res, next){
      let item = req.body.data;
      console.log("item: ", item);
@@ -97,8 +113,8 @@ router.post('/savedList', function(req, res, next){
          if(err) return res.send(err);
          res.send(record);
     })
-
  })
+
 
 //COMPLETE: GET display all the bank records
   //moved from top of page
@@ -137,6 +153,18 @@ router.get('/:user', function(req, res, next) {
 // });
 
 
+
+////////////////////////////////////////////////////////////////
+// WE PROBABLY DON'T NEED THIS
+////////////////////////////////////////////////////////////////
+//COMPLETE: get route to display saved item in AllSavings.js
+// router.get('/SavingsSummary', function(req, res, next){
+//     BankRecord.find({isSaved: true}, function(err, records){
+//         if(err) return res.send(err);
+//         console.log(records);
+//         res.send(records);
+//     })
+// });
 
 //using node export syntex
 module.exports = router;

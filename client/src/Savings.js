@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import EnterSavings from './EnterSavings.js'
-import SavingsSummary from './SavingsSummary.js'
-import AllSavings from './AllSavings.js'
+import EnterSavings from './EnterSavings.js';
+import SavingsSummary from './SavingsSummary.js';
+import AllSavings from './AllSavings.js';
 import './App.css';
 
 //parent component
@@ -32,9 +32,6 @@ class Savings extends Component {
     return (
 
       <div className="SavingsWrapper container ">
-
-
-
         <p>Savings Page</p>
         <EnterSavings user={user}/>
         <section className="row movepage">
@@ -44,11 +41,11 @@ class Savings extends Component {
               <li className='col s3'>Amount</li>
               <li className='col s3'>Category</li>
             </ul>
-
         </section>
         <AllSavings user={user}/>
         <SavingsSummary user={user}/>
       </div>
+
     );
   }
 }
