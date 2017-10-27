@@ -17,104 +17,85 @@ class EditBankData extends Component {
   }
 
   change(e) {
-    console.log(this.state.records);
+    console.log(this.props.records);
     console.log("user: ", this.state.user)
   }
 
   deleteTransaction(e) {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
-    let currentState = this.state.records;
-    let trans = this.state.records[i]._id;
-    let a = this;
-    axios.put('/bankRecords', {
-      data: trans
-    }).then(function(response) {
-      // let user = this.state.user;
-      // fetch('/bankRecords/' + user)
-      //   .then(response => response.json())
-      //   .then(response => this.setState({records: response}))
-      // }
-    }).then(function (response) {
-      currentState.splice(i, 1);
-      a.setState({
-        records: currentState
-      })
-    }).catch(function (error) {
-      console.log("error: ", error);
-    })
+    this.props.handleDelete(i);
+
+    // let currentState = this.props.records;
+    // let trans = this.props.records[i]._id;
+    // let a = this;
+    // axios.put('/bankRecords', {
+    //   data: trans
+    // }).then(function (response) {
+    //   currentState.splice(i, 1);
+    //   a.setState({
+    //     records: currentState
+    //   })
+    // }).catch(function (error) {
+    //   console.log("error: ", error);
+    // })
   }
 
   categoryChange(e) {
     e.preventDefault();
-    let i = e.target.getAttribute('data-key');
-    let Category = e.target.value;
-    let currentState = this.state.records;
-    let individState = this.state.records[i];
-    let categState = this.state.records[i].Category = Category;
-    individState.Category = categState
-    let trans = this.state.records[i]._id;
-    let a = this;
-    axios.put('/bankRecords/change', {
-      data: trans,
-      Category: Category
-    }).then(function (response) {
-      a.setState({
-        records: currentState,
-      })
-    }).catch(function (error) {
-      console.log("error: ", error);
-    })
+    console.log(e.target)
+    console.log("e: ", e);
+    this.props.handleCategChange(e);
   }
 
   componentDidMount() {
     //add function to add blank for uncategorized
     let user = this.props.user
+    let records = this.props.records
+    console.log("props records componentDid editbankdata: ", this.props.records)
+    console.log("state records componentDid editbankdata: ", this.state.records)
     this.setState({
-      user: user
+      user: user,
+      records: records
     })
-    fetch('/bankRecords/' + user)
-      .then(response => response.json())
-      .then(response => this.setState({records: response}))
+    // fetch('/bankRecords/' + user)
+    //   .then(response => response.json())
+    //   .then(response => this.setState({records: response}))
     }
 
 
   render() {
     let user = this.props.user
-    console.log("user in client/EditBankData.js: ", user);
-    console.log("this.state.user editbankdata: ", this.state.user);
+    let records = this.props.records
+    console.log("props records render() editbankdata: ", this.props.records)
+    console.log("state records render() editbankdata: ", this.state.records)
     // let categName = this.state.records.map((categ, index) => (
     //     {if (categ.Category !== "" || {categ.Category} !== undefined || {categ.Category} !== null) {
     //      {categ.Category} } else { } }</option>
     //   ))
 
-    let mappedItems = this.state.records.map((records, index) => (
+    let mappedItems = this.props.records.map((records, index) => (
           <section onClick={this.change} className="row z-depth-1" key={index}>
                 <div className='col s3' data-key={index}>{records.TransDate} {records.PostedDate}</div>
                 <div className='col s3' data-key={index}>{records.Description}</div>
                 <div className='col s3' data-key={index}>{records.Amount}</div>
                 <div className='col s2'>
 
-                  <select className="browser-default " data-key={index} onChange={this.categoryChange}>
-
-
-                    if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
-                      <option value="" disabled  selected data-key={index}></option>
-                    } else { <option value="" disabled  selected data-key={index}>{records.Category}</option> }
-
-                    <option value="Bills" data-key={index}>Bills</option>
-                    <option value="Groceries" data-key={index}>Groceries</option>
-                    <option value="Transportation" data-key={index}>Transportation</option>
-                    <option value="Entertainment" data-key={index}>Entertainment</option>
-                    <option value="Clothing" data-key={index}>Clothing</option>
-                    <option value="Dining Out" data-key={index}> Dining out</option>
-                    <option value="Vices" data-key={index}>Vices</option>
-                    <option value="Debt" data-key={index}>Debt</option>
-                    <option value="Housing" data-key={index}>Housing</option>
-                    <option value="Savings" data-key={index}>Savings</option>
-                    <option value="Health" data-key={index}>Health</option>
-                    <option value="Miscellaneous" data-key={index}>Miscellaneous</option>
-                    <option value="Income" data-key={index}>Income</option>
+                  <select name='' className="browser-default " value={this.state.value} data-key={index} onChange={this.categoryChange}>
+                    <option value="" disabled  selected >{records.Category}</option>
+                    <option value="Bills" >Bills</option>
+                    <option value="Groceries" >Groceries</option>
+                    <option value="Transportation" >Transportation</option>
+                    <option value="Entertainment" >Entertainment</option>
+                    <option value="Clothing" >Clothing</option>
+                    <option value="Dining Out" > Dining out</option>
+                    <option value="Vices" >Vices</option>
+                    <option value="Debt" >Debt</option>
+                    <option value="Housing" >Housing</option>
+                    <option value="Savings" >Savings</option>
+                    <option value="Health" >Health</option>
+                    <option value="Miscellaneous" >Miscellaneous</option>
+                    <option value="Income" >Income</option>
                   </select>
                 </div>
 
@@ -129,3 +110,11 @@ class EditBankData extends Component {
   }
 }
 export default EditBankData;
+
+
+//
+// if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
+//   <option value="" disabled  selected data-key={index}></option>
+// } else {
+  // <option value="" disabled  selected data-key={index}>{records.Category}</option>
+// }

@@ -22,43 +22,28 @@ class InputBankRecords extends Component {
 
   uploadFile(e) {
     e.preventDefault();
+    // console.log("uploadFile: ", e.target)
     let uploaded = e.target.files[0];
     let user = this.state.user;
-    // console.log("user in uploadFile(): ", user);
-    let a = this;
-    let papaData = Papa.parse(uploaded, {
-      header: true,
-      delimiter: ",",
-      complete( result, file ) {
-        let data = result.data;
-        a.setState({
-          records: data
-        })
-        data.map(id => id.userId = user)
-        // console.log("data userId: ", data);
-        data.map(saved => saved.isSaved = false)
-        // console.log("data isSaved: ", data);
-        axios.post('/bankRecords', {
-          data: data
-        }).then(function (response) {
-          console.log("data: ", data);
-        }).catch(function (error) {
-          console.log("error: ", error)
-        })
-      } });
+    console.log("XXXX user in uploadfile XXX: ", user);
+    uploaded.user = user;
+      this.props.papaData(uploaded);
   }
 
   componentDidMount() {
     let user = this.props.user
+    let records = this.props.records
     this.setState({
-      user: user
+      user: user,
+      records: records
     })
   }
 
   render() {
     let user = this.props.user
     console.log("user in client/InputBankRecords: ", user);
-    console.log("this.state.user inputbankrecords: ", this.state.user);
+    console.log("this.state.records inputbankrecords: ", this.state.records);
+    console.log("this.props.records inputbankrecords: ", this.props.user);
 
     return (
       <div>
