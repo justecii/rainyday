@@ -46,20 +46,20 @@ class Home extends Component {
                                  </div>
                                </div>
                                {/* <Parallax imageSrc="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg"/> */}
-                               <div className="parallax"><img src="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg" height='800'alt="Unsplashed background img 2"/></div>
+                               <div className="parallax"><img src="/img/umbrellas.png" alt="Unsplashed background img 2"/></div>
 
                              </div>
                            
                            
                              <br/><br/>
                              
-                               <div className="container space">
+                               <div className="container space ">
                                  <div className="section">
                             
                                    {/* <!--   Icon Section   --> */}
                                    <div className="row">
                                      <div className="col s12 m4">
-                                       <div className="icon-block  hoverable">
+                                       <div className="icon-block  hoverable info-card">
                                          <h2 className="center brown-text"><i className="large material-icons">dashboard</i></h2>
                                          <h5 className="center">Import and critique</h5>
                              
@@ -70,7 +70,7 @@ class Home extends Component {
                                      </div>
                              
                                      <div className="col s12 m4">
-                                       <div className="icon-block  hoverable">
+                                       <div className="icon-block  hoverable info-card">
                                          <h2 className="center brown-text"><i class="large material-icons">assignment</i></h2>
                                          <h5 className="center">Categorize and disifer </h5>
                              
@@ -85,7 +85,7 @@ class Home extends Component {
                                      </div>
                              
                                      <div className="col s12 m4">
-                                       <div className="icon-block  hoverable">
+                                       <div className="icon-block  hoverable info-card">
                                          <h2 className="center brown-text"><i className="large material-icons">map</i></h2>
                                          <h5 className="center">Set goals to cut down </h5>
                              
@@ -107,9 +107,9 @@ class Home extends Component {
                      {/* <!--   Icon Section   --> */}
                      <div className="row">
                        <div className="col s12 m4">
-                         <div className="icon-block  hoverable">
+                         <div className="icon-block  hoverable info-card">
                            <h2 className="center brown-text"><i className="large material-icons">border_color</i></h2>
-                           <h5 className="center">Track occasions that you purposfly didn't spend</h5>
+                           <h5 className="center">Track what you purposfly didn't spend</h5>
                
                            <p className="light">
                                Every time you go to the store and almost buy an unnessisary product, submit the product by catigory, description, amount and date.
@@ -120,7 +120,7 @@ class Home extends Component {
                        </div>
                
                        <div className="col s12 m4">
-                         <div className="icon-block  hoverable">
+                         <div className="icon-block  hoverable info-card">
                            <h2 className="center brown-text"><i className="large material-icons">insert_chart</i></h2>
                            <h5 className="center">Compare and Track</h5>
                
@@ -131,7 +131,7 @@ class Home extends Component {
                        </div>
                
                        <div className="col s12 m4">
-                         <div className="icon-block  hoverable">
+                         <div className="icon-block  hoverable info-card">
                            <h2 className="center brown-text"><i className="large material-icons">dashboard</i></h2>
                            <h5 className="center">Keep track and save</h5>
                
@@ -148,7 +148,7 @@ class Home extends Component {
                             
                               
                               
-                 {<Parallax imageSrc="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg"/>}
+                 {<Parallax imageSrc="/img/umbrellas.png"/>}
 
                              
 
@@ -158,11 +158,11 @@ class Home extends Component {
 
                 
                     <Carousel images={[
-                    'https://lorempixel.com/250/250/nature/1',
-                    'https://lorempixel.com/250/250/nature/2',
-                    'https://lorempixel.com/250/250/nature/3',
-                    'https://lorempixel.com/250/250/nature/4',
-                    'https://lorempixel.com/250/250/nature/5'
+                    '/img/liz.png',
+                    '/img/TomWaits.png',
+                    '/img/angelina-jolie.png',
+                    '/img/Aj.png',
+                    '/img/umbrellas.png'
                 ]} />
                 </div>
                 {/* end of carousel */}
@@ -189,7 +189,7 @@ class Home extends Component {
                             <div className="col s3 ">
                             <div className="card  hoverable  ">
                                 <div className="card-image border-tlr-radius">
-                                    <img className='border-tlr-radius' src="http://u.lorenzoferrara.net/marlenesco/material-card/thumb-christopher-walken.jpg"  alt=""/>
+                                    <img className='border-tlr-radius' src="/img/Aj.png"  alt=""/>
                                     <span className="card-title">Part in the project</span>
                                 </div>
                                 <div className="card__content card__padding" >
@@ -218,7 +218,7 @@ class Home extends Component {
                         <div className="col s3 ">
                                     <div className="card  hoverable  ">
                                         <div className="card-image border-tlr-radius">
-                                            <img className='border-tlr-radius' src="https://media.gq.com/photos/55835f533655c24c6c964f6b/master/w_800/style-blogs-the-gq-eye-TomWaitsMorningShot-635.jpg"  alt=""/>
+                                            <img className='border-tlr-radius' src="/img/TomWaits.png"  alt=""/>
                                             <span className="card-title">Part in the project</span>
                                         </div>
                                         <div className="card__content card__padding" >
@@ -247,7 +247,7 @@ class Home extends Component {
                                 <div className="col s3 ">
                                     <div className="card  hoverable  ">
                                         <div className="card-image border-tlr-radius">
-                                            <img className='border-tlr-radius responsive-img' src="http://img.allw.mn/content/dg/o0/eobgsgtv.jpg"  alt=""/>
+                                            <img className='border-tlr-radius responsive-img' src="/img/angelina-jolie.png"  alt=""/>
                                             <span className="card-title">Part in the project</span>
                                         </div>
                                         <div className="card__content card__padding" >
@@ -276,7 +276,7 @@ class Home extends Component {
                             <div className="col s3 ">
                                 <div className="card  hoverable  ">
                                         <div className="card-image border-tlr-radius">
-                                            <img className='border-tlr-radius responsive-img' src="http://38.media.tumblr.com/4d7b2c7624eca03c7271c5294e2b9c13/tumblr_mltee6NXLH1qjmb9ko1_500.png"  alt=""/>
+                                            <img className='border-tlr-radius responsive-img' src="/img/liz.png"  alt=""/>
                                             <span className="card-title">Front End Developer</span>
                                         </div>
                                     <div className="card__content card__padding" >
@@ -297,7 +297,7 @@ class Home extends Component {
                                                   <article className="card__article">
                                                       <h2><a>Front-end leaning full stack developer</a></h2>
             
-                                                      <p> Aspiring web developer with a human resource background that complements my technical skillset allowing novel perspectives on tough problems for users.</p>
+                                                      <p> Aspiring web developer with a background in human resources that complements technical skillset allowing novel perspectives on users interactions.</p>
                                                   </article>
                                
                                      </div>
