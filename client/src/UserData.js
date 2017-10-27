@@ -181,7 +181,7 @@ class UserData extends Component {
 
 
   render() {
-    console.log("USER DATA STATE", this.state)
+    console.log("USER DATA STATE this is dumb ignore it", this.state)
     return (
       <div className="UserDataWrapper">
         
