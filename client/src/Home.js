@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import $ from 'jquery';
+import {Button, Icon, Parallax, Carousel, Modal} from 'react-materialize';
 
 class Home extends Component {
     constructor(props) {
@@ -44,19 +45,21 @@ class Home extends Component {
                            
                                  </div>
                                </div>
-                               <div className="parallax"><img src="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg" height='1200' alt="head"/></div>
+                               {/* <Parallax imageSrc="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg"/> */}
+                               <div className="parallax"><img src="/img/umbrellas.png" alt="Unsplashed background img 2"/></div>
+
                              </div>
                            
                            
                              <br/><br/>
                              
-                               <div className="container space">
+                               <div className="container space ">
                                  <div className="section">
                             
                                    {/* <!--   Icon Section   --> */}
                                    <div className="row">
                                      <div className="col s12 m4">
-                                       <div className="icon-block  hoverable">
+                                       <div className="icon-block  hoverable info-card">
                                          <h2 className="center brown-text"><i className="large material-icons">dashboard</i></h2>
                                          <h5 className="center">Import and critique</h5>
                              
@@ -67,7 +70,7 @@ class Home extends Component {
                                      </div>
                              
                                      <div className="col s12 m4">
-                                       <div className="icon-block  hoverable">
+                                       <div className="icon-block  hoverable info-card">
                                          <h2 className="center brown-text"><i class="large material-icons">assignment</i></h2>
                                          <h5 className="center">Categorize and disifer </h5>
                              
@@ -82,7 +85,7 @@ class Home extends Component {
                                      </div>
                              
                                      <div className="col s12 m4">
-                                       <div className="icon-block  hoverable">
+                                       <div className="icon-block  hoverable info-card">
                                          <h2 className="center brown-text"><i className="large material-icons">map</i></h2>
                                          <h5 className="center">Set goals to cut down </h5>
                              
@@ -104,9 +107,9 @@ class Home extends Component {
                      {/* <!--   Icon Section   --> */}
                      <div className="row">
                        <div className="col s12 m4">
-                         <div className="icon-block  hoverable">
+                         <div className="icon-block  hoverable info-card">
                            <h2 className="center brown-text"><i className="large material-icons">border_color</i></h2>
-                           <h5 className="center">Track occasions that you purposfly didn't spend</h5>
+                           <h5 className="center">Track what you purposfly didn't spend</h5>
                
                            <p className="light">
                                Every time you go to the store and almost buy an unnessisary product, submit the product by catigory, description, amount and date.
@@ -117,7 +120,7 @@ class Home extends Component {
                        </div>
                
                        <div className="col s12 m4">
-                         <div className="icon-block  hoverable">
+                         <div className="icon-block  hoverable info-card">
                            <h2 className="center brown-text"><i className="large material-icons">insert_chart</i></h2>
                            <h5 className="center">Compare and Track</h5>
                
@@ -128,7 +131,7 @@ class Home extends Component {
                        </div>
                
                        <div className="col s12 m4">
-                         <div className="icon-block  hoverable">
+                         <div className="icon-block  hoverable info-card">
                            <h2 className="center brown-text"><i className="large material-icons">dashboard</i></h2>
                            <h5 className="center">Keep track and save</h5>
                
@@ -142,16 +145,27 @@ class Home extends Component {
                  <br /><br />
                  {/* end of info button */}
                            
-                             <div className="parallax-container valign-wrapper">
-                               <div className="section no-pad-bot">
-                                 <div className="container">
-                                   <div className="row ">
-                                     <h3 className="header col s12 light">Making better spending choices, set goals, and improve your quality of life for tomorrow</h3>
-                                   </div>
-                                 </div>
-                               </div>
-                               <div className="parallax"><img src="https://static.pexels.com/photos/166639/pexels-photo-166639.jpeg" height='800'alt="Unsplashed background img 2"/></div>
-                             </div>
+                            
+                              
+                              
+                 {<Parallax imageSrc="/img/umbrellas.png"/>}
+
+                             
+
+                                    {/* carousel */}
+                    <div >
+                    <h3 className="header col s12 light">Making better spending choices, set goals, and improve your quality of life for tomorrow</h3>
+
+                
+                    <Carousel images={[
+                    '/img/liz.png',
+                    '/img/TomWaits.png',
+                    '/img/angelina-jolie.png',
+                    '/img/Aj.png',
+                    '/img/umbrellas.png'
+                ]} />
+                </div>
+                {/* end of carousel */}
                            
                              <div className="container">
                                <div className="section">
@@ -175,7 +189,7 @@ class Home extends Component {
                             <div className="col s3 ">
                             <div className="card  hoverable  ">
                                 <div className="card-image border-tlr-radius">
-                                    <img className='border-tlr-radius' src="http://u.lorenzoferrara.net/marlenesco/material-card/thumb-christopher-walken.jpg"  alt=""/>
+                                    <img className='border-tlr-radius' src="/img/Aj.png"  alt=""/>
                                     <span className="card-title">Part in the project</span>
                                 </div>
                                 <div className="card__content card__padding" >
@@ -204,7 +218,7 @@ class Home extends Component {
                         <div className="col s3 ">
                                     <div className="card  hoverable  ">
                                         <div className="card-image border-tlr-radius">
-                                            <img className='border-tlr-radius' src="https://media.gq.com/photos/55835f533655c24c6c964f6b/master/w_800/style-blogs-the-gq-eye-TomWaitsMorningShot-635.jpg"  alt=""/>
+                                            <img className='border-tlr-radius' src="/img/TomWaits.png"  alt=""/>
                                             <span className="card-title">Part in the project</span>
                                         </div>
                                         <div className="card__content card__padding" >
@@ -233,7 +247,7 @@ class Home extends Component {
                                 <div className="col s3 ">
                                     <div className="card  hoverable  ">
                                         <div className="card-image border-tlr-radius">
-                                            <img className='border-tlr-radius responsive-img' src="http://img.allw.mn/content/dg/o0/eobgsgtv.jpg"  alt=""/>
+                                            <img className='border-tlr-radius responsive-img' src="/img/angelina-jolie.png"  alt=""/>
                                             <span className="card-title">Part in the project</span>
                                         </div>
                                         <div className="card__content card__padding" >
@@ -254,7 +268,7 @@ class Home extends Component {
                                                   <article className="card__article">
                                                       <h2><a>Branding statment goes here</a></h2>
             
-                                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...</p>
+                                                      <p>I am a web developer with a passion for science and an acute attention to detail. My previous experience in research, project management and regulatory affairs contributed to my love for exploring new topics and passion to learn programming languages.</p>
                                                   </article>
                                         </div>
                                     </div>
@@ -262,7 +276,7 @@ class Home extends Component {
                             <div className="col s3 ">
                                 <div className="card  hoverable  ">
                                         <div className="card-image border-tlr-radius">
-                                            <img className='border-tlr-radius responsive-img' src="http://38.media.tumblr.com/4d7b2c7624eca03c7271c5294e2b9c13/tumblr_mltee6NXLH1qjmb9ko1_500.png"  alt=""/>
+                                            <img className='border-tlr-radius responsive-img' src="/img/liz.png"  alt=""/>
                                             <span className="card-title">Front End Developer</span>
                                         </div>
                                     <div className="card__content card__padding" >
@@ -283,7 +297,7 @@ class Home extends Component {
                                                   <article className="card__article">
                                                       <h2><a>Front-end leaning full stack developer</a></h2>
             
-                                                      <p> Aspiring web developer with a human resource background that complements my technical skillset allowing novel perspectives on tough problems for users.</p>
+                                                      <p> Aspiring web developer with a background in human resources that complements technical skillset allowing novel perspectives on users interactions.</p>
                                                   </article>
                                
                                      </div>
@@ -367,8 +381,14 @@ class Home extends Component {
                         </div>
             
                             {/* end of the Developer info */}
-                           
-                        
+                           {/* modal */}
+                           {/* <Modal
+	header='Modal Header'
+	trigger={<Button>MODAL</Button>}>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+</Modal> */}
+
+                       {/* model */}
                            
                              <footer class="page-footer teal">
                                <div class="container">
