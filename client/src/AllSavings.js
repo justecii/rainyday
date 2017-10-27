@@ -7,14 +7,13 @@ class AllSavings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      savings: [],
       user: {}
     }
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
-    // this.deleteSaved = this.deleteSaved.bind(this);
+    this.deleteSaved = this.deleteSaved.bind(this);
   }
 
   
@@ -27,23 +26,23 @@ class AllSavings extends Component {
   
 
   check(e) {
-    console.log("savings state: ", this.state.savings);
+    console.log("savings state: ", this.props.savings);
     console.log("user state: ", this.state.user);
   }
 
   deleteSaved(e) {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
-    let currentState = this.state.savings;
-    let trans = this.state.savings[i]._id;
+    let currentState = this.props.savings;
+    let trans = this.props.savings[i]._id;
     let a = this;
     axios.put('/bankRecords', {
       data: trans
     }).then(function (response) {
       currentState.splice(i, 1);
-      a.setState({
-        savings: currentState
-      })
+    
+       a.props.setSavings(currentState);
+    
     }).catch(function (error) {
       console.log("error: ", error);
     })
@@ -55,19 +54,17 @@ class AllSavings extends Component {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
     let Category = e.target.value;
-    let currentState = this.state.savings;
-    let individState = this.state.savings[i];
-    let categState = this.state.savings[i].Category = Category;
+    let currentState = this.props.savings;
+    let individState = this.props.savings[i];
+    let categState = this.props.savings[i].Category = Category;
     individState.Category = categState
-    let trans = this.state.savings[i]._id;
+    let trans = this.props.savings[i]._id;
     let a = this;
     axios.put('/bankRecords/change', {
       data: trans,
       Category: Category
     }).then(function (response) {
-      a.setState({
-        savings: currentState,
-      })
+      a.props.setSavings(currentState);
     }).catch(function (error) {
       console.log("error: ", error);
     })
@@ -81,39 +78,29 @@ class AllSavings extends Component {
     fetch('/bankRecords/SavingsSummary/' + user)
       .then(response => response.json())
       .then(response => {
-        this.setState({savings: response})
+        this.props.setSavings(response);
         console.log("response in AllSavings fetch: ", response)
       })
     }
 
 
-//   componentDidMount() {
-//     fetch('/bankRecords/SavingsSummary')
-//       .then(response => response.json())
-//       .then(response => {
-//         this.setState({savings: response})
-//       })
-//     }
+
 
 
   render() {
 
-    console.log('savings', this.state.savings)
+    console.log('savings', this.props.savings)
 
     let user = this.props.user
     console.log("user in client/AllSavings.js: ", user);
 
 
-    let savedOn = this.state.savings.map((saving, index) => (
+    let savedOn = this.props.savings.map((saving, index) => (
 
               <section className="row z-depth-1" key={index} onClick={this.check}>
                 <div className='col s4'>{saving.Description}</div>
                 <div className='col s3'>
-                  <select className="browser-default" data-key={index} onChange={this.SaveCatChange}>
-                    {/* <label>{saving.Category}</label> */}
-                    {console.log('this.state.savings.Description', this.state.savings.Description)}
-                    if else
-                    <option value="" disabled defaultValue>{saving.Category}</option>
+                  <select className="browser-default" data-key={index} value={saving.Category} onChange={this.SaveCatChange}>
                     <option value="Bills" data-key={index}>Bills</option>
                     <option value="Groceries" data-key={index}>Groceries</option>
                     <option value="Transportation" data-key={index}>Transportation</option>

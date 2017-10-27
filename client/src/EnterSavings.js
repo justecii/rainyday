@@ -14,12 +14,10 @@ class EnterSavings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // isSaved = true, should it be included here...
-      savings: [],
       Description: "",
       Category: "",
       Amount: "",
-      date: Date,
+      date: null,
       user: {}
     };
     //thisis the binding line necessary to keep this bound correctly
@@ -43,12 +41,7 @@ class EnterSavings extends Component {
       Category: e.target.value
     });
   }
-  handleChangeCategory(e){
-    // console.log('handleChangeCategory', e.target.value)
-    this.setState({
-      Category: e.target.value
-    });
-  }
+  
   handleChangeAmount(e){
     // console.log('handleChangeAmount', e.target.value)
     this.setState({
@@ -56,18 +49,21 @@ class EnterSavings extends Component {
     });
   }
   
-  handleChangeDate(e){
-    console.log('handleChangeDate', e)
+  handleChangeDate(date){
+    console.log('handleChangeDate', date)
 
-    console.log(e.format("MM/DD/YY"))
+    console.log(date.format("MM/DD/YY"))
     console.log(this.props.showClearDate)
     this.setState({
-      date: e.format("MM/DD/YY")
+      date: date
     })
   }
 
   resetForm(e) { 
     document.getElementById("myform").reset();
+    this.setState({
+      date: null
+    })
   }
 
 
@@ -81,18 +77,11 @@ class EnterSavings extends Component {
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
-
-    console.log("descript: ", Description);
-    console.log("category: ", Category);
-    console.log("Amount: ", Amount);
-   
-
     // console.log("descript: ", Description);
     // console.log("category: ", Category);
     // console.log("Amount: ", Amount);
     let user = this.state.user;
-
-    let date = this.state.date;
+    let date = this.state.date.format("MM/DD/YY");
   
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
@@ -105,18 +94,15 @@ class EnterSavings extends Component {
     }
     //data: Ojbect of the three variables
     //re-set state based on updated form information...
-    let tempArr = this.state.savings;
-    tempArr.push(newObject)
+    
     //add the new object (Object) to tempArr -- Google: ".shift() for objects"
     //setState to tempArr (which is already done below)
     // console.log("state: ", this.state.savings);
-    let a = this;
+   let a = this;
     axios.post('/bankRecords/savedList', {
       data: newObject//insert object of the three variables
     }).then(function (response) {
-      a.setState({
-        savings: tempArr,
-      })
+      a.props.addSaving(newObject);
     }).catch(function (error) {
       console.log("error: ", error);
     })
@@ -131,10 +117,10 @@ class EnterSavings extends Component {
     this.setState({
       user: user
     })
-    fetch('/bankRecords/' + user)
-      .then(response => response.json())
-      // .then(response => this.setState({records: response}))
-    .then(response => this.setState({savings: response}))
+    // fetch('/bankRecords/' + user)
+    //   .then(response => response.json())
+    //   // .then(response => this.setState({records: response}))
+    // .then(response => this.setState({savings: response}))
     }
 
 
@@ -166,7 +152,7 @@ class EnterSavings extends Component {
                 <option value="Groceries">Groceries</option>
                 <option value="Transportation">Transportation</option>
                 <option value="Entertainment">Entertainment</option>
-                <option value="Clothes">Clothes</option>
+                <option value="Clothing">Clothing</option>
                 <option value="Dining Out">Dining Out</option>
                 <option value="Vices">Vices</option>
                 <option value="Debt">Debt</option>
@@ -174,6 +160,7 @@ class EnterSavings extends Component {
                 <option value="Savings">Savings</option>
                 <option value="Health">Health</option>
                 <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Income">Income</option>
               </select>
             </div>  
           </div>  
@@ -185,11 +172,12 @@ class EnterSavings extends Component {
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>
-          <SingleDatePicker
-              onDateChange={(e) => this.handleChangeDate( e )} // PropTypes.func.isRequired
+            <SingleDatePicker
+              date={this.state.date}
+              onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
               focused={this.state.focused} // PropTypes.bool
               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-            />  
+            />
 
             <br/>
           <input type="submit" value="Submit" />

@@ -33,8 +33,7 @@ class App extends Component {
 
 
   liftTokenToState(token, user) {
-    console.log("token: ", token)
-    console.log("user: ", user)
+
     this.setState({
       token: token,
       user: user
@@ -59,15 +58,13 @@ class App extends Component {
     this.setState({
       user: user
     })
-    console.log("user props: ", this.props.user)
-    console.log("user state: ", this.state.user)
+
     }
 
   render() {
-    console.log("XXXXXXXXXX: ", this.state)
+ 
     let user = this.props.user
-    console.log("user in client/App.js: ", user);
-    console.log("APP.JS STATE", this.state)
+
     // if the token exists display the router
     if(this.state.token!==""){ //need this active to use auth
   // if(true){
@@ -118,9 +115,11 @@ class App extends Component {
       return(
        
         <div className="App">
+
                       <nav className="RouterLinks  #00838f cyan darken-3  navbar">
                   
               </nav>
+
            <div className="SignupBox">
             <Signup lift={this.liftTokenToState} />
           </div> 
