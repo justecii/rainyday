@@ -20,10 +20,13 @@ class UserData extends Component {
       catAmtRange2:[],
       dateAmtRange1:[],
       dateAmtRange2:[],
+      pieDataFullRange:[],
       startDate1: "07/24/17",
       endDate1:"08/31/17",
       startDate2: "09/01/17",
-      endDate2: "10/19/17"
+      endDate2: "10/19/17",
+      pieRadius: 75,
+      pieRadius0: 0,
     }
     this.makeUnique = this.makeUnique.bind(this);
     this.recordSoap = this.recordSoap.bind(this);
@@ -40,24 +43,29 @@ class UserData extends Component {
     })
     fetch('/bankRecords/' + user)
     .then((response) => response.json())
-    .then((response) => {
+    .then((response) => {this.updateLists(response)})
+  }
 
-      var cleanBankRecords = this.recordSoap(response)
-      var categoryList1 = this.uniqueCatByRange(cleanBankRecords,this.state.startDate1,this.state.endDate1)
-      var categoryList2 = this.uniqueCatByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
-      var dateList1 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate1,this.state.endDate1)
-      var dateList2 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
-      var newCatAmtRange1 = this.makeCatAmt(categoryList1,cleanBankRecords)
-      var newCatAmtRange2 = this.makeCatAmt(categoryList2,cleanBankRecords)
-      var newDatAmtRange1 = this.makeDateAmt(dateList1,cleanBankRecords)
-      var newDatAmtRange2 = this.makeDateAmt(dateList2,cleanBankRecords)
-      this.setState({
-        bankRecords: cleanBankRecords,
-        catAmtRange1:newCatAmtRange1,
-        catAmtRange2:newCatAmtRange2,
-        dateAmtRange1:newDatAmtRange1,
-        dateAmtRange2:newDatAmtRange2,
-      })
+  updateLists(bankRecords){
+    var cleanBankRecords = this.recordSoap(bankRecords)
+    var categoryList1 = this.uniqueCatByRange(cleanBankRecords,this.state.startDate1,this.state.endDate1)
+    var categoryList2 = this.uniqueCatByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
+    var categoryListFullRange = this.uniqueCatByRange(cleanBankRecords,this.state.startDate1,this.state.endDate2)
+    var dateList1 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate1,this.state.endDate1)
+    var dateList2 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
+    var newCatAmtRange1 = this.makeCatAmt(categoryList1,cleanBankRecords)
+    var newCatAmtRange2 = this.makeCatAmt(categoryList2,cleanBankRecords)
+    var newCatAmtFullRange = this.makeCatAmt(categoryListFullRange,cleanBankRecords)
+    var newDatAmtRange1 = this.makeDateAmt(dateList1,cleanBankRecords)
+    var newDatAmtRange2 = this.makeDateAmt(dateList2,cleanBankRecords)
+    var newPieDataFullRange = this.convertToPie(newCatAmtFullRange)
+    this.setState({
+      bankRecords: cleanBankRecords,
+      catAmtRange1:newCatAmtRange1,
+      catAmtRange2:newCatAmtRange2,
+      dateAmtRange1:newDatAmtRange1,
+      dateAmtRange2:newDatAmtRange2,
+      pieDataFullRange:newPieDataFullRange
     })
   }
 
@@ -170,6 +178,33 @@ class UserData extends Component {
     return dateAmt;
   }
 
+  convertToPie(catAmt){
+    let dataArr = catAmt;
+    let total = 0;
+
+    for(var i = 0; i<dataArr.length;i++){ //calculates total amount spent
+      total += dataArr[i].amount;
+    }
+    for(var j = 0; j<dataArr.length;j++){ //assigns a % of total for each category
+      dataArr[j].percent = dataArr[j].amount/total;
+    }
+    dataArr[0].angle0 = 0;//first slice starts at 0 degrees
+    for(var l = 1; l<dataArr.length;l++){ //each angle starts where the last one left off
+      dataArr[l].angle0 = dataArr[l-1].angle0 + dataArr[l-1].percent*2*Math.PI;
+    }
+    for(var k = 0; k<dataArr.length;k++){ //converts % to radians
+      dataArr[k].angle = dataArr[k].angle0 + dataArr[k].percent*2*Math.PI;
+    }
+    var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
+    for(var m = 0; m<dataArr.length;m++){//assigning radius, radius from state and color based on index
+      dataArr[m].radius = this.state.pieRadius;
+      dataArr[m].radius0 = this.state.pieRadius0;
+      dataArr[m].opacity = 0.5;
+      dataArr[m].color = CSS_COLOR_NAMES[Math.floor(Math.random()*CSS_COLOR_NAMES.length)];
+    }
+    return dataArr
+  }
+
 
 
   handleDateChange(e){
@@ -190,9 +225,13 @@ class UserData extends Component {
         <DateRangePicker
           startDate={moment(this.state.startDate1)} // momentPropTypes.momentObj or null,
           endDate={moment(this.state.endDate1)} // momentPropTypes.momentObj or null,
-          onDatesChange={({startDate,endDate}) => this.setState({startDate1:startDate,endDate1:endDate})} // PropTypes.func.isRequired,
-          focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-          onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+          onDatesChange={({startDate,endDate}) => {
+            var start = startDate.format("MM/DD/YY")
+            var end = endDate.format("MM/DD/YY")
+          this.setState({startDate1:start,endDate1:end},this.updateLists(this.state.bankRecords)
+          )}} // PropTypes.func.isRequired,
+          focusedInput={this.state.focusedInput1} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+          onFocusChange={focusedInput1 => this.setState({ focusedInput1 })} // PropTypes.func.isRequired,
           isOutsideRange={() => false}
           withPortal={true}
         />
@@ -200,14 +239,18 @@ class UserData extends Component {
         <DateRangePicker
           startDate={moment(this.state.startDate2)} // momentPropTypes.momentObj or null,
           endDate={moment(this.state.endDate2)} // momentPropTypes.momentObj or null,
-          onDatesChange={({startDate,endDate}) => this.setState({startDate2:startDate,endDate2:endDate})} // PropTypes.func.isRequired,
-          focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-          onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+          onDatesChange={({startDate,endDate}) => {
+            var start = startDate.format("MM/DD/YY")
+            var end = endDate.format("MM/DD/YY")
+          this.setState({startDate1:start,endDate1:end},this.updateLists(this.state.bankRecords)
+          )}} // PropTypes.func.isRequired,
+          focusedInput={this.state.focusedInput2} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+          onFocusChange={focusedInput2 => this.setState({ focusedInput2 })} // PropTypes.func.isRequired,
           isOutsideRange={() => false}
           withPortal={true}
         />
         <UserSummary />
-        <UserPieCharts catAmt={this.state.catAmtRange1}/>
+        <UserPieCharts pieData={this.state.pieDataFullRange}/>
         <UserBarGraph />
       </div>
     );
