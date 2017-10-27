@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import $ from 'jquery';
-import {Button, Icon, Parallax, Carousel} from 'react-materialize';
+import {Button, Icon, Parallax, Carousel, Modal} from 'react-materialize';
 
 class Home extends Component {
     constructor(props) {
@@ -268,7 +268,7 @@ class Home extends Component {
                                                   <article className="card__article">
                                                       <h2><a>Branding statment goes here</a></h2>
             
-                                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...</p>
+                                                      <p>I am a web developer with a passion for science and an acute attention to detail. My previous experience in research, project management and regulatory affairs contributed to my love for exploring new topics and passion to learn programming languages.</p>
                                                   </article>
                                         </div>
                                     </div>
@@ -381,8 +381,14 @@ class Home extends Component {
                         </div>
             
                             {/* end of the Developer info */}
-                           
-                        
+                           {/* modal */}
+                           {/* <Modal
+	header='Modal Header'
+	trigger={<Button>MODAL</Button>}>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+</Modal> */}
+
+                       {/* model */}
                            
                              <footer class="page-footer teal">
                                <div class="container">

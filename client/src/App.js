@@ -16,6 +16,7 @@ import BankRecords from './BankRecords.js';
 import EditBankData from './EditBankData';
 //////////////////////////////////////////////////
 import UserData from './UserData.js';
+import {Button, Icon, Parallax, Carousel, Modal} from 'react-materialize';
 
 
 
@@ -85,7 +86,7 @@ class App extends Component {
               <Link to="/savingsReactRoute" className="btn btn-large #88bbd6 cyan darken-3 ">Savings</Link>
               <Link to="/bankRecordsReactRoute" className="btn btn-large #00838f cyan darken-3 ">Bank Records</Link>
               <Link to="/userDataReactRoute" className="btn btn-large #00838f cyan darken-3 ">User Data</Link>
-              <Link to="/SignupReactRoute" className="btn btn-large #00838f cyan darken-3 ">Signup</Link>
+              
 
               </div>
               <div className="side-nav row" id="mobile-demo">
@@ -117,13 +118,16 @@ class App extends Component {
       return(
        
         <div className="App">
-           <Home />
+                      <nav className="RouterLinks  #00838f cyan darken-3  navbar">
+                  
+              </nav>
            <div className="SignupBox">
             <Signup lift={this.liftTokenToState} />
           </div> 
           <div className="LoginBox">
             <Login lift={this.liftTokenToState} />
           </div>
+          
         </div>
       )
     }

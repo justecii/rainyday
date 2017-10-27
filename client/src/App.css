@@ -59,7 +59,7 @@ html {
   margin-top:60px;
 }
 
-.notmoving{
+/* .notmoving{
   position: fixed; 
 	background-color: rgb(92, 119, 177);
   overflow: hidden;
@@ -71,9 +71,9 @@ html {
 	
 	font-size: 17px;
 	color: white;
-}
+} */
 
-.notmoving:hover{
+/* .notmoving:hover{
   position: fixed; 
 	background-color: rgb(92, 119, 177);
   overflow: hidden;
@@ -84,7 +84,7 @@ html {
 	top:0;
 	font-size: 17px;
 	color: white;
-}
+} */
 
 
 /* #tableLable {
