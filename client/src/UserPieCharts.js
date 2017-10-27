@@ -30,7 +30,7 @@ class UserPieCharts extends Component {
 
   componentWillReceiveProps(nextProps) {
     var pieProps = nextProps.pieData;
-    console.log("pieProps", pieProps)
+    // console.log("pieProps", pieProps)
     this.setState({
       pieData: pieProps
     })
@@ -71,7 +71,7 @@ class UserPieCharts extends Component {
   }
 
   render() {
-    console.log("PIE CHART STATE", this.state)
+    // console.log("PIE CHART STATE", this.state)
     return (
       <div className="UserPieChartsWrapper">
         <p>User Pie Charts Component</p>

@@ -9,32 +9,14 @@ class UserBarGraph extends Component {
     super(props);
     this.state = {
       data1:[
-      { x:'Bills', y: 10},
-      { x:'Groceries', y: 9},
-      { x:'Transportation', y: 4},
-      { x:'Entertainment', y: 10},
-      { x:'Clothes', y: 6 },
-      { x:'Dining Out', y: 10},
-      { x:'Vices',y: 10},
-      { x:'Debt',y: 10},
-      { x:'Housing',y: 5},
-      { x:'Savings',y: 5},
-      { x:'Health',y: 5},
-      { x:'Miscellaneous',y: 5}
+      { x:'Sample A', y: 10},
+      { x:'Sample B', y: 9},
+      { x:'C', y: 4},
+
       ],
       data2:[
-      { x:'Bills', y: 5},
-      { x:'Groceries', y: 3},
-      { x:'Transportation', y: 4},
-      { x:'Entertainment', y: 6},
-      { x:'Clothes', y: 6 },
-      { x:'Dining Out', y: 10},
-      { x:'Vices',y: 7},
-      { x:'Debt',y: 3},
-      { x:'Housing',y: 1},
-      { x:'Savings',y: 3},
-      { x:'Health',y: 5},
-      { x:'Miscellaneous',y: 4}
+      { x:'Sample A', y: 5},
+      { x:'Sample B', y: 3},
       ],
       toolTipValue:{
         toolTipValue:{
@@ -48,7 +30,16 @@ class UserBarGraph extends Component {
   componentDidMount() {
     $('.barTooltip').hide();
     var merr = $('.userBarGraphWrapper');
-    console.log(merr.position(),merr.offset())
+  }
+
+  componentWillReceiveProps(nextProps) {
+    var range1 = nextProps.barDataRange1;
+    var range2 = nextProps.barDataRange2;
+    // console.log(range1, range2)
+    this.setState({
+      data1: range1,
+      data2: range2
+    })
   }
 
   showToolTip(e,info){

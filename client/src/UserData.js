@@ -47,25 +47,34 @@ class UserData extends Component {
   }
 
   updateLists(bankRecords){
-    var cleanBankRecords = this.recordSoap(bankRecords)
-    var categoryList1 = this.uniqueCatByRange(cleanBankRecords,this.state.startDate1,this.state.endDate1)
-    var categoryList2 = this.uniqueCatByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
-    var categoryListFullRange = this.uniqueCatByRange(cleanBankRecords,this.state.startDate1,this.state.endDate2)
-    var dateList1 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate1,this.state.endDate1)
-    var dateList2 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
-    var newCatAmtRange1 = this.makeCatAmt(categoryList1,cleanBankRecords)
-    var newCatAmtRange2 = this.makeCatAmt(categoryList2,cleanBankRecords)
-    var newCatAmtFullRange = this.makeCatAmt(categoryListFullRange,cleanBankRecords)
-    var newDatAmtRange1 = this.makeDateAmt(dateList1,cleanBankRecords)
-    var newDatAmtRange2 = this.makeDateAmt(dateList2,cleanBankRecords)
-    var newPieDataFullRange = this.convertToPie(newCatAmtFullRange)
+    
+    let cleanBankRecords = this.recordSoap(bankRecords)
+
+    let sepTypes = this.sepTypes(cleanBankRecords).expense
+    console.log("bank records",cleanBankRecords)
+    console.log("septypes",sepTypes)
+    let categoryList1 = this.uniqueCatByRange(sepTypes,this.state.startDate1,this.state.endDate1)
+    let categoryList2 = this.uniqueCatByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
+    let categoryListFullRange = this.uniqueCatByRange(cleanBankRecords,this.state.startDate1,this.state.endDate2)
+    let dateList1 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate1,this.state.endDate1)
+    let dateList2 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
+    let newCatAmtRange1 = this.makeCatAmt(categoryList1,sepTypes)
+    let newCatAmtRange2 = this.makeCatAmt(categoryList2,cleanBankRecords)
+    let newCatAmtFullRange = this.makeCatAmt(categoryListFullRange,cleanBankRecords)
+    let newDatAmtRange1 = this.makeDateAmt(dateList1,cleanBankRecords)
+    let newDatAmtRange2 = this.makeDateAmt(dateList2,cleanBankRecords)
+    let newPieDataFullRange = this.convertToPie(newCatAmtFullRange)
+    let newBarDataRange1 = this.convertToBar(newCatAmtRange1)
+    let newBarDataRange2 = this.convertToBar(newCatAmtRange2)
     this.setState({
       bankRecords: cleanBankRecords,
       catAmtRange1:newCatAmtRange1,
       catAmtRange2:newCatAmtRange2,
       dateAmtRange1:newDatAmtRange1,
       dateAmtRange2:newDatAmtRange2,
-      pieDataFullRange:newPieDataFullRange
+      pieDataFullRange:newPieDataFullRange,
+      barDataRange1:newBarDataRange1,
+      barDataRange2:newBarDataRange2,
     })
   }
 
@@ -205,18 +214,40 @@ class UserData extends Component {
     return dataArr
   }
 
+  convertToBar(catAmt){
+    let dataArr = catAmt;
+    for(var i = 0; i<dataArr.length;i++){
+      var temp = dataArr[i];
+      dataArr[i]={x:temp.category,y:temp.amount}
+    }
+    return dataArr
+  }
 
+  //accepts a bankRecords array and returns an object with 3 arrays...income, expense, saved, uncategorized
+  sepTypes(bankRecords){
+    var br = bankRecords;
+    var income = [];
+    var expense = [];
+    var saved = [];
+    var uncategorized = [];
 
-  handleDateChange(e){
-    console.log("you just clicked this bro",e.startDate.format("MM/DD/YY"))
-    // this.setState({
-    //   date:e.target.value
-    // })
+    for(var i = 0; i< br.length;i++){
+      if(br[i].isSaved){
+        saved.push(br[1])
+      } else if(br[i].Category==='Income' && !br.isSaved){
+        income.push(br[1])
+      } else if(br[i].Category==='uncategorized' && !br.isSaved){
+        uncategorized.push(br[1])
+      } else {
+        expense.push(br[1])
+      }
+    }
+    return {income:income,expense:expense,saved:saved,uncategorized:uncategorized}
   }
 
 
   render() {
-    console.log("USER DATA STATE this is dumb ignore it", this.state)
+    console.log("USER DATA STATE", this.state)
     return (
       <div className="UserDataWrapper">
         
@@ -242,7 +273,7 @@ class UserData extends Component {
           onDatesChange={({startDate,endDate}) => {
             var start = startDate.format("MM/DD/YY")
             var end = endDate.format("MM/DD/YY")
-          this.setState({startDate1:start,endDate1:end},this.updateLists(this.state.bankRecords)
+          this.setState({startDate2:start,endDate2:end},this.updateLists(this.state.bankRecords)
           )}} // PropTypes.func.isRequired,
           focusedInput={this.state.focusedInput2} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
           onFocusChange={focusedInput2 => this.setState({ focusedInput2 })} // PropTypes.func.isRequired,
@@ -251,7 +282,7 @@ class UserData extends Component {
         />
         <UserSummary />
         <UserPieCharts pieData={this.state.pieDataFullRange}/>
-        <UserBarGraph />
+        <UserBarGraph barDataRange1={this.state.barDataRange1} barDataRange2={this.state.barDataRange2}/>
       </div>
     );
   }
