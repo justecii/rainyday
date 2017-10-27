@@ -34,7 +34,7 @@ class BankRecords extends Component {
 
     return (
 
-      <div className="BankRecordsWrapper  "  >
+      <div className="BankRecordsWrapper  " >
         <p>BankRecords Page</p>
         <InputBankRecords user={user}/>
 
@@ -60,7 +60,7 @@ class BankRecords extends Component {
 
 
         <EditBankData user={user}/>
-        </div>
+       
         </section>
         
       </div>

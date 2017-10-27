@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import $ from 'jquery';
+import {Button, Icon, Parallax, Carousel} from 'react-materialize';
 
 class Home extends Component {
     constructor(props) {
@@ -44,7 +45,9 @@ class Home extends Component {
                            
                                  </div>
                                </div>
-                               <div className="parallax"><img src="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg" height='1200' alt="head"/></div>
+                               {/* <Parallax imageSrc="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg"/> */}
+                               <div className="parallax"><img src="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg" height='800'alt="Unsplashed background img 2"/></div>
+
                              </div>
                            
                            
@@ -142,16 +145,27 @@ class Home extends Component {
                  <br /><br />
                  {/* end of info button */}
                            
-                             <div className="parallax-container valign-wrapper">
-                               <div className="section no-pad-bot">
-                                 <div className="container">
-                                   <div className="row ">
-                                     <h3 className="header col s12 light">Making better spending choices, set goals, and improve your quality of life for tomorrow</h3>
-                                   </div>
-                                 </div>
-                               </div>
-                               <div className="parallax"><img src="https://static.pexels.com/photos/166639/pexels-photo-166639.jpeg" height='800'alt="Unsplashed background img 2"/></div>
-                             </div>
+                            
+                              
+                              
+                 {<Parallax imageSrc="https://static.pexels.com/photos/268941/pexels-photo-268941.jpeg"/>}
+
+                             
+
+                                    {/* carousel */}
+                    <div >
+                    <h3 className="header col s12 light">Making better spending choices, set goals, and improve your quality of life for tomorrow</h3>
+
+                
+                    <Carousel images={[
+                    'https://lorempixel.com/250/250/nature/1',
+                    'https://lorempixel.com/250/250/nature/2',
+                    'https://lorempixel.com/250/250/nature/3',
+                    'https://lorempixel.com/250/250/nature/4',
+                    'https://lorempixel.com/250/250/nature/5'
+                ]} />
+                </div>
+                {/* end of carousel */}
                            
                              <div className="container">
                                <div className="section">
