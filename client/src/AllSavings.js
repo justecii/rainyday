@@ -14,7 +14,7 @@ class AllSavings extends Component {
     this.componentDidMount = this.componentDidMount.bind(this);
     this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
-    // this.deleteSaved = this.deleteSaved.bind(this);
+    this.deleteSaved = this.deleteSaved.bind(this);
   }
 
   
@@ -87,13 +87,7 @@ class AllSavings extends Component {
     }
 
 
-//   componentDidMount() {
-//     fetch('/bankRecords/SavingsSummary')
-//       .then(response => response.json())
-//       .then(response => {
-//         this.setState({savings: response})
-//       })
-//     }
+
 
 
   render() {

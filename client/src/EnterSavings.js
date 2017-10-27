@@ -63,6 +63,9 @@ class EnterSavings extends Component {
 
   resetForm(e) { 
     document.getElementById("myform").reset();
+    this.setState({
+      date: null
+    })
   }
 
 
@@ -80,7 +83,7 @@ class EnterSavings extends Component {
     // console.log("category: ", Category);
     // console.log("Amount: ", Amount);
     let user = this.state.user;
-    let date = this.state.date;
+    let date = this.state.date.format("MM/DD/YY");
   
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
