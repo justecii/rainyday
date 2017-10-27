@@ -12,48 +12,7 @@ class UserPieCharts extends Component {
       propData:[{ //be an array yo
           category: 'Bills',
           amount: 10
-        },{
-          category: 'Groceries',
-          amount: 10
-        },{
-          category: 'Transportation',
-          amount: 10
-        },{
-          category: 'Entertainment',
-          amount: 10
-        },{
-          category: 'Clothes',
-          amount: 10
-        },{
-          category: 'Dining Out',
-          amount: 10
-        },{
-          category: 'Vices',
-          amount: 10
-        },{
-          category: 'Debt',
-          amount: 10
-        },{
-          category: 'Housing',
-          amount: 5
-        },{
-          category: 'Savings',
-          amount: 5
-        },{
-          category: 'Health',
-          amount: 5
-        },{
-          category: 'Miscellaneous',
-          amount: 5
         }],
-      myData: [
-        {angle0: 0 * Math.PI / 4, angle: 1 * Math.PI / 4, opacity: 0.2, radius: 50, radius0: 0, color:'blue'},
-        {angle0: 1 * Math.PI / 4, angle: 2 * Math.PI / 4, radius: 50, radius0: 0, color:'red'},
-        {angle0: 2 * Math.PI / 4, angle: 3 * Math.PI / 4, radius: 50, radius0: 0, color:'green'},
-        {angle0: 3 * Math.PI / 4, angle: 4 * Math.PI / 4, radius: 50, radius0: 0, color:'yellow'},
-        {angle0: 4 * Math.PI / 4, angle: 5 * Math.PI / 4, radius: 50, radius0: 0, color:'purple'},
-        {angle0: 5 * Math.PI / 4, angle: 6 * Math.PI / 4, radius: 50, radius0: 0, color:'blue'}
-      ],
       radius: 75,
       radius0: 0,
       toolTipValue:{
@@ -96,6 +55,13 @@ class UserPieCharts extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log("PIE PROPS",nextProps)
+    this.setState({
+      propData: nextProps
+    })
+  }
+
   showToolTip(e){
     let cssVal={};
     if (e.x>0 && e.y>0){
@@ -130,7 +96,7 @@ class UserPieCharts extends Component {
   }
 
   render() {
-    // console.log("PIE CHART STATE", this.state)
+    console.log("PIE CHART STATE", this.state)
     return (
       <div className="UserPieChartsWrapper">
         <p>User Pie Charts Component</p>
