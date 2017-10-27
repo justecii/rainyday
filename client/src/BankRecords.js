@@ -60,7 +60,7 @@ class BankRecords extends Component {
 
 
         <EditBankData user={user}/>
-       
+
         </section>
         
       </div>
