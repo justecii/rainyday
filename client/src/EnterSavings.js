@@ -19,7 +19,7 @@ class EnterSavings extends Component {
       Description: "",
       Category: "",
       Amount: "",
-      date: Date,
+      date: null,
       user: {}
     };
     //thisis the binding line necessary to keep this bound correctly
@@ -43,12 +43,7 @@ class EnterSavings extends Component {
       Category: e.target.value
     });
   }
-  handleChangeCategory(e){
-    // console.log('handleChangeCategory', e.target.value)
-    this.setState({
-      Category: e.target.value
-    });
-  }
+  
   handleChangeAmount(e){
     // console.log('handleChangeAmount', e.target.value)
     this.setState({
@@ -56,13 +51,13 @@ class EnterSavings extends Component {
     });
   }
   
-  handleChangeDate(e){
-    console.log('handleChangeDate', e)
+  handleChangeDate(date){
+    console.log('handleChangeDate', date)
 
-    console.log(e.format("MM/DD/YY"))
+    console.log(date.format("MM/DD/YY"))
     console.log(this.props.showClearDate)
     this.setState({
-      date: e.format("MM/DD/YY")
+      date: date
     })
   }
 
@@ -81,17 +76,10 @@ class EnterSavings extends Component {
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
-
-    console.log("descript: ", Description);
-    console.log("category: ", Category);
-    console.log("Amount: ", Amount);
-   
-
     // console.log("descript: ", Description);
     // console.log("category: ", Category);
     // console.log("Amount: ", Amount);
     let user = this.state.user;
-
     let date = this.state.date;
   
     //add all three variables to object {} -- let Object = {insert object of three variables}
@@ -185,11 +173,12 @@ class EnterSavings extends Component {
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>
-          <SingleDatePicker
-              onDateChange={(e) => this.handleChangeDate( e )} // PropTypes.func.isRequired
+            <SingleDatePicker
+              date={this.state.date}
+              onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
               focused={this.state.focused} // PropTypes.bool
               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-            />  
+            />
 
             <br/>
           <input type="submit" value="Submit" />
