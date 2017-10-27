@@ -103,11 +103,7 @@ class AllSavings extends Component {
               <section className="row z-depth-1" key={index} onClick={this.check}>
                 <div className='col s4'>{saving.Description}</div>
                 <div className='col s3'>
-                  <select className="browser-default" data-key={index} onChange={this.SaveCatChange}>
-                    {/* <label>{saving.Category}</label> */}
-                    {console.log('this.state.savings.Description', this.state.savings.Description)}
-                    if else
-                    <option value="" disabled defaultValue>{saving.Category}</option>
+                  <select className="browser-default" data-key={index} value={saving.Category} onChange={this.SaveCatChange}>
                     <option value="Bills" data-key={index}>Bills</option>
                     <option value="Groceries" data-key={index}>Groceries</option>
                     <option value="Transportation" data-key={index}>Transportation</option>
