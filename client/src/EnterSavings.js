@@ -14,8 +14,6 @@ class EnterSavings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // isSaved = true, should it be included here...
-      savings: [],
       Description: "",
       Category: "",
       Amount: "",
@@ -96,18 +94,15 @@ class EnterSavings extends Component {
     }
     //data: Ojbect of the three variables
     //re-set state based on updated form information...
-    let tempArr = this.state.savings;
-    tempArr.push(newObject)
+    
     //add the new object (Object) to tempArr -- Google: ".shift() for objects"
     //setState to tempArr (which is already done below)
     // console.log("state: ", this.state.savings);
-    let a = this;
+   let a = this;
     axios.post('/bankRecords/savedList', {
       data: newObject//insert object of the three variables
     }).then(function (response) {
-      a.setState({
-        savings: tempArr,
-      })
+      a.props.addSaving(newObject);
     }).catch(function (error) {
       console.log("error: ", error);
     })
@@ -122,10 +117,10 @@ class EnterSavings extends Component {
     this.setState({
       user: user
     })
-    fetch('/bankRecords/' + user)
-      .then(response => response.json())
-      // .then(response => this.setState({records: response}))
-    .then(response => this.setState({savings: response}))
+    // fetch('/bankRecords/' + user)
+    //   .then(response => response.json())
+    //   // .then(response => this.setState({records: response}))
+    // .then(response => this.setState({savings: response}))
     }
 
 
@@ -157,7 +152,7 @@ class EnterSavings extends Component {
                 <option value="Groceries">Groceries</option>
                 <option value="Transportation">Transportation</option>
                 <option value="Entertainment">Entertainment</option>
-                <option value="Clothes">Clothes</option>
+                <option value="Clothing">Clothing</option>
                 <option value="Dining Out">Dining Out</option>
                 <option value="Vices">Vices</option>
                 <option value="Debt">Debt</option>
@@ -165,6 +160,7 @@ class EnterSavings extends Component {
                 <option value="Savings">Savings</option>
                 <option value="Health">Health</option>
                 <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Income">Income</option>
               </select>
             </div>  
           </div>  
