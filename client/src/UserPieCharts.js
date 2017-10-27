@@ -9,12 +9,11 @@ class UserPieCharts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      propData:[{ //be an array yo
+      catAmt:[{ //be an array yo
           category: 'Bills',
           amount: 10
         }],
-      radius: 75,
-      radius0: 0,
+      pieData: [{angle0: 0, angle: Math.PI*2, opacity: 0.2, radius: 75, radius0: 0}],
       toolTipValue:{
         Category:'empty',
         Amount:0,
@@ -27,40 +26,16 @@ class UserPieCharts extends Component {
 
   componentDidMount() {
     $('.tooltip').hide();
-    let dataArr = this.state.propData
-    let total = 0;
-
-    for(var i = 0; i<dataArr.length;i++){ //calculates total amount spent
-      total += dataArr[i].amount;
-    }
-    for(var j = 0; j<dataArr.length;j++){ //assigns a % of total for each category
-      dataArr[j].percent = dataArr[j].amount/total;
-    }
-    dataArr[0].angle0 = 0;//first slice starts at 0 degrees
-    for(var l = 1; l<dataArr.length;l++){ //each angle starts where the last one left off
-      dataArr[l].angle0 = dataArr[l-1].angle0 + dataArr[l-1].percent*2*Math.PI;
-    }
-    for(var k = 0; k<dataArr.length;k++){ //converts % to radians
-      dataArr[k].angle = dataArr[k].angle0 + dataArr[k].percent*2*Math.PI;
-    }
-    var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
-    for(var m = 0; m<dataArr.length;m++){//assigning radius, radius from state and color based on index
-      dataArr[m].radius = this.state.radius;
-      dataArr[m].radius0 = this.state.radius0;
-      dataArr[m].opacity = 0.5;
-      dataArr[m].color = CSS_COLOR_NAMES[Math.floor(Math.random()*CSS_COLOR_NAMES.length)];
-    }
-    this.setState({
-      myData:dataArr
-    })
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("PIE PROPS",nextProps)
+    var pieProps = nextProps.pieData;
+    // console.log("pieProps", pieProps)
     this.setState({
-      propData: nextProps
+      pieData: pieProps
     })
   }
+
 
   showToolTip(e){
     let cssVal={};
@@ -96,7 +71,7 @@ class UserPieCharts extends Component {
   }
 
   render() {
-    console.log("PIE CHART STATE", this.state)
+    // console.log("PIE CHART STATE", this.state)
     return (
       <div className="UserPieChartsWrapper">
         <p>User Pie Charts Component</p>
@@ -114,7 +89,7 @@ class UserPieCharts extends Component {
             animation
             radiusType={'literal'}
             center={{x: 3, y: 3}}
-            data={this.state.myData}
+            data={this.state.pieData}
             colorType={'literal'}
             onValueMouseOver={(e)=>{this.showToolTip(e)}}
             onValueMouseOut={(e)=>{this.hideToolTip(e)}}
