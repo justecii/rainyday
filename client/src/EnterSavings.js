@@ -138,7 +138,7 @@ class EnterSavings extends Component {
         <form id="myform" onSubmit={(e) => {this.handleSubmit(e); this.resetForm(e)}}>    
           <div className="row highlight">
             <div className="input-field col s12">
-              <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChangeDescription}/>
+              <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChangeDescription} required/>
               <label htmlFor="Description">Describe what you are saving on..</label>
             </div>
           </div>
@@ -146,7 +146,7 @@ class EnterSavings extends Component {
           <div className="row highlight">
             <div className="col s12">  
               <h5>Category</h5>  
-              <select name="Category" value={this.state.value} onChange={this.handleChangeCategory}>
+              <select name="Category" value={this.state.value} onChange={this.handleChangeCategory} required>
                 <option  value="" disabled defaultValue> </option>
                 <option value="Bills">Bills</option>
                 <option value="Groceries">Groceries</option>
@@ -168,7 +168,7 @@ class EnterSavings extends Component {
       
           <div className="row highlight">
             <div className="input-field col s12">
-              <input type="number" name="Amount" className="validate"  onChange={this.handleChangeAmount}/>  
+              <input type="number" name="Amount" className="validate"  onChange={this.handleChangeAmount} required/>  
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>
@@ -177,6 +177,8 @@ class EnterSavings extends Component {
               onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
               focused={this.state.focused} // PropTypes.bool
               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+              isOutsideRange={() => false}
+              withPortal={true}
             />
 
             <br/>
