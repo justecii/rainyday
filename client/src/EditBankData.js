@@ -82,7 +82,9 @@ class EditBankData extends Component {
                 <div className='col s2'>
 
                   <select name='' className="browser-default " value={this.state.value} data-key={index} onChange={this.categoryChange}>
-                    <option value="" disabled  selected >{records.Category}</option>
+                  if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
+                      <option value="" disabled  value></option>
+                    } else { <option value="" disabled  selected>{records.Category}</option> }
                     <option value="Bills" >Bills</option>
                     <option value="Groceries" >Groceries</option>
                     <option value="Transportation" >Transportation</option>

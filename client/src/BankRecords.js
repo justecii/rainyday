@@ -39,10 +39,16 @@ class BankRecords extends Component {
         console.log("result: ", result);
         data = result.data;
         console.log("data1: ", data);
-        data.map(id => id.userId = user);
-        // console.log("data userId: ", data);
-        data.map(saved => saved.isSaved = false)
-        // console.log("data isSaved: ", data);
+        data.forEach(function(item) {
+          item.userId = user
+          item.isSaved = false
+        })
+
+        // data.map(id => id.userId = user);
+        // // console.log("data userId: ", data);
+        // data.map(saved => saved.isSaved = false)
+        // // console.log("data isSaved: ", data);
+
         console.log("data2: ", data);
         axios.post('/bankRecords', {
           data: data
