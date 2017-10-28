@@ -130,18 +130,18 @@ class EnterSavings extends Component {
 
     return (
       <div className="EnterSavingsWrapper">
-        <h4>Choose your savings</h4>
         <form id="myform" onSubmit={(e) => {this.handleSubmit(e); this.resetForm(e)}}>
           <div className="row highlight">
+            <h5>Description</h5>
             <div className="input-field col s12">
               <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChangeDescription} required/>
-              <label htmlFor="Description">Describe what you are saving on..</label>
+              <label htmlFor="Description">Enter your {`saving's`} description here</label>
             </div>
           </div>
-
           <div className="row highlight">
+            <h5>Category</h5>
+            <br />
             <div className="col s12">
-              <h5>Category</h5>
               <select name="Category" value={this.state.value} onChange={this.handleChangeCategory} required>
                 <option  value="" disabled defaultValue> </option>
                 <option value="Bills">Bills</option>
@@ -160,14 +160,14 @@ class EnterSavings extends Component {
               </select>
             </div>
           </div>
-          <br />
-
           <div className="row highlight">
+            <h5>Savings</h5>
             <div className="input-field col s12">
               <input type="number" name="Amount" className="validate"  onChange={this.handleChangeAmount} required/>
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>
+            <h5>Date</h5>
             <SingleDatePicker
               date={this.state.date}
               onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
@@ -177,7 +177,8 @@ class EnterSavings extends Component {
               withPortal={true}
             />
 
-            <br/>
+            <br />
+            <br />
           <input type="submit" value="Submit" />
         </form>
       </div>

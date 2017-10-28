@@ -16,14 +16,14 @@ class AllSavings extends Component {
     this.deleteSaved = this.deleteSaved.bind(this);
   }
 
-  
+
   // componentDidMount(){
   //   fetch("/bankRecords/savedList")
   //   .then((response) => response.json())
-  //   .then((response) => this.setState({savings: response})) 
-    
+  //   .then((response) => this.setState({savings: response}))
+
   // }
-  
+
 
   check(e) {
     console.log("savings state: ", this.props.savings);
@@ -40,9 +40,9 @@ class AllSavings extends Component {
       data: trans
     }).then(function (response) {
       currentState.splice(i, 1);
-    
+
        a.props.setSavings(currentState);
-    
+
     }).catch(function (error) {
       console.log("error: ", error);
     })
@@ -116,21 +116,17 @@ class AllSavings extends Component {
                     <option value="Income" data-key={index}>Income</option>
                   </select>
                 </div>
-                <div className='col s2'>{saving.Amount}</div>
+                <div className='col s2'>${saving.Amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                 <div className='col s2'>{saving.date}</div>
-
-
                 <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteSaved}>Delete</div>
-
               </section>  ))
 
     return (
       <div className="allSavings">
-        <h4>Those could be your expenses, instead those are your savings!</h4>
         <div className="row">
           <div className='col s4'>Description</div>
           <div className='col s3'>Category</div>
-          <div className='col s2'>Money Saved ($)</div>
+          <div className='col s2'>Money Saved</div>
           <div className='col s2'>Created on</div>
           <div className='col s1'>Delete</div>
         </div>
