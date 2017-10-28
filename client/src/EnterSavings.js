@@ -9,6 +9,7 @@ import moment from 'moment';
 import { DateRangePicker, SingleDatePicker } from 'react-dates';
 
 
+
 //form for entering
 class EnterSavings extends Component {
   constructor(props) {
@@ -179,6 +180,7 @@ class EnterSavings extends Component {
               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
               isOutsideRange={() => false}
               withPortal={true}
+              numberOfMonths={1}
             />
 
             <br/>
