@@ -44,9 +44,6 @@ class EditBankData extends Component {
       user: user,
       records: records
     })
-    // fetch('/bankRecords/' + user)
-    //   .then(response => response.json())
-    //   .then(response => this.setState({records: response}))
     }
 
 
@@ -62,11 +59,12 @@ class EditBankData extends Component {
 
     let mappedItems = this.props.records.map((records, index) => (
           <section onClick={this.change} className="row z-depth-1" key={index}>
+
+            <div>
                 <div className='col s3' data-key={index}>{records.TransDate} {records.PostedDate}</div>
                 <div className='col s3' data-key={index}>{records.Description}</div>
                 <div className='col s3' data-key={index}>{records.Amount}</div>
                 <div className='col s2'>
-
                   <select name='' className="browser-default " value={this.state.value} data-key={index} onChange={this.categoryChange}>
                   if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
                       <option value="" disabled  value></option>
@@ -87,11 +85,10 @@ class EditBankData extends Component {
                   </select>
                 </div>
 
-
-
                 <div className="waves-effect waves-light btn red col s1  " data-key={index} onClick={this.deleteTransaction}>Delete</div>
-
+                </div>
           </section>  ))
+
     return (
       <div>{mappedItems}</div>
     );

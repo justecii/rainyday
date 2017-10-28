@@ -28,7 +28,7 @@ class EnterSavings extends Component {
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
   handleChangeDescription(e){
     // console.log('handleChangeDescription', e.target.value)
     this.setState({
@@ -41,14 +41,14 @@ class EnterSavings extends Component {
       Category: e.target.value
     });
   }
-  
+
   handleChangeAmount(e){
     // console.log('handleChangeAmount', e.target.value)
     this.setState({
       Amount: e.target.value
     });
   }
-  
+
   handleChangeDate(date){
     console.log('handleChangeDate', date)
 
@@ -59,7 +59,7 @@ class EnterSavings extends Component {
     })
   }
 
-  resetForm(e) { 
+  resetForm(e) {
     document.getElementById("myform").reset();
     this.setState({
       date: null
@@ -82,7 +82,7 @@ class EnterSavings extends Component {
     // console.log("Amount: ", Amount);
     let user = this.state.user;
     let date = this.state.date.format("MM/DD/YY");
-  
+
     //add all three variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
       Description: Description,
@@ -94,7 +94,7 @@ class EnterSavings extends Component {
     }
     //data: Ojbect of the three variables
     //re-set state based on updated form information...
-    
+
     //add the new object (Object) to tempArr -- Google: ".shift() for objects"
     //setState to tempArr (which is already done below)
     // console.log("state: ", this.state.savings);
@@ -108,24 +108,20 @@ class EnterSavings extends Component {
     })
   }
 
-  
-  
-  
+
+
+
 
   componentDidMount() {
     let user = this.props.user
     this.setState({
       user: user
     })
-    // fetch('/bankRecords/' + user)
-    //   .then(response => response.json())
-    //   // .then(response => this.setState({records: response}))
-    // .then(response => this.setState({savings: response}))
     }
 
 
-  
-  
+
+
 
   render() {
     let user = this.props.user
@@ -135,17 +131,17 @@ class EnterSavings extends Component {
     return (
       <div className="EnterSavingsWrapper">
         <h4>Choose your savings</h4>
-        <form id="myform" onSubmit={(e) => {this.handleSubmit(e); this.resetForm(e)}}>    
+        <form id="myform" onSubmit={(e) => {this.handleSubmit(e); this.resetForm(e)}}>
           <div className="row highlight">
             <div className="input-field col s12">
               <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChangeDescription} required/>
               <label htmlFor="Description">Describe what you are saving on..</label>
             </div>
           </div>
-      
+
           <div className="row highlight">
-            <div className="col s12">  
-              <h5>Category</h5>  
+            <div className="col s12">
+              <h5>Category</h5>
               <select name="Category" value={this.state.value} onChange={this.handleChangeCategory} required>
                 <option  value="" disabled defaultValue> </option>
                 <option value="Bills">Bills</option>
@@ -162,13 +158,13 @@ class EnterSavings extends Component {
                 <option value="Miscellaneous">Miscellaneous</option>
                 <option value="Income">Income</option>
               </select>
-            </div>  
-          </div>  
+            </div>
+          </div>
           <br />
-      
+
           <div className="row highlight">
             <div className="input-field col s12">
-              <input type="number" name="Amount" className="validate"  onChange={this.handleChangeAmount} required/>  
+              <input type="number" name="Amount" className="validate"  onChange={this.handleChangeAmount} required/>
               <label htmlFor="Amount">Money saved ($)</label>
             </div>
           </div>

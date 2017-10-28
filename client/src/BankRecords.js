@@ -26,13 +26,10 @@ class BankRecords extends Component {
 
   papaData(uploaded) {
     console.log("papaData in BankRecords: ", uploaded);
-    // let user = this.state.user
     console.log("user in PAPADATA: ", uploaded.user);
-    // console.log("this.state.user in papaData: ", this.state.user);
     let user = uploaded.user;
     let a = this;
     let data;
-    // let tempArr = this.state.records;
     let papaParse = Papa.parse(uploaded, {
       header: true,
       delimiter: ",",
@@ -44,9 +41,6 @@ class BankRecords extends Component {
           item.userId = user
           item.isSaved = false
         })
-        // console.log("tempArr1: ", tempArr);
-        // tempArr.push(data);
-        // console.log("tempArr2: ", tempArr);
         for (let obj of data) {
           obj['CheckNumber'] = obj['Check or Slip #'];
           obj['TransDate'] = obj['Trans Date'];
@@ -59,8 +53,6 @@ class BankRecords extends Component {
         a.setState({
           records: data
         })
-        console.log("data2: ", data);
-
         axios.post('/bankRecords', {
           data: data
         }).then(function (response) {
@@ -68,9 +60,6 @@ class BankRecords extends Component {
         }).catch(function (error) {
           console.log("error: ", error)
         })
-        // a.setState({
-        //   records: tempArr
-        // })
       } })
   }
 
@@ -97,19 +86,36 @@ class BankRecords extends Component {
     let category = e.target.value;
     // console.log("category: ", category);
     let currentState = this.state.records;
-    // console.log("currentState: ", currentState);
+    console.log("currentState1: ", currentState);
     currentState[i].Category = category
+    console.log("currentState2: ", currentState);
+    this.setState({
+      records: currentState
+    })
     let trans = this.state.records[i]._id;
     let a = this;
     axios.put('/bankRecords/change', {
       data: trans,
       Category: category
     }).then(function (response) {
-      a.setState({
-        records: currentState
-      })
+      // a.setState({
+      //   records: currentState
+      // })
     }).catch(function (error) {
       console.log("error: ", error);
+    })
+  }
+
+  updateState(bankRecords) {
+    let records = [];
+    for (var i = 0; i < bankRecords.length; i++) {
+      if (bankRecords[i].isSaved === false) {
+        records.push(bankRecords[i])
+      }
+      // console.log("bankRecords: ", records);
+    }
+    this.setState({
+      records: records
     })
   }
 
@@ -123,7 +129,8 @@ class BankRecords extends Component {
     // console.log("XXXX user XXXX: ", user);
     fetch('/bankRecords/' + user)
       .then(response => response.json())
-      .then(response => this.setState({records: response}))
+      .then(response =>
+      this.updateState(response))
     }
 
   render() {
