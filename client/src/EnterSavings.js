@@ -181,6 +181,7 @@ class EnterSavings extends Component {
               isOutsideRange={() => false}
               withPortal={true}
               numberOfMonths={1}
+              showDefaultInputIcon={true}
             />
 
             <br/>
