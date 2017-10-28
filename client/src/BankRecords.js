@@ -32,6 +32,7 @@ class BankRecords extends Component {
     let user = uploaded.user;
     let a = this;
     let data;
+    // let tempArr = this.state.records;
     let papaParse = Papa.parse(uploaded, {
       header: true,
       delimiter: ",",
@@ -43,13 +44,23 @@ class BankRecords extends Component {
           item.userId = user
           item.isSaved = false
         })
-
-        // data.map(id => id.userId = user);
-        // // console.log("data userId: ", data);
-        // data.map(saved => saved.isSaved = false)
-        // // console.log("data isSaved: ", data);
-
+        // console.log("tempArr1: ", tempArr);
+        // tempArr.push(data);
+        // console.log("tempArr2: ", tempArr);
+        for (let obj of data) {
+          obj['CheckNumber'] = obj['Check or Slip #'];
+          obj['TransDate'] = obj['Trans Date'];
+          obj['PostDate'] = obj['Post Date'];
+          obj['PostedDate'] = obj['Posting Date'];
+          delete obj['Trans Date'];
+          delete obj['Post Date'];
+          delete obj['Posting Date'];
+        }
+        a.setState({
+          records: data
+        })
         console.log("data2: ", data);
+
         axios.post('/bankRecords', {
           data: data
         }).then(function (response) {
@@ -57,9 +68,9 @@ class BankRecords extends Component {
         }).catch(function (error) {
           console.log("error: ", error)
         })
-        a.setState({
-          records: data
-        })
+        // a.setState({
+        //   records: tempArr
+        // })
       } })
   }
 
@@ -82,11 +93,11 @@ class BankRecords extends Component {
   handleCategChange(e) {
     console.log("target: ", e);
     let i = e.target.getAttribute('data-key');
-    console.log("i: ", i);
+    // console.log("i: ", i);
     let category = e.target.value;
-    console.log("category: ", category);
+    // console.log("category: ", category);
     let currentState = this.state.records;
-    console.log("currentState: ", currentState);
+    // console.log("currentState: ", currentState);
     currentState[i].Category = category
     let trans = this.state.records[i]._id;
     let a = this;
@@ -109,7 +120,7 @@ class BankRecords extends Component {
     this.setState({
       user: user
     })
-    console.log("XXXX user XXXX: ", user);
+    // console.log("XXXX user XXXX: ", user);
     fetch('/bankRecords/' + user)
       .then(response => response.json())
       .then(response => this.setState({records: response}))
@@ -117,8 +128,8 @@ class BankRecords extends Component {
 
   render() {
     let user = this.props.user
-    console.log("user in client/BankRecords.js: ", user);
-    console.log("this.state.user bankrecords: ", this.state.user);
+    // console.log("user in client/BankRecords.js: ", user);
+    // console.log("this.state.user bankrecords: ", this.state.user);
 
     return (
 

@@ -25,20 +25,6 @@ class EditBankData extends Component {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
     this.props.handleDelete(i);
-
-    // let currentState = this.props.records;
-    // let trans = this.props.records[i]._id;
-    // let a = this;
-    // axios.put('/bankRecords', {
-    //   data: trans
-    // }).then(function (response) {
-    //   currentState.splice(i, 1);
-    //   a.setState({
-    //     records: currentState
-    //   })
-    // }).catch(function (error) {
-    //   console.log("error: ", error);
-    // })
   }
 
   categoryChange(e) {
@@ -52,8 +38,8 @@ class EditBankData extends Component {
     //add function to add blank for uncategorized
     let user = this.props.user
     let records = this.props.records
-    console.log("props records componentDid editbankdata: ", this.props.records)
-    console.log("state records componentDid editbankdata: ", this.state.records)
+    // console.log("props records componentDid editbankdata: ", this.props.records)
+    // console.log("state records componentDid editbankdata: ", this.state.records)
     this.setState({
       user: user,
       records: records
@@ -67,8 +53,8 @@ class EditBankData extends Component {
   render() {
     let user = this.props.user
     let records = this.props.records
-    console.log("props records render() editbankdata: ", this.props.records)
-    console.log("state records render() editbankdata: ", this.state.records)
+    // console.log("props records render() editbankdata: ", this.props.records)
+    // console.log("state records render() editbankdata: ", this.state.records)
     // let categName = this.state.records.map((categ, index) => (
     //     {if (categ.Category !== "" || {categ.Category} !== undefined || {categ.Category} !== null) {
     //      {categ.Category} } else { } }</option>
