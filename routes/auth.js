@@ -32,9 +32,11 @@ router.post('/login', function(req, res, next) {
       var token = jwt.sign(user.toObject(), secret, {
         expiresIn: 60 * 60 * 24 // expires in 24 hours
       });
+      
       req.flash('success', 'You are now logged in.')
       console.log(user)
       res.send({user: user, token: token});
+      
     } else {
       console.log("passwords don't match");
       // Return an error

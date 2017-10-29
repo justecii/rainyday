@@ -60,7 +60,7 @@ class App extends Component {
     }
   render() {
     console.log("XXXXXXXXXX: ", this.state)
-    let user = this.props.user
+    let user = this.state.user
     console.log("user in client/App.js: ", user);
     console.log("APP.JS STATE", this.state)
     // if the token exists display the router
@@ -91,6 +91,9 @@ class App extends Component {
             </nav>
             <div>
               <Route exact path="/"
+                render={() => <Home childProp={this.state.childProp} logout={this.logout} />}
+              />
+              <Route exact path="/login"
                 render={() => <Home childProp={this.state.childProp} logout={this.logout} />}
               />
               <Route exact path="/savingsReactRoute"
