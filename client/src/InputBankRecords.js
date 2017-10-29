@@ -25,7 +25,7 @@ class InputBankRecords extends Component {
     // console.log("uploadFile: ", e.target)
     let uploaded = e.target.files[0];
     let user = this.state.user;
-    console.log("XXXX user in uploadfile XXX: ", user);
+    // console.log("XXXX user in uploadfile XXXX: ", user);
     uploaded.user = user;
       this.props.papaData(uploaded);
   }
@@ -41,22 +41,20 @@ class InputBankRecords extends Component {
 
   render() {
     let user = this.props.user
-    console.log("user in client/InputBankRecords: ", user);
-    console.log("this.state.records inputbankrecords: ", this.state.records);
-    console.log("this.props.records inputbankrecords: ", this.props.user);
+    // console.log("user in client/InputBankRecords: ", user);
+    // console.log("this.state.records inputbankrecords: ", this.state.records);
+    // console.log("this.props.records inputbankrecords: ", this.props.user);
 
     return (
-      <div>
+      <div className="inputData">
         <form action="/bankRecordsReactRoute">
           <div onClick={this.change} className="file-field input-field col s12 ">
-
             <div className="btn #00838f cyan darken-3">
               <span>File</span>
               <input type="file" name="uploadCSV" onChange={this.uploadFile}/>
             </div>
           </div>
         </form>
-
       </div>
     );
   }

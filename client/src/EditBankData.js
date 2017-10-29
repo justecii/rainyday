@@ -17,28 +17,16 @@ class EditBankData extends Component {
   }
 
   change(e) {
-    console.log(this.props.records);
+    console.log("this.props.records: ", this.props.records);
+    console.log("this.state.records: ", this.state.records);
     console.log("user: ", this.state.user)
   }
 
   deleteTransaction(e) {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
+    console.log("deleteTransaction");
     this.props.handleDelete(i);
-
-    // let currentState = this.props.records;
-    // let trans = this.props.records[i]._id;
-    // let a = this;
-    // axios.put('/bankRecords', {
-    //   data: trans
-    // }).then(function (response) {
-    //   currentState.splice(i, 1);
-    //   a.setState({
-    //     records: currentState
-    //   })
-    // }).catch(function (error) {
-    //   console.log("error: ", error);
-    // })
   }
 
   categoryChange(e) {
@@ -52,23 +40,20 @@ class EditBankData extends Component {
     //add function to add blank for uncategorized
     let user = this.props.user
     let records = this.props.records
-    console.log("props records componentDid editbankdata: ", this.props.records)
-    console.log("state records componentDid editbankdata: ", this.state.records)
+    // console.log("props records componentDid editbankdata: ", this.props.records)
+    // console.log("state records componentDid editbankdata: ", this.state.records)
     this.setState({
       user: user,
       records: records
     })
-    // fetch('/bankRecords/' + user)
-    //   .then(response => response.json())
-    //   .then(response => this.setState({records: response}))
     }
 
 
   render() {
     let user = this.props.user
     let records = this.props.records
-    console.log("props records render() editbankdata: ", this.props.records)
-    console.log("state records render() editbankdata: ", this.state.records)
+    // console.log("props records render() editbankdata: ", this.props.records)
+    // console.log("state records render() editbankdata: ", this.state.records)
     // let categName = this.state.records.map((categ, index) => (
     //     {if (categ.Category !== "" || {categ.Category} !== undefined || {categ.Category} !== null) {
     //      {categ.Category} } else { } }</option>
@@ -76,12 +61,13 @@ class EditBankData extends Component {
 
     let mappedItems = this.props.records.map((records, index) => (
           <section onClick={this.change} className="row z-depth-1" key={index}>
+
+            <div>
                 <div className='col s3' data-key={index}>{records.TransDate} {records.PostedDate}</div>
                 <div className='col s3' data-key={index}>{records.Description}</div>
                 <div className='col s3' data-key={index}>{records.Amount}</div>
                 <div className='col s2'>
-
-                  <select name='' className="browser-default " value={this.state.value} data-key={index} onChange={this.categoryChange}>
+                  <select name='' className="browser-default " data-key={index} onChange={this.categoryChange}>
                   if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
                       <option value="" disabled  value></option>
                     } else { <option value="" disabled  selected>{records.Category}</option> }
@@ -101,13 +87,24 @@ class EditBankData extends Component {
                   </select>
                 </div>
 
-
-
                 <div className="waves-effect waves-light btn red col s1  " data-key={index} onClick={this.deleteTransaction}>Delete</div>
-
+                </div>
           </section>  ))
+
     return (
-      <div>{mappedItems}</div>
+      <div>
+        <br/>
+        <section className="row   sectionRow" >
+          <ul id='tableLable' className='notmoving ' onClick={this.change}>
+            <li className='col s3'>Date</li>
+            <li className='col s3'>Description</li>
+            <li className='col s3'>Amount</li>
+            <li className='col s2'>Category</li>
+          </ul>
+        </section>
+        <br />
+        <div className="mappedItems">{mappedItems}</div>
+      </div>
     );
   }
 }

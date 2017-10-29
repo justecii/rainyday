@@ -11,7 +11,7 @@ class Savings extends Component {
     this.state = {
       user: {},
       savings: []
-      
+
     }
     this.setSavings = this.setSavings.bind(this);
     this.addSaving = this.addSaving.bind(this);
@@ -48,8 +48,14 @@ class Savings extends Component {
     return (
 
       <div className="SavingsWrapper container ">
-       
+        <h2>My Savings</h2>
+        <p>When you decide not to spend money you can log those savings in the form below</p>
+        <br />
+        <h4>Choose your savings</h4>
+        <p>Enter a brief description of your savings and {`it's`} respective category and dollar amount below.</p>
         <EnterSavings  addSaving={this.addSaving} user={user}/>
+        <br />
+        <h4>Savings</h4>
         <AllSavings savings={this.state.savings}  setSavings={this.setSavings} user={user}/>
         {/* <SavingsSummary user={user}/> */}
       </div>
