@@ -8,6 +8,8 @@ import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import { DateRangePicker, SingleDatePicker } from 'react-dates';
 
+//TEST COMMENT FOR PULL REQUEST - JENNA BLAAAAH
+
 
 //form for entering
 class EnterSavings extends Component {
@@ -143,7 +145,7 @@ class EnterSavings extends Component {
             <br />
             <div className="col s12">
               <select name="Category" value={this.state.value} onChange={this.handleChangeCategory} required>
-                <option  value="" disabled defaultValue> </option>
+                <option  value="" disabled defaultValue selected> </option>
                 <option value="Bills">Bills</option>
                 <option value="Groceries">Groceries</option>
                 <option value="Transportation">Transportation</option>
@@ -175,6 +177,8 @@ class EnterSavings extends Component {
               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
               isOutsideRange={() => false}
               withPortal={true}
+              numberOfMonths={1}
+              showDefaultInputIcon={true}
             />
 
             <br />

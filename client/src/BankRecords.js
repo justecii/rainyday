@@ -142,6 +142,7 @@ class BankRecords extends Component {
 
     return (
 
+
       <div className="BankRecordsWrapper  " >
       <h2 onClick={this.change}>My Transactions</h2>
       <p>You can view all of your imported transactions here.</p>
@@ -164,6 +165,7 @@ class BankRecords extends Component {
             user={user}
             />
       </div>
+
     );
   }
 }
