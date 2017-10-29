@@ -17,10 +17,6 @@ var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/mern-local-auth');
 mongoose.connect('mongodb://localhost/rainyDay');
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 20f95289062eb4659571de61300566538066c1eb
 // var BankRecord = require('./models/bankRecord');
 var User = require('./models/user');
 var index = require('./routes/index');
@@ -75,27 +71,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/bankRecords', bankRecords);
-<<<<<<< HEAD
 
-=======
->>>>>>> 20f95289062eb4659571de61300566538066c1eb
 
-// catch 404 and forward to error handler - commented out
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
-//
-// // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-//
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
 
 module.exports = app;

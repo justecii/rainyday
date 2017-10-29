@@ -70,7 +70,10 @@ select {
 .movedown{
   margin-top:60px;
 }
-
+.movedownalittle{
+	margin-top:10px;
+	
+}
 /* .notmoving{
   position: fixed;
 	background-color: rgb(92, 119, 177);
@@ -177,7 +180,8 @@ select {
 
 input[type=text]:not(.browser-default){
 	margin:0;
-	text-align: center;
+	text-align: left;
+	border-bottom: 0px;
 
 }
 

@@ -23,7 +23,7 @@
 * Run `npm install` to install dependencies
 * Use `npm start` to start your application
 
-* View this project on  <a href="#">Github</a>
+* View this project on  <a href="#">Heroku</a>
 
 # Approach taken: #
 
@@ -50,7 +50,7 @@ _wireframes:_
 
 
 _planing the flow of the app:_
-![picture](static/img/flowchartapp.png)
+![picture](client/public/img/flowchartapp.png)
 
 _planing the routes:_
 ![picture](client/public/img/routes.png)
@@ -63,11 +63,9 @@ _Execution:_
 
 3.  We made the routes  and created the front-end pages with React.
 
-4.    
+4.  Designed with Materilize    
 
-5.  Designed with Materilize    
-
-6.  Github mutual contribution    
+5.  Github mutual contribution    
 
 # Unsolved problems #
 _Things we would love to accomplish later:_

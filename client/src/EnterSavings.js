@@ -20,7 +20,7 @@ class EnterSavings extends Component {
       user: {}
     };
     //thisis the binding line necessary to keep this bound correctly
-    // this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
     this.handleChangeAmount = this.handleChangeAmount.bind(this);
@@ -63,22 +63,14 @@ class EnterSavings extends Component {
 
 
   handleSubmit(e) {
-    // console.log('in savings value this is this.date.value', e)
-    // console.log("Description: ", this.state.Description);
-    // console.log("Category: ", this.state.Category);
-    // console.log("Amount: ", this.state.Amount);
-    // console.log("date: ", this.state.date);
     e.preventDefault();
     let Description = this.state.Description;
     let Category = this.state.Category;
     let Amount = this.state.Amount;
-    // console.log("descript: ", Description);
-    // console.log("category: ", Category);
-    // console.log("Amount: ", Amount);
     let user = this.state.user;
     let date = this.state.date.format("MM/DD/YY");
 
-    //add all three variables to object {} -- let Object = {insert object of three variables}
+    //add all the variables to object {} -- let Object = {insert object of three variables}
     let newObject = {
       Description: Description,
       Category: Category,
@@ -87,12 +79,6 @@ class EnterSavings extends Component {
       isSaved: true,
       userId: user
     }
-    //data: Ojbect of the three variables
-    //re-set state based on updated form information...
-
-    //add the new object (Object) to tempArr -- Google: ".shift() for objects"
-    //setState to tempArr (which is already done below)
-    // console.log("state: ", this.state.savings);
    let a = this;
     axios.post('/bankRecords/savedList', {
       data: newObject//insert object of the three variables
@@ -102,10 +88,6 @@ class EnterSavings extends Component {
       console.log("error: ", error);
     })
   }
-
-
-
-
 
   componentDidMount() {
     let user = this.props.user
@@ -138,11 +120,7 @@ class EnterSavings extends Component {
             <br />
             <div className="col s12">
               <select name="Category" value={this.state.value} onChange={this.handleChangeCategory} required>
-<<<<<<< HEAD
-                <option  value="" disabled defaultValue selected> </option>
-=======
-                <option  value="" disabled selected default> </option>
->>>>>>> unclebconnor-fridaysync
+                <option  value="" > </option>
                 <option value="Bills">Bills</option>
                 <option value="Groceries">Groceries</option>
                 <option value="Transportation">Transportation</option>
@@ -179,9 +157,11 @@ class EnterSavings extends Component {
             />
 
             <br />
-            <br />
-          <input type="submit" value="Submit" />
+            <input className="btn waves-effect waves-light movedownalittle" type="submit" value="Submit"  />  
         </form>
+        <br/>
+        <div className='divider'> </div>
+
       </div>
     );
   }
