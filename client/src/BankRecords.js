@@ -164,6 +164,21 @@ class BankRecords extends Component {
             records={this.state.records}
             user={user}
             />
+            {/* tool  */}
+            <div className="fixed-action-btn toolbar">
+                  <a className="btn-floating btn-large  #26a69a teal lighten-1">
+                       <i className="large material-icons">grade</i>
+                  </a>
+                  <ul className='row'>
+                      <li className='col s2'><a href="#!"><i >Date</i></a></li>
+                      <li className='col s2'><a href="#!"><i >Description</i></a></li>
+                      <li className='col s2'><a href="#!"><i >Amount</i></a></li>
+                      <li className='col s2'><a href="#!"><i >Category</i></a></li>
+                      <li className='col s2'><a href="#!"><i >Delete</i></a></li>
+
+                  </ul>
+                </div>
+                {/* end tool */}
       </div>
 
     );

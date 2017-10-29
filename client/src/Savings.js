@@ -90,6 +90,16 @@ class Savings extends Component {
                     handleDelete={this.handleDelete}
                     handleCatChange={this.handleCatChange}
                     />
+                    {/* tool tip */}
+        <div className="fixed-action-btn toolbar">
+          <a className="btn-floating btn-large #26a69a teal lighten-1">
+            <i className="large material-icons">flare</i>
+          </a>
+           <ul>
+               <li className="waves-effect waves-light"><a href="#!"><i >Here you can add your savings</i></a></li>
+          </ul>
+      </div>
+      {/* end of tool tip */}
       </div>
 
     );
