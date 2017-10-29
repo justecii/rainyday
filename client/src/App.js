@@ -55,28 +55,14 @@ class App extends Component {
     this.setState({
       user: user
     })
-    // console.log("user props: ", this.props.user)
-    // console.log("user state: ", this.state.user)
+    console.log("user props: ", this.props.user)
+    console.log("user state: ", this.state.user)
     }
   render() {
-<<<<<<< HEAD
-
-    // console.log("XXXXXXXXXX: ", this.state)
-    let user = this.props.user
-    // console.log("user in client/App.js: ", user);
-    // console.log("APP.JS STATE", this.state)
-
-=======
-<<<<<<< HEAD
     console.log("XXXXXXXXXX: ", this.state)
     let user = this.state.user
-=======
-    // console.log("XXXXXXXXXX: ", this.state)
-    let user = this.props.user
->>>>>>> 20f95289062eb4659571de61300566538066c1eb
     console.log("user in client/App.js: ", user);
     console.log("APP.JS STATE", this.state)
->>>>>>> unclebconnor-fridaysync
     // if the token exists display the router
     if(this.state.token !== "" && this.state.token !== undefined){ //need this active to use auth
   // if(true){
@@ -87,7 +73,7 @@ class App extends Component {
             <div className="nav-wrapper">
             <a href="/" className="brand-logo right"><i className="material-icons left">beach_access </i>RainyDay </a>
             <a href="/" className="button-collapse "><i className="material-icons">menu</i></a>
-              <div className='hide-on-sm-and-down'>
+              <div className='hide-on-med-and-down'>
               <Link to="/" className="btn btn-large #99d3df cyan darken-3 ">Home</Link>
               <Link to="/savingsReactRoute" className="btn btn-large #88bbd6 cyan darken-3 ">Savings</Link>
               <Link to="/bankRecordsReactRoute" className="btn btn-large #00838f cyan darken-3 ">Bank Records</Link>
@@ -116,11 +102,11 @@ class App extends Component {
               <Route exact path="/bankRecordsReactRoute"
                 render={() => <BankRecords user={this.state.user} />}
               />
-              <Route exact path="/userDataReactRoute"
+              <Route exact path="/userDataReactRoute" 
                 render={() => <UserData user={this.state.user} />}
               />
-
-
+             
+              
             </div>
           </div>
         </Router>
@@ -129,7 +115,7 @@ class App extends Component {
       return(
         <Router>
         <div className="App">
-
+                      
               <nav className="RouterLinks  #00838f cyan darken-3  navbar">
                  <div className="nav-wrapper">
                    <a href="/" className="brand-logo right"><i className="material-icons left">beach_access </i>RainyDay </a>
@@ -149,9 +135,9 @@ class App extends Component {
               <Route exact path="/Login"
                 render={() => <Login lift={this.liftTokenToState} />}
               />
-
+              
             </div>
-
+          
         </div>
         </Router>
       )

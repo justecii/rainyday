@@ -361,7 +361,7 @@ class UserData extends Component {
     return (
       <div className="UserDataWrapper">
         
-<<<<<<< HEAD
+
         <p>Make Toolbar for datepicker with directions</p>
         <p>First Date Range</p>
         <DateRangePicker
@@ -394,7 +394,7 @@ class UserData extends Component {
         <UserSummary />
         <UserPieCharts pieData={this.state.pieDataFullRange}/>
         {/* <UserBarGraph barDataRange1={this.state.barDataRange1} barDataRange2={this.state.barDataRange2}/> */}
-=======
+
         <div className="row">
           <div className="col m6">
             <div className="col s6">
@@ -481,7 +481,7 @@ class UserData extends Component {
             barDataSaved1={this.state.barDataSaved1}
             barDataSaved2={this.state.barDataSaved2}
           />
->>>>>>> 20f95289062eb4659571de61300566538066c1eb
+
       </div>
     );
   }
