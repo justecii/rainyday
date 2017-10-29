@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import EnterSavings from './EnterSavings.js';
 import SavingsSummary from './SavingsSummary.js';
 import AllSavings from './AllSavings.js';
+import axios from 'axios';
+
 import './App.css';
 
 //parent component
@@ -11,15 +13,44 @@ class Savings extends Component {
     this.state = {
       user: {},
       savings: []
-
+      
     }
-    this.setSavings = this.setSavings.bind(this);
     this.addSaving = this.addSaving.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleCatChange = this.handleCatChange.bind(this);
   }
 
-  setSavings(savings){
+  handleDelete(i) {
+    console.log("handleDelete(i): ", i);
+    let currentState = this.state.savings;
+    let trans = this.state.savings[i]._id;
+    let a = this;
+    axios.put('/bankRecords', {
+      data: trans
+    }).then(function (response) {
+      currentState.splice(i, 1);
+       a.setState({savings: currentState});
+    }).catch(function (error) {
+      console.log("error: ", error);
+    })
+  }
+
+  handleCatChange(e){
+    let i = e.target.getAttribute('data-key');
+    let category = e.target.value;
+    let currentState = this.state.savings;
+    currentState[i].Category = category;
     this.setState({
-      savings: savings
+      savings: currentState
+    })
+    let trans = this.state.savings[i]._id;
+    axios.put('/bankRecords/change', {
+      data: trans,
+      Category: category
+    }).then(function (response) {
+      console.log("response: ", response);
+    }).catch(function (error) {
+      console.log("error: ", error);
     })
   }
 
@@ -33,31 +64,42 @@ class Savings extends Component {
 
   componentDidMount() {
     let user = this.props.user
+    console.log('user!!!!!', user);
     this.setState({
       user: user
     })
-    fetch('/bankRecords/' + user)
-      .then(response => response.json())
-      .then(response => this.setState({records: response}))
+    fetch('/bankRecords/SavingsSummary/' + user)
+    .then(response => response.json())
+    .then(response => {
+      this.setState({savings: response})})
     }
 
 
   render() {
     let user = this.props.user
+    console.log("savings state in render: ", this.state.savings);
     // console.log("user in client/Savings.js: ", user);
     return (
 
       <div className="SavingsWrapper container ">
-        <h2>My Savings</h2>
-        <p>When you decide not to spend money you can log those savings in the form below</p>
-        <br />
-        <h4>Choose your savings</h4>
-        <p>Enter a brief description of your savings and {`it's`} respective category and dollar amount below.</p>
+       
         <EnterSavings  addSaving={this.addSaving} user={user}/>
-        <br />
-        <h4>Savings</h4>
-        <AllSavings savings={this.state.savings}  setSavings={this.setSavings} user={user}/>
-        {/* <SavingsSummary user={user}/> */}
+        <AllSavings savings={this.state.savings}  
+                    setSavings={this.setSavings} 
+                    user={user}
+                    handleDelete={this.handleDelete}
+                    handleCatChange={this.handleCatChange}
+                    />
+                    {/* tool tip */}
+        <div className="fixed-action-btn toolbar">
+          <a className="btn-floating btn-large #26a69a teal lighten-1">
+            <i className="large material-icons">flare</i>
+          </a>
+           <ul>
+               <li className="waves-effect waves-light"><a href="#!"><i >Here you can add your savings</i></a></li>
+          </ul>
+      </div>
+      {/* end of tool tip */}
       </div>
 
     );
