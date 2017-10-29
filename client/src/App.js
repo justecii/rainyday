@@ -22,7 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      token: '',
+      token: localStorage.mernToken,
       user: {}
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
@@ -64,7 +64,7 @@ class App extends Component {
     console.log("user in client/App.js: ", user);
     console.log("APP.JS STATE", this.state)
     // if the token exists display the router
-    if(this.state.token!==""){ //need this active to use auth
+    if(this.state.token !== "" && this.state.token !== undefined){ //need this active to use auth
   // if(true){
       return (
         <Router>
