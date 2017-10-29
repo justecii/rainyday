@@ -8,6 +8,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import { DateRangePicker, SingleDatePicker } from 'react-dates';
 
+
 class EnterSavings extends Component {
   constructor(props) {
     super(props);
@@ -177,6 +178,8 @@ class EnterSavings extends Component {
               onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
               isOutsideRange={() => false}
               withPortal={true}
+              numberOfMonths={1}
+              showDefaultInputIcon={true}
             />
 
             <br/>
