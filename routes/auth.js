@@ -86,7 +86,7 @@ router.get('/logout', function(req, res, next) {
   // TODO: will need to invalidate the token here
   req.logout();
   req.flash('success', 'You have logged out. Goodbye!');
-  res.redirect('/bankRecordsReactRoute');
+  res.redirect('/');
 });
 
 // This is checked on a browser refresh
