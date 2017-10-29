@@ -17,7 +17,8 @@ class UserPieCharts extends Component {
       toolTipValue:{
         Category:'empty',
         Amount:0,
-        Percent:0
+        Percent:0,
+        color:""
       },
       width: 315,
       height:315
@@ -30,7 +31,6 @@ class UserPieCharts extends Component {
 
   componentWillReceiveProps(nextProps) {
     var pieProps = nextProps.pieData;
-    // console.log("pieProps", pieProps)
     this.setState({
       pieData: pieProps
     })
@@ -38,19 +38,17 @@ class UserPieCharts extends Component {
 
 
   showToolTip(data,e){
-    console.log(data.x,data.y)
     var pagex = e.event.pageX
     var pagey = e.event.pageY
     var cssVal={'left':(pagex),'top':(pagey)};
-
-    console.log("cssval",cssVal)
     $('.tooltip').css(cssVal).show();
 
     this.setState({
       toolTipValue:{
         category: data.category,
         amount: data.amount,
-        percent: data.percent
+        percent: data.percent,
+        color:data.color
       },
     })
   }
@@ -61,14 +59,14 @@ class UserPieCharts extends Component {
   }
 
   render() {
-    // console.log("PIE CHART STATE", this.state)
     return (
       <div className="UserPieChartsWrapper">
         <p>User Pie Charts Component</p>
         <div className="tooltip">
             <p>{this.state.toolTipValue.category}</p>
-            <p>${this.state.toolTipValue.amount}</p>
-            <p>{this.state.toolTipValue.percent*100}%</p>
+            <p>{this.state.toolTipValue.color}</p>
+            <p>${Math.round(this.state.toolTipValue.amount)}</p>
+            <p>{Math.round(this.state.toolTipValue.percent*100)}%</p>
         </div>
         <XYPlot
           xDomain={[-1, 1]}
@@ -80,6 +78,8 @@ class UserPieCharts extends Component {
             radiusType={'literal'}
             center={{x: 0, y: 0}}
             data={this.state.pieData}
+            colorDomain={[0,Math.round(this.state.pieData.length/2)*2,this.state.pieData.length]}
+            colorRange={['#8CA9B5','#EFC850','#D04448']}
             colorType={'literal'}
             onValueMouseOver={(datapoint,event)=>{this.showToolTip(datapoint,event)}}
             onValueMouseOut={(e)=>{this.hideToolTip(e)}}

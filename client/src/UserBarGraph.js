@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/react-vis/dist/style.css';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries,DiscreteColorLegend,Hint} from 'react-vis';
+import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries, HorizontalBarSeries,DiscreteColorLegend,Hint} from 'react-vis';
 import $ from 'jquery';
 
 class UserBarGraph extends Component {
@@ -52,7 +52,6 @@ class UserBarGraph extends Component {
     if(nextProps.barDataSaved2!==null || nextProps.barDataSaved2!==undefined){
       var saved2 = nextProps.barDataSaved2;
     }
-    // console.log(range1, range2)
     this.setState({
       data1: range1,
       data2: range2,
@@ -62,7 +61,6 @@ class UserBarGraph extends Component {
   }
 
   showToolTip(e,info){
-    // console.log(info.event.target);
     let cssVal={};
     cssVal = {'left':(info.event.pageX),'top':(info.event.pageY)};
     $('.barTooltip').css(cssVal).show();
@@ -72,7 +70,6 @@ class UserBarGraph extends Component {
         amount: e.y,
       }
     })
-    console.log(e)
   }
 
   hideToolTip(e){
@@ -80,22 +77,65 @@ class UserBarGraph extends Component {
   }
 
   render() {
-    console.log("BAR GRAPH STATE", this.state)
     return (
       
       <div className="UserBarGraphWrapper">
         <div className="barTooltip">
           <p>{this.state.toolTipValue.category}</p>
-          <p>{this.state.toolTipValue.amount}</p>
+          <p>{Math.round(this.state.toolTipValue.amount)}</p>
         </div>
-        <XYPlot 
-          height={400} 
-          width={800} 
-          xType={'ordinal'}
-          stackBy="y"
-        >
+        <div className="verticalBar">
+          <XYPlot 
+            height={400} 
+            width={850} 
+            xType={'ordinal'}
+            stackBy="y"
+          >
+            <VerticalGridLines />
+            <HorizontalGridLines />
+            <XAxis />
+            <YAxis />
+            <VerticalBarSeries //first range expenses
+              opacity={0.8}
+              color={'#26a69a'}
+              cluster="group1"
+              data={this.state.data1}
+              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
+              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            />
+            <VerticalBarSeries //second range expenses
+              opacity={0.8}
+              color={'#3661B0'}
+              cluster="group2" 
+              data={this.state.data2}
+              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
+              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            />
+            <VerticalBarSeries //first range saved
+              opacity={0.8}
+              color={'#FF8E3A'}
+              cluster="group1" 
+              data={this.state.saved1}
+              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
+              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            />
+            <VerticalBarSeries //second range saved
+              opacity={0.8}
+              color={'#FFBA3A'}
+              cluster="group2" 
+              data={this.state.saved2}
+              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
+              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            />
+          </XYPlot>
+        </div>
+      </div>
+    );
+  }
+}
+export default UserBarGraph;
 
-          <DiscreteColorLegend
+{/* <DiscreteColorLegend
             style={{position: 'absolute', left: '200px', top: '0px'}}
             orientation="horizontal" 
             items={[
@@ -108,39 +148,4 @@ class UserBarGraph extends Component {
                 color: '#79C7E3'
               }
             ]}
-          />
-          <VerticalGridLines />
-          <HorizontalGridLines />
-          <XAxis />
-          <YAxis />
-          <VerticalBarSeries //first range expenses
-            cluster="group1"
-            data={this.state.data1}
-            onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-            onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-          />
-          <VerticalBarSeries //second range expenses
-            cluster="group2" 
-            data={this.state.data2}
-            onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-            onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-          />
-          <VerticalBarSeries //first range saved
-            cluster="group1" 
-            data={this.state.saved1}
-            onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-            onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-          />
-          <VerticalBarSeries //second range saved
-            cluster="group2" 
-            data={this.state.saved2}
-            onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-            onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-          />
-         
-        </XYPlot>
-      </div>
-    );
-  }
-}
-export default UserBarGraph;
+          /> */}

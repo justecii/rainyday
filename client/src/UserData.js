@@ -24,12 +24,13 @@ class UserData extends Component {
       dateAmtRange1:[],
       dateAmtRange2:[],
       pieDataFullRange:[],
+      savedDataFullRange:[],
       startDate1: "7/23/17",
       endDate1:"8/31/17",
       startDate2: "9/1/17",
       endDate2: "11/30/17",
       pieRadius: 125,
-      pieRadius0: 75,
+      pieRadius0: 0,
     }
     this.makeUnique = this.makeUnique.bind(this);
     this.recordSoap = this.recordSoap.bind(this);
@@ -71,6 +72,7 @@ class UserData extends Component {
     let savedList1 = this.filterByRange(savedRecords,startDate1,endDate1)
     let savedList2 = this.filterByRange(savedRecords,startDate2,endDate2)
     let categoryListFullRange = this.uniqueCatByRange(cleanBankRecords,startDate1,endDate2) 
+    let savedListFullRange = this.uniqueCatByRange(savedRecords,startDate1,endDate2)
     let categoryListAllRecords = this.uniqueCatByRange(cleanBankRecords,startDate1,endDate2) //maybe trash
 
     // arrays of dates sorted
@@ -80,7 +82,6 @@ class UserData extends Component {
     allDates = this.sortDates(allDates)
     dateList1 = this.sortDates(dateList1)
     dateList2 = this.sortDates(dateList2)
-    console.log(allDates)
 
     // arrays with category and amount given a time range
     let newCatAmtRange1 = this.makeCatAmt(categoryListFullRange,expenseList1) //expense records needs to be by date
@@ -88,6 +89,7 @@ class UserData extends Component {
     let newCatAmtSaved1 = this.makeCatAmt(categoryListFullRange,savedList1)
     let newCatAmtSaved2 = this.makeCatAmt(categoryListFullRange,savedList2) //saved records needs to be by date range
     let newCatAmtFullRange = this.makeCatAmt(categoryListFullRange,expenseRecords) //for pie
+    let newCatAmtSavedFullRange = this.makeCatAmt(savedListFullRange,savedRecords)
 
     //future development for line graph
     // let newDatAmtRange1 = this.makeDateAmt(dateList1,expenseRecords)
@@ -105,6 +107,7 @@ class UserData extends Component {
           this.setState({
             bankRecords: cleanBankRecords,
             pieDataFullRange:newPieDataFullRange,
+            savedDataFullRange:newCatAmtSavedFullRange,
             barDataRange1:newBarDataRange1,
             barDataRange2:newBarDataRange2,
             barDataSaved1:newBarDataSaved1,
@@ -118,6 +121,7 @@ class UserData extends Component {
           this.setState({
             bankRecords: cleanBankRecords,
             pieDataFullRange:newPieDataFullRange,
+            savedDataFullRange:newCatAmtSavedFullRange,
             barDataRange1:newBarDataRange1,
             barDataRange2:newBarDataRange2,
             barDataSaved1:newBarDataSaved1,
@@ -267,12 +271,43 @@ class UserData extends Component {
     for(var k = 0; k<dataArr.length;k++){ //converts % to radians
       dataArr[k].angle = dataArr[k].angle0 + dataArr[k].percent*2*Math.PI;
     }
-    var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
+    //var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
+    var CSS_COLOR_NAMES = ["Aqua","Aquamarine",
+    "Black","Blue","BlueViolet","Brown",
+    "CadetBlue","Chartreuse","Coral",
+    "Crimson","Cyan","DarkBlue","DarkCyan",
+    "DarkGreen","DarkMagenta","Darkorange",
+    "DarkOrchid","DarkSlateBlue","DarkTurquoise",
+    "DeepPink","DeepSkyBlue","DimGray",
+    "DodgerBlue","FireBrick","Fuchsia",
+    "Gold",
+    "IndianRed","Indigo",
+    "LawnGreen","LightBlue","LightCoral","LightCyan",
+    "LightGreen","LightPink","LightSalmon","LightSeaGreen",
+    "LightSkyBlue",
+    "Lime","LimeGreen","Maroon","MediumAquaMarine",
+    "MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen",
+    "MediumTurquoise","MediumVioletRed","MidnightBlue",
+    "Olive","OliveDrab","Orange","OrangeRed","Orchid",
+    "PaleGreen","PaleVioletRed",
+    "Peru","Pink","Purple","Red","RoyalBlue",
+    "Salmon","SkyBlue","SlateBlue",
+    "Teal","Thistle","Tomato",
+    "Turquoise","Yellow","YellowGreen"];
+    
+    // var CSS_COLOR_NAMES = ["Brown","CadetBlue","DarkCyan","DarkGoldenRod","DarkOliveGreen",
+    // "DarkOrange","DarkOrchid","DarkRed","DarkSeaGreen","DarkSlateBlue","DarkSlateGrey",
+    // "DarkTurquoise","Gold","IndianRed","LightSeaGreen",
+    // "Maroon","MediumAquaMarine","MediumSeaGreen","MediumTurquoise","MidnightBlue","Olive",
+    // "OliveDrab","Orange","OrangeRed","PaleGreen","Peru","RoyalBlue",
+    // "Salmon","SeaGreen","SteelBlue","Tomato","Turquoise","YellowGreen"];
     for(var m = 0; m<dataArr.length;m++){//assigning radius, radius from state and color based on index
       dataArr[m].radius = this.state.pieRadius;
       dataArr[m].radius0 = this.state.pieRadius0;
-      dataArr[m].opacity = 0.5;
+      dataArr[m].opacity = 0.9;
       dataArr[m].color = CSS_COLOR_NAMES[Math.floor(Math.random()*CSS_COLOR_NAMES.length)];
+      //CSS_COLOR_NAMES[Math.floor(Math.random()*CSS_COLOR_NAMES.length)]
+      
     }
     return dataArr
   }
@@ -322,7 +357,7 @@ class UserData extends Component {
 
 
   render() {
-    console.log("USER DATA STATE", this.state)
+    // console.log("USER DATA STATE", this.state)
     return (
       <div className="UserDataWrapper">
         
@@ -399,13 +434,13 @@ class UserData extends Component {
         </div>
         <div className="row">
           <div className="col m6 s12">
-            <UserSummary />
+            <UserSummary allExpenses={this.state.pieDataFullRange} allSaved={this.state.savedDataFullRange}/>
           </div>
           <div className="col m6 s12">
             <UserPieCharts pieData={this.state.pieDataFullRange}/>
           </div>
         </div>
-        
+
           <UserBarGraph 
             barDataRange1={this.state.barDataRange1} 
             barDataRange2={this.state.barDataRange2}
