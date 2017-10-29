@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/react-vis/dist/style.css';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries} from 'react-vis';
+import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries, HorizontalBarSeries,DiscreteColorLegend,Hint} from 'react-vis';
 import $ from 'jquery';
 
 class UserBarGraph extends Component {
@@ -9,14 +9,20 @@ class UserBarGraph extends Component {
     super(props);
     this.state = {
       data1:[
-      { x:'Sample A', y: 10},
-      { x:'Sample B', y: 9},
-      { x:'C', y: 4},
-
+      { x:'', y: 0},
+      { x:'', y: 0},
       ],
       data2:[
-      { x:'Sample A', y: 5},
-      { x:'Sample B', y: 3},
+      { x:'', y: 0},
+      { x:'', y: 0},
+      ],
+      saved1:[
+      { x:'', y: 0},
+      { x:'', y: 0},
+      ],
+      saved2:[
+      { x:'', y: 0},
+      { x:'', y: 0},
       ],
       toolTipValue:{
         toolTipValue:{
@@ -33,19 +39,31 @@ class UserBarGraph extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    var range1 = nextProps.barDataRange1;
-    var range2 = nextProps.barDataRange2;
-    // console.log(range1, range2)
+    console.log("props yo",nextProps)
+    if(nextProps.barDataRange1!==null || nextProps.barDataRange1!==undefined){
+      var range1 = nextProps.barDataRange1;
+    }
+    if(nextProps.barDataRange2!==null || nextProps.barDataRange2!==undefined){
+      var range2 = nextProps.barDataRange2;
+    }
+    if(nextProps.barDataSaved1!==null || nextProps.barDataSaved1!==undefined){
+      var saved1 = nextProps.barDataSaved1;
+    }
+    if(nextProps.barDataSaved2!==null || nextProps.barDataSaved2!==undefined){
+      var saved2 = nextProps.barDataSaved2;
+    }
     this.setState({
       data1: range1,
-      data2: range2
+      data2: range2,
+      saved1: saved1,
+      saved2: saved2
     })
   }
 
   showToolTip(e,info){
-    // console.log(info.event.target);
     let cssVal={};
-    cssVal = {'left':(info.event.target.getAttribute('x')),'top':(info.event.target.getAttribute('y'))+400};
+    cssVal = {'left':(info.event.pageX),'top':(info.event.pageY)};
+    $('.barTooltip').css(cssVal).show();
     this.setState({
       toolTipValue:{
         category: e.x,
@@ -56,12 +74,6 @@ class UserBarGraph extends Component {
 
   hideToolTip(e){
     $('.barTooltip').hide();
-    this.setState({
-      toolTipValue:{
-        category:'empty',
-        amount:0,
-      }
-    })
   }
 
   render() {
@@ -70,27 +82,70 @@ class UserBarGraph extends Component {
       <div className="UserBarGraphWrapper">
         <div className="barTooltip">
           <p>{this.state.toolTipValue.category}</p>
-          <p>{this.state.toolTipValue.amount}</p>
+          <p>{Math.round(this.state.toolTipValue.amount)}</p>
         </div>
-        <XYPlot height={400} width={800} xType={'ordinal'}>
-          <VerticalGridLines />
-          <HorizontalGridLines />
-          <XAxis />
-          <YAxis />
-          <VerticalBarSeries 
-            data={this.state.data1}
-            onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-            onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-          />
-          <VerticalBarSeries 
-            data={this.state.data2}
-            onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-            onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-          />
-         
-        </XYPlot>
+        <div className="verticalBar">
+          <XYPlot 
+            height={400} 
+            width={850} 
+            xType={'ordinal'}
+            stackBy="y"
+          >
+            <VerticalGridLines />
+            <HorizontalGridLines />
+            <XAxis />
+            <YAxis />
+            <VerticalBarSeries //first range expenses
+              opacity={0.8}
+              color={'#26a69a'}
+              cluster="group1"
+              data={this.state.data1}
+              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
+              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            />
+            <VerticalBarSeries //second range expenses
+              opacity={0.8}
+              color={'#3661B0'}
+              cluster="group2" 
+              data={this.state.data2}
+              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
+              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            />
+            <VerticalBarSeries //first range saved
+              opacity={0.8}
+              color={'#FF8E3A'}
+              cluster="group1" 
+              data={this.state.saved1}
+              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
+              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            />
+            <VerticalBarSeries //second range saved
+              opacity={0.8}
+              color={'#FFBA3A'}
+              cluster="group2" 
+              data={this.state.saved2}
+              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
+              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            />
+          </XYPlot>
+        </div>
       </div>
     );
   }
 }
 export default UserBarGraph;
+
+{/* <DiscreteColorLegend
+            style={{position: 'absolute', left: '200px', top: '0px'}}
+            orientation="horizontal" 
+            items={[
+              {
+                title: 'Apples',
+                color: '#12939A'
+              },
+              {
+                title: 'Oranges',
+                color: '#79C7E3'
+              }
+            ]}
+          /> */}

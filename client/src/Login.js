@@ -28,7 +28,7 @@ class Login extends Component {
     }).then(result => {
       localStorage.setItem('mernToken', result.data.token)
       this.props.lift(result.data.token, result.data.user.id)
-      console.log("handlesubmit() results.data: ", result.data.user.id)
+      // console.log("handlesubmit() results.data: ", result.data.user.id)
 
     })
   }

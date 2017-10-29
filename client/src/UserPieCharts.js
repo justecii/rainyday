@@ -17,10 +17,11 @@ class UserPieCharts extends Component {
       toolTipValue:{
         Category:'empty',
         Amount:0,
-        Percent:0
+        Percent:0,
+        color:""
       },
-      width: 400,
-      height:400
+      width: 315,
+      height:315
     }
   }
 
@@ -30,69 +31,59 @@ class UserPieCharts extends Component {
 
   componentWillReceiveProps(nextProps) {
     var pieProps = nextProps.pieData;
-    // console.log("pieProps", pieProps)
     this.setState({
       pieData: pieProps
     })
   }
 
 
-  showToolTip(e){
-    let cssVal={};
-    if (e.x>0 && e.y>0){
-      cssVal = {'left':(e.x)+225,'top':(e.y*-1)+225};
-    } else if (e.x>0 && e.y<0){
-      cssVal = {'left':(e.x)+225,'top':(e.y*-1)+375};
-    } else if (e.x<0 && e.y<0){
-      cssVal = {'left':(e.x)+100,'top':(e.y*-1)+375};
-    } else if (e.x<0 && e.y>0){
-      cssVal = {'left':(e.x)+100,'top':(e.y*-1)+225};
-    }
-
+  showToolTip(data,e){
+    var pagex = e.event.pageX
+    var pagey = e.event.pageY
+    var cssVal={'left':(pagex),'top':(pagey)};
     $('.tooltip').css(cssVal).show();
+
     this.setState({
       toolTipValue:{
-        category: e.category,
-        amount: e.amount,
-        percent: e.percent
-      }
+        category: data.category,
+        amount: data.amount,
+        percent: data.percent,
+        color:data.color
+      },
     })
   }
+
 
   hideToolTip(e){
     $('.tooltip').hide();
-    this.setState({
-      toolTipValue:{
-        Category:'empty',
-        Amount:0,
-        Percent:0
-      }
-    })
   }
 
   render() {
-    // console.log("PIE CHART STATE", this.state)
     return (
       <div className="UserPieChartsWrapper">
         <p>User Pie Charts Component</p>
         <div className="tooltip">
             <p>{this.state.toolTipValue.category}</p>
-            <p>${this.state.toolTipValue.amount}</p>
-            <p>{this.state.toolTipValue.percent*100}%</p>
+            <p>{this.state.toolTipValue.color}</p>
+            <p>${Math.round(this.state.toolTipValue.amount)}</p>
+            <p>{Math.round(this.state.toolTipValue.percent*100)}%</p>
         </div>
         <XYPlot
-          xDomain={[0, 6]}
-          yDomain={[0, 6]}
+          xDomain={[-1, 1]}
+          yDomain={[-1, 1]}
           width={this.state.width}
           height={this.state.height}>
           <ArcSeries
             animation
             radiusType={'literal'}
-            center={{x: 3, y: 3}}
+            center={{x: 0, y: 0}}
             data={this.state.pieData}
+            colorDomain={[0,Math.round(this.state.pieData.length/2)*2,this.state.pieData.length]}
+            colorRange={['#8CA9B5','#EFC850','#D04448']}
             colorType={'literal'}
-            onValueMouseOver={(e)=>{this.showToolTip(e)}}
+            onValueMouseOver={(datapoint,event)=>{this.showToolTip(datapoint,event)}}
             onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            onSeriesClick={(e)=>{console.log(e.event.target)}}
           />      
         </XYPlot>
       </div>

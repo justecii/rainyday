@@ -50,9 +50,9 @@ select {
   margin: 30px;
 }
 
-html {
+/*html {
   font-family: GillSans, Calibri, Trebuchet, sans-serif;
-}
+}*/
 
 
 .movedown{
@@ -120,7 +120,7 @@ html {
 }
 
 .tooltip {
-  z-index: 1;
+  z-index: 2;
   text-align: center;
   position: absolute;
   background: rgba(0,0,0,0.5);
@@ -128,7 +128,8 @@ html {
   display:block;
   padding: 0 5px;
   min-width: 75px;
-  border-radius: 5px
+  border-radius: 5px;
+  font-size:0.9em;
 }
 
 .tooltip .row{
@@ -150,7 +151,7 @@ html {
   display:block;
   padding: 0 5px;
   min-width: 75px;
-  border-radius: 5px
+  border-radius: 5px;
 }
 
 .barTooltip .row{
@@ -162,6 +163,11 @@ html {
   padding: 5px 0;
 }
 
+input[type=text]:not(.browser-default){
+	margin:0;
+	text-align: center;
+
+}
 
 
 
@@ -186,13 +192,13 @@ html {
  * Basics Styles
  */
 html {
-	font-size: 62.5%;
+	/*font-size: 62.5%*/;
 }
 body {
 	background-color: #eee;
 	font-family: Roboto;
 	font-weight: 400;
-	font-size: 1.6em;
+	font-size: 1em;
 	line-height: 1.6;
   color: #666;
  

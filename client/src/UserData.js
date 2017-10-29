@@ -6,6 +6,7 @@ import './App.css';
 
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 
 import { DateRangePicker, SingleDatePicker } from 'react-dates';
@@ -17,15 +18,18 @@ class UserData extends Component {
     this.state = {
       bankRecords:[],
       catAmtRange1:[],
+      catAmtSaved1:[],
       catAmtRange2:[],
+      catAmtSaved2:[],
       dateAmtRange1:[],
       dateAmtRange2:[],
       pieDataFullRange:[],
-      startDate1: "07/24/17",
-      endDate1:"08/31/17",
-      startDate2: "09/01/17",
-      endDate2: "10/19/17",
-      pieRadius: 75,
+      savedDataFullRange:[],
+      startDate1: "7/23/17",
+      endDate1:"8/31/17",
+      startDate2: "9/1/17",
+      endDate2: "11/30/17",
+      pieRadius: 125,
       pieRadius0: 0,
     }
     this.makeUnique = this.makeUnique.bind(this);
@@ -33,49 +37,98 @@ class UserData extends Component {
     this.consoliDate = this.consoliDate.bind(this);
     this.uniqueCatByRange = this.uniqueCatByRange.bind(this);
     this.uniqueDateByRange = this.uniqueDateByRange.bind(this);
-    this.stod = this.stod.bind(this);
+    this.stringToDate = this.stringToDate.bind(this);
   }
 
   componentDidMount(){
+    var startDate1 = this.state.startDate1
+    var startDate2 = this.state.startDate2
+    var endDate1 = this.state.endDate1
+    var endDate2 = this.state.endDate2
     let user = this.props.user
     this.setState({
       user: user
     })
     fetch('/bankRecords/' + user)
     .then((response) => response.json())
-    .then((response) => {this.updateLists(response)})
+    .then((response) => {this.updateLists(response,startDate1,endDate1,startDate2,endDate2,true)})
   }
 
-  updateLists(bankRecords){
+  //returns an object with full range of dates for the data
+  updateLists(bankRecords,startDate1,endDate1,startDate2,endDate2,firstLoad){
     
+    //array of all records with a value for "date" and "category"
     let cleanBankRecords = this.recordSoap(bankRecords)
 
-    let sepTypes = this.sepTypes(cleanBankRecords).expense
-    console.log("bank records",cleanBankRecords)
-    console.log("septypes",sepTypes)
-    let categoryList1 = this.uniqueCatByRange(sepTypes,this.state.startDate1,this.state.endDate1)
-    let categoryList2 = this.uniqueCatByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
-    let categoryListFullRange = this.uniqueCatByRange(cleanBankRecords,this.state.startDate1,this.state.endDate2)
-    let dateList1 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate1,this.state.endDate1)
-    let dateList2 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
-    let newCatAmtRange1 = this.makeCatAmt(categoryList1,sepTypes)
-    let newCatAmtRange2 = this.makeCatAmt(categoryList2,cleanBankRecords)
-    let newCatAmtFullRange = this.makeCatAmt(categoryListFullRange,cleanBankRecords)
-    let newDatAmtRange1 = this.makeDateAmt(dateList1,cleanBankRecords)
-    let newDatAmtRange2 = this.makeDateAmt(dateList2,cleanBankRecords)
+    // arrays of each type of record
+    let expenseRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).expense)
+    let incomeRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).income)
+    let savedRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).saved)
+    let uncatRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).uncategorized)
+
+    // arrays of bankRecords by date range and type
+    let expenseList1 = this.filterByRange(expenseRecords,startDate1,endDate1)  
+    let expenseList2 = this.filterByRange(expenseRecords,startDate2,endDate2)
+    let savedList1 = this.filterByRange(savedRecords,startDate1,endDate1)
+    let savedList2 = this.filterByRange(savedRecords,startDate2,endDate2)
+    let categoryListFullRange = this.uniqueCatByRange(cleanBankRecords,startDate1,endDate2) 
+    let savedListFullRange = this.uniqueCatByRange(savedRecords,startDate1,endDate2)
+    let categoryListAllRecords = this.uniqueCatByRange(cleanBankRecords,startDate1,endDate2) //maybe trash
+
+    // arrays of dates sorted
+    let allDates = this.uniqueDateByRange(cleanBankRecords,"1/1/00","12/31/99")
+    let dateList1 = this.uniqueDateByRange(expenseRecords,startDate1,endDate1)
+    let dateList2 = this.uniqueDateByRange(expenseRecords,startDate2,endDate2)
+    allDates = this.sortDates(allDates)
+    dateList1 = this.sortDates(dateList1)
+    dateList2 = this.sortDates(dateList2)
+
+    // arrays with category and amount given a time range
+    let newCatAmtRange1 = this.makeCatAmt(categoryListFullRange,expenseList1) //expense records needs to be by date
+    let newCatAmtRange2 = this.makeCatAmt(categoryListFullRange,expenseList2)
+    let newCatAmtSaved1 = this.makeCatAmt(categoryListFullRange,savedList1)
+    let newCatAmtSaved2 = this.makeCatAmt(categoryListFullRange,savedList2) //saved records needs to be by date range
+    let newCatAmtFullRange = this.makeCatAmt(categoryListFullRange,expenseRecords) //for pie
+    let newCatAmtSavedFullRange = this.makeCatAmt(savedListFullRange,savedRecords)
+
+    //future development for line graph
+    // let newDatAmtRange1 = this.makeDateAmt(dateList1,expenseRecords)
+    // let newDatAmtRange2 = this.makeDateAmt(dateList2,expenseRecords)
+
+    //arrays formatted for components
     let newPieDataFullRange = this.convertToPie(newCatAmtFullRange)
     let newBarDataRange1 = this.convertToBar(newCatAmtRange1)
     let newBarDataRange2 = this.convertToBar(newCatAmtRange2)
-    this.setState({
-      bankRecords: cleanBankRecords,
-      catAmtRange1:newCatAmtRange1,
-      catAmtRange2:newCatAmtRange2,
-      dateAmtRange1:newDatAmtRange1,
-      dateAmtRange2:newDatAmtRange2,
-      pieDataFullRange:newPieDataFullRange,
-      barDataRange1:newBarDataRange1,
-      barDataRange2:newBarDataRange2,
-    })
+    let newBarDataSaved1 = this.convertToBar(newCatAmtSaved1)
+    let newBarDataSaved2 = this.convertToBar(newCatAmtSaved2)
+    if(this.state.bankRecords!==null && this.state.pieDataFullRange!==null && this.state.barDataRange1!==null && 
+      this.state.barDataRange2!==null && this.state.barDataSaved1!==null & this.state.barDataSaved2!==null){
+        if(firstLoad){ //on first load sets date range from first to last available date and separates at median
+          this.setState({
+            bankRecords: cleanBankRecords,
+            pieDataFullRange:newPieDataFullRange,
+            savedDataFullRange:newCatAmtSavedFullRange,
+            barDataRange1:newBarDataRange1,
+            barDataRange2:newBarDataRange2,
+            barDataSaved1:newBarDataSaved1,
+            barDataSaved2:newBarDataSaved2,
+            startDate1:allDates[0],
+            endDate1:allDates[Math.floor(allDates.length/2)],
+            startDate2:allDates[Math.floor(allDates.length/2)+1],
+            endDate2:allDates[allDates.length-1]
+          })
+        } else{
+          this.setState({
+            bankRecords: cleanBankRecords,
+            pieDataFullRange:newPieDataFullRange,
+            savedDataFullRange:newCatAmtSavedFullRange,
+            barDataRange1:newBarDataRange1,
+            barDataRange2:newBarDataRange2,
+            barDataSaved1:newBarDataSaved1,
+            barDataSaved2:newBarDataSaved2,
+          })
+        }
+    }
   }
 
 
@@ -84,7 +137,7 @@ class UserData extends Component {
   recordSoap(records){
     let updatebr = records;
     for(var i = 0; i< updatebr.length;i++){
-      if(updatebr[i].Category===undefined && !updatebr[i].isSaved){
+      if(updatebr[i].Category===undefined || updatebr[i].Category===""){
         updatebr[i].Category="uncategorized";
       }
     }
@@ -121,7 +174,7 @@ class UserData extends Component {
   }
 
    //converts from string in form MM/DD/YY to date (post 2000 only)
-  stod(dateString){
+  stringToDate(dateString){
     var parts =dateString.split('/');
     var mydate = new Date("20"+parts[2],parts[0]-1,parts[1]);
     return mydate;
@@ -130,11 +183,12 @@ class UserData extends Component {
   //takes bankdata array, start date, and end date.  
   //returns an array of unique categories for that date range
   uniqueCatByRange(array,start,end){
-    let a = array;
-    let b = [];
+    var a = array;
+    var b = [];
     for(var i = 0;i<a.length;i++){
-      if(this.stod(a[i].date)>=this.stod(start) && this.stod(a[i].date)<=this.stod(end)){
-        b.push(a[i].Category)
+      if(this.stringToDate(a[i].date)>=this.stringToDate(start) && this.stringToDate(a[i].date)<=this.stringToDate(end)){
+        var category=a[i].Category
+        b.push(category)
       }
     }
     b = this.makeUnique(b)
@@ -147,11 +201,24 @@ class UserData extends Component {
     let a = array;
     let b = [];
     for(var i = 0;i<a.length;i++){
-      if(this.stod(a[i].date)>=this.stod(start) && this.stod(a[i].date)<=this.stod(end)){
+      if(this.stringToDate(a[i].date)>=this.stringToDate(start) && this.stringToDate(a[i].date)<=this.stringToDate(end)){
         b.push(a[i].date)
       }
     }
     b = this.makeUnique(b)
+    return b;
+  }
+
+  //takes bankdata array, start date, and end date.  
+  //returns an array of bankdata arrays in that date range
+  filterByRange(array,start,end){
+    let a = array;
+    let b = [];
+    for(var i = 0;i<a.length;i++){
+      if(this.stringToDate(a[i].date)>=this.stringToDate(start) && this.stringToDate(a[i].date)<=this.stringToDate(end)){
+        b.push(a[i])
+      }
+    }
     return b;
   }
 
@@ -204,12 +271,43 @@ class UserData extends Component {
     for(var k = 0; k<dataArr.length;k++){ //converts % to radians
       dataArr[k].angle = dataArr[k].angle0 + dataArr[k].percent*2*Math.PI;
     }
-    var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
+    //var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
+    var CSS_COLOR_NAMES = ["Aqua","Aquamarine",
+    "Black","Blue","BlueViolet","Brown",
+    "CadetBlue","Chartreuse","Coral",
+    "Crimson","Cyan","DarkBlue","DarkCyan",
+    "DarkGreen","DarkMagenta","Darkorange",
+    "DarkOrchid","DarkSlateBlue","DarkTurquoise",
+    "DeepPink","DeepSkyBlue","DimGray",
+    "DodgerBlue","FireBrick","Fuchsia",
+    "Gold",
+    "IndianRed","Indigo",
+    "LawnGreen","LightBlue","LightCoral","LightCyan",
+    "LightGreen","LightPink","LightSalmon","LightSeaGreen",
+    "LightSkyBlue",
+    "Lime","LimeGreen","Maroon","MediumAquaMarine",
+    "MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen",
+    "MediumTurquoise","MediumVioletRed","MidnightBlue",
+    "Olive","OliveDrab","Orange","OrangeRed","Orchid",
+    "PaleGreen","PaleVioletRed",
+    "Peru","Pink","Purple","Red","RoyalBlue",
+    "Salmon","SkyBlue","SlateBlue",
+    "Teal","Thistle","Tomato",
+    "Turquoise","Yellow","YellowGreen"];
+    
+    // var CSS_COLOR_NAMES = ["Brown","CadetBlue","DarkCyan","DarkGoldenRod","DarkOliveGreen",
+    // "DarkOrange","DarkOrchid","DarkRed","DarkSeaGreen","DarkSlateBlue","DarkSlateGrey",
+    // "DarkTurquoise","Gold","IndianRed","LightSeaGreen",
+    // "Maroon","MediumAquaMarine","MediumSeaGreen","MediumTurquoise","MidnightBlue","Olive",
+    // "OliveDrab","Orange","OrangeRed","PaleGreen","Peru","RoyalBlue",
+    // "Salmon","SeaGreen","SteelBlue","Tomato","Turquoise","YellowGreen"];
     for(var m = 0; m<dataArr.length;m++){//assigning radius, radius from state and color based on index
       dataArr[m].radius = this.state.pieRadius;
       dataArr[m].radius0 = this.state.pieRadius0;
-      dataArr[m].opacity = 0.5;
+      dataArr[m].opacity = 0.9;
       dataArr[m].color = CSS_COLOR_NAMES[Math.floor(Math.random()*CSS_COLOR_NAMES.length)];
+      //CSS_COLOR_NAMES[Math.floor(Math.random()*CSS_COLOR_NAMES.length)]
+      
     }
     return dataArr
   }
@@ -218,13 +316,17 @@ class UserData extends Component {
     let dataArr = catAmt;
     for(var i = 0; i<dataArr.length;i++){
       var temp = dataArr[i];
-      dataArr[i]={x:temp.category,y:temp.amount}
+      if(temp.category!==null && temp.category!==undefined){
+        dataArr[i]={x:temp.category,y:temp.amount}
+      } else {
+        dataArr[i]={x:"",y:temp.amount}
+      }
     }
     return dataArr
   }
 
   //accepts a bankRecords array and returns an object with 3 arrays...income, expense, saved, uncategorized
-  sepTypes(bankRecords){
+  splitBankRecTypes(bankRecords){
     var br = bankRecords;
     var income = [];
     var expense = [];
@@ -233,24 +335,33 @@ class UserData extends Component {
 
     for(var i = 0; i< br.length;i++){
       if(br[i].isSaved){
-        saved.push(br[1])
+        saved.push(br[i])
       } else if(br[i].Category==='Income' && !br.isSaved){
-        income.push(br[1])
+        income.push(br[i])
       } else if(br[i].Category==='uncategorized' && !br.isSaved){
-        uncategorized.push(br[1])
+        uncategorized.push(br[i])
       } else {
-        expense.push(br[1])
+        expense.push(br[i])
       }
     }
     return {income:income,expense:expense,saved:saved,uncategorized:uncategorized}
   }
 
+  sortDates(array){
+    array.sort(function(a, b) {
+      var dateA = new Date(a), dateB = new Date(b);
+      return dateA - dateB;
+    });
+    return array;
+  }
+
 
   render() {
-    console.log("USER DATA STATE", this.state)
+    // console.log("USER DATA STATE", this.state)
     return (
       <div className="UserDataWrapper">
         
+<<<<<<< HEAD
         <p>Make Toolbar for datepicker with directions</p>
         <p>First Date Range</p>
         <DateRangePicker
@@ -283,11 +394,104 @@ class UserData extends Component {
         <UserSummary />
         <UserPieCharts pieData={this.state.pieDataFullRange}/>
         {/* <UserBarGraph barDataRange1={this.state.barDataRange1} barDataRange2={this.state.barDataRange2}/> */}
+=======
+        <div className="row">
+          <div className="col m6">
+            <div className="col s6">
+              <p>Start Date 1</p>
+              <SingleDatePicker
+                date={moment(this.state.startDate1)}
+                onDateChange={(date) => {
+                  var startDate1 = date.format("MM/DD/YY")
+                  this.setState({startDate1:startDate1},
+                    this.updateLists(this.state.bankRecords,startDate1,this.state.endDate1,this.state.startDate2,this.state.endDate2)
+                )}}
+                focused={this.state.focused1} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused1:focused })} // PropTypes.func.isRequired
+                isOutsideRange={() => false}
+                withPortal={true}
+                numberOfMonths={1}
+              />
+            </div>
+            <div className="col s6">
+              <p>End Date 1</p>
+              <SingleDatePicker
+                date={moment(this.state.endDate1)}
+                onDateChange={(date) => {
+                  var endDate1 = date.format("MM/DD/YY")
+                  this.setState({endDate1:endDate1},
+                    this.updateLists(this.state.bankRecords,this.state.startDate1,endDate1,this.state.startDate2,this.state.endDate2)
+                )}}
+                focused={this.state.focused2} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused2: focused })} // PropTypes.func.isRequired
+                isOutsideRange={() => false}
+                withPortal={true}
+                numberOfMonths={1}
+              />
+            </div>
+          </div>
+          <div className="col m6">
+            <div className="col s6">
+              <p>Start Date 2</p>
+              <SingleDatePicker
+                date={moment(this.state.startDate2)}
+                onDateChange={(date) => {
+                  var startDate2 = date.format("MM/DD/YY")
+                  this.setState({startDate2:startDate2},
+                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,startDate2,this.state.endDate2)
+                )}}
+                focused={this.state.focused3} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused3: focused })} // PropTypes.func.isRequired
+                isOutsideRange={() => false}
+                withPortal={true}
+                numberOfMonths={1}
+              />
+              </div>
+              <div className="col s6">
+              <p>End Date 2</p>
+              <SingleDatePicker
+                date={moment(this.state.endDate2)}
+                // onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
+                onDateChange={(date) => {
+                  var endDate2 = date.format("MM/DD/YY")
+                  this.setState({endDate2:endDate2},
+                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,this.state.startDate2,endDate2)
+                )}}
+                focused={this.state.focused4} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused4: focused })} // PropTypes.func.isRequired
+                isOutsideRange={() => false}
+                withPortal={true}
+                numberOfMonths={1}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col m6 s12">
+            <UserSummary allExpenses={this.state.pieDataFullRange} allSaved={this.state.savedDataFullRange}/>
+          </div>
+          <div className="col m6 s12">
+            <UserPieCharts pieData={this.state.pieDataFullRange}/>
+          </div>
+        </div>
+
+          <UserBarGraph 
+            barDataRange1={this.state.barDataRange1} 
+            barDataRange2={this.state.barDataRange2}
+            barDataSaved1={this.state.barDataSaved1}
+            barDataSaved2={this.state.barDataSaved2}
+          />
+>>>>>>> 20f95289062eb4659571de61300566538066c1eb
       </div>
     );
   }
 }
 
- 
+
 
 export default UserData;
+
+
+ 
+
+ 
