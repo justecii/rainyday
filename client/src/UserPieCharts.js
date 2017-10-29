@@ -37,38 +37,27 @@ class UserPieCharts extends Component {
   }
 
 
-  showToolTip(e,info){
-    console.log(info.event.pageX,info.event.pageY)
-    let cssVal={};
-    if (e.x>0 && e.y>0){
-      cssVal = {'left':(info.event.pageX),'top':(info.event.pageY)};
-    } else if (e.x>0 && e.y<0){
-      cssVal = {'left':(info.event.pageX),'bottom':(info.event.pageY)};
-    } else if (e.x<0 && e.y<0){
-      cssVal = {'right':(info.event.pageX),'bottom':(info.event.pageY)};
-    } else if (e.x<0 && e.y>0){
-      cssVal = {'right':(info.event.pageX),'top':(info.event.pageY)};
-    }
+  showToolTip(data,e){
+    console.log(data.x,data.y)
+    var pagex = e.event.pageX
+    var pagey = e.event.pageY
+    var cssVal={'left':(pagex),'top':(pagey)};
 
+    console.log("cssval",cssVal)
     $('.tooltip').css(cssVal).show();
+
     this.setState({
       toolTipValue:{
-        category: e.category,
-        amount: e.amount,
-        percent: e.percent
-      }
+        category: data.category,
+        amount: data.amount,
+        percent: data.percent
+      },
     })
   }
 
+
   hideToolTip(e){
     $('.tooltip').hide();
-    // this.setState({
-    //   toolTipValue:{
-    //     Category:'empty',
-    //     Amount:0,
-    //     Percent:0
-    //   }
-    // })
   }
 
   render() {
@@ -82,18 +71,19 @@ class UserPieCharts extends Component {
             <p>{this.state.toolTipValue.percent*100}%</p>
         </div>
         <XYPlot
-          xDomain={[0, 6]}
-          yDomain={[0, 6]}
+          xDomain={[-1, 1]}
+          yDomain={[-1, 1]}
           width={this.state.width}
           height={this.state.height}>
           <ArcSeries
             animation
             radiusType={'literal'}
-            center={{x: 3, y: 3}}
+            center={{x: 0, y: 0}}
             data={this.state.pieData}
             colorType={'literal'}
-            onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
+            onValueMouseOver={(datapoint,event)=>{this.showToolTip(datapoint,event)}}
             onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            onSeriesClick={(e)=>{console.log(e.event.target)}}
           />      
         </XYPlot>
       </div>

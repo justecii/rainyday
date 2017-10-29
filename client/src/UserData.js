@@ -50,10 +50,11 @@ class UserData extends Component {
     })
     fetch('/bankRecords/' + user)
     .then((response) => response.json())
-    .then((response) => {this.updateLists(response,startDate1,endDate1,startDate2,endDate2)})
+    .then((response) => {this.updateLists(response,startDate1,endDate1,startDate2,endDate2,true)})
   }
 
-  updateLists(bankRecords,startDate1,endDate1,startDate2,endDate2){
+  //returns an object with full range of dates for the data
+  updateLists(bankRecords,startDate1,endDate1,startDate2,endDate2,firstLoad){
     
     //array of all records with a value for "date" and "category"
     let cleanBankRecords = this.recordSoap(bankRecords)
@@ -73,10 +74,13 @@ class UserData extends Component {
     let categoryListAllRecords = this.uniqueCatByRange(cleanBankRecords,startDate1,endDate2) //maybe trash
 
     // arrays of dates sorted
+    let allDates = this.uniqueDateByRange(cleanBankRecords,"1/1/00","12/31/99")
     let dateList1 = this.uniqueDateByRange(expenseRecords,startDate1,endDate1)
     let dateList2 = this.uniqueDateByRange(expenseRecords,startDate2,endDate2)
+    allDates = this.sortDates(allDates)
     dateList1 = this.sortDates(dateList1)
     dateList2 = this.sortDates(dateList2)
+    console.log(allDates)
 
     // arrays with category and amount given a time range
     let newCatAmtRange1 = this.makeCatAmt(categoryListFullRange,expenseList1) //expense records needs to be by date
@@ -96,19 +100,31 @@ class UserData extends Component {
     let newBarDataSaved1 = this.convertToBar(newCatAmtSaved1)
     let newBarDataSaved2 = this.convertToBar(newCatAmtSaved2)
     if(this.state.bankRecords!==null && this.state.pieDataFullRange!==null && this.state.barDataRange1!==null && 
-      this.state.barDataRange2!==null && this.state.barDataSaved1!==null & this.state.barDataSaved2!==null)
-    this.setState({
-      bankRecords: cleanBankRecords,
-      // catAmtRange1:newCatAmtRange1,
-      // catAmtRange2:newCatAmtRange2,
-      // dateAmtRange1:newDatAmtRange1,
-      // dateAmtRange2:newDatAmtRange2,
-      pieDataFullRange:newPieDataFullRange,
-      barDataRange1:newBarDataRange1,
-      barDataRange2:newBarDataRange2,
-      barDataSaved1:newBarDataSaved1,
-      barDataSaved2:newBarDataSaved2,
-    })
+      this.state.barDataRange2!==null && this.state.barDataSaved1!==null & this.state.barDataSaved2!==null){
+        if(firstLoad){ //on first load sets date range from first to last available date and separates at median
+          this.setState({
+            bankRecords: cleanBankRecords,
+            pieDataFullRange:newPieDataFullRange,
+            barDataRange1:newBarDataRange1,
+            barDataRange2:newBarDataRange2,
+            barDataSaved1:newBarDataSaved1,
+            barDataSaved2:newBarDataSaved2,
+            startDate1:allDates[0],
+            endDate1:allDates[Math.floor(allDates.length/2)],
+            startDate2:allDates[Math.floor(allDates.length/2)+1],
+            endDate2:allDates[allDates.length-1]
+          })
+        } else{
+          this.setState({
+            bankRecords: cleanBankRecords,
+            pieDataFullRange:newPieDataFullRange,
+            barDataRange1:newBarDataRange1,
+            barDataRange2:newBarDataRange2,
+            barDataSaved1:newBarDataSaved1,
+            barDataSaved2:newBarDataSaved2,
+          })
+        }
+    }
   }
 
 
@@ -310,72 +326,92 @@ class UserData extends Component {
     return (
       <div className="UserDataWrapper">
         
-        <p>Make Toolbar for datepicker with directions</p>
-        <p>Start Date - Range 1</p>
-        <SingleDatePicker
-          date={moment(this.state.startDate1)}
-          onDateChange={(date) => {
-            var startDate1 = date.format("MM/DD/YY")
-            this.setState({startDate1:startDate1},
-              this.updateLists(this.state.bankRecords,startDate1,this.state.endDate1,this.state.startDate2,this.state.endDate2)
-          )}}
-          focused={this.state.focused1} // PropTypes.bool
-          onFocusChange={({ focused }) => this.setState({ focused1:focused })} // PropTypes.func.isRequired
-          isOutsideRange={() => false}
-          withPortal={true}
-          numberOfMonths={1}
-        />
-        <p>End Date - Range 1</p>
-        <SingleDatePicker
-          date={moment(this.state.endDate1)}
-          onDateChange={(date) => {
-            var endDate1 = date.format("MM/DD/YY")
-            this.setState({endDate1:endDate1},
-              this.updateLists(this.state.bankRecords,this.state.startDate1,endDate1,this.state.startDate2,this.state.endDate2)
-          )}}
-          focused={this.state.focused2} // PropTypes.bool
-          onFocusChange={({ focused }) => this.setState({ focused2: focused })} // PropTypes.func.isRequired
-          isOutsideRange={() => false}
-          withPortal={true}
-          numberOfMonths={1}
-        />
-        <p>Start Date - Range 2</p>
-        <SingleDatePicker
-          date={moment(this.state.startDate2)}
-          onDateChange={(date) => {
-            var startDate2 = date.format("MM/DD/YY")
-            this.setState({startDate2:startDate2},
-              this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,startDate2,this.state.endDate2)
-          )}}
-          focused={this.state.focused3} // PropTypes.bool
-          onFocusChange={({ focused }) => this.setState({ focused3: focused })} // PropTypes.func.isRequired
-          isOutsideRange={() => false}
-          withPortal={true}
-          numberOfMonths={1}
-        />
-        <p>End Date - Range 2</p>
-        <SingleDatePicker
-          date={moment(this.state.endDate2)}
-          // onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
-          onDateChange={(date) => {
-            var endDate2 = date.format("MM/DD/YY")
-            this.setState({endDate2:endDate2},
-              this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,this.state.startDate2,endDate2)
-          )}}
-          focused={this.state.focused4} // PropTypes.bool
-          onFocusChange={({ focused }) => this.setState({ focused4: focused })} // PropTypes.func.isRequired
-          isOutsideRange={() => false}
-          withPortal={true}
-          numberOfMonths={1}
-        />
-        <UserSummary />
-        <UserPieCharts pieData={this.state.pieDataFullRange}/>
-        <UserBarGraph 
-          barDataRange1={this.state.barDataRange1} 
-          barDataRange2={this.state.barDataRange2}
-          barDataSaved1={this.state.barDataSaved1}
-          barDataSaved2={this.state.barDataSaved2}
-        />
+        <div className="row">
+          <div className="col m6">
+            <div className="col s6">
+              <p>Start Date 1</p>
+              <SingleDatePicker
+                date={moment(this.state.startDate1)}
+                onDateChange={(date) => {
+                  var startDate1 = date.format("MM/DD/YY")
+                  this.setState({startDate1:startDate1},
+                    this.updateLists(this.state.bankRecords,startDate1,this.state.endDate1,this.state.startDate2,this.state.endDate2)
+                )}}
+                focused={this.state.focused1} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused1:focused })} // PropTypes.func.isRequired
+                isOutsideRange={() => false}
+                withPortal={true}
+                numberOfMonths={1}
+              />
+            </div>
+            <div className="col s6">
+              <p>End Date 1</p>
+              <SingleDatePicker
+                date={moment(this.state.endDate1)}
+                onDateChange={(date) => {
+                  var endDate1 = date.format("MM/DD/YY")
+                  this.setState({endDate1:endDate1},
+                    this.updateLists(this.state.bankRecords,this.state.startDate1,endDate1,this.state.startDate2,this.state.endDate2)
+                )}}
+                focused={this.state.focused2} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused2: focused })} // PropTypes.func.isRequired
+                isOutsideRange={() => false}
+                withPortal={true}
+                numberOfMonths={1}
+              />
+            </div>
+          </div>
+          <div className="col m6">
+            <div className="col s6">
+              <p>Start Date 2</p>
+              <SingleDatePicker
+                date={moment(this.state.startDate2)}
+                onDateChange={(date) => {
+                  var startDate2 = date.format("MM/DD/YY")
+                  this.setState({startDate2:startDate2},
+                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,startDate2,this.state.endDate2)
+                )}}
+                focused={this.state.focused3} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused3: focused })} // PropTypes.func.isRequired
+                isOutsideRange={() => false}
+                withPortal={true}
+                numberOfMonths={1}
+              />
+              </div>
+              <div className="col s6">
+              <p>End Date 2</p>
+              <SingleDatePicker
+                date={moment(this.state.endDate2)}
+                // onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
+                onDateChange={(date) => {
+                  var endDate2 = date.format("MM/DD/YY")
+                  this.setState({endDate2:endDate2},
+                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,this.state.startDate2,endDate2)
+                )}}
+                focused={this.state.focused4} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused4: focused })} // PropTypes.func.isRequired
+                isOutsideRange={() => false}
+                withPortal={true}
+                numberOfMonths={1}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col m6 s12">
+            <UserSummary />
+          </div>
+          <div className="col m6 s12">
+            <UserPieCharts pieData={this.state.pieDataFullRange}/>
+          </div>
+        </div>
+        
+          <UserBarGraph 
+            barDataRange1={this.state.barDataRange1} 
+            barDataRange2={this.state.barDataRange2}
+            barDataSaved1={this.state.barDataSaved1}
+            barDataSaved2={this.state.barDataSaved2}
+          />
       </div>
     );
   }

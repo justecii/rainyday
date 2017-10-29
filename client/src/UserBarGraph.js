@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/react-vis/dist/style.css';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries,DiscreteColorLegend} from 'react-vis';
+import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries,DiscreteColorLegend,Hint} from 'react-vis';
 import $ from 'jquery';
 
 class UserBarGraph extends Component {
@@ -77,12 +77,6 @@ class UserBarGraph extends Component {
 
   hideToolTip(e){
     $('.barTooltip').hide();
-    // this.setState({
-    //   toolTipValue:{
-    //     category:'empty',
-    //     amount:0,
-    //   }
-    // })
   }
 
   render() {
@@ -100,6 +94,7 @@ class UserBarGraph extends Component {
           xType={'ordinal'}
           stackBy="y"
         >
+
           <DiscreteColorLegend
             style={{position: 'absolute', left: '200px', top: '0px'}}
             orientation="horizontal" 
