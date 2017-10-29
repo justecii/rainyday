@@ -16,58 +16,38 @@ class AllSavings extends Component {
     this.deleteSaved = this.deleteSaved.bind(this);
   }
 
-
-  // componentDidMount(){
-  //   fetch("/bankRecords/savedList")
-  //   .then((response) => response.json())
-  //   .then((response) => this.setState({savings: response}))
-
-  // }
-
-
   check(e) {
-    console.log("savings state: ", this.props.savings);
+    console.log("savings state: ", this.state.savings);
     console.log("user state: ", this.state.user);
   }
 
   deleteSaved(e) {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
-    let currentState = this.props.savings;
-    let trans = this.props.savings[i]._id;
-    let a = this;
-    axios.put('/bankRecords', {
-      data: trans
-    }).then(function (response) {
-      currentState.splice(i, 1);
-
-       a.props.setSavings(currentState);
-
-    }).catch(function (error) {
-      console.log("error: ", error);
-    })
+    this.props.handleDelete(i);
   }
 
 
 
   SaveCatChange(e) {
     e.preventDefault();
-    let i = e.target.getAttribute('data-key');
-    let Category = e.target.value;
-    let currentState = this.props.savings;
-    let individState = this.props.savings[i];
-    let categState = this.props.savings[i].Category = Category;
-    individState.Category = categState
-    let trans = this.props.savings[i]._id;
-    let a = this;
-    axios.put('/bankRecords/change', {
-      data: trans,
-      Category: Category
-    }).then(function (response) {
-      a.props.setSavings(currentState);
-    }).catch(function (error) {
-      console.log("error: ", error);
-    })
+    this.props.handleCatChange(e);
+    // let i = e.target.getAttribute('data-key');
+    // let Category = e.target.value;
+    // let currentState = this.props.savings;
+    // let individState = this.props.savings[i];
+    // let categState = this.props.savings[i].Category = Category;
+    // individState.Category = categState
+    // let trans = this.props.savings[i]._id;
+    // let a = this;
+    // axios.put('/bankRecords/change', {
+    //   data: trans,
+    //   Category: Category
+    // }).then(function (response) {
+    //   a.props.setSavings(currentState);
+    // }).catch(function (error) {
+    //   console.log("error: ", error);
+    // })
   }
 
   componentDidMount() {
@@ -75,12 +55,6 @@ class AllSavings extends Component {
     this.setState({
       user: user
     })
-    fetch('/bankRecords/SavingsSummary/' + user)
-      .then(response => response.json())
-      .then(response => {
-        this.props.setSavings(response);
-        console.log("response in AllSavings fetch: ", response)
-      })
     }
 
 
@@ -89,7 +63,7 @@ class AllSavings extends Component {
 
   render() {
 
-    console.log('savings', this.props.savings)
+    console.log('savings props', this.props.savings)
 
     let user = this.props.user
     console.log("user in client/AllSavings.js: ", user);
@@ -116,17 +90,21 @@ class AllSavings extends Component {
                     <option value="Income" data-key={index}>Income</option>
                   </select>
                 </div>
-                <div className='col s2'>${saving.Amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                <div className='col s2'>{saving.Amount}</div>
                 <div className='col s2'>{saving.date}</div>
+
+
                 <div className="waves-effect waves-light btn red col s1 " data-key={index} onClick={this.deleteSaved}>Delete</div>
+
               </section>  ))
 
     return (
       <div className="allSavings">
-        <div className="row sectionRow">
+        <h4>Those could be your expenses, instead those are your savings!</h4>
+        <div className="row">
           <div className='col s4'>Description</div>
           <div className='col s3'>Category</div>
-          <div className='col s2'>Money Saved</div>
+          <div className='col s2'>Money Saved ($)</div>
           <div className='col s2'>Created on</div>
           <div className='col s1'>Delete</div>
         </div>
