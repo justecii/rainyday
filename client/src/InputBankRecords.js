@@ -46,17 +46,15 @@ class InputBankRecords extends Component {
     // console.log("this.props.records inputbankrecords: ", this.props.user);
 
     return (
-      <div>
+      <div className="inputData">
         <form action="/bankRecordsReactRoute">
           <div onClick={this.change} className="file-field input-field col s12 ">
-
             <div className="btn #00838f cyan darken-3">
               <span>File</span>
               <input type="file" name="uploadCSV" onChange={this.uploadFile}/>
             </div>
           </div>
         </form>
-
       </div>
     );
   }

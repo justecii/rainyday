@@ -20,7 +20,7 @@ class BankRecords extends Component {
   }
 
   change(e) {
-    console.log(this.state.records);
+    console.log("this.state.records: ", this.state.records);
     console.log("user: ", this.state.user)
   }
 
@@ -64,12 +64,14 @@ class BankRecords extends Component {
   }
 
   handleDelete(i) {
+    console.log("handleDelete");
     let currentState = this.state.records;
     let trans = this.state.records[i]._id;
     let a = this;
     axios.put('/bankRecords', {
       data: trans
     }).then(function (response) {
+      console.log("currentState: ", currentState);
       currentState.splice(i, 1);
       a.setState({
         records: currentState
@@ -141,32 +143,27 @@ class BankRecords extends Component {
     return (
 
       <div className="BankRecordsWrapper  " >
-        <p>BankRecords Page</p>
-        <InputBankRecords
-                papaData={this.papaData}
-                records={this.state.records}
-                user={user}
-                />
-        <section className="row  " >
-          <ul id='tableLable' className='notmoving ' onClick={this.change}>
-            <li className='col s3'>Date</li>
-            <li className='col s3'>Description</li>
-            <li className='col s3'>Amount</li>
-            <li className='col s2'>Category</li>
-          </ul>
-          <br/><br/>
-          <div className='movepage'></div>
-          <EditBankData
-                {...this.state.records}
-                handleDelete={this.handleDelete}
-                handleCategChange={this.handleCategChange}
-                records={this.state.records}
-                user={user}
-                />
-        </section>
+      <h2 onClick={this.change}>My Transactions</h2>
+      <p>You can view all of your imported transactions here.</p>
+      <br />
+      <h4>Import Transactions</h4>
+      <p>Upload a CSV file from your bank. The file should include a transaction or posting date, description, and dollar amount.</p>
+      <br />
+      <InputBankRecords
+              papaData={this.papaData}
+              records={this.state.records}
+              user={user}
+              />
+      <br />
+      <h4 className="editBankDataHeader">Transactions</h4>
+      <EditBankData
+            {...this.state.records}
+            handleDelete={this.handleDelete}
+            handleCategChange={this.handleCategChange}
+            records={this.state.records}
+            user={user}
+            />
       </div>
-
-
     );
   }
 }

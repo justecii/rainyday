@@ -123,7 +123,7 @@ class AllSavings extends Component {
 
     return (
       <div className="allSavings">
-        <div className="row">
+        <div className="row sectionRow">
           <div className='col s4'>Description</div>
           <div className='col s3'>Category</div>
           <div className='col s2'>Money Saved</div>
