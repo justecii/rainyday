@@ -17,6 +17,7 @@ var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/mern-local-auth');
 mongoose.connect('mongodb://localhost/rainyDay');
 
+
 // var BankRecord = require('./models/bankRecord');
 var User = require('./models/user');
 var index = require('./routes/index');
@@ -71,6 +72,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/bankRecords', bankRecords);
+
 
 // catch 404 and forward to error handler - commented out
 // app.use(function(req, res, next) {

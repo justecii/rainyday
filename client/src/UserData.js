@@ -282,7 +282,7 @@ class UserData extends Component {
         />
         <UserSummary />
         <UserPieCharts pieData={this.state.pieDataFullRange}/>
-        <UserBarGraph barDataRange1={this.state.barDataRange1} barDataRange2={this.state.barDataRange2}/>
+        {/* <UserBarGraph barDataRange1={this.state.barDataRange1} barDataRange2={this.state.barDataRange2}/> */}
       </div>
     );
   }
