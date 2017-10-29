@@ -50,10 +50,6 @@ class EnterSavings extends Component {
   }
   
   handleChangeDate(date){
-    console.log('handleChangeDate', date)
-
-    console.log(date.format("MM/DD/YY"))
-    console.log(this.props.showClearDate)
     this.setState({
       date: date
     })
@@ -147,7 +143,7 @@ class EnterSavings extends Component {
             <div className="col s12">  
               <h5>Category</h5>  
               <select name="Category" value={this.state.value} onChange={this.handleChangeCategory} required>
-                <option  value="" disabled defaultValue> </option>
+                <option  value="" disabled selected default> </option>
                 <option value="Bills">Bills</option>
                 <option value="Groceries">Groceries</option>
                 <option value="Transportation">Transportation</option>

@@ -6,6 +6,7 @@ import './App.css';
 
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 
 import { DateRangePicker, SingleDatePicker } from 'react-dates';
@@ -17,64 +18,96 @@ class UserData extends Component {
     this.state = {
       bankRecords:[],
       catAmtRange1:[],
+      catAmtSaved1:[],
       catAmtRange2:[],
+      catAmtSaved2:[],
       dateAmtRange1:[],
       dateAmtRange2:[],
       pieDataFullRange:[],
-      startDate1: "07/24/17",
-      endDate1:"08/31/17",
-      startDate2: "09/01/17",
-      endDate2: "10/19/17",
-      pieRadius: 75,
-      pieRadius0: 0,
+      startDate1: "7/23/17",
+      endDate1:"8/31/17",
+      startDate2: "9/1/17",
+      endDate2: "11/30/17",
+      pieRadius: 125,
+      pieRadius0: 75,
     }
     this.makeUnique = this.makeUnique.bind(this);
     this.recordSoap = this.recordSoap.bind(this);
     this.consoliDate = this.consoliDate.bind(this);
     this.uniqueCatByRange = this.uniqueCatByRange.bind(this);
     this.uniqueDateByRange = this.uniqueDateByRange.bind(this);
-    this.stod = this.stod.bind(this);
+    this.stringToDate = this.stringToDate.bind(this);
   }
 
   componentDidMount(){
+    var startDate1 = this.state.startDate1
+    var startDate2 = this.state.startDate2
+    var endDate1 = this.state.endDate1
+    var endDate2 = this.state.endDate2
     let user = this.props.user
     this.setState({
       user: user
     })
     fetch('/bankRecords/' + user)
     .then((response) => response.json())
-    .then((response) => {this.updateLists(response)})
+    .then((response) => {this.updateLists(response,startDate1,endDate1,startDate2,endDate2)})
   }
 
-  updateLists(bankRecords){
+  updateLists(bankRecords,startDate1,endDate1,startDate2,endDate2){
     
+    //array of all records with a value for "date" and "category"
     let cleanBankRecords = this.recordSoap(bankRecords)
 
-    let sepTypes = this.sepTypes(cleanBankRecords).expense
-    console.log("bank records",cleanBankRecords)
-    console.log("septypes",sepTypes)
-    let categoryList1 = this.uniqueCatByRange(sepTypes,this.state.startDate1,this.state.endDate1)
-    let categoryList2 = this.uniqueCatByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
-    let categoryListFullRange = this.uniqueCatByRange(cleanBankRecords,this.state.startDate1,this.state.endDate2)
-    let dateList1 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate1,this.state.endDate1)
-    let dateList2 = this.uniqueDateByRange(cleanBankRecords,this.state.startDate2,this.state.endDate2)
-    let newCatAmtRange1 = this.makeCatAmt(categoryList1,sepTypes)
-    let newCatAmtRange2 = this.makeCatAmt(categoryList2,cleanBankRecords)
-    let newCatAmtFullRange = this.makeCatAmt(categoryListFullRange,cleanBankRecords)
-    let newDatAmtRange1 = this.makeDateAmt(dateList1,cleanBankRecords)
-    let newDatAmtRange2 = this.makeDateAmt(dateList2,cleanBankRecords)
+    // arrays of each type of record
+    let expenseRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).expense)
+    let incomeRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).income)
+    let savedRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).saved)
+    let uncatRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).uncategorized)
+
+    // arrays of bankRecords by date range and type
+    let expenseList1 = this.filterByRange(expenseRecords,startDate1,endDate1)  
+    let expenseList2 = this.filterByRange(expenseRecords,startDate2,endDate2)
+    let savedList1 = this.filterByRange(savedRecords,startDate1,endDate1)
+    let savedList2 = this.filterByRange(savedRecords,startDate2,endDate2)
+    let categoryListFullRange = this.uniqueCatByRange(cleanBankRecords,startDate1,endDate2) 
+    let categoryListAllRecords = this.uniqueCatByRange(cleanBankRecords,startDate1,endDate2) //maybe trash
+
+    // arrays of dates sorted
+    let dateList1 = this.uniqueDateByRange(expenseRecords,startDate1,endDate1)
+    let dateList2 = this.uniqueDateByRange(expenseRecords,startDate2,endDate2)
+    dateList1 = this.sortDates(dateList1)
+    dateList2 = this.sortDates(dateList2)
+
+    // arrays with category and amount given a time range
+    let newCatAmtRange1 = this.makeCatAmt(categoryListFullRange,expenseList1) //expense records needs to be by date
+    let newCatAmtRange2 = this.makeCatAmt(categoryListFullRange,expenseList2)
+    let newCatAmtSaved1 = this.makeCatAmt(categoryListFullRange,savedList1)
+    let newCatAmtSaved2 = this.makeCatAmt(categoryListFullRange,savedList2) //saved records needs to be by date range
+    let newCatAmtFullRange = this.makeCatAmt(categoryListFullRange,expenseRecords) //for pie
+
+    //future development for line graph
+    // let newDatAmtRange1 = this.makeDateAmt(dateList1,expenseRecords)
+    // let newDatAmtRange2 = this.makeDateAmt(dateList2,expenseRecords)
+
+    //arrays formatted for components
     let newPieDataFullRange = this.convertToPie(newCatAmtFullRange)
     let newBarDataRange1 = this.convertToBar(newCatAmtRange1)
     let newBarDataRange2 = this.convertToBar(newCatAmtRange2)
+    let newBarDataSaved1 = this.convertToBar(newCatAmtSaved1)
+    let newBarDataSaved2 = this.convertToBar(newCatAmtSaved2)
+    if(this.state.bankRecords!==null && this.state.pieDataFullRange!==null && this.state.barDataRange1!==null && 
+      this.state.barDataRange2!==null && this.state.barDataSaved1!==null & this.state.barDataSaved2!==null)
     this.setState({
       bankRecords: cleanBankRecords,
-      catAmtRange1:newCatAmtRange1,
-      catAmtRange2:newCatAmtRange2,
-      dateAmtRange1:newDatAmtRange1,
-      dateAmtRange2:newDatAmtRange2,
+      // catAmtRange1:newCatAmtRange1,
+      // catAmtRange2:newCatAmtRange2,
+      // dateAmtRange1:newDatAmtRange1,
+      // dateAmtRange2:newDatAmtRange2,
       pieDataFullRange:newPieDataFullRange,
       barDataRange1:newBarDataRange1,
       barDataRange2:newBarDataRange2,
+      barDataSaved1:newBarDataSaved1,
+      barDataSaved2:newBarDataSaved2,
     })
   }
 
@@ -84,7 +117,7 @@ class UserData extends Component {
   recordSoap(records){
     let updatebr = records;
     for(var i = 0; i< updatebr.length;i++){
-      if(updatebr[i].Category===undefined && !updatebr[i].isSaved){
+      if(updatebr[i].Category===undefined || updatebr[i].Category===""){
         updatebr[i].Category="uncategorized";
       }
     }
@@ -121,7 +154,7 @@ class UserData extends Component {
   }
 
    //converts from string in form MM/DD/YY to date (post 2000 only)
-  stod(dateString){
+  stringToDate(dateString){
     var parts =dateString.split('/');
     var mydate = new Date("20"+parts[2],parts[0]-1,parts[1]);
     return mydate;
@@ -130,11 +163,12 @@ class UserData extends Component {
   //takes bankdata array, start date, and end date.  
   //returns an array of unique categories for that date range
   uniqueCatByRange(array,start,end){
-    let a = array;
-    let b = [];
+    var a = array;
+    var b = [];
     for(var i = 0;i<a.length;i++){
-      if(this.stod(a[i].date)>=this.stod(start) && this.stod(a[i].date)<=this.stod(end)){
-        b.push(a[i].Category)
+      if(this.stringToDate(a[i].date)>=this.stringToDate(start) && this.stringToDate(a[i].date)<=this.stringToDate(end)){
+        var category=a[i].Category
+        b.push(category)
       }
     }
     b = this.makeUnique(b)
@@ -147,11 +181,24 @@ class UserData extends Component {
     let a = array;
     let b = [];
     for(var i = 0;i<a.length;i++){
-      if(this.stod(a[i].date)>=this.stod(start) && this.stod(a[i].date)<=this.stod(end)){
+      if(this.stringToDate(a[i].date)>=this.stringToDate(start) && this.stringToDate(a[i].date)<=this.stringToDate(end)){
         b.push(a[i].date)
       }
     }
     b = this.makeUnique(b)
+    return b;
+  }
+
+  //takes bankdata array, start date, and end date.  
+  //returns an array of bankdata arrays in that date range
+  filterByRange(array,start,end){
+    let a = array;
+    let b = [];
+    for(var i = 0;i<a.length;i++){
+      if(this.stringToDate(a[i].date)>=this.stringToDate(start) && this.stringToDate(a[i].date)<=this.stringToDate(end)){
+        b.push(a[i])
+      }
+    }
     return b;
   }
 
@@ -218,13 +265,17 @@ class UserData extends Component {
     let dataArr = catAmt;
     for(var i = 0; i<dataArr.length;i++){
       var temp = dataArr[i];
-      dataArr[i]={x:temp.category,y:temp.amount}
+      if(temp.category!==null && temp.category!==undefined){
+        dataArr[i]={x:temp.category,y:temp.amount}
+      } else {
+        dataArr[i]={x:"",y:temp.amount}
+      }
     }
     return dataArr
   }
 
   //accepts a bankRecords array and returns an object with 3 arrays...income, expense, saved, uncategorized
-  sepTypes(bankRecords){
+  splitBankRecTypes(bankRecords){
     var br = bankRecords;
     var income = [];
     var expense = [];
@@ -233,16 +284,24 @@ class UserData extends Component {
 
     for(var i = 0; i< br.length;i++){
       if(br[i].isSaved){
-        saved.push(br[1])
+        saved.push(br[i])
       } else if(br[i].Category==='Income' && !br.isSaved){
-        income.push(br[1])
+        income.push(br[i])
       } else if(br[i].Category==='uncategorized' && !br.isSaved){
-        uncategorized.push(br[1])
+        uncategorized.push(br[i])
       } else {
-        expense.push(br[1])
+        expense.push(br[i])
       }
     }
     return {income:income,expense:expense,saved:saved,uncategorized:uncategorized}
+  }
+
+  sortDates(array){
+    array.sort(function(a, b) {
+      var dateA = new Date(a), dateB = new Date(b);
+      return dateA - dateB;
+    });
+    return array;
   }
 
 
@@ -252,42 +311,81 @@ class UserData extends Component {
       <div className="UserDataWrapper">
         
         <p>Make Toolbar for datepicker with directions</p>
-        <p>First Date Range</p>
-        <DateRangePicker
-          startDate={moment(this.state.startDate1)} // momentPropTypes.momentObj or null,
-          endDate={moment(this.state.endDate1)} // momentPropTypes.momentObj or null,
-          onDatesChange={({startDate,endDate}) => {
-            var start = startDate.format("MM/DD/YY")
-            var end = endDate.format("MM/DD/YY")
-          this.setState({startDate1:start,endDate1:end},this.updateLists(this.state.bankRecords)
-          )}} // PropTypes.func.isRequired,
-          focusedInput={this.state.focusedInput1} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-          onFocusChange={focusedInput1 => this.setState({ focusedInput1 })} // PropTypes.func.isRequired,
+        <p>Start Date - Range 1</p>
+        <SingleDatePicker
+          date={moment(this.state.startDate1)}
+          onDateChange={(date) => {
+            var startDate1 = date.format("MM/DD/YY")
+            this.setState({startDate1:startDate1},
+              this.updateLists(this.state.bankRecords,startDate1,this.state.endDate1,this.state.startDate2,this.state.endDate2)
+          )}}
+          focused={this.state.focused1} // PropTypes.bool
+          onFocusChange={({ focused }) => this.setState({ focused1:focused })} // PropTypes.func.isRequired
           isOutsideRange={() => false}
           withPortal={true}
+          numberOfMonths={1}
         />
-        <p>Second Date Range</p>
-        <DateRangePicker
-          startDate={moment(this.state.startDate2)} // momentPropTypes.momentObj or null,
-          endDate={moment(this.state.endDate2)} // momentPropTypes.momentObj or null,
-          onDatesChange={({startDate,endDate}) => {
-            var start = startDate.format("MM/DD/YY")
-            var end = endDate.format("MM/DD/YY")
-          this.setState({startDate2:start,endDate2:end},this.updateLists(this.state.bankRecords)
-          )}} // PropTypes.func.isRequired,
-          focusedInput={this.state.focusedInput2} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-          onFocusChange={focusedInput2 => this.setState({ focusedInput2 })} // PropTypes.func.isRequired,
+        <p>End Date - Range 1</p>
+        <SingleDatePicker
+          date={moment(this.state.endDate1)}
+          onDateChange={(date) => {
+            var endDate1 = date.format("MM/DD/YY")
+            this.setState({endDate1:endDate1},
+              this.updateLists(this.state.bankRecords,this.state.startDate1,endDate1,this.state.startDate2,this.state.endDate2)
+          )}}
+          focused={this.state.focused2} // PropTypes.bool
+          onFocusChange={({ focused }) => this.setState({ focused2: focused })} // PropTypes.func.isRequired
           isOutsideRange={() => false}
           withPortal={true}
+          numberOfMonths={1}
+        />
+        <p>Start Date - Range 2</p>
+        <SingleDatePicker
+          date={moment(this.state.startDate2)}
+          onDateChange={(date) => {
+            var startDate2 = date.format("MM/DD/YY")
+            this.setState({startDate2:startDate2},
+              this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,startDate2,this.state.endDate2)
+          )}}
+          focused={this.state.focused3} // PropTypes.bool
+          onFocusChange={({ focused }) => this.setState({ focused3: focused })} // PropTypes.func.isRequired
+          isOutsideRange={() => false}
+          withPortal={true}
+          numberOfMonths={1}
+        />
+        <p>End Date - Range 2</p>
+        <SingleDatePicker
+          date={moment(this.state.endDate2)}
+          // onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
+          onDateChange={(date) => {
+            var endDate2 = date.format("MM/DD/YY")
+            this.setState({endDate2:endDate2},
+              this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,this.state.startDate2,endDate2)
+          )}}
+          focused={this.state.focused4} // PropTypes.bool
+          onFocusChange={({ focused }) => this.setState({ focused4: focused })} // PropTypes.func.isRequired
+          isOutsideRange={() => false}
+          withPortal={true}
+          numberOfMonths={1}
         />
         <UserSummary />
         <UserPieCharts pieData={this.state.pieDataFullRange}/>
-        <UserBarGraph barDataRange1={this.state.barDataRange1} barDataRange2={this.state.barDataRange2}/>
+        <UserBarGraph 
+          barDataRange1={this.state.barDataRange1} 
+          barDataRange2={this.state.barDataRange2}
+          barDataSaved1={this.state.barDataSaved1}
+          barDataSaved2={this.state.barDataSaved2}
+        />
       </div>
     );
   }
 }
 
- 
+
 
 export default UserData;
+
+
+ 
+
+ 

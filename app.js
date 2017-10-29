@@ -17,13 +17,13 @@ var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/mern-local-auth');
 mongoose.connect('mongodb://localhost/rainyDay');
 
-var Category = require('./models/category');
+// var Category = require('./models/category');
 // var BankRecord = require('./models/bankRecord');
 var User = require('./models/user');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
-var categories = require('./routes/categories');
+// var categories = require('./routes/categories');
 var bankRecords = require('./routes/bankRecords');
 
 var app = express();
@@ -73,7 +73,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/bankRecords', bankRecords);
-app.use('/categories', categories);
+// app.use('/categories', categories);
 
 // catch 404 and forward to error handler - commented out
 // app.use(function(req, res, next) {

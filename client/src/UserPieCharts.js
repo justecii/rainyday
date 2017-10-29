@@ -19,8 +19,8 @@ class UserPieCharts extends Component {
         Amount:0,
         Percent:0
       },
-      width: 400,
-      height:400
+      width: 315,
+      height:315
     }
   }
 
@@ -37,16 +37,17 @@ class UserPieCharts extends Component {
   }
 
 
-  showToolTip(e){
+  showToolTip(e,info){
+    console.log(info.event.pageX,info.event.pageY)
     let cssVal={};
     if (e.x>0 && e.y>0){
-      cssVal = {'left':(e.x)+225,'top':(e.y*-1)+225};
+      cssVal = {'left':(info.event.pageX),'top':(info.event.pageY)};
     } else if (e.x>0 && e.y<0){
-      cssVal = {'left':(e.x)+225,'top':(e.y*-1)+375};
+      cssVal = {'left':(info.event.pageX),'bottom':(info.event.pageY)};
     } else if (e.x<0 && e.y<0){
-      cssVal = {'left':(e.x)+100,'top':(e.y*-1)+375};
+      cssVal = {'right':(info.event.pageX),'bottom':(info.event.pageY)};
     } else if (e.x<0 && e.y>0){
-      cssVal = {'left':(e.x)+100,'top':(e.y*-1)+225};
+      cssVal = {'right':(info.event.pageX),'top':(info.event.pageY)};
     }
 
     $('.tooltip').css(cssVal).show();
@@ -61,13 +62,13 @@ class UserPieCharts extends Component {
 
   hideToolTip(e){
     $('.tooltip').hide();
-    this.setState({
-      toolTipValue:{
-        Category:'empty',
-        Amount:0,
-        Percent:0
-      }
-    })
+    // this.setState({
+    //   toolTipValue:{
+    //     Category:'empty',
+    //     Amount:0,
+    //     Percent:0
+    //   }
+    // })
   }
 
   render() {
@@ -91,7 +92,7 @@ class UserPieCharts extends Component {
             center={{x: 3, y: 3}}
             data={this.state.pieData}
             colorType={'literal'}
-            onValueMouseOver={(e)=>{this.showToolTip(e)}}
+            onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
             onValueMouseOut={(e)=>{this.hideToolTip(e)}}
           />      
         </XYPlot>

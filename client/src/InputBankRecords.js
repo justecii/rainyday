@@ -16,8 +16,8 @@ class InputBankRecords extends Component {
   }
 
   change(e) {
-    console.log("records: ", this.state.records);
-    console.log("user: ", this.state.user)
+    // console.log("records: ", this.state.records);
+    // console.log("user: ", this.state.user)
   }
 
   uploadFile(e) {
@@ -25,7 +25,7 @@ class InputBankRecords extends Component {
     // console.log("uploadFile: ", e.target)
     let uploaded = e.target.files[0];
     let user = this.state.user;
-    console.log("XXXX user in uploadfile XXX: ", user);
+    // console.log("XXXX user in uploadfile XXX: ", user);
     uploaded.user = user;
       this.props.papaData(uploaded);
   }
@@ -41,9 +41,9 @@ class InputBankRecords extends Component {
 
   render() {
     let user = this.props.user
-    console.log("user in client/InputBankRecords: ", user);
-    console.log("this.state.records inputbankrecords: ", this.state.records);
-    console.log("this.props.records inputbankrecords: ", this.props.user);
+    // console.log("user in client/InputBankRecords: ", user);
+    // console.log("this.state.records inputbankrecords: ", this.state.records);
+    // console.log("this.props.records inputbankrecords: ", this.props.user);
 
     return (
       <div>

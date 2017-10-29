@@ -55,11 +55,11 @@ class App extends Component {
     this.setState({
       user: user
     })
-    console.log("user props: ", this.props.user)
-    console.log("user state: ", this.state.user)
+    // console.log("user props: ", this.props.user)
+    // console.log("user state: ", this.state.user)
     }
   render() {
-    console.log("XXXXXXXXXX: ", this.state)
+    // console.log("XXXXXXXXXX: ", this.state)
     let user = this.props.user
     console.log("user in client/App.js: ", user);
     console.log("APP.JS STATE", this.state)
@@ -73,7 +73,7 @@ class App extends Component {
             <div className="nav-wrapper">
             <a href="/" className="brand-logo right"><i className="material-icons left">beach_access </i>RainyDay </a>
             <a href="/" className="button-collapse "><i className="material-icons">menu</i></a>
-              <div className='hide-on-med-and-down'>
+              <div className='hide-on-sm-and-down'>
               <Link to="/" className="btn btn-large #99d3df cyan darken-3 ">Home</Link>
               <Link to="/savingsReactRoute" className="btn btn-large #88bbd6 cyan darken-3 ">Savings</Link>
               <Link to="/bankRecordsReactRoute" className="btn btn-large #00838f cyan darken-3 ">Bank Records</Link>
