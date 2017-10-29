@@ -88,9 +88,9 @@ class BankRecords extends Component {
     let category = e.target.value;
     // console.log("category: ", category);
     let currentState = this.state.records;
-    console.log("currentState1: ", currentState);
+    // console.log("currentState1: ", currentState);
     currentState[i].Category = category
-    console.log("currentState2: ", currentState);
+    // console.log("currentState2: ", currentState);
     this.setState({
       records: currentState
     })
