@@ -149,7 +149,7 @@ class EnterSavings extends Component {
             <div className="col s12">  
               <h5>Category</h5>  
               <select name="Category" value={this.state.value} onChange={this.handleChangeCategory} required>
-                <option  value="" disabled defaultValue> </option>
+                <option  value="" disabled defaultValue selected> </option>
                 <option value="Bills">Bills</option>
                 <option value="Groceries">Groceries</option>
                 <option value="Transportation">Transportation</option>
