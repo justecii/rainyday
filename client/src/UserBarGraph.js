@@ -39,7 +39,6 @@ class UserBarGraph extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("props yo",nextProps)
     if(nextProps.barDataRange1!==null || nextProps.barDataRange1!==undefined){
       var range1 = nextProps.barDataRange1;
     }

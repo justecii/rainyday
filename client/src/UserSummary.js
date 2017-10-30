@@ -21,7 +21,6 @@ class UserSummary extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="UserSummaryWrapper">
         <p>Your User Summary!</p>

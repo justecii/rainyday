@@ -7,15 +7,7 @@ var flash = require('connect-flash');
 
 //COMPLETE: grab data form database and display in client: src/EditBankData.js
 router.post('/', function(req, res, next) {
-  for (let obj of req.body.data) {
-    obj['CheckNumber'] = obj['Check or Slip #'];
-    obj['TransDate'] = obj['Trans Date'];
-    obj['PostDate'] = obj['Post Date'];
-    obj['PostedDate'] = obj['Posting Date'];
-    delete obj['Trans Date'];
-    delete obj['Post Date'];
-    delete obj['Posting Date'];
-  }
+
   let item = req.body.data;
   console.log("item in router.post: ", item);
   //TODO: add user ID to item

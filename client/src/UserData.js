@@ -214,11 +214,13 @@ class UserData extends Component {
   filterByRange(array,start,end){
     let a = array;
     let b = [];
+    console.log("a",a)
     for(var i = 0;i<a.length;i++){
       if(this.stringToDate(a[i].date)>=this.stringToDate(start) && this.stringToDate(a[i].date)<=this.stringToDate(end)){
         b.push(a[i])
       }
     }
+
     return b;
   }
 
@@ -357,7 +359,7 @@ class UserData extends Component {
 
 
   render() {
-    // console.log("USER DATA STATE", this.state)
+    console.log("USER DATA STATE", this.state)
     return (
       <div className="UserDataWrapper">
         
@@ -404,7 +406,7 @@ class UserData extends Component {
                 onDateChange={(date) => {
                   var startDate2 = date.format("MM/DD/YY")
                   this.setState({startDate2:startDate2},
-                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,startDate2,this.state.endDate2)
+                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,startDate2,this.state.endDate2,false)
                 )}}
                 focused={this.state.focused3} // PropTypes.bool
                 onFocusChange={({ focused }) => this.setState({ focused3: focused })} // PropTypes.func.isRequired
@@ -421,7 +423,7 @@ class UserData extends Component {
                 onDateChange={(date) => {
                   var endDate2 = date.format("MM/DD/YY")
                   this.setState({endDate2:endDate2},
-                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,this.state.startDate2,endDate2)
+                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,this.state.startDate2,endDate2,false)
                 )}}
                 focused={this.state.focused4} // PropTypes.bool
                 onFocusChange={({ focused }) => this.setState({ focused4: focused })} // PropTypes.func.isRequired
