@@ -21,24 +21,27 @@ class UserSummary extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="UserSummaryWrapper">
-        <p>Your User Summary!</p>
-        <p>Spending by Category</p>
-        {this.state.allExpenses.map((category,index) => (
-          <div key={index} className="row">
-            <div className="col s4">{category.category}:</div>
-            <div className="col s2">{Math.round(category.amount)}</div>
-          </div>
-        ))}
-        <p>Savings by Category</p>
-        {this.state.allSaved.map((category,index) => (
-          <div key={index} className="row">
-            <div className="col s4">{category.category}:</div>
-            <div className="col s2">{Math.round(category.amount)}</div>
-          </div>
-        ))}
+        <div className="row">
+          <h4 className="center-align">Spending by Category</h4>
+          {this.state.allExpenses.map((category,index) => (
+            <div key={index} >
+              <div className="col s4">{category.category}:</div>
+              <div className="col s2">{Math.round(category.amount)}</div>
+            </div>
+          ))}
+        </div>
+        <div className="row">
+          <h4 className="center-align">Savings by Category</h4>
+          {this.state.allSaved.map((category,index) => (
+            <div key={index} className="row">
+              <div className="col s4">{category.category}:</div>
+              <div className="col s2">{Math.round(category.amount)}</div>
+            </div>
+          ))}
+        </div>
+        
       </div>
     );
   }

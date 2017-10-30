@@ -39,7 +39,6 @@ class UserBarGraph extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("props yo",nextProps)
     if(nextProps.barDataRange1!==null || nextProps.barDataRange1!==undefined){
       var range1 = nextProps.barDataRange1;
     }
@@ -56,7 +55,11 @@ class UserBarGraph extends Component {
       data1: range1,
       data2: range2,
       saved1: saved1,
-      saved2: saved2
+      saved2: saved2,
+      startDate1:nextProps.startDate1,
+      endDate1:nextProps.endDate1,
+      startDate2:nextProps.startDate2,
+      endDate2:nextProps.endDate2,
     })
   }
 
@@ -85,6 +88,28 @@ class UserBarGraph extends Component {
           <p>{Math.round(this.state.toolTipValue.amount)}</p>
         </div>
         <div className="verticalBar">
+          <DiscreteColorLegend
+            style={{position: 'absolute'}}
+            orientation="horizontal" 
+            items={[
+              {
+                title: `Expenses  ${this.state.startDate1}  to ${this.state.endDate1}`,
+                color: '#26a69a'
+              },
+              {
+                title: `Expenses  ${this.state.startDate2}  to ${this.state.endDate2}`,
+                color: '#3661B0'
+              },
+              {
+                title: `Saved ${this.state.startDate1}  to ${this.state.endDate1}`,
+                color: '#FF8E3A'
+              },
+              {
+                title: `Saved ${this.state.startDate2}  to ${this.state.endDate2}`,
+                color: '#FFBA3A'
+              }
+            ]}
+          />
           <XYPlot 
             height={400} 
             width={850} 
@@ -135,17 +160,3 @@ class UserBarGraph extends Component {
 }
 export default UserBarGraph;
 
-{/* <DiscreteColorLegend
-            style={{position: 'absolute', left: '200px', top: '0px'}}
-            orientation="horizontal" 
-            items={[
-              {
-                title: 'Apples',
-                color: '#12939A'
-              },
-              {
-                title: 'Oranges',
-                color: '#79C7E3'
-              }
-            ]}
-          /> */}

@@ -77,29 +77,30 @@ class Savings extends Component {
 
   render() {
     let user = this.props.user
-    console.log("savings state in render: ", this.state.savings);
-    // console.log("user in client/Savings.js: ", user);
     return (
 
-      <div className="SavingsWrapper container ">
-       
-        <EnterSavings  addSaving={this.addSaving} user={user}/>
-        <AllSavings savings={this.state.savings}  
-                    setSavings={this.setSavings} 
-                    user={user}
-                    handleDelete={this.handleDelete}
-                    handleCatChange={this.handleCatChange}
-                    />
-                    {/* tool tip */}
+      <div className="SavingsWrapper row">
+        <div className="col s10 offset-s1">
+          <EnterSavings  addSaving={this.addSaving} user={user}/>
+          <AllSavings 
+            savings={this.state.savings}  
+            setSavings={this.setSavings} 
+            user={user}
+            handleDelete={this.handleDelete}
+            handleCatChange={this.handleCatChange}
+          />
+        </div>
+        {/* tool tip */}
         <div className="fixed-action-btn toolbar">
-          <a className="btn-floating btn-large #26a69a teal lighten-1">
+          <a className="btn-floating btn-large #263238 blue-grey darken-4 pulse">
             <i className="large material-icons">flare</i>
           </a>
-           <ul>
-               <li className="waves-effect waves-light"><a href="#!"><i >Here you can add your savings</i></a></li>
+          <ul>
+            <li className="waves-effect waves-light"><a href="#!">
+              <i >Here's where you can track that you didn't spend $147 on donuts on Tuesday, March 4.</i></a>
+            </li>
           </ul>
-      </div>
-      {/* end of tool tip */}
+        </div> {/* end of tool tip */}
       </div>
 
     );

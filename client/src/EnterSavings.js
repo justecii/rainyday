@@ -112,13 +112,19 @@ class EnterSavings extends Component {
             <h5>Description</h5>
             <div className="input-field col s12">
               <input id="Description" type="text" className="validate" name="Description" onChange={this.handleChangeDescription} required/>
-              <label htmlFor="Description">Enter your {`saving's`} description here</label>
+              <label htmlFor="Description">I didn't buy ...</label>
             </div>
           </div>
           <div className="row highlight">
-            <h5>Category</h5>
-            <br />
-            <div className="col s12">
+            <div className="col s12 m4">
+              <h5>Savings</h5>
+              <div className="input-field col s12">
+                <input type="number" name="Amount" className="validate"  onChange={this.handleChangeAmount} required/>
+                <label htmlFor="Amount">I didn't spend ...</label>
+              </div>
+            </div>
+            <div className="col s12 m4">
+              <h5>Category</h5>
               <select name="Category" value={this.state.value} onChange={this.handleChangeCategory} required>
                 <option  value="" > </option>
                 <option value="Bills">Bills</option>
@@ -136,32 +142,30 @@ class EnterSavings extends Component {
                 <option value="Income">Income</option>
               </select>
             </div>
-          </div>
-          <div className="row highlight">
-            <h5>Savings</h5>
-            <div className="input-field col s12">
-              <input type="number" name="Amount" className="validate"  onChange={this.handleChangeAmount} required/>
-              <label htmlFor="Amount">Money saved ($)</label>
+            <div className="col s12 m4">
+              <h5>Date</h5>
+              <SingleDatePicker
+                date={this.state.date}
+                onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
+                focused={this.state.focused} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+                isOutsideRange={() => false}
+                withPortal={true}
+                numberOfMonths={1}
+                showDefaultInputIcon={true}
+              />
             </div>
           </div>
-            <h5>Date</h5>
-            <SingleDatePicker
-              date={this.state.date}
-              onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
-              focused={this.state.focused} // PropTypes.bool
-              onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-              isOutsideRange={() => false}
-              withPortal={true}
-              numberOfMonths={1}
-              showDefaultInputIcon={true}
-            />
-
-            <br />
-            <input className="btn waves-effect waves-light movedownalittle" type="submit" value="Submit"  />  
+          <div className="row">
+            <input 
+              className="btn waves-effect waves-light movedownalittle #263238 blue-grey darken-4" 
+              type="submit" 
+              value="Submit"  
+            />  
+          </div>
         </form>
         <br/>
         <div className='divider'> </div>
-
       </div>
     );
   }

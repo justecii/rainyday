@@ -141,49 +141,41 @@ class BankRecords extends Component {
     // console.log("this.state.user bankrecords: ", this.state.user);
 
     return (
-
-
       <div className="BankRecordsWrapper row " >
         <div className='col s10 offset-s1'>
-      <h2 onClick={this.change}>My Transactions</h2>
-      <p>You can view all of your imported transactions here.</p>
-      <br />
-      <h4>Import Transactions</h4>
-      <p>Upload a CSV file from your bank. The file should include a transaction or posting date, description, and dollar amount.</p>
-      <br />
-      <InputBankRecords
-              papaData={this.papaData}
-              records={this.state.records}
-              user={user}
-              />
-      <br />
-      <h4 className="editBankDataHeader ">Transactions</h4>
-      
-      <EditBankData
+          <h3 onClick={this.change}>My Transactions</h3>
+          <p>You can view all of your imported transactions here.</p>
+          <br />
+          
+          <InputBankRecords
+            papaData={this.papaData}
+            records={this.state.records}
+            user={user}
+            />
+          <br />
+          <h4 className="editBankDataHeader ">Transactions</h4>
+          <EditBankData
             {...this.state.records}
             handleDelete={this.handleDelete}
             handleCategChange={this.handleCategChange}
             records={this.state.records}
             user={user}
-            />
-            {/* tool  */}
-            <div className="fixed-action-btn toolbar">
-                  <a className="btn-floating btn-large  #26a69a teal lighten-1">
-                       <i className="large material-icons">grade</i>
-                  </a>
-                  <ul className='row'>
-                      <li className='col s2'><a href="#!"><i >Date</i></a></li>
-                      <li className='col s2'><a href="#!"><i >Description</i></a></li>
-                      <li className='col s2'><a href="#!"><i >Amount</i></a></li>
-                      <li className='col s2'><a href="#!"><i >Category</i></a></li>
-                      <li className='col s2'><a href="#!"><i >Delete</i></a></li>
-
-                  </ul>
-                </div>
-                {/* end tool */}
+          />
+          {/* tool  */}
+          <div className="fixed-action-btn toolbar">
+            <a className="btn-floating btn-large  #263238 blue-grey darken-4">
+              <i className="large material-icons">grade</i>
+            </a>
+            <ul className='row'>
+              <li className='col s2'><a href="#!"><i >Date</i></a></li>
+              <li className='col s4'><a href="#!"><i >Description</i></a></li>
+              <li className='col s2'><a href="#!"><i >Amount</i></a></li>
+              <li className='col s2'><a href="#!"><i >Category</i></a></li>
+              <li className='col s2'><a href="#!"><i >Delete</i></a></li>
+            </ul>
+          </div> {/* end tool */}
         </div>
       </div>
-
     );
   }
 }

@@ -17,9 +17,9 @@ class SavingsSummary extends Component {
   }
 
   check(e) {
-    console.log(this.state.savings);
-    console.log("totalPerCat: ", this.state.totalPerCat);
-    console.log("total in check: ", this.state.total);
+    // console.log(this.state.savings);
+    // console.log("totalPerCat: ", this.state.totalPerCat);
+    // console.log("total in check: ", this.state.total);
   }
 
 
@@ -59,15 +59,15 @@ class SavingsSummary extends Component {
 
 
   render() {
-    {console.log("total in render: ", this.state.total)}
+    // {console.log("total in render: ", this.state.total)}
     let total = this.state.total;
     let user = this.props.user
-    console.log("user in client/SavingsSummary.js: ", this.state);
-    console.log("savings state in client/SavingsSummary.js: ", this.state.savings);
+    // console.log("user in client/SavingsSummary.js: ", this.state);
+    // console.log("savings state in client/SavingsSummary.js: ", this.state.savings);
 
     return (
 
-      <div>
+      <div >
         <div className="col s3"></div>
         <div className="col s3">{total}</div>
         <br />

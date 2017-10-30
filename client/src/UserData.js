@@ -17,12 +17,6 @@ class UserData extends Component {
     super(props);
     this.state = {
       bankRecords:[],
-      catAmtRange1:[],
-      catAmtSaved1:[],
-      catAmtRange2:[],
-      catAmtSaved2:[],
-      dateAmtRange1:[],
-      dateAmtRange2:[],
       pieDataFullRange:[],
       savedDataFullRange:[],
       startDate1: "7/23/17",
@@ -83,6 +77,7 @@ class UserData extends Component {
     dateList1 = this.sortDates(dateList1)
     dateList2 = this.sortDates(dateList2)
 
+
     // arrays with category and amount given a time range
     let newCatAmtRange1 = this.makeCatAmt(categoryListFullRange,expenseList1) //expense records needs to be by date
     let newCatAmtRange2 = this.makeCatAmt(categoryListFullRange,expenseList2)
@@ -113,8 +108,8 @@ class UserData extends Component {
             barDataSaved1:newBarDataSaved1,
             barDataSaved2:newBarDataSaved2,
             startDate1:allDates[0],
-            endDate1:allDates[Math.floor(allDates.length/2)],
-            startDate2:allDates[Math.floor(allDates.length/2)+1],
+            endDate1:allDates[Math.round(allDates.length/2)],
+            startDate2:allDates[Math.round(allDates.length/2+1)],
             endDate2:allDates[allDates.length-1]
           })
         } else{
@@ -176,7 +171,11 @@ class UserData extends Component {
    //converts from string in form MM/DD/YY to date (post 2000 only)
   stringToDate(dateString){
     var parts =dateString.split('/');
-    var mydate = new Date("20"+parts[2],parts[0]-1,parts[1]);
+    if (parts[2].length===2){
+      var mydate = new Date("20"+parts[2],parts[0]-1,parts[1]);
+    } else {
+      var mydate = new Date(parts[2],parts[0]-1,parts[1]);
+    }
     return mydate;
   }
 
@@ -214,6 +213,7 @@ class UserData extends Component {
   filterByRange(array,start,end){
     let a = array;
     let b = [];
+    
     for(var i = 0;i<a.length;i++){
       if(this.stringToDate(a[i].date)>=this.stringToDate(start) && this.stringToDate(a[i].date)<=this.stringToDate(end)){
         b.push(a[i])
@@ -272,35 +272,18 @@ class UserData extends Component {
       dataArr[k].angle = dataArr[k].angle0 + dataArr[k].percent*2*Math.PI;
     }
     //var CSS_COLOR_NAMES = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
-    var CSS_COLOR_NAMES = ["Aqua","Aquamarine",
-    "Black","Blue","BlueViolet","Brown",
-    "CadetBlue","Chartreuse","Coral",
-    "Crimson","Cyan","DarkBlue","DarkCyan",
-    "DarkGreen","DarkMagenta","Darkorange",
-    "DarkOrchid","DarkSlateBlue","DarkTurquoise",
-    "DeepPink","DeepSkyBlue","DimGray",
-    "DodgerBlue","FireBrick","Fuchsia",
-    "Gold",
-    "IndianRed","Indigo",
-    "LawnGreen","LightBlue","LightCoral","LightCyan",
-    "LightGreen","LightPink","LightSalmon","LightSeaGreen",
-    "LightSkyBlue",
-    "Lime","LimeGreen","Maroon","MediumAquaMarine",
-    "MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen",
-    "MediumTurquoise","MediumVioletRed","MidnightBlue",
-    "Olive","OliveDrab","Orange","OrangeRed","Orchid",
-    "PaleGreen","PaleVioletRed",
-    "Peru","Pink","Purple","Red","RoyalBlue",
-    "Salmon","SkyBlue","SlateBlue",
-    "Teal","Thistle","Tomato",
-    "Turquoise","Yellow","YellowGreen"];
+    var CSS_COLOR_NAMES = ["Aqua","Aquamarine","Black","Blue","BlueViolet","Brown",
+    "CadetBlue","Chartreuse","Coral","Crimson","Cyan","DarkBlue","DarkCyan",
+    "DarkGreen","DarkMagenta","Darkorange","DarkOrchid","DarkSlateBlue","DarkTurquoise",
+    "DeepPink","DeepSkyBlue","DimGray","DodgerBlue","FireBrick","Fuchsia","Gold",
+    "IndianRed","Indigo","LawnGreen","LightBlue","LightCoral","LightCyan",
+    "LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue",
+    "Lime","LimeGreen","Maroon","MediumAquaMarine","MediumOrchid","MediumPurple",
+    "MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise",
+    "MediumVioletRed","MidnightBlue","Olive","OliveDrab","Orange","OrangeRed","Orchid",
+    "PaleGreen","PaleVioletRed","Peru","Pink","Purple","Red","RoyalBlue",
+    "Salmon","SkyBlue","SlateBlue","Teal","Thistle","Tomato","Turquoise","Yellow","YellowGreen"];
     
-    // var CSS_COLOR_NAMES = ["Brown","CadetBlue","DarkCyan","DarkGoldenRod","DarkOliveGreen",
-    // "DarkOrange","DarkOrchid","DarkRed","DarkSeaGreen","DarkSlateBlue","DarkSlateGrey",
-    // "DarkTurquoise","Gold","IndianRed","LightSeaGreen",
-    // "Maroon","MediumAquaMarine","MediumSeaGreen","MediumTurquoise","MidnightBlue","Olive",
-    // "OliveDrab","Orange","OrangeRed","PaleGreen","Peru","RoyalBlue",
-    // "Salmon","SeaGreen","SteelBlue","Tomato","Turquoise","YellowGreen"];
     for(var m = 0; m<dataArr.length;m++){//assigning radius, radius from state and color based on index
       dataArr[m].radius = this.state.pieRadius;
       dataArr[m].radius0 = this.state.pieRadius0;
@@ -357,96 +340,111 @@ class UserData extends Component {
 
 
   render() {
-    // console.log("USER DATA STATE", this.state)
     return (
       <div className="UserDataWrapper">
         
-        <div className="row">
-          <div className="col m6">
-            <div className="col s6">
-              <p>Start Date 1</p>
-              <SingleDatePicker
-                date={moment(this.state.startDate1)}
-                onDateChange={(date) => {
-                  var startDate1 = date.format("MM/DD/YY")
-                  this.setState({startDate1:startDate1},
-                    this.updateLists(this.state.bankRecords,startDate1,this.state.endDate1,this.state.startDate2,this.state.endDate2)
-                )}}
-                focused={this.state.focused1} // PropTypes.bool
-                onFocusChange={({ focused }) => this.setState({ focused1:focused })} // PropTypes.func.isRequired
-                isOutsideRange={() => false}
-                withPortal={true}
-                numberOfMonths={1}
-              />
-            </div>
-            <div className="col s6">
-              <p>End Date 1</p>
-              <SingleDatePicker
-                date={moment(this.state.endDate1)}
-                onDateChange={(date) => {
-                  var endDate1 = date.format("MM/DD/YY")
-                  this.setState({endDate1:endDate1},
-                    this.updateLists(this.state.bankRecords,this.state.startDate1,endDate1,this.state.startDate2,this.state.endDate2)
-                )}}
-                focused={this.state.focused2} // PropTypes.bool
-                onFocusChange={({ focused }) => this.setState({ focused2: focused })} // PropTypes.func.isRequired
-                isOutsideRange={() => false}
-                withPortal={true}
-                numberOfMonths={1}
-              />
-            </div>
-          </div>
-          <div className="col m6">
-            <div className="col s6">
-              <p>Start Date 2</p>
-              <SingleDatePicker
-                date={moment(this.state.startDate2)}
-                onDateChange={(date) => {
-                  var startDate2 = date.format("MM/DD/YY")
-                  this.setState({startDate2:startDate2},
-                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,startDate2,this.state.endDate2)
-                )}}
-                focused={this.state.focused3} // PropTypes.bool
-                onFocusChange={({ focused }) => this.setState({ focused3: focused })} // PropTypes.func.isRequired
-                isOutsideRange={() => false}
-                withPortal={true}
-                numberOfMonths={1}
-              />
+        <div className="row section center-align">
+          <h4><i className="material-icons">date_range</i>Choose date ranges to compare</h4>
+          <div className="col s12 m10 offset-m1 movedownalittle">
+            <div className="col m6">
+              <div className="col s6">
+                <p>Start Date 1</p>
+                <SingleDatePicker
+                  date={moment(this.state.startDate1)}
+                  onDateChange={(date) => {
+                    var startDate1 = date.format("MM/DD/YY")
+                    this.setState({startDate1:startDate1},
+                      this.updateLists(this.state.bankRecords,startDate1,this.state.endDate1,this.state.startDate2,this.state.endDate2)
+                  )}}
+                  focused={this.state.focused1} // PropTypes.bool
+                  onFocusChange={({ focused }) => this.setState({ focused1:focused })} // PropTypes.func.isRequired
+                  isOutsideRange={() => false}
+                  withPortal={true}
+                  numberOfMonths={1}
+                />
               </div>
               <div className="col s6">
-              <p>End Date 2</p>
-              <SingleDatePicker
-                date={moment(this.state.endDate2)}
-                // onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
-                onDateChange={(date) => {
-                  var endDate2 = date.format("MM/DD/YY")
-                  this.setState({endDate2:endDate2},
-                    this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,this.state.startDate2,endDate2)
-                )}}
-                focused={this.state.focused4} // PropTypes.bool
-                onFocusChange={({ focused }) => this.setState({ focused4: focused })} // PropTypes.func.isRequired
-                isOutsideRange={() => false}
-                withPortal={true}
-                numberOfMonths={1}
-              />
+                <p>End Date 1</p>
+                <SingleDatePicker
+                  date={moment(this.state.endDate1)}
+                  onDateChange={(date) => {
+                    var endDate1 = date.format("MM/DD/YY")
+                    this.setState({endDate1:endDate1},
+                      this.updateLists(this.state.bankRecords,this.state.startDate1,endDate1,this.state.startDate2,this.state.endDate2)
+                  )}}
+                  focused={this.state.focused2} // PropTypes.bool
+                  onFocusChange={({ focused }) => this.setState({ focused2: focused })} // PropTypes.func.isRequired
+                  isOutsideRange={() => false}
+                  withPortal={true}
+                  numberOfMonths={1}
+                />
+              </div>
             </div>
+            <div className="col m6">
+              <div className="col s6">
+                <p>Start Date 2</p>
+                <SingleDatePicker
+                  date={moment(this.state.startDate2)}
+                  onDateChange={(date) => {
+                    var startDate2 = date.format("MM/DD/YY")
+                    this.setState({startDate2:startDate2},
+                      this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,startDate2,this.state.endDate2,false)
+                  )}}
+                  focused={this.state.focused3} // PropTypes.bool
+                  onFocusChange={({ focused }) => this.setState({ focused3: focused })} // PropTypes.func.isRequired
+                  isOutsideRange={() => false}
+                  withPortal={true}
+                  numberOfMonths={1}
+                />
+                </div>
+                <div className="col s6">
+                <p>End Date 2</p>
+                <SingleDatePicker
+                  date={moment(this.state.endDate2)}
+                  // onDateChange={this.handleChangeDate} // PropTypes.func.isRequired
+                  onDateChange={(date) => {
+                    var endDate2 = date.format("MM/DD/YY")
+                    this.setState({endDate2:endDate2},
+                      this.updateLists(this.state.bankRecords,this.state.startDate1,this.state.endDate1,this.state.startDate2,endDate2,false)
+                  )}}
+                  focused={this.state.focused4} // PropTypes.bool
+                  onFocusChange={({ focused }) => this.setState({ focused4: focused })} // PropTypes.func.isRequired
+                  isOutsideRange={() => false}
+                  withPortal={true}
+                  numberOfMonths={1}
+                />
+              </div>
+            </div>
+          </div> {/*End of date picker row*/}
+        </div>
+        <div className="divider"></div>
+        <div className="movedown"></div>
+        <div className="row">
+          <div className="col s12 m5 offset-m1">
+            <UserSummary allExpenses={this.state.pieDataFullRange} allSaved={this.state.savedDataFullRange}/>
+          </div>
+          <div className="col s12 m5 z-depth-1 ">
+            <UserPieCharts 
+              pieData={this.state.pieDataFullRange}
+              startDate1={this.state.startDate1}
+              endDate2={this.state.endDate2}
+              />
           </div>
         </div>
         <div className="row">
-          <div className="col m6 s12">
-            <UserSummary allExpenses={this.state.pieDataFullRange} allSaved={this.state.savedDataFullRange}/>
-          </div>
-          <div className="col m6 s12">
-            <UserPieCharts pieData={this.state.pieDataFullRange}/>
+          <div className="col s10 offset-s1 z-depth-1 ">  
+            <UserBarGraph 
+              barDataRange1={this.state.barDataRange1} 
+              barDataRange2={this.state.barDataRange2}
+              barDataSaved1={this.state.barDataSaved1}
+              barDataSaved2={this.state.barDataSaved2}
+              startDate1={this.state.startDate1}
+              endDate1={this.state.endDate1}
+              startDate2={this.state.startDate2}
+              endDate2={this.state.endDate2}
+            />
           </div>
         </div>
-
-          <UserBarGraph 
-            barDataRange1={this.state.barDataRange1} 
-            barDataRange2={this.state.barDataRange2}
-            barDataSaved1={this.state.barDataSaved1}
-            barDataSaved2={this.state.barDataSaved2}
-          />
       </div>
     );
   }

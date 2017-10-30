@@ -31,45 +31,25 @@
     
    <script>
       $(document).ready(function(){
-      $('.parallax').parallax();
-      //date for the form
-      $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year,
-        today: 'Today',
-        clear: 'Clear',
-        close: 'Ok',
-        closeOnSelect: false // Close upon selecting a date,
-      });  
-
- // Initialize collapse button
- $(".button-collapse").sideNav();
-
-//  tablelable  does not work yet
-var tableLable = document.getElementById("tableLable");
-var sticky = tableLable.offsetTop;
-
-function myFunction() {
-  console.log('scrolling')
-  if (window.pageYOffset >= sticky) {
-    tableLable.classList.add("sticky")
-  } else {
-    tableLable.classList.remove("sticky");
-  }
-}
-
-    // card info
-    $('.card__share > a').on('click', function(e){
-		e.preventDefault() // prevent default action - hash doesn't appear in url
-   		$(this).parent().find( 'div' ).toggleClass( 'card__social--active' );
-		$(this).toggleClass('share-expanded');
-    });
-    });
- 
-  
-
-
-});
+        $('.parallax').parallax();
+        //date for the form
+        $('.datepicker').pickadate({
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 15, // Creates a dropdown of 15 years to control year,
+          today: 'Today',
+          clear: 'Clear',
+          close: 'Ok',
+          closeOnSelect: false // Close upon selecting a date,
+        });  
+        // Initialize collapse button
+        $(".button-collapse").sideNav();
+        // card info
+        $('.card__share > a').on('click', function(e){
+  		    e.preventDefault(); // prevent default action - hash doesn't appear in url
+     	  	$(this).parent().find( 'div' ).toggleClass( 'card__social--active' );
+  		    $(this).toggleClass('share-expanded');
+        });
+      });
 // Next slide
 
     </script>

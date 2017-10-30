@@ -71,7 +71,7 @@ class AllSavings extends Component {
 
     let savedOn = this.props.savings.map((saving, index) => (
 
-              <section className="row z-depth-1" key={index} onClick={this.check}>
+              <section className="row z-depth-1 valign-wrapper" key={index} onClick={this.check}>
                 <div className='col s3'>{saving.Description}</div>
                 <div className='col s3'>
                   <select className="browser-default" data-key={index} value={saving.Category} onChange={this.SaveCatChange}>

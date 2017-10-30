@@ -62,10 +62,10 @@ class EditBankData extends Component {
     let mappedItems = this.props.records.map((records, index) => (
           <section onClick={this.change} className="row z-depth-1" key={index}>
 
-            <div>
-                <div className='col s3' data-key={index}>{records.TransDate} {records.PostedDate}</div>
-                <div className='col s3' data-key={index}>{records.Description}</div>
-                <div className='col s3' data-key={index}>{records.Amount}</div>
+            <div className="valign-wrapper">
+                <div className='col s2' data-key={index}>{records.TransDate} {records.PostedDate}</div>
+                <div className='col s4' data-key={index}>{records.Description}</div>
+                <div className='col s2' data-key={index}>{records.Amount}</div>
                 <div className='col s2'>
                   <select name='' className="browser-default " data-key={index} onChange={this.categoryChange}>
                   if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
@@ -86,8 +86,12 @@ class EditBankData extends Component {
                     <option value="Income" >Income</option>
                   </select>
                 </div>
-
-                <div className="waves-effect waves-light btn red col s1  " data-key={index} onClick={this.deleteTransaction}>Delete</div>
+                <div className="col s2">
+                  <button 
+                    className="waves-effect waves-light btn red"
+                    data-key={index} onClick={this.deleteTransaction}
+                  >Delete</button>
+                </div>
                 </div>
           </section>  ))
 
@@ -95,7 +99,7 @@ class EditBankData extends Component {
       <div>
         <br/>
         <section className="row   sectionRow" >
-          <ul id='tableLable' className='notmoving ' onClick={this.change}>
+          <ul id='tableLable' className='notmoving ' onScroll={this.change}>
             <li className='col s3'>Date</li>
             <li className='col s3'>Description</li>
             <li className='col s3'>Amount</li>
