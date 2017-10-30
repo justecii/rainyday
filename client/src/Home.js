@@ -118,19 +118,16 @@ class Home extends Component {
         {<Parallax imageSrc="/img/umbrellas.png"/>}
       {/* carousel */}
         <div >
-          <h3 className="header center-align col s9 offset-s2 light">
-            Making better spending choices, set goals, and improve your quality of life for tomorrow
-          </h3>
-          <Carousel 
-            images={[
-              '/img/liz.png',
-              '/img/TomWaits.png',
-              '/img/angelina-jolie.png',
-              '/img/Aj.png',
-              '/img/umbrellas.png'
-          ]} />
-        </div>
-      {/* end of carousel */}
+          <h3 className="header  center-align col s9 offset-s2 light">Making better spending choices, set goals, and improve your quality of life for tomorrow</h3>
+            <Carousel  images={[
+              'https://static.pexels.com/photos/221534/pexels-photo-221534.jpeg',
+              'https://static.pexels.com/photos/164474/pexels-photo-164474.jpeg',
+              'https://static.pexels.com/photos/163032/office-pen-calculator-computation-163032.jpeg',
+              'https://static.pexels.com/photos/164485/pexels-photo-164485.jpeg',
+              'https://static.pexels.com/photos/221539/pexels-photo-221539.jpeg'
+            ]} />
+          </div>
+        {/* end of carousel */}
         <div className="container">
           <div className="section">
             <div className="row">
