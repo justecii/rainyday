@@ -143,7 +143,8 @@ class BankRecords extends Component {
     return (
 
 
-      <div className="BankRecordsWrapper  " >
+      <div className="BankRecordsWrapper row " >
+        <div className='col s10 offset-s1'>
       <h2 onClick={this.change}>My Transactions</h2>
       <p>You can view all of your imported transactions here.</p>
       <br />
@@ -156,7 +157,8 @@ class BankRecords extends Component {
               user={user}
               />
       <br />
-      <h4 className="editBankDataHeader">Transactions</h4>
+      <h4 className="editBankDataHeader ">Transactions</h4>
+      
       <EditBankData
             {...this.state.records}
             handleDelete={this.handleDelete}
@@ -179,6 +181,7 @@ class BankRecords extends Component {
                   </ul>
                 </div>
                 {/* end tool */}
+        </div>
       </div>
 
     );
