@@ -361,40 +361,6 @@ class UserData extends Component {
     return (
       <div className="UserDataWrapper">
         
-
-        <p>Make Toolbar for datepicker with directions</p>
-        <p>First Date Range</p>
-        <DateRangePicker
-          startDate={moment(this.state.startDate1)} // momentPropTypes.momentObj or null,
-          endDate={moment(this.state.endDate1)} // momentPropTypes.momentObj or null,
-          onDatesChange={({startDate,endDate}) => {
-            var start = startDate.format("MM/DD/YY")
-            var end = endDate.format("MM/DD/YY")
-          this.setState({startDate1:start,endDate1:end},this.updateLists(this.state.bankRecords)
-          )}} // PropTypes.func.isRequired,
-          focusedInput={this.state.focusedInput1} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-          onFocusChange={focusedInput1 => this.setState({ focusedInput1 })} // PropTypes.func.isRequired,
-          isOutsideRange={() => false}
-          withPortal={true}
-        />
-        <p>Second Date Range</p>
-        <DateRangePicker
-          startDate={moment(this.state.startDate2)} // momentPropTypes.momentObj or null,
-          endDate={moment(this.state.endDate2)} // momentPropTypes.momentObj or null,
-          onDatesChange={({startDate,endDate}) => {
-            var start = startDate.format("MM/DD/YY")
-            var end = endDate.format("MM/DD/YY")
-          this.setState({startDate2:start,endDate2:end},this.updateLists(this.state.bankRecords)
-          )}} // PropTypes.func.isRequired,
-          focusedInput={this.state.focusedInput2} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-          onFocusChange={focusedInput2 => this.setState({ focusedInput2 })} // PropTypes.func.isRequired,
-          isOutsideRange={() => false}
-          withPortal={true}
-        />
-        <UserSummary />
-        <UserPieCharts pieData={this.state.pieDataFullRange}/>
-        {/* <UserBarGraph barDataRange1={this.state.barDataRange1} barDataRange2={this.state.barDataRange2}/> */}
-
         <div className="row">
           <div className="col m6">
             <div className="col s6">
@@ -481,7 +447,6 @@ class UserData extends Component {
             barDataSaved1={this.state.barDataSaved1}
             barDataSaved2={this.state.barDataSaved2}
           />
-
       </div>
     );
   }
@@ -490,8 +455,3 @@ class UserData extends Component {
 
 
 export default UserData;
-
-
- 
-
- 
