@@ -41,22 +41,31 @@ class Signup extends Component {
   render() {
     return (
   
-      <div class="row">
-        <h1>in</h1>
-      <div class="col s12 m6">
-        <div class="card ">
-          <div class="card-content blue-text">
-            <span class="card-title">Login</span>
-            <form onSubmit={this.handleSubmit}>
-        Email: <input type='text' value={this.state.email} onChange={this.handleEmailChange} /><br />
-        Password: <input type='password' value={this.state.password} onChange={this.handlePasswordChange} /><br />
-        <input type='submit' value='Log in' />
+      <div className="row">
+        <div className='movedown'></div>
+        <h1>Sign Up</h1>
+        <div className='movedownalittle'></div>
+   
+   
+          
+            <form onSubmit={this.handleSubmit} className='col s6 offset-s3 z-depth-5 padding movedownalittle'>
+            <div className='movedown'></div>
+
+            <h5 className='left'> Email: </h5><input type='text' value={this.state.email} onChange={this.handleEmailChange} /><br />
+            <div className='movedown'></div>
+            <h5 className='left'> Password:  </h5><input type='password' value={this.state.password} onChange={this.handlePasswordChange} /><br />
+            <div className='movedownalittle'></div>
+        <input  
+          type='submit' 
+          value='Sign up' 
+          className='col s12 waves-effect waves-light btn movedownalittle movedownmore #263238 blue-grey darken-4'  />
+        <div className='movedown'></div>
+ 
+         <div className='movedownmore'></div>
       </form>
           </div>
-        
-        </div>
-      </div>
-    </div>
+     
+          
 
     );
   }

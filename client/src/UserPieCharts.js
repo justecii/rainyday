@@ -18,10 +18,11 @@ class UserPieCharts extends Component {
         Category:'empty',
         Amount:0,
         Percent:0,
-        color:""
       },
       width: 315,
-      height:315
+      height:315,
+      startDate1:"1/1/00",
+      endDate2:"12/31/99"
     }
   }
 
@@ -31,8 +32,12 @@ class UserPieCharts extends Component {
 
   componentWillReceiveProps(nextProps) {
     var pieProps = nextProps.pieData;
+    var startDate1 = nextProps.startDate1;
+    var endDate2 = nextProps.endDate2;
     this.setState({
-      pieData: pieProps
+      pieData: pieProps,
+      startDate1: startDate1,
+      endDate2: endDate2
     })
   }
 
@@ -59,33 +64,37 @@ class UserPieCharts extends Component {
   }
 
   render() {
+    console.log("sup",this.props)
     return (
-      <div className="UserPieChartsWrapper">
-        <p>User Pie Charts Component</p>
+      <div className="UserPieChartsWrapper center-align">
+        <h4>Spending from </h4>
+        <h6>{this.state.startDate1} to {this.state.endDate2}</h6>
         <div className="tooltip">
             <p>{this.state.toolTipValue.category}</p>
-            <p>{this.state.toolTipValue.color}</p>
             <p>${Math.round(this.state.toolTipValue.amount)}</p>
             <p>{Math.round(this.state.toolTipValue.percent*100)}%</p>
         </div>
-        <XYPlot
-          xDomain={[-1, 1]}
-          yDomain={[-1, 1]}
-          width={this.state.width}
-          height={this.state.height}>
-          <ArcSeries
-            animation
-            radiusType={'literal'}
-            center={{x: 0, y: 0}}
-            data={this.state.pieData}
-            colorDomain={[0,Math.round(this.state.pieData.length/2)*2,this.state.pieData.length]}
-            colorRange={['#8CA9B5','#EFC850','#D04448']}
-            colorType={'literal'}
-            onValueMouseOver={(datapoint,event)=>{this.showToolTip(datapoint,event)}}
-            onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-            onSeriesClick={(e)=>{console.log(e.event.target)}}
-          />      
-        </XYPlot>
+        <div className="col s12 center-align">
+          <XYPlot
+            xDomain={[-1, 1]}
+            yDomain={[-1, 1]}
+            width={this.state.width}
+            height={this.state.height}
+            style={{display:'block',margin:'auto'}}
+          >
+            <ArcSeries
+              animation
+              radiusType={'literal'}
+              center={{x: 0, y: 0}}
+              data={this.state.pieData}
+              colorDomain={[0,Math.round(this.state.pieData.length/2)*2,this.state.pieData.length]}
+              colorRange={['#8CA9B5','#EFC850','#D04448']}
+              colorType={'literal'}
+              onValueMouseOver={(datapoint,event)=>{this.showToolTip(datapoint,event)}}
+              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
+            />      
+          </XYPlot>
+        </div>
       </div>
     );
   }
