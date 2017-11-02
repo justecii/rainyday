@@ -15,12 +15,11 @@ var flash = require('connect-flash');
 // Mongoose stuff
 var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/mern-local-auth');
-// mongoose.connect('mongodb://localhost/rainyDay');
-mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true});
+mongoose.connect('mongodb://localhost/rainyDay');
 
 // var BankRecord = require('./models/bankRecord');
 var User = require('./models/user');
-// var index = require('./routes/index');
+var index = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 var bankRecords = require('./routes/bankRecords');
@@ -37,7 +36,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 /* Configure the express-session...
@@ -67,14 +67,10 @@ app.use(function(req, res, next) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use('/', index);
+app.use('/', index);
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/bankRecords', bankRecords);
-
-app.get('*', function(req, res, next) {
-	res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-});
 
 
 
