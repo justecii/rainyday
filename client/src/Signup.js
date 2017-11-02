@@ -51,6 +51,8 @@ class Signup extends Component {
             <form onSubmit={this.handleSubmit} className='col s6 offset-s3 z-depth-5 padding movedownalittle'>
             <div className='movedown'></div>
 
+            <h5 className='left'> Name: </h5><input type='text' value={this.state.name} onChange={this.handleNameChange} /><br />
+            <div className='movedown'></div>
             <h5 className='left'> Email: </h5><input type='text' value={this.state.email} onChange={this.handleEmailChange} /><br />
             <div className='movedown'></div>
             <h5 className='left'> Password:  </h5><input type='password' value={this.state.password} onChange={this.handlePasswordChange} /><br />
