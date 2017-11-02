@@ -28,7 +28,9 @@ class UserBarGraph extends Component {
         toolTipValue:{
         category:'empty',
         amount:0,
-      }
+      },
+      height: 400,
+      width: 850
       }
     }
   }
