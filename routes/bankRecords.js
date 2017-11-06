@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var BankRecord = require('../models/BankRecord')
+var BankRecord = require('../models/bankRecord')
 var router = express.Router();
 var flash = require('connect-flash');
 
