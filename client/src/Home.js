@@ -120,11 +120,10 @@ class Home extends Component {
         <div >
           <h3 className="header  center-align col s9 offset-s2 light">Making better spending choices, set goals, and improve your quality of life for tomorrow</h3>
             <Carousel  images={[
-              'https://static.pexels.com/photos/221534/pexels-photo-221534.jpeg',
-              'https://static.pexels.com/photos/164474/pexels-photo-164474.jpeg',
-              'https://static.pexels.com/photos/163032/office-pen-calculator-computation-163032.jpeg',
-              'https://static.pexels.com/photos/164485/pexels-photo-164485.jpeg',
-              'https://static.pexels.com/photos/221539/pexels-photo-221539.jpeg'
+              <img src="/img/login.png"/>,
+              <img src="/img/savings.png"/>,
+              <img src="/img/transactions.png"/>,
+              <img src="/img/graphs.png"/>,
             ]} />
           </div>
         {/* end of carousel */}
@@ -146,25 +145,29 @@ class Home extends Component {
             <div className="col s3 ">
               <div className="card  hoverable">
                 <div className="card-image border-tlr-radius">
-                  <img className='border-tlr-radius' src="/img/Aj.png"  alt=""/>
-                  <span className="card-title">Part in the project</span>
+                  <img className='border-tlr-radius picture' src="/img/aj.jpg"  alt="Aj photo"/>
+                  <span className="card-title">Full stack developer, bank records pages, React routes and database</span>
                 </div>
                 <div className="card__content card__padding" >
                   <div className="card__share">
                     <div className="card__social">
-                      <a className="share-icon mail" ><span className="fa fa-envelope"></span></a>
-                      <a className="share-icon linkedin" ><span className="fa fa-linkedin"></span></a>
-                      <a className="share-icon github" ><span className="fa fa-github"></span></a>
+                      <a className="share-icon mail" href="mailto:stevens1434@gmail.com"><span className="fa fa-envelope"></span></a>
+                      <a className="share-icon linkedin" href="https://www.linkedin.com/in/stevens1434/"><span className="fa fa-linkedin"></span></a>
+                      <a className="share-icon github" href="https://github.com/stevens1434"><span className="fa fa-github"></span></a>
                     </div>
                     <a id="share" className="share-toggle share-icon" ></a>
                   </div>
                   <div className="card__meta">
-                    <a >Your Name</a>
-                    <time>17th March</time>
+                    <a >Andrew Stevens</a>
+                    <time>30 October</time>
                   </div>
                   <article className="card__article">
-                    <h2><a>Branding statment goes here</a></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...</p>
+                    <h4>About Andrew</h4>
+                    <p>Curious full-stack web developer who loves working complex problems into simple, 
+                      thoughtful solutions that cause good for others. I thrive while working in flexible and 
+                      collaborative environments. I am always driving towards actionable decisions and goals, 
+                      can liken most any working situation to my experience fishing (which is an ongoing learning process) 
+                      or growing up working at the family-business, and have an absurd love of being near water.</p>
                   </article>
                 </div>
               </div>
@@ -172,25 +175,26 @@ class Home extends Component {
             <div className="col s3 ">
               <div className="card  hoverable  ">
                 <div className="card-image border-tlr-radius">
-                  <img className='border-tlr-radius' src="/img/TomWaits.png"  alt=""/>
-                  <span className="card-title">Part in the project</span>
+                  <img className='border-tlr-radius picture' src="/img/brian.jpg"  alt="Brian photo"/>
+                  <span className="card-title">Full stack developer, user data presentation and development</span>
                 </div>
                 <div className="card__content card__padding" >
                   <div className="card__share">
                     <div className="card__social">
-                      <a className="share-icon mail" ><span className="fa fa-envelope"></span></a>
-                      <a className="share-icon linkedin" ><span className="fa fa-linkedin"></span></a>
-                      <a className="share-icon github" ><span className="fa fa-github"></span></a>
+                      <a className="share-icon mail" href="mailto:bc.boxomail@gmail.com"><span className="fa fa-envelope"></span></a>
+                      <a className="share-icon linkedin" href="https://www.linkedin.com/in/unclebconnor/"><span className="fa fa-linkedin"></span></a>
+                      <a className="share-icon github" href="https://github.com/unclebconnor"><span className="fa fa-github"></span></a>
                     </div>
                     <a id="share" className="share-toggle share-icon" ></a>
                   </div>
                   <div className="card__meta">
-                    <a >Your Name</a>
-                    <time>17th March</time>
+                    <a >Brian Connor</a>
+                    <time>30 October</time>
                   </div>
                   <article className="card__article">
-                    <h2><a>Branding statment goes here</a></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...</p>
+                    <h4>About Brian</h4>
+                    <p>I am observant, reliable, and unbound by convention. I am focused on helping others leverage 
+                      technology to simplify and streamline complex tasks, making room for deep work and human connection.</p>
                   </article>
                 </div>
               </div>
@@ -198,28 +202,29 @@ class Home extends Component {
             <div className="col s3 ">
               <div className="card  hoverable  ">
                 <div className="card-image border-tlr-radius">
-                    <img className='border-tlr-radius responsive-img' src="/img/angelina-jolie.png"  alt=""/>
-                    <span className="card-title">Part in the project</span>
+                    <img className='border-tlr-radius picture' src="/img/elena.jpg"  alt="Elena photo"/>
+                    <span className="card-title">Full stack developer, React routes and database, savings page</span>
                 </div>
                 <div className="card__content card__padding" >
                   <div className="card__share">
                     <div className="card__social">
-                      <a className="share-icon mail" ><span className="fa fa-envelope"></span></a>
-                      <a className="share-icon linkedin" ><span className="fa fa-linkedin"></span></a>
-                      <a className="share-icon github" ><span className="fa fa-github"></span></a>
+                      <a className="share-icon mail" href="mailto:pravutiner@gmail.com"><span className="fa fa-envelope"></span></a>
+                      <a className="share-icon linkedin" href="https://www.linkedin.com/in/elena-olekh/"><span className="fa fa-linkedin"></span></a>
+                      <a className="share-icon github" href="https://github.com/ElenaOl"><span className="fa fa-github"></span></a>
                     </div>
                     <a id="share" className="share-toggle share-icon" ></a>
                   </div>
                   <div className="card__meta">
-                    <a >Your Name</a>
-                    <time>17th March</time>
+                    <a>Elena Olekh</a>
+                    {<time>30 October</time>}
                   </div>
                   <article className="card__article">
-                    <h2><a>Branding statment goes here</a></h2>
-                    <p>I am a web developer with a passion for science and an acute attention to detail. 
-                    My previous experience in research, project management and regulatory 
-                    affairs contributed to my love for exploring new topics and passion 
-                    to learn programming languages.</p>
+                    <h4>About Elena</h4>
+                    <p>I am a web developer with a passion for science and dedication to details. 
+                      My previous experience in research, project management and regulatory affairs 
+                      contributed to my love for exploring new topics and passion to learn programming 
+                      languages that allow me to create new web sites and application. I am ready to implement 
+                      my newly earned knowledge in web development and contribute to the world through my creativity.</p>
                   </article>
                 </div>
               </div>
@@ -227,15 +232,15 @@ class Home extends Component {
             <div className="col s3 ">
               <div className="card  hoverable  ">
                 <div className="card-image border-tlr-radius">
-                  <img className='border-tlr-radius responsive-img' src="/img/liz.png"  alt=""/>
-                  <span className="card-title">Front End Developer</span>
+                  <img className='border-tlr-radius  picture' src="/img/liz.jpg"  alt="Liz photo"/>
+                  <span className="card-title">Front-end leaning full stack developer</span>
                 </div>
                   <div className="card__content card__padding" >
                     <div className="card__share">
                       <div className="card__social">
-                        <a className="share-icon mail" ><span className="fa fa-envelope"></span></a>
-                        <a className="share-icon linkedin" ><span className="fa fa-linkedin"></span></a>
-                        <a className="share-icon github" ><span className="fa fa-github"></span></a>
+                        <a className="share-icon mail" href="mailto:efriedla20852@gmail.com"><span className="fa fa-envelope"></span></a>
+                        <a className="share-icon linkedin" href="https://www.linkedin.com/in/elizabeth-friedland13/"><span className="fa fa-linkedin"></span></a>
+                        <a className="share-icon github" href="https://github.com/efriedla"><span className="fa fa-github"></span></a>
                       </div>
                       <a id="share" className="share-toggle share-icon" ></a>
                     </div>
@@ -244,7 +249,7 @@ class Home extends Component {
                       <time>30th October</time>
                     </div>
                     <article className="card__article">
-                      <h2><a>Front-end leaning full stack developer</a></h2>
+                      <h4>About Elizabeth</h4>
                       <p> Aspiring web developer with a background in human resources 
                       that complements technical skillset allowing novel perspectives 
                       on users interactions.</p>
@@ -256,60 +261,60 @@ class Home extends Component {
           {/* moble only */}
             <div className=" hide-on-med-and-up">
               <div>
-                <img src="http://u.lorenzoferrara.net/marlenesco/material-card/thumb-christopher-walken.jpg" alt="user" className='circle responsive-img'/>
+                <img src="/img/aj.jpg" alt="AJ Stevens" className='circle responsive-img'/>
                 <div className="card__author-content border-tlr-radius">
-                  title<a>your name</a>
+                  title<a>Andrew Stevens</a>
                 </div>
                 <div className="card__share">
                   <div className="card__social">
-                    <a className="share-icon mail" ><span className="fa fa-envelope"></span></a>
-                    <a className="share-icon linkedin" ><span className="fa fa-linkedin"></span></a>
-                    <a className="share-icon github" ><span className="fa fa-github"></span></a>
+                    <a className="share-icon mail" href="mailto:stevens1434@gmail.com"><span className="fa fa-envelope"></span></a>
+                    <a className="share-icon linkedin" href="https://www.linkedin.com/in/stevens1434/"><span className="fa fa-linkedin"></span></a>
+                    <a className="share-icon github" href="https://github.com/stevens1434" ><span className="fa fa-github"></span></a>
                   </div>
                   <a id="share" className="share-toggle share-icon" ></a>
                 </div>
               </div>
           {/* person 2 */}
               <div>
-                <img src=" http://u.lorenzoferrara.net/marlenesco/material-card/thumb-sean-penn.jpg" alt="user" className='circle responsive-img'/>
+                <img src="/img/brian.jpg"  alt="Brian Connor" className='circle responsive-img'/>
                 <div className="card__author-content border-tlr-radius">
-                  title <a>your name</a>
+                  title <a>Brian</a>
                 </div>
                 <div className="card__share">
                   <div className="card__social">
-                    <a className="share-icon mail" ><span className="fa fa-envelope"></span></a>
-                    <a className="share-icon linkedin" ><span className="fa fa-linkedin"></span></a>
-                    <a className="share-icon github" ><span className="fa fa-github"></span></a>
+                    <a className="share-icon mail" href="mailto:bc.boxomail@gmail.com"><span className="fa fa-envelope"></span></a>
+                    <a className="share-icon linkedin"  href="https://www.linkedin.com/in/unclebconnor/"><span className="fa fa-linkedin"></span></a>
+                    <a className="share-icon github" href="https://github.com/unclebconnor"><span className="fa fa-github"></span></a>
                   </div>
                   <a id="share" className="share-toggle share-icon" ></a>
                 </div>
               </div>
           {/* person 3 */}
               <div>
-                <img src=" http://img.allw.mn/content/dg/o0/eobgsgtv.jpg" alt="user" className='circle responsive-img'/>
+                <img src="/img/elena.jpg" alt="user" className='circle responsive-img'/>
                 <div className="card__author-content border-tlr-radius">
-                  title <a>your name</a>
+                  title <a>Elena Olekh</a>
                 </div>
                 <div className="card__share">
                   <div className="card__social">
-                    <a className="share-icon mail" ><span className="fa fa-envelope"></span></a>
-                    <a className="share-icon linkedin" ><span className="fa fa-linkedin"></span></a>
-                    <a className="share-icon github" ><span className="fa fa-github"></span></a>
+                    <a className="share-icon mail" href="mailto:pravutiner@gmail.com"><span className="fa fa-envelope"></span></a>
+                    <a className="share-icon linkedin" href="https://www.linkedin.com/in/elena-olekh/"><span className="fa fa-linkedin"></span></a>
+                    <a className="share-icon github" href="https://github.com/ElenaOl"><span className="fa fa-github"></span></a>
                   </div>
                   <a id="share" className="share-toggle share-icon" ></a>
                 </div>
               </div>
           {/* person 4 */}
               <div>
-                <img src=" https://s-media-cache-ak0.pinimg.com/originals/c9/6d/48/c96d489d4db197a43f9b5d78721b1625.gif" alt="user" className='circle responsive-img'/>
+                <img src="/img/liz.jpg" alt="user" className='circle responsive-img'/>
                   <div className="card__author-content border-tlr-radius">
                     Front-end Developer:  <br /> <a>Elizabeth Friedland</a>
                   </div>
                   <div className="card__share">
                     <div className="card__social">
-                        <a className="share-icon mail" ><span className="fa fa-envelope"></span></a>
-                        <a className="share-icon linkedin" ><span className="fa fa-linkedin"></span></a>
-                        <a className="share-icon github" ><span className="fa fa-github"></span></a>
+                        <a className="share-icon mail" href="mailto:efriedla20852@gmail.com"><span className="fa fa-envelope"></span></a>
+                        <a className="share-icon linkedin"  href="https://www.linkedin.com/in/elizabeth-friedland13/"><span className="fa fa-linkedin"></span></a>
+                        <a className="share-icon github" href="https://github.com/efriedla"><span className="fa fa-github"></span></a>
                     </div>
                     <a id="share" className="share-toggle share-icon" ></a>
                   </div>
@@ -320,7 +325,7 @@ class Home extends Component {
         <footer className="page-footer #263238 blue-grey darken-2 center-align">
           <div className="container">
             <div className="row">
-              <div className="col l6 s12">
+              <div className="col s12">
                 <h5 className="white-text">Company Bio</h5>
                 <p className="grey-text text-lighten-4">
                   We are a team of college students working on this 
@@ -329,29 +334,11 @@ class Home extends Component {
                   project and is greatly appreciated.
                 </p>
               </div>
-              <div className="col l3 s12">
-                <h5 className="white-text">Settings</h5>
-                <ul>
-                  <li><a className="white-text" href="">Link 1</a></li>
-                  <li><a className="white-text" href="">Link 2</a></li>
-                  <li><a className="white-text" href="">Link 3</a></li>
-                  <li><a className="white-text" href="">Link 4</a></li>
-                </ul>
-              </div>
-              <div className="col l3 s12">
-                <h5 className="white-text">Connect</h5>
-                <ul>
-                  <li><a className="white-text" href="">Link 1</a></li>
-                  <li><a className="white-text" href="">Link 2</a></li>
-                  <li><a className="white-text" href="">Link 3</a></li>
-                  <li><a className="white-text" href="">Link 4</a></li>
-                </ul>
-              </div>
             </div>
           </div>
           <div className="footer-copyright">
             <div className="container">
-              Made by <a className="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+              Made by <a className="brown-text text-lighten-3" href="http://materializecss.com">The team</a>
             </div>
           </div>
         </footer>
@@ -359,5 +346,4 @@ class Home extends Component {
     );
   }
 }
-
 export default Home;

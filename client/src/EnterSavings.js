@@ -29,20 +29,17 @@ class EnterSavings extends Component {
   }
 
   handleChangeDescription(e){
-    // console.log('handleChangeDescription', e.target.value)
     this.setState({
       Description: e.target.value
     })
   }
   handleChangeCategory(e){
-    // console.log('handleChangeCategory', e.target.value)
     this.setState({
       Category: e.target.value
     });
   }
 
   handleChangeAmount(e){
-    // console.log('handleChangeAmount', e.target.value)
     this.setState({
       Amount: e.target.value
     });
@@ -70,7 +67,7 @@ class EnterSavings extends Component {
     let user = this.state.user;
     let date = this.state.date.format("MM/DD/YY");
 
-    //add all the variables to object {} -- let Object = {insert object of three variables}
+    //add all the variables to object {} 
     let newObject = {
       Description: Description,
       Category: Category,
@@ -102,7 +99,6 @@ class EnterSavings extends Component {
 
   render() {
     let user = this.props.user
-    // console.log("user in client/EnterSavings.js: ", user);
 
 
     return (

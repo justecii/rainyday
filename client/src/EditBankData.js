@@ -13,26 +13,16 @@ class EditBankData extends Component {
     this.deleteTransaction = this.deleteTransaction.bind(this);
     this.categoryChange = this.categoryChange.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-    this.change = this.change.bind(this);
-  }
-
-  change(e) {
-    console.log("this.props.records: ", this.props.records);
-    console.log("this.state.records: ", this.state.records);
-    console.log("user: ", this.state.user)
   }
 
   deleteTransaction(e) {
     e.preventDefault();
     let i = e.target.getAttribute('data-key');
-    console.log("deleteTransaction");
     this.props.handleDelete(i);
   }
 
   categoryChange(e) {
     e.preventDefault();
-    console.log(e.target)
-    console.log("e: ", e);
     this.props.handleCategChange(e);
   }
 
@@ -40,8 +30,6 @@ class EditBankData extends Component {
     //add function to add blank for uncategorized
     let user = this.props.user
     let records = this.props.records
-    // console.log("props records componentDid editbankdata: ", this.props.records)
-    // console.log("state records componentDid editbankdata: ", this.state.records)
     this.setState({
       user: user,
       records: records
@@ -52,12 +40,6 @@ class EditBankData extends Component {
   render() {
     let user = this.props.user
     let records = this.props.records
-    // console.log("props records render() editbankdata: ", this.props.records)
-    // console.log("state records render() editbankdata: ", this.state.records)
-    // let categName = this.state.records.map((categ, index) => (
-    //     {if (categ.Category !== "" || {categ.Category} !== undefined || {categ.Category} !== null) {
-    //      {categ.Category} } else { } }</option>
-    //   ))
 
     let mappedItems = this.props.records.map((records, index) => (
           <section onClick={this.change} className="row z-depth-1" key={index}>
@@ -113,11 +95,3 @@ class EditBankData extends Component {
   }
 }
 export default EditBankData;
-
-
-//
-// if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
-//   <option value="" disabled  selected data-key={index}></option>
-// } else {
-  // <option value="" disabled  selected data-key={index}>{records.Category}</option>
-// }

@@ -16,13 +16,6 @@ class SavingsSummary extends Component {
     this.check = this.check.bind(this);
   }
 
-  check(e) {
-    // console.log(this.state.savings);
-    // console.log("totalPerCat: ", this.state.totalPerCat);
-    // console.log("total in check: ", this.state.total);
-  }
-
-
   componentDidMount() {
     let user = this.props.user
     this.setState({
@@ -46,8 +39,6 @@ class SavingsSummary extends Component {
           delete catAndAmount[j].__v
           total = total + amountTotal[j]
         }
-        console.log("total in SavingsSummary fetch: ", total)
-        console.log("response in SavingsSummary fetch: ", response)
         this.setState({
           savings: response,
           totalPerCat: catAndAmount,
@@ -59,11 +50,9 @@ class SavingsSummary extends Component {
 
 
   render() {
-    // {console.log("total in render: ", this.state.total)}
+    
     let total = this.state.total;
     let user = this.props.user
-    // console.log("user in client/SavingsSummary.js: ", this.state);
-    // console.log("savings state in client/SavingsSummary.js: ", this.state.savings);
 
     return (
 

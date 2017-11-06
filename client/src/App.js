@@ -16,7 +16,6 @@ import BankRecords from './BankRecords.js';
 // import EditBankData from './EditBankData';
 //////////////////////////////////////////////////
 import UserData from './UserData.js';
-import Logout from './Logout';
 import {Button, SideNav, SideNavItem } from 'react-materialize';
 class App extends Component {
   constructor(props) {
@@ -28,14 +27,14 @@ class App extends Component {
     this.liftTokenToState = this.liftTokenToState.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
+  
   liftTokenToState(token, user) {
-    console.log("token: ", token)
-    console.log("user: ", user)
     this.setState({
       token: token,
       user: user
-  })
+    })
   }
+  
   handleLogout(e) {
     e.preventDefault()
     localStorage.removeItem('mernToken')
@@ -55,8 +54,6 @@ class App extends Component {
     this.setState({
       user: user
     })
-    console.log("user props: ", this.props.user)
-    console.log("user state: ", this.state.user)
     }
   render() {
     let user = this.state.user
@@ -109,6 +106,9 @@ class App extends Component {
               />
               <Route exact path="/login"
                 render={() => <Home childProp={this.state.childProp} logout={this.logout} />}
+              />
+              <Route exact path="/signup"
+                render={() => <Home  />}
               />
               <Route exact path="/savingsReactRoute"
                 render={() => <Savings user={this.state.user} />}

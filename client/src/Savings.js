@@ -11,7 +11,7 @@ class Savings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      user: this.props.user,
       savings: []
       
     }
@@ -21,7 +21,6 @@ class Savings extends Component {
   }
 
   handleDelete(i) {
-    console.log("handleDelete(i): ", i);
     let currentState = this.state.savings;
     let trans = this.state.savings[i]._id;
     let a = this;
@@ -64,7 +63,6 @@ class Savings extends Component {
 
   componentDidMount() {
     let user = this.props.user
-    console.log('user!!!!!', user);
     this.setState({
       user: user
     })

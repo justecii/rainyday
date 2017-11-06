@@ -11,14 +11,8 @@ class AllSavings extends Component {
     }
 
     this.componentDidMount = this.componentDidMount.bind(this);
-    this.check = this.check.bind(this);
     this.SaveCatChange = this.SaveCatChange.bind(this);
     this.deleteSaved = this.deleteSaved.bind(this);
-  }
-
-  check(e) {
-    console.log("savings state: ", this.state.savings);
-    console.log("user state: ", this.state.user);
   }
 
   deleteSaved(e) {
@@ -32,22 +26,6 @@ class AllSavings extends Component {
   SaveCatChange(e) {
     e.preventDefault();
     this.props.handleCatChange(e);
-    // let i = e.target.getAttribute('data-key');
-    // let Category = e.target.value;
-    // let currentState = this.props.savings;
-    // let individState = this.props.savings[i];
-    // let categState = this.props.savings[i].Category = Category;
-    // individState.Category = categState
-    // let trans = this.props.savings[i]._id;
-    // let a = this;
-    // axios.put('/bankRecords/change', {
-    //   data: trans,
-    //   Category: Category
-    // }).then(function (response) {
-    //   a.props.setSavings(currentState);
-    // }).catch(function (error) {
-    //   console.log("error: ", error);
-    // })
   }
 
   componentDidMount() {
@@ -55,20 +33,15 @@ class AllSavings extends Component {
     this.setState({
       user: user
     })
-    }
+  }
 
 
 
 
 
   render() {
-
-    console.log('savings props', this.props.savings)
-
     let user = this.props.user
-    console.log("user in client/AllSavings.js: ", user);
-
-
+ 
     let savedOn = this.props.savings.map((saving, index) => (
 
               <section className="row z-depth-1 valign-wrapper" key={index} onClick={this.check}>
