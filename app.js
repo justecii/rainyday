@@ -18,7 +18,7 @@ var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/rainyDay');
 mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true});
 
-// var BankRecord = require('./models/bankRecord');
+var BankRecord = require('./models/bankRecord');
 var User = require('./models/user');
 // var index = require('./routes/index');
 var users = require('./routes/users');
