@@ -27,6 +27,7 @@ class Signup extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    let a = this;
     axios.post('/auth/signup', {
       name: this.state.name,
       email: this.state.email,
@@ -34,7 +35,9 @@ class Signup extends Component {
     }).then(result => {
       console.log(result.data)
       localStorage.setItem('mernToken', result.data.token)
-      this.props.lift(result.data.token, result.data.user.id)
+      a.props.lift(result.data.token, result.data.user.id)
+      console.log("handlesubmit() sign up results.data: ", result.data.user.id)
+      
     })
   }
 
@@ -45,30 +48,23 @@ class Signup extends Component {
         <div className='movedown'></div>
         <h1>Sign Up</h1>
         <div className='movedownalittle'></div>
-   
-   
           
-            <form onSubmit={this.handleSubmit} className='col s6 offset-s3 z-depth-5 padding movedownalittle'>
+          <form onSubmit={this.handleSubmit} className='col s6 offset-s3 z-depth-5 padding movedownalittle'>
             <div className='movedown'></div>
-
             <h5 className='left'> Name: </h5><input type='text' value={this.state.name} onChange={this.handleNameChange} /><br />
             <div className='movedown'></div>
             <h5 className='left'> Email: </h5><input type='text' value={this.state.email} onChange={this.handleEmailChange} /><br />
             <div className='movedown'></div>
             <h5 className='left'> Password:  </h5><input type='password' value={this.state.password} onChange={this.handlePasswordChange} /><br />
             <div className='movedownalittle'></div>
-        <input  
-          type='submit' 
-          value='Sign up' 
-          className='col s12 waves-effect waves-light btn movedownalittle movedownmore #263238 blue-grey darken-4'  />
-        <div className='movedown'></div>
- 
-         <div className='movedownmore'></div>
-      </form>
-          </div>
-     
-          
-
+            <input  
+              type='submit' 
+              value='Sign up' 
+              className='col s12 waves-effect waves-light btn movedownalittle movedownmore #263238 blue-grey darken-4'  />
+            <div className='movedown'></div>
+            <div className='movedownmore'></div>
+          </form>
+      </div>
     );
   }
 }

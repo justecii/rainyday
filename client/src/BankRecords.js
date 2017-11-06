@@ -13,20 +13,12 @@ class BankRecords extends Component {
     user: {},
     records: []
     }
-    this.change = this.change.bind(this);
     this.papaData = this.papaData.bind(this);
     this.handleCategChange = this.handleCategChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  change(e) {
-    console.log("this.state.records: ", this.state.records);
-    console.log("user: ", this.state.user)
-  }
-
   papaData(uploaded) {
-    console.log("papaData in BankRecords: ", uploaded);
-    console.log("user in PAPADATA: ", uploaded.user);
     let user = uploaded.user;
     let a = this;
     let data;
@@ -34,9 +26,7 @@ class BankRecords extends Component {
       header: true,
       delimiter: ",",
       complete( result, file ) {
-        console.log("result: ", result);
         data = result.data;
-        console.log("data1: ", data);
         data.forEach(function(item) {
           item.userId = user
           item.isSaved = false
@@ -56,22 +46,19 @@ class BankRecords extends Component {
         axios.post('/bankRecords', {
           data: data
         }).then(function (response) {
-          console.log("response: ", response);
         }).catch(function (error) {
-          console.log("error: ", error)
+          console.log("error: ", error);
         })
       } })
   }
 
   handleDelete(i) {
-    console.log("handleDelete");
     let currentState = this.state.records;
     let trans = this.state.records[i]._id;
     let a = this;
     axios.put('/bankRecords', {
       data: trans
     }).then(function (response) {
-      console.log("currentState: ", currentState);
       currentState.splice(i, 1);
       a.setState({
         records: currentState
@@ -82,15 +69,10 @@ class BankRecords extends Component {
   }
 
   handleCategChange(e) {
-    console.log("target: ", e);
     let i = e.target.getAttribute('data-key');
-    // console.log("i: ", i);
     let category = e.target.value;
-    // console.log("category: ", category);
     let currentState = this.state.records;
-    // console.log("currentState1: ", currentState);
     currentState[i].Category = category
-    // console.log("currentState2: ", currentState);
     this.setState({
       records: currentState
     })
@@ -114,7 +96,6 @@ class BankRecords extends Component {
       if (bankRecords[i].isSaved === false) {
         records.push(bankRecords[i])
       }
-      // console.log("bankRecords: ", records);
     }
     this.setState({
       records: records
@@ -128,7 +109,6 @@ class BankRecords extends Component {
     this.setState({
       user: user
     })
-    // console.log("XXXX user XXXX: ", user);
     fetch('/bankRecords/' + user)
       .then(response => response.json())
       .then(response =>
@@ -137,9 +117,6 @@ class BankRecords extends Component {
 
   render() {
     let user = this.props.user
-    // console.log("user in client/BankRecords.js: ", user);
-    // console.log("this.state.user bankrecords: ", this.state.user);
-
     return (
       <div className="BankRecordsWrapper row " >
         <div className='col s10 offset-s1'>

@@ -179,8 +179,8 @@ select {
 
 input[type=text]:not(.browser-default){
 	margin:0;
-	text-align: center;
-	border-bottom: 0px;
+	text-align: left;
+	/* border-bottom: 0px; */
 
 }
 
@@ -279,7 +279,13 @@ input[type=text]:not(.browser-default){
 .card__article a:hover {
 	color: #2980b9;
 }
+.card__article {
+	height: 300px;
+}
 
+.picture {
+	height: 300px;
+}
 /* card action */
 .card__action {
 	overflow: hidden;

@@ -13,12 +13,6 @@ class InputBankRecords extends Component {
       user: {}
     }
     this.uploadFile = this.uploadFile.bind(this);
-    this.change = this.change.bind(this);
-  }
-
-  change(e) {
-    // console.log("records: ", this.state.records);
-    // console.log("user: ", this.state.user)
   }
 
   uploadFile(e) {
