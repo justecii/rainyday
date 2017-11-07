@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var BankRecord = require('../models/bankRecord')
 var router = express.Router();
-var flash = require('connect-flash');
+// var flash = require('connect-flash');
 
 
 //COMPLETE: grab data form database and display in client: src/EditBankData.js

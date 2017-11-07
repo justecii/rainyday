@@ -33,7 +33,7 @@ router.post('/login', function(req, res, next) {
         expiresIn: 60 * 60 * 24 // expires in 24 hours
       });
       
-      req.flash('success', 'You are now logged in.')
+      // req.flash('success', 'You are now logged in.')
       console.log(user)
       res.send({user: user, token: token});
       
@@ -58,7 +58,7 @@ router.post('/signup', function(req, res, next) {
   // Find by email
   User.findOne({ email: req.body.email }, function(err, user) {
     if (user) {
-      req.flash('error', 'Account already exists');
+      // req.flash('error', 'Account already exists');
       res.redirect('/auth/signup');
     } else {
       // create and save a user
@@ -74,7 +74,7 @@ router.post('/signup', function(req, res, next) {
           var token = jwt.sign(user.toObject(), secret, {
             expiresIn: 60 * 60 * 24 // expires in 24 hours
           });
-          req.flash('success', 'Welcome to your new account! You are logged in.');
+          // req.flash('success', 'Welcome to your new account! You are logged in.');
           res.send({user: user, token: token});
         }
       });
