@@ -69,7 +69,10 @@ _Execution:_
 
 # Unsolved problems #
 _Things we would love to accomplish later:_
-* 
-* 
-* 
+* React refresh pages
+
+# Testing our app #
+### To test our app, please enter this person information in our Login page: ###
+##### email : suzie@sample.com #####
+##### password: docrivers #####
 
