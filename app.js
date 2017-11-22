@@ -76,6 +76,8 @@ app.use('/bankRecords', bankRecords);
 
 app.get('*', function(req, res, next) {res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));}); 
 
-app.listen(process.env.PORT || 3000, function(){}
+app.listen(process.env.PORT || 8080, function() {
+  console.log('Express server is up and running!');
+});
 
 module.exports = app;
