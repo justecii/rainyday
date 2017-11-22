@@ -188,8 +188,14 @@ select {
 input[type=text]:not(.browser-default){
 	margin:0;
 	text-align: left;
-	border-bottom: none; 
+	/*border-bottom: none; */
 
+}
+
+.DateInput_input{
+	margin:0;
+	text-align: center;
+	border-bottom: none; 
 }
 
 /* new home page  */

@@ -91,7 +91,7 @@ class UserBarGraph extends Component {
         <div className="verticalBar">
           <DiscreteColorLegend
             style={{position: 'absolute'}}
-            orientation="horizontal hide-on-sm-down" 
+            orientation="horizontal" 
             items={[
               {
                 title: `Expenses  ${this.state.startDate1}  to ${this.state.endDate1}`,
@@ -146,73 +146,6 @@ class UserBarGraph extends Component {
               onValueMouseOut={(e)=>{this.hideToolTip(e)}}
             />
             <VerticalBarSeries //second range saved
-              opacity={0.8}
-              color={'#FFBA3A'}
-              cluster="group2" 
-              data={this.state.saved2}
-              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-            />
-          </XYPlot>
-        </div>
-        <div className="horizontalBar hide-on-med-and-up">
-          <DiscreteColorLegend
-            style={{position: 'absolute'}}
-            orientation="vertical" 
-            items={[
-              {
-                title: `Expenses  ${this.state.startDate1}  to ${this.state.endDate1}`,
-                color: '#26a69a'
-              },
-              {
-                title: `Expenses  ${this.state.startDate2}  to ${this.state.endDate2}`,
-                color: '#3661B0'
-              },
-              {
-                title: `Saved ${this.state.startDate1}  to ${this.state.endDate1}`,
-                color: '#FF8E3A'
-              },
-              {
-                title: `Saved ${this.state.startDate2}  to ${this.state.endDate2}`,
-                color: '#FFBA3A'
-              }
-            ]}
-          />
-          <XYPlot 
-            height={800} 
-            width={300} 
-            xType={'ordinal'}
-            stackBy="x"
-          >
-            <VerticalGridLines />
-            <HorizontalGridLines />
-            <XAxis />
-            <YAxis />
-            <HorizontalBarSeries //first range expenses
-              opacity={0.8}
-              color={'#26a69a'}
-              cluster="group1"
-              data={this.state.data1}
-              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-            />
-            <HorizontalBarSeries //second range expenses
-              opacity={0.8}
-              color={'#3661B0'}
-              cluster="group2" 
-              data={this.state.data2}
-              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-            />
-            <HorizontalBarSeries //first range saved
-              opacity={0.8}
-              color={'#FF8E3A'}
-              cluster="group1" 
-              data={this.state.saved1}
-              onValueMouseOver={(e,info)=>{this.showToolTip(e,info)}}
-              onValueMouseOut={(e)=>{this.hideToolTip(e)}}
-            />
-            <HorizontalBarSeries //second range saved
               opacity={0.8}
               color={'#FFBA3A'}
               cluster="group2" 
