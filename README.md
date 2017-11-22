@@ -1,5 +1,5 @@
 # Rainyday
-### WDI project - best app to control your savings
+### WDI Group Project - Financial Planning Tool
 
 # Technologies used #
 
