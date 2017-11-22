@@ -76,6 +76,6 @@ app.use('/bankRecords', bankRecords);
 
 app.get('*', function(req, res, next) {res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));}); 
 
-
+app.listen(process.env.PORT || 3000, function(){}
 
 module.exports = app;
