@@ -142,7 +142,7 @@ class Home extends Component {
                       <a className="share-icon linkedin" href="https://www.linkedin.com/in/stevens1434/"><span className="fa fa-linkedin"></span></a>
                       <a className="share-icon github" href="https://github.com/stevens1434"><span className="fa fa-github"></span></a>
                     </div>
-                    <a id="share" className="share-toggle share-icon"></a>
+                    <a href="#"  className="share-toggle share-icon"></a>
                   </div>
                   <div className="card__meta">
                     <h5>Andrew Stevens</h5>
@@ -164,7 +164,7 @@ class Home extends Component {
                       <a className="share-icon linkedin" href="https://www.linkedin.com/in/unclebconnor/"><span className="fa fa-linkedin"></span></a>
                       <a className="share-icon github" href="https://github.com/unclebconnor"><span className="fa fa-github"></span></a>
                     </div>
-                    <a id="share" className="share-toggle share-icon" ></a>
+                    <a href="#"  className="share-toggle share-icon" ></a>
                   </div>
                   <div className="card__meta">
                     <h5>Brian Connor</h5>
@@ -186,7 +186,7 @@ class Home extends Component {
                       <a className="share-icon linkedin" href="https://www.linkedin.com/in/elena-olekh/"><span className="fa fa-linkedin"></span></a>
                       <a className="share-icon github" href="https://github.com/ElenaOl"><span className="fa fa-github"></span></a>
                     </div>
-                    <a id="share" className="share-toggle share-icon" ></a>
+                    <a href="#"  className="share-toggle share-icon" ></a>
                   </div>
                   <div className="card__meta">
                     <h5>Elena Olekh</h5>
@@ -208,7 +208,7 @@ class Home extends Component {
                       <a className="share-icon linkedin" href="https://www.linkedin.com/in/elizabeth-friedland13/"><span className="fa fa-linkedin"></span></a>
                       <a className="share-icon github" href="https://github.com/efriedla"><span className="fa fa-github"></span></a>
                     </div>
-                    <a id="share" className="share-toggle share-icon"></a>
+                    <a href="#"  className="share-toggle share-icon"></a>
                   </div>
                   <div className="card__meta">
                     <h5>Elizabeth Friedland</h5>
@@ -232,7 +232,7 @@ class Home extends Component {
                 <a className="share-icon linkedin" href="https://www.linkedin.com/in/stevens1434/"><span className="fa fa-linkedin"></span></a>
                 <a className="share-icon github" href="https://github.com/stevens1434" ><span className="fa fa-github"></span></a>
               </div>
-              <a id="share" className="share-toggle share-icon" ></a>
+              <a href="#"  className="share-toggle share-icon" ></a>
             </div>
           </div>
           {/* person 2 */}
@@ -247,7 +247,7 @@ class Home extends Component {
                 <a className="share-icon linkedin"  href="https://www.linkedin.com/in/unclebconnor/"><span className="fa fa-linkedin"></span></a>
                 <a className="share-icon github" href="https://github.com/unclebconnor"><span className="fa fa-github"></span></a>
               </div>
-              <a id="share" className="share-toggle share-icon" ></a>
+              <a href="#"  className="share-toggle share-icon" ></a>
             </div>
           </div>
           {/* person 3 */}
@@ -262,7 +262,7 @@ class Home extends Component {
                 <a className="share-icon linkedin" href="https://www.linkedin.com/in/elena-olekh/"><span className="fa fa-linkedin"></span></a>
                 <a className="share-icon github" href="https://github.com/ElenaOl"><span className="fa fa-github"></span></a>
               </div>
-              <a id="share" className="share-toggle share-icon" ></a>
+              <a href="#"  className="share-toggle share-icon" ></a>
             </div>
           </div>
           {/* person 4 */}
@@ -277,7 +277,7 @@ class Home extends Component {
                   <a className="share-icon linkedin"  href="https://www.linkedin.com/in/elizabeth-friedland13/"><span className="fa fa-linkedin"></span></a>
                   <a className="share-icon github" href="https://github.com/efriedla"><span className="fa fa-github"></span></a>
                 </div>
-                <a id="share" className="share-toggle share-icon" ></a>
+                <a href="#"  className="share-toggle share-icon" ></a>
               </div>
             </div>
           </div>
