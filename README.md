@@ -4,28 +4,20 @@
 # Technologies used #
 
 * React
-* HTML/JSX
-* CSS
+* HTML/JSX/CSS
 * Materialize
-* JavaScript
-* jQuery
-* DOM
-* JSON
-* Fetch
+* JS/jQuery
 * Axios
 * Node.js
-* npm
-* RESTful
 * mongoDB
-* Auth
 
 # Installation instructions #
-* Run `npm install` to install dependencies
+* Run `npm install` to install dependencies (in root and again in "client" folder)
 * Use `npm start` to start your application
 
-* View this project on  <a href="#">Heroku</a>
-
-# Approach taken: #
+##### Live Demo: https://rainydaysavings.herokuapp.com/ #####
+### email : suzie@sample.com ###
+### password: password ###
 
 _Planning:_
 ## User Stories ##
@@ -34,26 +26,6 @@ _Planning:_
 * As a user, I want to choose what expenses are redundant and choose not to spend money on those items anymore. 
 * As a user, I want to track my savings and see the difference in my budget before and after I have implemented them.
 
-_Pseudo coding:_
-
-_initial planning:_
-![picture](client/public/img/initial-planning.jpg)
-![picture](client/public/img/initial-planning-1.jpg)
-![picture](client/public/img/initial-planning-2.jpg)
-![picture](client/public/img/initial-planning-3.jpg)
-
-_wireframes:_
-![picture](client/public/img/wireframe2.png)
-![picture](client/public/img/wireframe1.png)
-![picture](client/public/img/wireframe3.png)
-![picture](client/public/img/wireframe.png)
-
-
-_planing the flow of the app:_
-![picture](client/public/img/flowchartapp.png)
-
-_planing the routes:_
-![picture](client/public/img/routes.png)
 
 _Execution:_ 
 
@@ -61,7 +33,7 @@ _Execution:_
 
 2.  Each of us have worked on different feature of the app, while collaborated with each other.  
 
-3.  We made the routes  and created the front-end pages with React.
+3.  We made the routes and created the front-end pages with React.
 
 4.  Designed with Materilize    
 
@@ -71,8 +43,5 @@ _Execution:_
 _Things we would love to accomplish later:_
 * React refresh pages
 
-# Testing our app #
-### To test our app, please enter this person information in our Login page: ###
-##### email : suzie@sample.com #####
-##### password: docrivers #####
+
 
