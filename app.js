@@ -15,8 +15,8 @@ var Papa = require('papaparse');
 // Mongoose stuff
 var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/mern-local-auth');
-// mongoose.connect('mongodb://localhost/rainyDay');
-mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true});
+mongoose.connect('mongodb://localhost/rainyDay');
+// mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true});  USE THIS WHEN DEPLOYING
 
 var BankRecord = require('./models/bankRecord');
 var User = require('./models/user');
