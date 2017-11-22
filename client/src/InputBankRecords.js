@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
+// import axios from 'axios';
 import $ from 'jquery';
-var Papa = require('papaparse');
+// var Papa = require('papaparse');
 
 
 class InputBankRecords extends Component {
@@ -38,7 +38,7 @@ class InputBankRecords extends Component {
   }
 
   render() {
-    let user = this.props.user
+    // let user = this.props.user
     return (
       <div className="inputData">
         <form action="/bankRecordsReactRoute">

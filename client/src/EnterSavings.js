@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import $ from 'jquery';
+// import $ from 'jquery';
 import './App.css';
 
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import moment from 'moment';
-import { DateRangePicker, SingleDatePicker } from 'react-dates';
+// import moment from 'moment';
+import { SingleDatePicker } from 'react-dates';
 
 
 class EnterSavings extends Component {
@@ -98,7 +98,7 @@ class EnterSavings extends Component {
 
 
   render() {
-    let user = this.props.user
+    // let user = this.props.user
 
 
     return (

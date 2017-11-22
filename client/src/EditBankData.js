@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
+// import axios from 'axios';
 
 
 class EditBankData extends Component {
@@ -38,8 +38,8 @@ class EditBankData extends Component {
 
 
   render() {
-    let user = this.props.user
-    let records = this.props.records
+    // let user = this.props.user
+    // let records = this.props.records
 
     let mappedItems = this.props.records.map((records, index) => (
           <section onClick={this.change} className="row z-depth-1" key={index}>
@@ -51,7 +51,7 @@ class EditBankData extends Component {
                 <div className='col s2'>
                   <select name='' className="browser-default " data-key={index} onChange={this.categoryChange}>
                   if({records.Category} === '' || {records.Category} === undefined || {records.Category} === null) {
-                      <option value="" disabled  value></option>
+                      <option value="" disabled></option>
                     } else { <option value="" disabled  selected>{records.Category}</option> }
                     <option value="Bills" >Bills</option>
                     <option value="Groceries" >Groceries</option>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/react-vis/dist/style.css';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries, HorizontalBarSeries,DiscreteColorLegend,Hint} from 'react-vis';
+import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries, HorizontalBarSeries,DiscreteColorLegend} from 'react-vis';
 import $ from 'jquery';
 
 class UserBarGraph extends Component {
@@ -37,7 +37,6 @@ class UserBarGraph extends Component {
 
   componentDidMount() {
     $('.barTooltip').hide();
-    var merr = $('.userBarGraphWrapper');
   }
 
   componentWillReceiveProps(nextProps) {
