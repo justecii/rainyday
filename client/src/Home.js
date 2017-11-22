@@ -277,7 +277,7 @@ class Home extends Component {
                   <a className="share-icon linkedin"  href="https://www.linkedin.com/in/elizabeth-friedland13/"><span className="fa fa-linkedin"></span></a>
                   <a className="share-icon github" href="https://github.com/efriedla"><span className="fa fa-github"></span></a>
                 </div>
-                <a id="share" className="share-toggle share-icon share-expanded" ></a>
+                <a id="share" className="share-toggle share-icon" ></a>
               </div>
             </div>
           </div>
