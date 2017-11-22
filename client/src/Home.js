@@ -142,7 +142,7 @@ class Home extends Component {
                       <a className="share-icon linkedin" href="https://www.linkedin.com/in/stevens1434/"><span className="fa fa-linkedin"></span></a>
                       <a className="share-icon github" href="https://github.com/stevens1434"><span className="fa fa-github"></span></a>
                     </div>
-                    <a id="share" className="share-toggle share-icon" href="#"></a>
+                    <a id="share" className="share-toggle share-icon"></a>
                   </div>
                   <div className="card__meta">
                     <h5>Andrew Stevens</h5>
@@ -208,7 +208,7 @@ class Home extends Component {
                       <a className="share-icon linkedin" href="https://www.linkedin.com/in/elizabeth-friedland13/"><span className="fa fa-linkedin"></span></a>
                       <a className="share-icon github" href="https://github.com/efriedla"><span className="fa fa-github"></span></a>
                     </div>
-                    <a id="share" className="share-toggle share-icon" href="#"></a>
+                    <a id="share" className="share-toggle share-icon"></a>
                   </div>
                   <div className="card__meta">
                     <h5>Elizabeth Friedland</h5>

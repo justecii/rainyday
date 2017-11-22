@@ -9,7 +9,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 
-import { DateRangePicker, SingleDatePicker } from 'react-dates';
+import { SingleDatePicker } from 'react-dates';
 
 
 class UserData extends Component {
@@ -56,9 +56,9 @@ class UserData extends Component {
 
     // arrays of each type of record
     let expenseRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).expense)
-    let incomeRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).income)
+    // let incomeRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).income)
     let savedRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).saved)
-    let uncatRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).uncategorized)
+    // let uncatRecords=Array.from(this.splitBankRecTypes(cleanBankRecords).uncategorized)
 
     // arrays of bankRecords by date range and type
     let expenseList1 = this.filterByRange(expenseRecords,startDate1,endDate1)  
@@ -71,11 +71,11 @@ class UserData extends Component {
 
     // arrays of dates sorted
     let allDates = this.uniqueDateByRange(cleanBankRecords,"1/1/00","12/31/99")
-    let dateList1 = this.uniqueDateByRange(expenseRecords,startDate1,endDate1)
-    let dateList2 = this.uniqueDateByRange(expenseRecords,startDate2,endDate2)
+    // let dateList1 = this.uniqueDateByRange(expenseRecords,startDate1,endDate1)
+    // let dateList2 = this.uniqueDateByRange(expenseRecords,startDate2,endDate2)
     allDates = this.sortDates(allDates)
-    dateList1 = this.sortDates(dateList1)
-    dateList2 = this.sortDates(dateList2)
+    // dateList1 = this.sortDates(dateList1)
+    // dateList2 = this.sortDates(dateList2)
 
 
     // arrays with category and amount given a time range
@@ -171,10 +171,11 @@ class UserData extends Component {
    //converts from string in form MM/DD/YY to date (post 2000 only)
   stringToDate(dateString){
     var parts =dateString.split('/');
+    var mydate;
     if (parts[2].length===2){
-      var mydate = new Date("20"+parts[2],parts[0]-1,parts[1]);
+      mydate = new Date("20"+parts[2],parts[0]-1,parts[1]);
     } else {
-      var mydate = new Date(parts[2],parts[0]-1,parts[1]);
+      mydate = new Date(parts[2],parts[0]-1,parts[1]);
     }
     return mydate;
   }

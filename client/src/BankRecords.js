@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import InputBankRecords from './InputBankRecords.js'
 import EditBankData from './EditBankData.js'
 import './App.css';
-import $ from 'jquery';
 import axios from 'axios';
 var Papa = require('papaparse');
 
@@ -50,6 +49,7 @@ class BankRecords extends Component {
           console.log("error: ", error);
         })
       } })
+    console.log (a, papaParse)
   }
 
   handleDelete(i) {

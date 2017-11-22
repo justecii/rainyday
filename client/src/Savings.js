@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import EnterSavings from './EnterSavings.js';
-import SavingsSummary from './SavingsSummary.js';
 import AllSavings from './AllSavings.js';
 import axios from 'axios';
 
