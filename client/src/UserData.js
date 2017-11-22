@@ -362,6 +362,7 @@ class UserData extends Component {
                   isOutsideRange={() => false}
                   withPortal={true}
                   numberOfMonths={1}
+                  hideKeyboardShortcutsPanel={true}
                 />
               </div>
               <div className="col s6">
@@ -378,6 +379,7 @@ class UserData extends Component {
                   isOutsideRange={() => false}
                   withPortal={true}
                   numberOfMonths={1}
+                  hideKeyboardShortcutsPanel={true}
                 />
               </div>
             </div>
@@ -396,6 +398,7 @@ class UserData extends Component {
                   isOutsideRange={() => false}
                   withPortal={true}
                   numberOfMonths={1}
+                  hideKeyboardShortcutsPanel={true}
                 />
                 </div>
                 <div className="col s6">
@@ -413,6 +416,7 @@ class UserData extends Component {
                   isOutsideRange={() => false}
                   withPortal={true}
                   numberOfMonths={1}
+                  hideKeyboardShortcutsPanel={true}
                 />
               </div>
             </div>

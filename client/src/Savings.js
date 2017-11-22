@@ -93,7 +93,7 @@ class Savings extends Component {
             <i className="large material-icons">flare</i>
           </a>
           <ul>
-            <li className="waves-effect waves-light"><a href="#!">
+            <li className="waves-effect waves-light"><a href="#">
               <i >Here's where you can track that you didn't spend $147 on donuts on Tuesday, March 4.</i></a>
             </li>
           </ul>

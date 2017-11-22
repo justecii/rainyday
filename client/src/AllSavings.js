@@ -21,8 +21,6 @@ class AllSavings extends Component {
     this.props.handleDelete(i);
   }
 
-
-
   SaveCatChange(e) {
     e.preventDefault();
     this.props.handleCatChange(e);
@@ -34,10 +32,6 @@ class AllSavings extends Component {
       user: user
     })
   }
-
-
-
-
 
   render() {
     let user = this.props.user
@@ -73,7 +67,7 @@ class AllSavings extends Component {
 
     return (
       <div className="allSavings">
-        <h4>Those could be your expenses, instead those are your savings!</h4>
+        <h4>Take a look at what you've saved!</h4>
         <div className="row">
           <div className='col s3'>Description</div>
           <div className='col s3'>Category</div>

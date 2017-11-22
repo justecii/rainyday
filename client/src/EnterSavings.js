@@ -149,6 +149,7 @@ class EnterSavings extends Component {
                 withPortal={true}
                 numberOfMonths={1}
                 showDefaultInputIcon={true}
+                hideKeyboardShortcutsPanel={true}
               />
             </div>
           </div>
