@@ -81,6 +81,10 @@ select {
     margin-bottom: 20px;
 }
 
+.center{
+	text-align: center;
+}
+
 .input-field{
 	margin-top:0px;
 }
