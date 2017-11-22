@@ -224,7 +224,7 @@ class Home extends Component {
           <div>
             <img src="/img/aj.png" alt="AJ Stevens" className='circle responsive-img'/>
             <div className="card__author-content border-tlr-radius col s12">
-              <h5>Andrew Stevens</h5>
+              <h5 className="center">Andrew Stevens</h5>
             </div>
             <div className="card__share">
               <div className="card__social">
@@ -240,7 +240,7 @@ class Home extends Component {
           <div>
             <img src="/img/brian.png"  alt="Brian Connor" className='circle responsive-img'/>
             <div className="card__author-content border-tlr-radius col s12">
-              <h5>Brian Connor</h5>
+              <h5 className="center">Brian Connor</h5>
             </div>
             <div className="card__share">
               <div className="card__social">
@@ -256,7 +256,7 @@ class Home extends Component {
           <div>
             <img src="/img/elena.png" alt="user" className='circle responsive-img'/>
             <div className="card__author-content border-tlr-radius col s12">
-              <h5>Elena Olekh</h5>
+              <h5 className="center">Elena Olekh</h5>
             </div>
             <div className="card__share">
               <div className="card__social">
@@ -272,7 +272,7 @@ class Home extends Component {
           <div>
             <img src="/img/liz.png" alt="user" className='circle responsive-img'/>
               <div className="card__author-content border-tlr-radius col s12">
-                <h5>Elizabeth Friedland</h5>
+                <h5 className="center">Elizabeth Friedland</h5>
               </div>
               <div className="card__share">
                 <div className="card__social">
