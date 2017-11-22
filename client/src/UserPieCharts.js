@@ -64,7 +64,7 @@ class UserPieCharts extends Component {
   }
 
   render() {
-    console.log("sup",this.props)
+    // console.log("sup",this.props)
     return (
       <div className="UserPieChartsWrapper center-align">
         <h4>Spending from </h4>
