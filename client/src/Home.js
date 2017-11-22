@@ -235,7 +235,7 @@ class Home extends Component {
               <a href="#"  className="share-toggle share-icon" ></a>
             </div>
           </div>
-          <div class="movedownalittle"</div>
+          <div class="movedownalittle"></div>
           {/* person 2 */}
           <div>
             <img src="/img/brian.png"  alt="Brian Connor" className='circle responsive-img'/>
@@ -251,7 +251,7 @@ class Home extends Component {
               <a href="#"  className="share-toggle share-icon" ></a>
             </div>
           </div>
-          <div class="movedownalittle"</div>
+          <div class="movedownalittle"></div>
           {/* person 3 */}
           <div>
             <img src="/img/elena.png" alt="user" className='circle responsive-img'/>
@@ -267,7 +267,7 @@ class Home extends Component {
               <a href="#"  className="share-toggle share-icon" ></a>
             </div>
           </div>
-          <div class="movedownalittle"</div>
+          <div class="movedownalittle"></div>
           {/* person 4 */}
           <div>
             <img src="/img/liz.png" alt="user" className='circle responsive-img'/>
@@ -284,7 +284,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div class="movedownalittle"</div>
+          <div class="movedownalittle"></div>
         </div>
         {/* end of the Developer info */}
         <footer className="page-footer #263238 blue-grey darken-2 center-align">
