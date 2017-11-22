@@ -223,8 +223,8 @@ class Home extends Component {
           {/* person 1 */}
           <div>
             <img src="/img/aj.png" alt="AJ Stevens" className='circle responsive-img'/>
-            <div className="card__author-content border-tlr-radius">
-              <h5 class="center">Andrew Stevens</h5>
+            <div className="card__author-content border-tlr-radius col s12">
+              <h5>Andrew Stevens</h5>
             </div>
             <div className="card__share">
               <div className="card__social">
@@ -235,11 +235,12 @@ class Home extends Component {
               <a href="#"  className="share-toggle share-icon" ></a>
             </div>
           </div>
+          <div class="movedownalittle"</div>
           {/* person 2 */}
           <div>
             <img src="/img/brian.png"  alt="Brian Connor" className='circle responsive-img'/>
-            <div className="card__author-content border-tlr-radius">
-              <h5 class="center">Brian Connor</h5>
+            <div className="card__author-content border-tlr-radius col s12">
+              <h5>Brian Connor</h5>
             </div>
             <div className="card__share">
               <div className="card__social">
@@ -250,11 +251,12 @@ class Home extends Component {
               <a href="#"  className="share-toggle share-icon" ></a>
             </div>
           </div>
+          <div class="movedownalittle"</div>
           {/* person 3 */}
           <div>
             <img src="/img/elena.png" alt="user" className='circle responsive-img'/>
-            <div className="card__author-content border-tlr-radius">
-              <h5 class="center">Elena Olekh</h5>
+            <div className="card__author-content border-tlr-radius col s12">
+              <h5>Elena Olekh</h5>
             </div>
             <div className="card__share">
               <div className="card__social">
@@ -265,11 +267,12 @@ class Home extends Component {
               <a href="#"  className="share-toggle share-icon" ></a>
             </div>
           </div>
+          <div class="movedownalittle"</div>
           {/* person 4 */}
           <div>
             <img src="/img/liz.png" alt="user" className='circle responsive-img'/>
-              <div className="card__author-content border-tlr-radius">
-                <h5 class="center">Elizabeth Friedland</h5>
+              <div className="card__author-content border-tlr-radius col s12">
+                <h5>Elizabeth Friedland</h5>
               </div>
               <div className="card__share">
                 <div className="card__social">
@@ -281,6 +284,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
+          <div class="movedownalittle"</div>
         </div>
         {/* end of the Developer info */}
         <footer className="page-footer #263238 blue-grey darken-2 center-align">
