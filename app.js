@@ -15,8 +15,8 @@ var Papa = require('papaparse');
 // Mongoose stuff
 var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/mern-local-auth');
-// mongoose.connect('mongodb://localhost/rainyDay');
-mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true});  //USE THIS WHEN DEPLOYING
+mongoose.connect('mongodb://localhost/rainyDay');
+// mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true});  //USE THIS WHEN DEPLOYING
 
 var BankRecord = require('./models/bankRecord');
 var User = require('./models/user');
@@ -69,15 +69,12 @@ app.use(function(req, res, next) {
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-// app.use('/', index);
+app.use('/', index);
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/bankRecords', bankRecords);
 
 app.get('*', function(req, res, next) {res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));}); 
 
-app.listen(process.env.PORT || 8080, function() {
-  console.log('Express server is up and running!');
-});
 
 module.exports = app;
