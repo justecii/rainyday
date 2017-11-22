@@ -43,18 +43,16 @@ class Signup extends Component {
 
   render() {
     return (
-  
       <div className="row">
         <div className='movedown'></div>
-        <h1>Sign Up</h1>
+        <h3>Sign Up</h3>
         <div className='movedownalittle'></div>
-          
-          <form onSubmit={this.handleSubmit} className='col s6 offset-s3 z-depth-5 padding movedownalittle'>
-            <div className='movedown'></div>
+          <form onSubmit={this.handleSubmit} className='col s4 offset-s4 z-depth-5 padding movedownalittle'>
+            <div className='movedownalittle'></div>
             <h5 className='left'> Name: </h5><input type='text' value={this.state.name} onChange={this.handleNameChange} /><br />
-            <div className='movedown'></div>
+            <div className='movedownalittle'></div>
             <h5 className='left'> Email: </h5><input type='text' value={this.state.email} onChange={this.handleEmailChange} /><br />
-            <div className='movedown'></div>
+            <div className='movedownalittle'></div>
             <h5 className='left'> Password:  </h5><input type='password' value={this.state.password} onChange={this.handlePasswordChange} /><br />
             <div className='movedownalittle'></div>
             <input  
