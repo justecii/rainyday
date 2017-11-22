@@ -69,8 +69,8 @@ app.use(function(req, res, next) {
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-app.use('/', index);
-app.use('/users', users);
+// app.use('/', index);
+// app.use('/users', users);
 app.use('/auth', auth);
 app.use('/bankRecords', bankRecords);
 
