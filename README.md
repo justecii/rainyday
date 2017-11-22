@@ -15,9 +15,9 @@
 * Run `npm install` to install dependencies (in root and again in "client" folder)
 * Use `npm start` to start your application
 
-##### Live Demo: https://rainydaysavings.herokuapp.com/ #####
-### email : suzie@sample.com ###
-### password: password ###
+## Live Demo: https://rainydaysavings.herokuapp.com/ ##
+#### email : suzie@sample.com ####
+#### password: password ####
 
 _Planning:_
 ## User Stories ##
