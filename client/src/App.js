@@ -22,7 +22,7 @@ class App extends Component {
     super(props)
     this.state = {
       token: localStorage.mernToken,
-      user: localStorage.userId
+      user: {}
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
