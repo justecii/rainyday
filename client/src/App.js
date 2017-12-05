@@ -58,7 +58,7 @@ class App extends Component {
     }
   render() {
     let user = this.state.user
-
+    console.log("APP STATE", this.state)
     // if the token exists display the router
     if(this.state.token !== "" && this.state.token !== undefined){ //need this active to use auth
   // if(true){
