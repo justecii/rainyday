@@ -22,7 +22,7 @@ class App extends Component {
     super(props)
     this.state = {
       token: localStorage.mernToken,
-      user: {}
+      user: localStorage.userId
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
@@ -50,12 +50,12 @@ class App extends Component {
       }
     }
   }
-  componentDidMount() {
-    let user = localStorage.userId
-    this.setState({
-      user: user
-    })
-    }
+  // componentDidMount() {
+  //   let user = localStorage.userId
+  //   this.setState({
+  //     user: user
+  //   })
+  //   }
   render() {
     let user = this.state.user
     console.log("APP STATE", this.state)
