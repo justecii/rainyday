@@ -50,15 +50,10 @@ class App extends Component {
       }
     }
   }
-  // componentDidMount() {
-  //   let user = localStorage.userId
-  //   this.setState({
-  //     user: user
-  //   })
-  //   }
+
   render() {
     let user = this.state.user
-    console.log("APP STATE", this.state)
+
     // if the token exists display the router
     if(this.state.token !== "" && this.state.token !== undefined){ //need this active to use auth
   // if(true){
