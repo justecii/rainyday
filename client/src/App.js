@@ -29,10 +29,10 @@ class App extends Component {
   }
   
   liftTokenToState(token, user) {
-    this.setState({
-      token: token,
-      user: user
-    })
+    // this.setState({
+    //   token: token,
+    //   user: user
+    // })
   }
   
   handleLogout(e) {
