@@ -22,7 +22,7 @@ class App extends Component {
     super(props)
     this.state = {
       token: localStorage.mernToken,
-      user: {}
+      user: localStorage.userId
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
@@ -38,6 +38,7 @@ class App extends Component {
   handleLogout(e) {
     e.preventDefault()
     localStorage.removeItem('mernToken')
+    localStorage.removeItem('userId')
     this.setState({token: '', user: {}})
   }
   isEmpty(obj) {

@@ -27,6 +27,7 @@ class Login extends Component {
       password: this.state.password
     }).then(result => {
       localStorage.setItem('mernToken', result.data.token)
+      localStorage.setItem('userId', result.data.user.id)
       this.props.lift(result.data.token, result.data.user.id)
     })
   }
