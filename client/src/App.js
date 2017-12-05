@@ -50,12 +50,12 @@ class App extends Component {
       }
     }
   }
-  // componentDidMount() {
-  //   let user = this.props.user
-  //   this.setState({
-  //     user: user
-  //   })
-  //   }
+  componentDidMount() {
+    let user = localStorage.userId
+    this.setState({
+      user: user
+    })
+    }
   render() {
     let user = this.state.user
     console.log("APP STATE", this.state)
